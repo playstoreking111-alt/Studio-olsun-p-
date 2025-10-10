@@ -1,0 +1,4345 @@
+--https://github.com/Mokiros/roblox-FE-compatibility
+wait(1)
+
+plr = owner
+
+
+local p = owner
+local plr = p
+local player = p
+local char = p.Character
+local Mouse = p:GetMouse()
+local cam = game.Workspace.CurrentCamera
+Camera = cam
+local CamInterrupt = false
+local TwoD = false
+local TargetInfo = {nil, nil}
+cam.CameraType = "Custom"
+local larm = char:WaitForChild("Left Arm")
+local rarm = char:WaitForChild("Right Arm")
+local lleg = char:WaitForChild("Left Leg")
+local rleg = char:WaitForChild("Right Leg")
+local hed = char:WaitForChild("Head")
+local torso = char:WaitForChild("Torso")
+local root = char:WaitForChild("HumanoidRootPart")
+local hum = char:FindFirstChildOfClass("Humanoid")
+local debris = game:GetService("Debris")
+local run = game:GetService("RunService")
+local rs = run.RenderStepped
+local cam = workspace.CurrentCamera
+local movement = 4
+local change = 0.4
+local Character = char
+local DebrisModel = Instance.new("Model",char)
+local Humanoid = Character:WaitForChild("Humanoid")
+local root = Character:WaitForChild("HumanoidRootPart")
+local Head = Character:WaitForChild("Head")
+local Torso = Character:WaitForChild("Torso")
+local HRP = Character:WaitForChild("HumanoidRootPart")
+local RArm = Character:WaitForChild("Right Arm")
+local LArm = Character:WaitForChild("Left Arm")
+function Lerp(c1,c2,al)
+local com1 = {c1.X,c1.Y,c1.Z,c1:toEulerAnglesXYZ()}
+local com2 = {c2.X,c2.Y,c2.Z,c2:toEulerAnglesXYZ()}
+for i,v in pairs(com1) do
+com1[i] = v+(com2[i]-v)*al
+end
+return CFrame.new(com1[1],com1[2],com1[3]) * CFrame.Angles(select(4,unpack(com1)))
+end
+local block = false
+local RLeg = Character:WaitForChild("Right Leg")
+local LLeg = Character:WaitForChild("Left Leg")
+local stealth = false
+local debounce = false
+hum.MaxHealth = math.huge
+hum.Health = math.huge
+themeid = 0
+themepitch = 1
+local Melee = false
+  hed:FindFirstChildOfClass("Decal").Texture = "rbxassetid://"
+hum.DisplayDistanceType = "None"
+lleg.Transparency = 1
+hed.Transparency = 1
+rleg.Transparency = 1
+rarm.Transparency = 1
+larm.Transparency = 1
+torso.Transparency = 1
+hum.WalkSpeed = 0
+punchsound1 = Instance.new("Sound",torso)
+punchsound1.Volume = 1.2
+punchsound1.Name = "punchsound1"
+punchsound1.Looped = false
+punchsound1.SoundId = "rbxassetid://137579113"
+StrongPunch = Instance.new("Sound",torso)
+StrongPunch.Volume = 1.6
+StrongPunch.Name = "StrongPunch"
+StrongPunch.Looped = false
+StrongPunch.SoundId = "rbxassetid://441202925"
+StrongPunch = Instance.new("Sound",torso)
+StrongPunch.Volume = 1.6
+StrongPunch.Name = "StrongPunch"
+StrongPunch.Looped = false
+StrongPunch.SoundId = "rbxassetid://441202925"
+StrongPunch1 = Instance.new("Sound",torso)
+StrongPunch1.Volume = 1.6
+StrongPunch1.Name = "StrongPunch"
+StrongPunch1.Looped = false
+StrongPunch1.SoundId = "rbxassetid://441202925"
+StrongPunch2 = Instance.new("Sound",torso)
+StrongPunch2.Volume = 1.6
+StrongPunch2.Name = "StrongPunch"
+StrongPunch.Looped = false
+StrongPunch2.SoundId = "rbxassetid://441202925"
+Zano = Instance.new("Sound",torso)
+Zano.Volume = 6
+Zano.Name = "Zano"
+Zano.Looped = false
+Zano.SoundId = "rbxassetid://744770874"
+GroundImpact = Instance.new("Sound",torso)
+GroundImpact.Volume = 8
+GroundImpact.Name = "GroundImpact"
+GroundImpact.Looped = false
+GroundImpact.SoundId = "rbxassetid://165970126"
+Break = Instance.new("Sound",torso)
+Break.Volume = 5
+Break.Name = "Bonebreak"
+Break.Looped = false
+Break.SoundId = "rbxassetid://314390675"
+local UltimateBattle = Instance.new("Sound",hed)
+		UltimateBattle.SoundId = "rbxassetid://4047815726"
+		UltimateBattle.Pitch = 1
+		UltimateBattle.Looped = true
+		UltimateBattle.Volume = 10
+	
+
+		local UltraInstinct = Instance.new("Sound",hed)
+		UltraInstinct.SoundId = "rbxassetid://2990765577"
+		UltraInstinct.Pitch = 1
+		UltraInstinct.Looped = true
+		UltraInstinct.Volume = 10
+		
+		local Theme = Instance.new("Sound",hed)
+		Theme.SoundId = "rbxassetid://1579337956"
+		Theme.Pitch = 1
+		Theme.Looped = false
+		Theme.Volume = 4
+		local Wind = Instance.new("Sound",hed)
+		Wind.SoundId = "rbxassetid://2670099458"
+		Wind.Pitch = 1
+		Wind.Looped = true
+		Wind.Volume = 10
+	SFX = Instance.new("Sound",hed)
+		SFX.SoundId = "rbxassetid://1216343787"
+		SFX.Pitch = 1
+		SFX.Looped = false
+		SFX.Volume = 10
+
+	local AuraSFX = Instance.new("Sound",torso)
+		AuraSFX.SoundId = "rbxassetid://1786830077"
+		AuraSFX.Pitch = 0.92
+		AuraSFX.Looped = true
+		AuraSFX.Volume = 10
+	local AuraSFX2 = Instance.new("Sound",torso)
+		AuraSFX2.SoundId = "rbxassetid://1677094219"
+		AuraSFX2.Pitch = 1
+		AuraSFX2.Looped = true
+		AuraSFX2.Volume = 10
+		Vec3 = Vector3.new
+Inst = Instance.new
+cFrame = CFrame.new
+Euler = CFrame.fromEulerAnglesXYZ
+vt = Vector3.new
+bc = BrickColor.new
+br = BrickColor.random
+it = Instance.new
+cf = CFrame.new
+radian = math.rad
+random = math.random
+		function CameraEnshaking(Length,Intensity)
+coroutine.resume(coroutine.create(function()
+      local intensity = 1*Intensity
+      local rotM = 0.01*Intensity
+for i = 0, Length, 0.1 do
+swait()
+intensity = intensity - 0.05*Intensity/Length
+rotM = rotM - 0.0005*Intensity/Length
+      hum.CameraOffset = Vec3(radian(random(-intensity, intensity)), radian(random(-intensity, intensity)), radian(random(-intensity, intensity)))
+      cam.CFrame = cam.CFrame * cFrame(radian(random(-intensity, intensity)), radian(random(-intensity, intensity)), radian(random(-intensity, intensity))) * Euler(radian(random(-intensity, intensity)) * rotM, radian(random(-intensity, intensity)) * rotM, radian(random(-intensity, intensity)) * rotM)
+end
+Humanoid.CameraOffset = Vec3(0, 0, 0)
+end))
+end
+CamShake=function(Part,Distan,Power,Times) 
+local de=Part.Position
+for i,v in pairs(workspace:children()) do
+ if v:IsA("Model") and v:findFirstChild("Humanoid") then
+for _,c in pairs(v:children()) do
+if c.ClassName=="Part" and (c.Position - de).magnitude < Distan then
+local Noob=v.Humanoid
+if Noob~=nil then
+coroutine.resume(coroutine.create(function()
+FV = Instance.new("BoolValue", Noob)
+FV.Name = "CameraShake"
+for ShakeNum=1,Times do
+swait()
+local ef=Power
+  if ef>=1 then
+   Humanoid.CameraOffset = Vector3.new(math.random(-ef,ef),math.random(-ef,ef),math.random(-ef,ef))
+  else
+   ef=Power*10
+   Humanoid.CameraOffset = Vector3.new(math.random(-ef,ef)/10,math.random(-ef,ef)/10,math.random(-ef,ef)/10)
+  end	
+end
+Humanoid.CameraOffset = Vector3.new(0,0,0)
+FV:Destroy()
+end))
+CameraShake(Times, Power, Noob)
+end
+end
+end
+end
+end
+end
+
+main = {r = 0;g = 100;b = 255;v = 1}
+main_color = Color3.fromRGB(main.r,main.g,main.b)
+explosionid = {165970126,165970390}
+punch = {548348185}
+--919941001
+Prefix = "/"
+for i,v in pairs (char:GetChildren()) do
+        if v:IsA("CharacterMesh") then
+                v:Destroy()
+        end
+end
+p.Chatted:connect(function(msg)
+ 
+    if msg:lower():sub(1,#Prefix+#'color r ')==Prefix..'color r ' then
+    local v = tonumber(msg:sub(#Prefix+#'color r '+1))
+    main.r = v
+    elseif msg:lower():sub(1,#Prefix+#'color g ')==Prefix..'color g ' then
+    local v = tonumber(msg:sub(#Prefix+#'color g '+1))
+    main.g = v
+    elseif msg:lower():sub(1,#Prefix+#'color b ')==Prefix..'color b ' then
+    local v = tonumber(msg:sub(#Prefix+#'color b '+1))
+    main.b = v
+    elseif msg:lower():sub(1,#Prefix+#'color v ')==Prefix..'color v ' then
+    local v = tonumber(msg:sub(#Prefix+#'color v '+1))
+    if v > 1 then main.v = 1 elseif v < -1 then main.v = -1 else main.v = v end
+
+    elseif msg:lower():sub(1,#Prefix+#'theme ')==Prefix..'theme ' then
+    local v = tonumber(msg:sub(#Prefix+#'theme '+1))
+    themeid = v
+    music(themeid,themepitch)
+
+    elseif msg:lower():sub(1,#Prefix+#'pitch ')==Prefix..'pitch ' then
+    local v = tonumber(msg:sub(#Prefix+#'pitch '+1))
+    themepitch = v
+    music(themeid,themepitch)
+
+    elseif msg:lower():sub(1,#Prefix+#'prefix ')==Prefix..'prefix ' then
+    local v = msg:sub(#Prefix+#'prefix '+1)
+    Prefix = v
+ 
+    elseif msg:lower():sub(1,#Prefix+#'reset')==Prefix..'reset' then
+    main.r = 0
+    main.g = 100
+    main.b = 255
+    main.v = 1
+    themeid = 556122490
+    themepitch = 1
+    music(themeid,themepitch)
+
+    end
+
+end)
+
+----------------------------------------------------------------------------
+no_anim = false
+attack = false
+attacking = false
+canjump = true
+aiming_anim = false
+animid = math.random(0,1)
+timer = 0
+bg = Instance.new("BodyGyro",root)
+bg.P = 100000
+bg.D = 100
+----------------------------------------------------------------------------
+
+function rswait(value)
+  if value ~= nil and value ~= 0 then
+    for i=1,value do
+     rs:wait()
+    end
+  else
+	rs:wait()
+  end
+end
+
+----------------------------------------------------------------------------
+local instinct = false
+hum.BreakJointsOnDeath = false
+root.Touched:connect(function(hit)--dodge
+local h = hit.Parent:FindFirstChild("Humanoid")
+if h ~= nil then
+if hum.Health > 0 and instinct == true then
+	
+	hum.MaxHealth = math.huge
+wait(0.01)
+hum.Health = math.huge
+  
+		   
+             
+        
+         torso.Weld.C0 = Lerp(torso.Weld.C0, CFrame.new(7, 0, 0) * CFrame.Angles(math.rad(20),math.rad(0),math.rad(0)), 0.4)--torso
+				    	
+
+	
+
+local ay = math.random(1,2)
+if ay == 1 then
+
+hum.MaxHealth = math.huge
+wait(0.01)
+hum.Health = math.huge
+ torso.Weld.C0 = Lerp(torso.Weld.C0, CFrame.new(-3, 0, 0) * CFrame.Angles(math.rad(20),math.rad(0),math.rad(0)), 0.4)--torso
+	
+ 
+end
+end
+end
+end)
+
+torso.Touched:connect(function(hit)--dodge
+local h = hit.Parent:FindFirstChildOfClass("Part")
+if h ~= nil then
+if hum.Health > 0 and instinct == true then
+ 
+hum.MaxHealth = math.huge
+wait(0.01)
+hum.Health = math.huge
+  torso.Weld.C0 = Lerp(torso.Weld.C0, CFrame.new(-8, 0, 0) * CFrame.Angles(math.rad(20),math.rad(0),math.rad(0)), 0.4)--torso
+		
+root.Anchored = false
+local ay = math.random(1,2)
+if ay == 1 then
+ 
+torso.Weld.C0 = Lerp(torso.Weld.C0, CFrame.new(8, 0, 0) * CFrame.Angles(math.rad(20),math.rad(0),math.rad(0)), 0.4)--torso
+
+end
+end
+end
+end)
+torso.Touched:connect(function(hit)--dodge
+local h = hit.Parent:FindFirstChildOfClass("Part")
+if h ~= nil then
+if hum.Health > 0 and instinct == true then
+ 
+hum.MaxHealth = math.huge
+wait(0.01)
+hum.Health = math.huge
+  torso.Weld.C0 = Lerp(torso.Weld.C0, CFrame.new(0, 0, -25) * CFrame.Angles(math.rad(20),math.rad(0),math.rad(0)), 0.4)--torso
+		
+
+
+
+end
+end
+end)
+Player=game:GetService("Players").LocalPlayer
+Character=Player.Character 
+PlayerGui=Player.PlayerGui 
+Backpack=Player.Backpack 
+Torso=Character.Torso 
+Head=Character.Head 
+Humanoid=Character.Humanoid
+---
+Instance.new("ForceField",char).Visible = false
+hum:SetStateEnabled("Dead",false)
+hum:SetStateEnabled(Enum.HumanoidStateType.Dead, false)
+---
+for i,v in pairs(char:children()) do
+    if v:IsA("Hat") then
+        v:Destroy()
+    end
+end
+for i,v in pairs(char:children()) do
+    if v:IsA("Accessory") then
+        v:Destroy()
+    end
+end
+for i,v in pairs(char:children()) do
+    if v:IsA("Hair") then
+        v:Destroy()
+    end
+end
+
+---
+wait(3)
+SFX:Play()
+Wind:Play()
+wait(0.5)
+UltraInstinct:Play()
+	
+			
+lleg.Transparency = 0
+hed.Transparency = 0
+rleg.Transparency = 0
+rarm.Transparency = 0
+larm.Transparency = 0
+torso.Transparency = 0
+
+local AURU = Instance.new('ParticleEmitter')
+AURU.Name = "Aura"
+AURU.Texture = "rbxassetid://1200947142"
+AURU.Parent = root
+AURU.LightEmission = 0.9
+AURU.Transparency = NumberSequence.new(0.1,1)
+AURU.Color = ColorSequence.new(BrickColor.new("Cyan").Color)
+AURU.Size = NumberSequence.new(10,20)
+AURU.LockedToPart = true
+AURU.Lifetime = NumberRange.new(1)
+AURU.Rate = 530
+AURU.Speed = NumberRange.new(40)
+AURU.Rotation = NumberRange.new(-360,360)
+AURU.EmissionDirection = "Top"
+AURU.ZOffset = -1
+wait(0.1)
+AURU.Rate = 1200
+AURU.VelocitySpread = 100
+
+local Aura = Instance.new("ParticleEmitter",rarm)
+Aura.Texture = "rbxassetid://1207853932"
+Aura.Color = ColorSequence.new(Color3.fromRGB(33, 54, 255))
+Aura.EmissionDirection = "Top"
+Aura.Speed = NumberRange.new(1)
+Aura.Size = NumberSequence.new(1.2)
+Aura.Transparency = NumberSequence.new(0,1)
+Aura.Drag = 0.4
+Aura.LightInfluence = 0
+Aura.LockedToPart = true
+Aura.Lifetime = NumberRange.new(1.2)
+Aura.Rate = 48
+Aura.LightEmission = 1
+Aura.Rotation = NumberRange.new(-360,360)
+Aura.VelocitySpread = 0
+Aura.Acceleration = Vector3.new(0,0,0)	
+Aura.ZOffset = 0.2
+local Aura2 = Instance.new("ParticleEmitter",larm)
+Aura2.Texture = "rbxassetid://1207853932"
+Aura2.Color = ColorSequence.new(Color3.fromRGB(33, 54, 255))
+Aura2.EmissionDirection = "Top"
+Aura2.Speed = NumberRange.new(1)
+Aura2.Size = NumberSequence.new(1.2)
+Aura2.Transparency = NumberSequence.new(0,1)
+Aura2.Drag = 0.4
+Aura2.LightInfluence = 0
+Aura2.LockedToPart = true
+Aura2.Lifetime = NumberRange.new(1.2)
+Aura2.Rate = 48
+Aura2.LightEmission = 1
+Aura2.Rotation = NumberRange.new(-360,360)
+Aura2.VelocitySpread = 0
+Aura2.Acceleration = Vector3.new(0,0,0)	
+Aura2.ZOffset = 0.2
+local Aura3 = Instance.new("ParticleEmitter",torso)
+Aura3.Texture = "rbxassetid://1207853932"
+Aura3.Color = ColorSequence.new(Color3.fromRGB(33, 54, 255))
+Aura3.EmissionDirection = "Top"
+Aura3.Speed = NumberRange.new(1)
+Aura3.Size = NumberSequence.new(1.2)
+Aura3.Transparency = NumberSequence.new(0,1)
+Aura3.Drag = 0.4
+Aura3.LightInfluence = 0
+Aura3.LockedToPart = true
+Aura3.Lifetime = NumberRange.new(1.2)
+Aura3.Rate = 48
+Aura3.LightEmission = 1
+Aura3.Rotation = NumberRange.new(-360,360)
+Aura3.VelocitySpread = 0
+Aura3.Acceleration = Vector3.new(0,0,0)	
+Aura3.ZOffset = 0.2
+local Aura4 = Instance.new("ParticleEmitter",hed)
+Aura4.Texture = "rbxassetid://1207853932"
+Aura4.Color = ColorSequence.new(Color3.fromRGB(33, 54, 255))
+Aura4.EmissionDirection = "Top"
+Aura4.Speed = NumberRange.new(1)
+Aura4.Size = NumberSequence.new(1.2)
+Aura4.Transparency = NumberSequence.new(0,1)
+Aura4.Drag = 0.4
+Aura4.LightInfluence = 0
+Aura4.LockedToPart = true
+Aura4.Lifetime = NumberRange.new(1.2)
+Aura4.Rate = 48
+Aura4.LightEmission = 1
+Aura4.Rotation = NumberRange.new(-360,360)
+Aura4.VelocitySpread = 0
+Aura4.Acceleration = Vector3.new(0,0,0)	
+Aura4.ZOffset = 0.2
+local Aura5 = Instance.new("ParticleEmitter",torso)
+Aura5.Texture = "rbxassetid://242255193"
+Aura5.Color = ColorSequence.new(Color3.fromRGB(85, 170, 255))
+Aura5.EmissionDirection = "Top"
+Aura5.Speed = NumberRange.new(1)
+Aura5.Size = NumberSequence.new(3)
+Aura5.Transparency = NumberSequence.new(0.9,1)
+Aura5.Drag = 0.4
+Aura5.LightInfluence = 0
+Aura5.LockedToPart = true
+Aura5.Lifetime = NumberRange.new(4)
+Aura5.Rate = 28
+Aura5.LightEmission = 1
+Aura5.Rotation = NumberRange.new(-360,360)
+Aura5.VelocitySpread = 1
+Aura5.Acceleration = Vector3.new(0,0,0)	
+Aura5.ZOffset = 2
+local Aura6 = Instance.new("ParticleEmitter",lleg)
+Aura6.Texture = "rbxassetid://1207853932"
+Aura6.Color = ColorSequence.new(Color3.fromRGB(33, 54, 255))
+Aura6.EmissionDirection = "Top"
+Aura6.Speed = NumberRange.new(1)
+Aura6.Size = NumberSequence.new(1.2)
+Aura6.Transparency = NumberSequence.new(0,1)
+Aura6.Drag = 0.4
+Aura6.LightInfluence = 0
+Aura6.LockedToPart = true
+Aura6.Lifetime = NumberRange.new(1.2)
+Aura6.Rate = 48
+Aura6.LightEmission = 1
+Aura6.Rotation = NumberRange.new(-360,360)
+Aura6.VelocitySpread = 0
+Aura6.Acceleration = Vector3.new(0,0,0)	
+Aura6.ZOffset = 0.2
+local Aura7 = Instance.new("ParticleEmitter",rleg)
+Aura7.Texture = "rbxassetid://1207853932"
+Aura7.Color = ColorSequence.new(Color3.fromRGB(33, 54, 255))
+Aura7.EmissionDirection = "Top"
+Aura7.Speed = NumberRange.new(1)
+Aura7.Size = NumberSequence.new(1.2)
+Aura7.Transparency = NumberSequence.new(0,1)
+Aura7.Drag = 0.4
+Aura7.LightInfluence = 0
+Aura7.LockedToPart = true
+Aura7.Lifetime = NumberRange.new(1.2)
+Aura7.Rate = 48
+Aura7.LightEmission = 1
+Aura7.Rotation = NumberRange.new(-360,360)
+Aura7.VelocitySpread = 0
+Aura7.Acceleration = Vector3.new(0,0,0)	
+Aura7.ZOffset = 0.2
+local Sparkles = Instance.new("ParticleEmitter",torso)
+Sparkles.Texture = "rbxassetid://1084976679"
+Sparkles.Color = ColorSequence.new(BrickColor.new("White").Color)
+Sparkles.EmissionDirection = "Top"
+Sparkles.Speed = NumberRange.new(0)
+Sparkles.Size = NumberSequence.new(2.5)
+Sparkles.Transparency = NumberSequence.new(0,1)
+Sparkles.Drag = 0.4
+Sparkles.LightInfluence = 0
+Sparkles.LockedToPart = true
+Sparkles.Lifetime = NumberRange.new(0.8)
+Sparkles.Rate = 60
+Sparkles.LightEmission = 1
+Sparkles.Rotation = NumberRange.new(-360,360)
+Sparkles.VelocitySpread = 0
+Sparkles.Acceleration = Vector3.new(0,10,0)	
+Sparkles.ZOffset = 1
+local HairAura = Instance.new('ParticleEmitter')
+HairAura.Name = "Aura"
+HairAura.Texture = "rbxassetid://1200947142"
+HairAura.Parent = hed
+HairAura.LightEmission = 1
+HairAura.Enabled = true
+HairAura.Color = ColorSequence.new(BrickColor.new("Cyan").Color)
+HairAura.Size = NumberSequence.new(1.1)
+HairAura.LockedToPart = true
+HairAura.Lifetime = NumberRange.new(2)
+HairAura.Rate = 30
+HairAura.Speed = NumberRange.new(0.1)
+HairAura.Rotation = NumberRange.new(-360,360)
+HairAura.EmissionDirection = "Top"
+HairAura.ZOffset = -1
+char.Shirt.ShirtTemplate = "rbxassetid://2529467572"
+char.Pants.PantsTemplate = "http://www.roblox.com/asset/?id=2471111569"
+local Hat = Instance.new("Part",char)
+Hat.Size = Vector3.new(1,1,1)
+Hat.Material = "SmoothPlastic"
+Hat.BrickColor = BrickColor.new("Really black")
+Hat.CanCollide = false
+Hat.Material = "Glass"
+local Hat2 = Instance.new("SpecialMesh",Hat)
+Hat2.MeshId = "rbxassetid://1493485805"
+Hat2.Scale = Vector3.new(0.07,0.07,0.07)
+Hat2.Offset = Vector3.new(0,0,0.15)
+local Hat3 = Instance.new("Weld",Hat)
+Hat3.Part0 = hed
+Hat3.Part1 = Hat
+
+--Converted with ttyyuu12345's model to script plugin v4
+function sandbox(var,func)
+	local env = getfenv(func)
+	local newenv = setmetatable({},{
+		__index = function(self,k)
+			if k=="script" then
+				return var
+			else
+				return env[k]
+			end
+		end,
+	})
+	setfenv(func,newenv)
+	return func
+end
+cors = {}
+mas = Instance.new("Model",game:GetService("Lighting"))
+Model0 = Instance.new("Model")
+
+Sound2 = Instance.new("Sound")
+Part3 = Instance.new("Part")
+SpecialMesh4 = Instance.new("SpecialMesh")
+BodyPosition5 = Instance.new("BodyPosition")
+BodyAngularVelocity6 = Instance.new("BodyAngularVelocity")
+Model0.Name = "Storm"
+Model0.Parent = mas
+Model0.PrimaryPart = Part3
+
+Part3.Name = "Smooth Block Model"
+Part3.Parent = Model0
+Part3.CFrame = CFrame.new(-23.0167236, 2.00001311, -91.5402985, 0, 0, -1, 0, 1, -0, 1, 0, -0)
+Part3.Orientation = Vector3.new(0, -90, 0)
+Part3.Position = Vector3.new(-23.0167236, 2.00001311, -91.5402985)
+Part3.Rotation = Vector3.new(0, -90, 0)
+Part3.Color = Color3.new(0.388235, 0.372549, 0.384314)
+Part3.Size = Vector3.new(2, 2, 2)
+Part3.BottomSurface = Enum.SurfaceType.Smooth
+Part3.BrickColor = BrickColor.new("Dark stone grey")
+Part3.CanCollide = false
+Part3.TopSurface = Enum.SurfaceType.Smooth
+Part3.brickColor = BrickColor.new("Dark stone grey")
+SpecialMesh4.Parent = Part3
+SpecialMesh4.MeshId = "http://www.roblox.com/asset/?id=1527559"
+SpecialMesh4.Scale = Vector3.new(-3500, -3500, -3500)
+SpecialMesh4.TextureId = "http://www.roblox.com/asset/?id=149397702"
+SpecialMesh4.MeshType = Enum.MeshType.FileMesh
+BodyPosition5.Parent = Part3
+BodyPosition5.Position = Vector3.new(0, 0, 0)
+BodyPosition5.MaxForce = Vector3.new(4e+09, 4e+09, 4e+09)
+BodyPosition5.maxForce = Vector3.new(4e+09, 4e+09, 4e+09)
+BodyPosition5.position = Vector3.new(0, 0, 0)
+BodyAngularVelocity6.Parent = Part3
+BodyAngularVelocity6.MaxTorque = Vector3.new(4e+09, 4e+09, 4e+09)
+BodyAngularVelocity6.maxTorque = Vector3.new(4e+09, 4e+09, 4e+09)
+for i,v in pairs(mas:GetChildren()) do
+	v.Parent = char
+	pcall(function() v:MakeJoints() end)
+end
+mas:Destroy()
+for i,v in pairs(cors) do
+	spawn(function()
+		pcall(v)
+	end)
+end
+
+Hat3.C0 = CFrame.new(-0.05,0.85,-0.1)*CFrame.Angles(math.rad(88.93),math.rad(180),math.rad(0))
+local Shirtpart = Instance.new("Part",char)
+Shirtpart.Size = Vector3.new(1,1,1)
+Shirtpart.Material = "Plastic"
+Shirtpart.BrickColor = BrickColor.new("Rust")
+Shirtpart.CanCollide = false
+local Shirtpart2 = Instance.new("SpecialMesh",Shirtpart)
+Shirtpart2.MeshId = "rbxassetid://1567960271"
+Shirtpart2.Scale = Vector3.new(0.060,0.036,0.052)
+local Shirtpart3 = Instance.new("Weld",Shirtpart)
+Shirtpart3.Part0 = torso
+Shirtpart3.Part1 = Shirtpart
+Shirtpart3.C0 = CFrame.new(0.01,-0.7,-0.1)*CFrame.Angles(math.rad(0),math.rad(180),math.rad(0))
+local ShirtpartB = Instance.new("Part",char)
+ShirtpartB.Size = Vector3.new(1,1,1)
+ShirtpartB.Material = "Plastic"
+ShirtpartB.BrickColor = BrickColor.new("Navy blue")
+ShirtpartB.CanCollide = false
+ShirtpartB.Transparency = 1
+local ShirtpartB2 = Instance.new("SpecialMesh",ShirtpartB)
+ShirtpartB2.MeshId = "rbxassetid://1567960271"
+ShirtpartB2.Scale = Vector3.new(0.060,0.036,0.052)
+local ShirtpartB3 = Instance.new("Weld",ShirtpartB)
+ShirtpartB3.Part0 = torso
+ShirtpartB3.Part1 = ShirtpartB
+ShirtpartB3.C0 = CFrame.new(0.01,-0.6,-0.1)*CFrame.Angles(math.rad(0),math.rad(180),math.rad(0))
+local RightAura = Instance.new('ParticleEmitter')
+RightAura.Name = "Aura"
+RightAura.Texture = "rbxassetid://1200947142"
+RightAura.Parent = rleg
+RightAura.LightEmission = 1
+RightAura.Enabled = true
+RightAura.Color = ColorSequence.new(BrickColor.new("Cyan").Color)
+RightAura.Size = NumberSequence.new(1.1)
+RightAura.LockedToPart = true
+RightAura.Lifetime = NumberRange.new(2)
+RightAura.Rate = 30
+RightAura.Speed = NumberRange.new(0.1)
+RightAura.Rotation = NumberRange.new(-360,360)
+RightAura.EmissionDirection = "Top"
+RightAura.ZOffset = -1
+
+local RightLow = Instance.new('ParticleEmitter')
+RightLow.Name = "Aura"
+RightLow.Texture = "rbxassetid://1200947142"
+RightLow.Parent = lleg
+RightLow.LightEmission = 1
+RightLow.Enabled = true
+RightLow.Color = ColorSequence.new(BrickColor.new("Cyan").Color)
+RightLow.Size = NumberSequence.new(1.1)
+RightLow.LockedToPart = true
+RightLow.Lifetime = NumberRange.new(2)
+RightLow.Rate = 30
+RightLow.Speed = NumberRange.new(0.1)
+RightLow.Rotation = NumberRange.new(-360,360)
+RightLow.EmissionDirection = "Top"
+RightLow.ZOffset = -1
+
+local LeftLow = Instance.new('ParticleEmitter')
+LeftLow.Name = "Aura"
+LeftLow.Texture = "rbxassetid://1200947142"
+LeftLow.Parent = larm
+LeftLow.LightEmission = 1
+LeftLow.Enabled = true
+LeftLow.Color = ColorSequence.new(BrickColor.new("Cyan").Color)
+LeftLow.Size = NumberSequence.new(1.1)
+LeftLow.LockedToPart = true
+LeftLow.Lifetime = NumberRange.new(2)
+LeftLow.Rate = 30
+LeftLow.Speed = NumberRange.new(0.1)
+LeftLow.Rotation = NumberRange.new(-360,360)
+LeftLow.EmissionDirection = "Top"
+LeftLow.ZOffset = -1
+
+local LeftLeg = Instance.new('ParticleEmitter')
+LeftLeg.Name = "Aura"
+LeftLeg.Texture = "rbxassetid://1200947142"
+LeftLeg.Parent = rarm
+LeftLeg.LightEmission = 1
+LeftLeg.Enabled = true
+LeftLeg.Color = ColorSequence.new(BrickColor.new("Cyan").Color)
+LeftLeg.Size = NumberSequence.new(1.1)
+LeftLeg.LockedToPart = true
+LeftLeg.Lifetime = NumberRange.new(2)
+LeftLeg.Rate = 30
+LeftLeg.Speed = NumberRange.new(0.1)
+LeftLeg.Rotation = NumberRange.new(-360,360)
+LeftLeg.EmissionDirection = "Top"
+LeftLeg.ZOffset = -1
+
+--other aura
+local Small = Instance.new('ParticleEmitter')
+Small.Name = "Aura"
+Small.Texture = "rbxassetid://242102147"
+Small.Parent = torso
+Small.LightEmission = 1
+Small.Enabled = true
+Small.Color = ColorSequence.new(BrickColor.new("Electric blue").Color)
+Small.Size = NumberSequence.new(0.5)
+Small.LockedToPart = true
+Small.Lifetime = NumberRange.new(0.5)
+Small.Rate = 150
+Small.Speed = NumberRange.new(4)
+Small.Rotation = NumberRange.new(-50,50)
+Small.EmissionDirection = "Top"
+Small.ZOffset = 2
+local Small2 = Instance.new('ParticleEmitter')
+Small2.Name = "Aura"
+Small2.Texture = "rbxassetid://242102147"
+Small2.Parent = rarm
+Small2.LightEmission = 1
+Small2.Enabled = true
+Small2.Color = ColorSequence.new(BrickColor.new("Electric blue").Color)
+Small2.Size = NumberSequence.new(0.5)
+Small2.LockedToPart = true
+Small2.Lifetime = NumberRange.new(0.5)
+Small2.Rate = 150
+Small2.Speed = NumberRange.new(4)
+Small2.Rotation = NumberRange.new(-50,50)
+Small2.EmissionDirection = "Top"
+Small2.ZOffset = 2
+local Small3 = Instance.new('ParticleEmitter')
+Small3.Name = "Aura"
+Small3.Texture = "rbxassetid://242102147"
+Small3.Parent = larm
+Small3.LightEmission = 1
+Small3.Enabled = true
+Small3.Color = ColorSequence.new(BrickColor.new("Electric blue").Color)
+Small3.Size = NumberSequence.new(0.5)
+Small3.LockedToPart = true
+Small3.Lifetime = NumberRange.new(0.5)
+Small3.Rate = 150
+Small3.Speed = NumberRange.new(4)
+Small3.Rotation = NumberRange.new(-50,50)
+Small3.EmissionDirection = "Top"
+Small3.ZOffset = 2
+local Small4 = Instance.new('ParticleEmitter')
+Small4.Name = "Aura"
+Small4.Texture = "rbxassetid://242102147"
+Small4.Parent = rleg
+Small4.LightEmission = 1
+Small4.Enabled = true
+Small4.Color = ColorSequence.new(BrickColor.new("Electric blue").Color)
+Small4.Size = NumberSequence.new(0.5)
+Small4.LockedToPart = true
+Small4.Lifetime = NumberRange.new(0.5)
+Small4.Rate = 150
+Small4.Speed = NumberRange.new(4)
+Small4.Rotation = NumberRange.new(-50,50)
+Small4.EmissionDirection = "Top"
+Small4.ZOffset = 2
+local Small5 = Instance.new('ParticleEmitter')
+Small5.Name = "Aura"
+Small5.Texture = "rbxassetid://242102147"
+Small5.Parent = lleg
+Small5.LightEmission = 1
+Small5.Enabled = true
+Small5.Color = ColorSequence.new(BrickColor.new("Electric blue").Color)
+Small5.Size = NumberSequence.new(0.5)
+Small5.LockedToPart = true
+Small5.Lifetime = NumberRange.new(0.5)
+Small5.Rate = 150
+Small5.Speed = NumberRange.new(4)
+Small5.Rotation = NumberRange.new(-50,50)
+Small5.EmissionDirection = "Top"
+Small5.ZOffset = 2
+local Small6 = Instance.new('ParticleEmitter')
+Small6.Name = "Aura"
+Small6.Texture = "rbxassetid://242102147"
+Small6.Parent = hed
+Small6.LightEmission = 1
+Small6.Enabled = true
+Small6.Color = ColorSequence.new(BrickColor.new("Electric blue").Color)
+Small6.Size = NumberSequence.new(0.5)
+Small6.LockedToPart = true
+Small6.Lifetime = NumberRange.new(0.5)
+Small6.Rate = 150
+Small6.Speed = NumberRange.new(4)
+Small6.Rotation = NumberRange.new(-50,50)
+Small6.EmissionDirection = "Top"
+Small6.ZOffset = 2
+local MUI = false
+wait(1)
+Humanoid.HipHeight = 470
+newWeld = function(wp0, wp1, wc0x, wc0y, wc0z)
+local wld = Instance.new("Weld", wp1)
+wld.Part0 = wp0
+wld.Part1 = wp1
+wld.C0 = CFrame.new(wc0x, wc0y, wc0z)
+end
+newWeld(Torso, LArm, -1.5, 0.5, 0)
+LArm.Weld.C1 = CFrame.new(0, 0.5, 0)
+newWeld(Torso, RArm, 1.5, 0.5, 0)
+RArm.Weld.C1 = CFrame.new(0, 0.5, 0)
+newWeld(Torso, Head, 0, 1.5, 0)
+newWeld(Torso, LLeg, -0.5, -1, 0)
+LLeg.Weld.C1 = CFrame.new(0, 1, 0)
+newWeld(Torso, RLeg, 0.5, -1, 0)
+RLeg.Weld.C1 = CFrame.new(0, 1, 0)
+newWeld(root, Torso, 0, -1, 0)
+Torso.Weld.C1 = CFrame.new(0, -1, 0)
+for i = 1, 30, 1 do
+hed.Weld.C0 = Lerp(hed.Weld.C0, CFrame.new(0,1.5,0)*CFrame.Angles(math.rad(-5),math.rad(0),math.rad(0)), 0.1)--head
+		torso.Weld.C0 = Lerp(torso.Weld.C0, CFrame.new(0, -1, 0) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(0)), 0.1)--torso
+		rarm.Weld.C0 = Lerp(rarm.Weld.C0, CFrame.new(1.5,0.5,0)*CFrame.Angles(math.rad(40),math.rad(-20),math.rad(10)), 0.1)--arm
+		larm.Weld.C0 = Lerp(larm.Weld.C0, CFrame.new(-1.5,0.5,0)*CFrame.Angles(math.rad(40),math.rad(20),math.rad(-10)), 0.1)--arm
+		lleg.Weld.C0 = Lerp(lleg.Weld.C0, CFrame.new(-0.5, -1, 0) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(-5)), 0.1)--leg
+		rleg.Weld.C0 = Lerp(rleg.Weld.C0, CFrame.new(0.5, -1, 0) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(5)), 0.1)--leg
+		wait(0.01)
+end
+
+
+local Grab = Instance.new("Part",hed)
+	Grab.Size = Vector3.new(3.9,5,3.9)
+	Grab.CanCollide = false
+	Grab.BrickColor = BrickColor.new("Deep orange")
+	Grab.Transparency = 1
+	local Grabo = Instance.new("Weld",Grab)
+	Grabo.Part0 = hed
+	Grabo.Part1 = Grab
+	Grabo.C0 = CFrame.new(0,-1.5,0)
+	
+local AuraB = Instance.new("Part",hed)
+	AuraB.Size = Vector3.new(2,1,2)
+	AuraB.CanCollide = false
+	AuraB.BrickColor = BrickColor.new("Deep orange")
+	AuraB.Transparency = 1
+	local AuraBo = Instance.new("Weld",AuraB)
+	AuraBo.Part0 = hed
+	AuraBo.Part1 = AuraB
+	AuraBo.C0 = CFrame.new(0,-3.6,0)
+	local FZcharge3 = Instance.new("ParticleEmitter",Grab)
+FZcharge3.Texture = "rbxassetid://1468162128"
+FZcharge3.Color = ColorSequence.new(Color3.fromRGB(248, 248, 248))
+FZcharge3.EmissionDirection = "Top"
+FZcharge3.Speed = NumberRange.new(2)
+FZcharge3.Size = NumberSequence.new(0.6,0)
+FZcharge3.Enabled = true
+FZcharge3.Drag = 1.2
+FZcharge3.LockedToPart = true
+FZcharge3.Lifetime = NumberRange.new(1)
+FZcharge3.Rate = 55
+FZcharge3.LightEmission = 0.3
+FZcharge3.Rotation = NumberRange.new(-5,5)
+FZcharge3.VelocitySpread = 0.2	
+FZcharge3.ZOffset = 2.5
+UILight = Instance.new("PointLight",torso)
+	UILight.Enabled = true
+	UILight.Name = "UltraInstinctLight"
+	UILight.Color = Color3.new(0,0,255)
+    UILight.Range = 10
+	UILight.Brightness = 4
+	  hed:FindFirstChildOfClass("Decal").Texture = "rbxassetid://986775808"
+AuraSFX:Play()
+instinct = true
+
+
+wait(2)
+Sound0 = Instance.new("Sound")
+Sound0.Name = "Ultra instinct Goku scream"
+Sound0.Parent = Head
+Sound0.EmitterSize = 1.0000000272564e+16
+Sound0.MinDistance = 1.0000000272564e+16
+Sound0.SoundId = "rbxassetid://1306739862"
+Sound0.Volume = 10
+
+
+
+
+local AuraBry2 = Instance.new("ParticleEmitter",torso)
+AuraBry2.Texture = "rbxassetid://434298892"
+AuraBry2.Color = ColorSequence.new(Color3.fromRGB(33, 84, 185))
+AuraBry2.EmissionDirection = "Top"
+AuraBry2.Speed = NumberRange.new(180)
+AuraBry2.Size = NumberSequence.new(30)
+AuraBry2.Transparency = NumberSequence.new(0.85)
+AuraBry2.Drag = 0.4
+AuraBry2.LightInfluence = 0
+AuraBry2.LockedToPart = true
+AuraBry2.Lifetime = NumberRange.new(5)
+AuraBry2.Rate = 778
+AuraBry2.LightEmission = 1
+AuraBry2.Rotation = NumberRange.new(-5,5)
+AuraBry2.VelocitySpread = 0
+AuraBry2.Acceleration = Vector3.new(0,0,0)	
+AuraBry2.ZOffset = 2.5
+
+
+local AuraBry2Low = Instance.new("ParticleEmitter",torso)
+AuraBry2Low.Texture = "rbxassetid://434298892"
+AuraBry2Low.Color = ColorSequence.new(Color3.fromRGB(33, 84, 185))
+AuraBry2Low.EmissionDirection = "Bottom"
+AuraBry2Low.Speed = NumberRange.new(180)
+AuraBry2Low.Size = NumberSequence.new(30)
+AuraBry2Low.Transparency = NumberSequence.new(0.85)
+AuraBry2Low.Drag = 0.4
+AuraBry2Low.LightInfluence = 0
+AuraBry2Low.LockedToPart = true
+AuraBry2Low.Lifetime = NumberRange.new(5)
+AuraBry2Low.Rate = 778
+AuraBry2Low.LightEmission = 1
+AuraBry2Low.Rotation = NumberRange.new(-5,5)
+AuraBry2Low.VelocitySpread = 0
+AuraBry2Low.Acceleration = Vector3.new(0,0,0)	
+AuraBry2Low.ZOffset = 2.5
+
+
+
+
+wait(5)
+wait(0.5)
+Sound0:Play()
+AURU.Rate = 50030
+AURU.Size = NumberSequence.new(40,80)
+wait(3)
+
+AuraBry2.Rate =0
+AuraBry2Low.Rate = 0
+AURU.Rate = 0
+hum.HipHeight = 0
+Sound0:Destroy()
+Model0:Destroy()
+LArm.Weld:Destroy()
+RArm.Weld:Destroy()
+LLeg.Weld:Destroy()
+RLeg.Weld:Destroy()
+Head.Weld:Destroy()
+Torso.Weld:Destroy()
+max = 0
+function music(id,pitch)
+max = 0
+if id == "Stop" then
+if not torso:FindFirstChild("MusicRuin") then
+soundz = Instance.new("Sound",torso)
+end
+soundz:Stop()
+else
+if not torso:FindFirstChild("MusicRuin") then
+soundz = Instance.new("Sound",torso)
+end
+soundz.MaxDistance = 150*5
+soundz.EmitterSize = 150/5
+soundz.Volume = 10
+soundz.Name = "MusicRuin"
+soundz.Looped = true
+soundz.PlaybackSpeed = pitch
+soundz.SoundId = "rbxassetid://"..id
+soundz:Stop()
+soundz:Play()
+end
+end
+
+----------------------------------------------------------------------------
+
+function lerp(a, b, t)
+  return a + (b - a)*t
+end
+
+----------------------------------------------------------------------------
+
+function Lerp(c1,c2,al)
+  local com1 = {c1.X,c1.Y,c1.Z,c1:toEulerAnglesXYZ()}
+  local com2 = {c2.X,c2.Y,c2.Z,c2:toEulerAnglesXYZ()}
+  for i,v in pairs(com1) do
+    com1[i] = v+(com2[i]-v)*al
+  end
+  return CFrame.new(com1[1],com1[2],com1[3]) * CFrame.Angles(select(4,unpack(com1)))
+end
+
+----------------------------------------------------------------------------
+
+function slerp(a, b, t)
+  dot = a:Dot(b)
+  if dot > 0.99999 or dot < -0.99999 then
+    return t <= 0.5 and a or b
+  else
+    r = math.acos(dot)
+    return (a*math.sin((1 - t)*r) + b*math.sin(t*r)) / math.sin(r)
+  end
+end
+
+----------------------------------------------------------------------------
+
+function clerp(c1,c2,al)
+
+  local com1 = {c1.X,c1.Y,c1.Z,c1:toEulerAnglesXYZ()}
+
+  local com2 = {c2.X,c2.Y,c2.Z,c2:toEulerAnglesXYZ()}
+
+  for i,v in pairs(com1) do
+
+    com1[i] = lerp(v,com2[i],al)
+
+  end
+
+  return CFrame.new(com1[1],com1[2],com1[3]) * CFrame.Angles(select(4,unpack(com1)))
+
+end
+
+----------------------------------------------------------------------------
+
+function findAllNearestTorso(pos,dist)
+    local list = game.Workspace:children()
+    local torso = {}
+    local temp = nil
+    local human = nil
+    local temp2 = nil
+    for x = 1, #list do
+        temp2 = list[x]
+        if (temp2.className == "Model") and (temp2 ~= char) then
+            local nayem = "Torso"
+            if temp2:findFirstChild("UpperTorso") then nayem = "UpperTorso" end
+            temp = temp2:findFirstChild(nayem)
+            human = temp2:findFirstChildOfClass("Humanoid")
+            if (temp ~= nil) and (human ~= nil) and (human.Health > 0) then
+                if (temp.Position - pos).magnitude < dist then
+                    table.insert(torso,temp)
+                    dist = (temp.Position - pos).magnitude
+                end
+            end
+        end
+    end
+    return torso
+end
+
+----------------------------------------------------------------------------
+
+local isAPlayer
+function checkIfNotPlayer(model)
+coroutine.resume(coroutine.create(function()
+if model ~= char and model.Parent ~= char and model.Parent.Parent ~= char and model.Parent ~= DebrisModel and model.Parent.Parent ~= DebrisModel and model.Parent.Parent.Parent ~= DebrisModel then
+isAPlayer = true
+else
+isAPlayer = false
+end
+end))
+return isAPlayer
+end
+
+----------------------------------------------------------------------------
+
+function computeDirection(vec)
+local lenSquared = vec.magnitude * vec.magnitude
+local invSqrt = 1 / math.sqrt(lenSquared)
+return Vector3.new(vec.x * invSqrt, vec.y * invSqrt, vec.z * invSqrt)
+end
+
+----------------------------------------------------------------------------
+
+function newWeld(wp0, wp1, wc0x, wc0y, wc0z)
+
+  local wld = Instance.new("Weld", wp1)
+
+  wld.Part0 = wp0
+
+  wld.Part1 = wp1
+
+  wld.C0 = CFrame.new(wc0x, wc0y, wc0z)
+
+  return wld
+
+end
+
+----------------------------------------------------------------------------
+
+function weld(model)
+	local parts,last = {}
+	local function scan(parent)
+		for _,v in pairs(parent:GetChildren()) do
+			if (v:IsA("BasePart")) then
+				if (last) then
+					local w = Instance.new("Weld")
+					w.Name = ("%s_Weld"):format(v.Name)
+					w.Part0,w.Part1 = last,v
+					w.C0 = last.CFrame:inverse()
+					w.C1 = v.CFrame:inverse()
+					w.Parent = last
+				end
+				last = v
+				table.insert(parts,v)
+			end
+			scan(v)
+		end
+	end
+	scan(model)
+	for _,v in pairs(parts) do
+		v.Anchored = false
+		v.Locked = true
+	end
+end
+
+
+----------------------------------------------------------------------------
+
+function sound(id,position,vol,pitch,dist,start,finish)
+  coroutine.resume(coroutine.create(function()
+
+  local part = Instance.new("Part",DebrisModel)
+  part.Anchored = true
+  part.Position = position
+  part.Size = Vector3.new(0,0,0)
+  part.CanCollide = false
+  part.Transparency = 1
+
+  soundasd = Instance.new("Sound",part)
+  
+  soundasd.SoundId = "rbxassetid://"..id
+  
+  if vol ~= nil then
+    soundasd.Volume = vol
+  end
+
+  if pitch ~= nil then
+    soundasd.PlaybackSpeed = pitch
+  end
+  
+  if dist ~= nil then
+    soundasd.MaxDistance = dist*5
+    soundasd.EmitterSize = dist/5
+  end
+
+  delay(0.5,function() debris:AddItem(part,soundasd.TimeLength+3) end)
+  
+  soundasd:Play()
+  
+  end))
+  return soundasd
+end
+
+function createsound(id,parent)
+
+  local soundz = Instance.new("Sound",parent)
+
+  soundz.SoundId = "rbxassetid://"..id
+
+  return soundz
+
+end
+
+function playsound(sond,vol,pitch,start)
+  
+  if vol ~= nil then
+    sond.Volume = vol
+  end
+
+  if pitch ~= nil then
+    sond.PlaybackSpeed = pitch
+  end
+ 
+  if start ~= nil then
+    sond.TimePosition = start
+  end
+
+  sond:Play()
+  
+end
+
+----------------------------------------------------------------------------
+eColors={"Really red","Really black"}
+function Lightning(Part0,Part1,Times,Offset,Color,Thickness,Trans)
+    local magz = (Part0 - Part1).magnitude
+    local curpos = Part0
+    local trz = {-Offset,Offset} 
+    for i=1,Times do
+        local li = Instance.new("Part", DebrisModel)
+        li.TopSurface =0
+        li.Material = Enum.Material.Neon
+        li.BottomSurface = 0
+        li.Anchored = true
+        li.Locked = true
+        li.Transparency = Trans or 0.4
+        li.BrickColor = BrickColor.new(Color)
+        li.formFactor = "Custom"
+        li.CanCollide = false
+        li.Size = Vector3.new(Thickness,Thickness,magz/Times)
+        local lim = Instance.new("BlockMesh",li)
+        local Offzet = Vector3.new(trz[math.random(1,2)],trz[math.random(1,2)],trz[math.random(1,2)])
+        local trolpos = CFrame.new(curpos,Part1)*CFrame.new(0,0,magz/Times).p+Offzet
+        if Times == i then
+        local magz2 = (curpos - Part1).magnitude
+        li.Size = Vector3.new(Thickness,Thickness,magz2)
+        li.CFrame = CFrame.new(curpos,Part1)*CFrame.new(0,0,-magz2/2)
+        else
+        li.CFrame = CFrame.new(curpos,trolpos)*CFrame.new(0,0,magz/Times/2)
+        end
+        curpos = li.CFrame*CFrame.new(0,0,magz/Times/2).p
+        li.Name = "LIGHTNING"
+    end
+end
+
+----------------------------------------------------------------------------
+
+local HBill = Instance.new("BillboardGui",hed)
+local HMain, HBar = Instance.new("Frame", HBill), Instance.new("Frame")
+local HName = Instance.new("TextLabel")
+HBill.Size = UDim2.new(15,0,2.2,0)
+HBill.StudsOffset = Vector3.new(3.675,1.2,0)
+HBill.AlwaysOnTop = true
+HBill.Enabled = true
+HMain.BackgroundColor3 = Color3.new(0, 0, 0)
+HMain.BackgroundTransparency = 1
+HMain.Size = UDim2.new(.5,0,.2,0)
+HName.Parent = HMain
+HName.BackgroundTransparency = 1
+HName.BackgroundColor3 = Color3.new(255,255,255)
+HName.BorderColor3 = Color3.new(0,0,0)
+HName.BorderSizePixel = 2
+HName.TextTransparency = 1
+HName.Size = UDim2.new(1,0,.75,0)
+HName.Font = "Code"
+HName.Text = [[ok]]
+HName.TextScaled = true
+HName.TextColor3 = Color3.new(0.5,0.5,0.5)
+HName.TextStrokeColor3 = Color3.new(0.1,0.1,0.1)
+HName.TextStrokeTransparency = 1
+HName.TextYAlignment = "Bottom"
+
+local HBill = Instance.new("BillboardGui",hed)
+local HMain, HBar = Instance.new("Frame", HBill), Instance.new("Frame")
+local HName = Instance.new("TextLabel")
+HBill.Size = UDim2.new(15,0,2.2,0)
+HBill.StudsOffset = Vector3.new(3.675,2,0)
+HBill.AlwaysOnTop = true
+HBill.Enabled = true
+HMain.BackgroundColor3 = Color3.new(0, 0, 0)
+HMain.BackgroundTransparency = 1
+HMain.Size = UDim2.new(.5,0,.5,0)
+HName.Parent = HMain
+HName.BackgroundTransparency = 1
+HName.BackgroundColor3 = Color3.new(255,255,255)
+HName.BorderColor3 = Color3.new(0,0,0)
+HName.BorderSizePixel = 2
+HName.Size = UDim2.new(1,0,.75,0)
+HName.Font = "Code"
+HName.TextTransparency = 1
+HName.Text = [[hi]]
+HName.TextScaled = true
+HName.TextColor3 = Color3.new(0,0,0)
+HName.TextStrokeColor3 = Color3.new(255,255,255)
+HName.TextStrokeTransparency = 1
+HName.TextYAlignment = "Bottom"
+
+function bigboomrektxd()
+coroutine.resume(coroutine.create(function()
+local magnitude = nil
+local Position = nil
+if animid == 0 then
+Position = larm.Position
+else
+Position = rarm.Position
+end
+--sound(743499393,Position,10,math.random(6,8)/10)
+sound(1050751126,Position,10,math.random(10,12)/10,50)
+
+local Part1 = Instance.new("Part")
+local mesh2 = Instance.new("SpecialMesh",Part1)
+mesh2.MeshId = "rbxassetid://559831844"
+mesh2.Scale = Vector3.new(0,0,0.4)
+Part1.Material = Enum.Material.Neon
+Part1.CanCollide = false
+Part1.BrickColor = BrickColor.new("White")
+Part1.Parent = DebrisModel
+Part1.Size = Vector3.new(0,0,0)
+Part1.Anchored = true
+Part1.CFrame = CFrame.new(Position,Mouse.Hit.p)
+Part1.Name = "EXPLOSION2"
+
+local Part0 = Instance.new("Part",DebrisModel)
+local PointLight2 = Instance.new("PointLight")
+Part0.Name = "Bullet"
+Part0.Material = Enum.Material.Neon
+Part0.BrickColor = BrickColor.new("New Yeller")
+Part0.Anchored = false
+Part0.Size = Vector3.new(5, 5, 5)
+local mesh = Instance.new("SpecialMesh",Part0)
+mesh.MeshType = Enum.MeshType.Sphere
+local bforce = Instance.new("BodyForce",Part0)
+bforce.force = Vector3.new(0, ((bforce.Parent:getMass())*workspace.Gravity), 0)
+Part0.CanCollide = false
+PointLight2.Parent = Part0
+PointLight2.Color = Part0.Color
+local Target = Mouse.Hit.p
+local direction = Target - Position
+local direction = computeDirection(direction)
+local pos = Position + (direction * 2) 
+Part0.CFrame = CFrame.new(pos,  pos + direction) * CFrame.Angles((math.pi/2)+math.rad(180), 0, 0)
+Part0.Velocity = direction * 60
+local asd = nil
+local loop = nil
+delay(9, function() Part0:Destroy() loop:disconnect() asd:disconnect() end)
+loop = rs:connect(function()
+local asdf = math.random(500,1000)/1000
+local Part1 = Instance.new("Part")
+local mesh2 = Instance.new("SpecialMesh",Part1)
+mesh2.MeshType = Enum.MeshType.Sphere
+Part1.Material = Enum.Material.Neon
+Part1.CanCollide = false
+Part1.BrickColor = BrickColor.new("Gold")
+Part1.Parent = DebrisModel
+Part1.Size = Part0.Size + Vector3.new(asdf,asdf,asdf)
+Part1.Anchored = true
+Part1.CFrame = CFrame.new(Part0.Position + Vector3.new(math.random(-1000,1000)/750,math.random(-1000,1000)/750,math.random(-1000,1000)/750))
+Part1.Name = "SMOKE"
+end)
+asd = Part0.Touched:connect(function(ht)
+local hit=ht.Parent
+if checkIfNotPlayer(ht) == true and ht.CanCollide == true then
+asd:disconnect()
+loop:disconnect()
+Part0:Destroy()
+
+sound(explosionid[math.random(1,#explosionid)],Part0.Position,5,math.random(6,9)/10,80)
+for i,v in pairs(findAllNearestTorso(Part0.Position,5)) do
+if v.Parent:FindFirstChildOfClass("Humanoid").MaxHealth >= 9e+99 then
+v:Destroy()
+else
+v.Parent:FindFirstChildOfClass("Humanoid"):TakeDamage(v.Parent:FindFirstChildOfClass("Humanoid").MaxHealth/(math.random(50,60)/10))
+end
+local Position = Part0.Position
+local Target = v.Position
+local direction = Target - Position
+local direction = computeDirection(direction)
+local bv = Instance.new("BodyVelocity",v)
+bv.Velocity = direction * (50 - ((Position - Target).magnitude/2))
+debris:AddItem(bv,1)
+end
+for i=1,14,2 do for x=1,math.random(0,1) do rs:wait() end
+for z=1,math.random(2,3) do
+local asdf = math.random(-5,5)*10-(i/20)*8
+local Part1 = Instance.new("Part")
+local mesh2 = Instance.new("SpecialMesh",Part1)
+mesh2.MeshType = Enum.MeshType.Sphere
+mesh2.Scale = Vector3.new(0,0,0)
+Part1.Material = Enum.Material.Neon
+Part1.CanCollide = false
+Part1.BrickColor = BrickColor.new("Gold")
+Part1.Parent = DebrisModel
+Part1.Size = Vector3.new(asdf,asdf,asdf)
+Part1.Anchored = true
+local a = i*0.5
+Part1.CFrame = CFrame.new(Part0.Position + Vector3.new(math.random(-2,2)*a,math.random(-10,10),math.random(-2,2)*a))
+Part1.Name = "EXPLOSION"
+end
+end
+
+end
+end)
+end))
+end
+
+
+function WhiteBall()
+coroutine.resume(coroutine.create(function()
+local magnitude = nil
+local Position = nil
+if animid == 0 then
+Position = larm.Position
+else
+Position = rarm.Position
+end
+--sound(743499393,Position,10,math.random(6,8)/10)
+sound(1050751126,Position,10,math.random(4,5)/10,100)
+
+local Part1 = Instance.new("Part")
+local mesh2 = Instance.new("SpecialMesh",Part1)
+mesh2.MeshId = "rbxassetid://559831844"
+mesh2.Scale = Vector3.new(0,0,0.4)
+Part1.Material = Enum.Material.Neon
+Part1.CanCollide = false
+Part1.BrickColor = BrickColor.new("White")
+Part1.Parent = DebrisModel
+Part1.Size = Vector3.new(0,0,0)
+Part1.Anchored = true
+Part1.CFrame = CFrame.new(Position,Mouse.Hit.p)
+Part1.Name = "EXPLOSION3"
+
+local Part0 = Instance.new("Part",DebrisModel)
+local PointLight2 = Instance.new("PointLight")
+Part0.Name = "Bullet"
+Part0.Material = Enum.Material.Neon
+Part0.BrickColor = BrickColor.new("White")
+Part0.Anchored = false
+Part0.Size = Vector3.new(5, 5, 5)
+local mesh = Instance.new("SpecialMesh",Part0)
+mesh.MeshType = Enum.MeshType.Sphere
+mesh.Scale = Vector3.new(3,3,3)
+local bforce = Instance.new("BodyForce",Part0)
+bforce.force = Vector3.new(0, ((bforce.Parent:getMass())*workspace.Gravity), 0)
+Part0.CanCollide = false
+PointLight2.Parent = Part0
+PointLight2.Color = Part0.Color
+local Target = Mouse.Hit.p
+local direction = Target - Position
+local direction = computeDirection(direction)
+local pos = Position + (direction * 2) 
+Part0.CFrame = CFrame.new(pos,  pos + direction) * CFrame.Angles((math.pi/2)+math.rad(180), 0, 0)
+Part0.Velocity = direction * 150
+local asd = nil
+local loop = nil
+delay(5, function() Part0:Destroy() loop:disconnect() asd:disconnect() end)
+loop = rs:connect(function()
+local asdf = math.random(500,1000)/1000
+local Part1 = Instance.new("Part")
+local mesh2 = Instance.new("SpecialMesh",Part1)
+mesh2.MeshType = Enum.MeshType.Sphere
+Part1.Material = Enum.Material.Neon
+Part1.CanCollide = false
+Part1.BrickColor = BrickColor.new("White")
+Part1.Parent = DebrisModel
+Part1.Size = (Part0.Size*3) + Vector3.new(asdf,asdf,asdf)
+Part1.Anchored = true
+Part1.CFrame = CFrame.new(Part0.Position + Vector3.new(math.random(-3000,3000)/750,math.random(-3000,3000)/750,math.random(-3000,3000)/750))
+Part1.Name = "SMOKE"
+end)
+asd = Part0.Touched:connect(function(ht)
+local hit=ht.Parent
+if checkIfNotPlayer(ht) == true and ht.CanCollide == true then
+asd:disconnect()
+loop:disconnect()
+Part0:Destroy()
+
+sound(explosionid[math.random(1,#explosionid)],Part0.Position,10,math.random(3,5)/10,500)
+for i,v in pairs(findAllNearestTorso(Part0.Position,160)) do
+if v.Parent:FindFirstChildOfClass("Humanoid").MaxHealth >= 9e+99 then
+v:Destroy()
+else
+v.Parent:BreakJoints()
+end
+local Position = Part0.Position
+local Target = v.Position
+local direction = Target - Position
+local direction = computeDirection(direction)
+local bv = Instance.new("BodyVelocity",v)
+bv.Velocity = direction * (120 - ((Position - Target).magnitude/2))
+debris:AddItem(bv,1)
+end
+for i=1,10,0.5 do for x=1,math.random(0,1) do rs:wait() end
+for z=1,math.random(2,3) do
+local asdf = math.random(-5,5)*10-(i/20)*12
+local Part1 = Instance.new("Part")
+local mesh2 = Instance.new("SpecialMesh",Part1)
+mesh2.MeshType = Enum.MeshType.Sphere
+mesh2.Scale = Vector3.new(0,0,0)
+Part1.Material = Enum.Material.Neon
+Part1.CanCollide = false
+Part1.BrickColor = BrickColor.new("White")
+Part1.Parent = DebrisModel
+Part1.Size = Vector3.new(asdf,asdf,asdf)
+Part1.Anchored = true
+local a = i*5
+Part1.CFrame = CFrame.new(Part0.Position + Vector3.new(math.random(-2,2)*a,math.random(-30,30),math.random(-2,2)*a))
+Part1.Name = "EXPLOSION4"
+end
+end
+
+end
+end)
+end))
+end
+
+
+function AirPunch()
+coroutine.resume(coroutine.create(function()
+local magnitude = nil
+local Position = nil
+if animid == 0 then
+Position = larm.Position
+else
+Position = rarm.Position
+end
+--sound(743499393,Position,10,math.random(6,8)/10)
+sound(1050751126,Position,10,math.random(4,5)/10,100)
+
+local Part1 = Instance.new("Part")
+local mesh2 = Instance.new("SpecialMesh",Part1)
+mesh2.MeshId = "rbxassetid://559831844"
+mesh2.Scale = Vector3.new(0,0,0.4)
+Part1.Material = Enum.Material.Neon
+Part1.CanCollide = false
+Part1.BrickColor = BrickColor.new("White")
+Part1.Parent = DebrisModel
+Part1.Size = Vector3.new(0,0,0)
+Part1.Anchored = true
+Part1.CFrame = CFrame.new(Position,Mouse.Hit.p)
+Part1.Name = "EXPLOSION3"
+
+local Part0 = Instance.new("Part",DebrisModel)
+local PointLight2 = Instance.new("PointLight")
+Part0.Name = "Bullet"
+Part0.Material = Enum.Material.Neon
+Part0.BrickColor = BrickColor.new("White")
+Part0.Anchored = false
+Part0.Size = Vector3.new(1,1,1)
+Part0.Transparency = 0.5
+local mesh = Instance.new("SpecialMesh",Part0)
+mesh.MeshId = "rbxassetid://437347603"
+mesh.Scale = Vector3.new(1.3,1.3,4.4)
+local bforce = Instance.new("BodyForce",Part0)
+bforce.force = Vector3.new(0, ((bforce.Parent:getMass())*workspace.Gravity), 0)
+Part0.CanCollide = false
+PointLight2.Parent = Part0
+PointLight2.Color = Part0.Color
+local Target = Mouse.Hit.p
+local direction = Target - Position
+local direction = computeDirection(direction)
+local pos = Position + (direction * 2) 
+Part0.CFrame = CFrame.new(pos,  pos + direction) * CFrame.Angles(0,0,1.55)
+Part0.Velocity = direction * 550
+local asd = nil
+local loop = nil
+delay(5, function() Part0:Destroy() loop:disconnect() asd:disconnect() end)
+loop = rs:connect(function()
+local asdf = math.random(500,1000)/1000
+local Part1 = Instance.new("Part")
+local mesh2 = Instance.new("SpecialMesh",Part1)
+mesh2.MeshType = Enum.MeshType.Sphere
+Part1.Material = Enum.Material.Neon
+Part1.CanCollide = false
+Part1.BrickColor = BrickColor.new("White")
+Part1.Parent = DebrisModel
+Part1.Size = (Part0.Size*3) + Vector3.new(asdf,asdf,asdf)
+Part1.Anchored = true
+Part1.CFrame = CFrame.new(Part0.Position + Vector3.new(math.random(-1000,1000)/750,math.random(-1000,1000)/750,math.random(-1000,1000)/750))
+Part1.Name = "SMOKE"
+end)
+asd = Part0.Touched:connect(function(ht)
+local hit=ht.Parent
+if checkIfNotPlayer(ht) == true and ht.CanCollide == true then
+asd:disconnect()
+loop:disconnect()
+Part0:Destroy()
+
+sound(punch[math.random(1,#punch)],Part0.Position,10,math.random(3,5)/5,50)
+for i,v in pairs(findAllNearestTorso(Part0.Position,30)) do
+if v.Parent:FindFirstChildOfClass("Humanoid").MaxHealth >= 9e+99 then
+v:Destroy()
+else
+v.Parent.Humanoid:TakeDamage(100000)
+local Fl = Instance.new("BodyVelocity",v.Parent.Head)
+			Fl.maxForce = Vector3.new(math.huge,math.huge,math.huge)
+			Fl.velocity = Part0.CFrame.lookVector*395
+			wait(0.05)
+			Fl:remove()
+
+end
+local Position = Part0.Position
+local Target = v.Position
+local direction = Target - Position
+local direction = computeDirection(direction)
+local bv = Instance.new("BodyVelocity",v)
+bv.Velocity = direction * (120 - ((Position - Target).magnitude/2))
+debris:AddItem(bv,1)
+end
+for i=1,10,0.5 do for x=1,math.random(0,1) do rs:wait() end
+for z=1,math.random(2,3) do
+local asdf = math.random(-5,5)*2-(i/2)*10
+local Part1 = Instance.new("Part")
+local mesh2 = Instance.new("SpecialMesh",Part1)
+mesh2.MeshType = Enum.MeshType.Sphere
+mesh2.Scale = Vector3.new(0,0,0)
+Part1.Material = Enum.Material.Neon
+Part1.CanCollide = false
+Part1.BrickColor = BrickColor.new("White")
+Part1.Parent = DebrisModel
+Part1.Size = Vector3.new(asdf,asdf,asdf)
+Part1.Anchored = true
+local a = i*0.7
+Part1.CFrame = CFrame.new(Part0.Position + Vector3.new(math.random(-2,2)*a,math.random(-4,4),math.random(-2,2)*a))
+Part1.Name = "EXPLOSION4"
+end
+end
+
+end
+end)
+end))
+end
+
+
+function AirPunchStrong()
+coroutine.resume(coroutine.create(function()
+local magnitude = nil
+local Position = nil
+if animid == 0 then
+Position = larm.Position
+else
+Position = rarm.Position
+end
+--sound(743499393,Position,10,math.random(6,8)/10)
+sound(1050751126,Position,10,math.random(4,5)/10,100)
+
+local Part1 = Instance.new("Part")
+local mesh2 = Instance.new("SpecialMesh",Part1)
+mesh2.MeshId = "rbxassetid://559831844"
+mesh2.Scale = Vector3.new(0,0,0.4)
+Part1.Material = Enum.Material.Neon
+Part1.CanCollide = false
+Part1.BrickColor = BrickColor.new("White")
+Part1.Parent = DebrisModel
+Part1.Size = Vector3.new(0,0,0)
+Part1.Anchored = true
+Part1.CFrame = CFrame.new(Position,Mouse.Hit.p)
+Part1.Name = "EXPLOSION3"
+
+local Part0 = Instance.new("Part",DebrisModel)
+local PointLight2 = Instance.new("PointLight")
+Part0.Name = "Bullet"
+Part0.Material = Enum.Material.Neon
+Part0.BrickColor = BrickColor.new("White")
+Part0.Anchored = false
+Part0.Size = Vector3.new(1,1,1)
+Part0.Transparency = 0.5
+local mesh = Instance.new("SpecialMesh",Part0)
+mesh.MeshId = "rbxassetid://437347603"
+mesh.Scale = Vector3.new(1.3,1.3,4.4)
+local bforce = Instance.new("BodyForce",Part0)
+bforce.force = Vector3.new(0, ((bforce.Parent:getMass())*workspace.Gravity), 0)
+Part0.CanCollide = false
+PointLight2.Parent = Part0
+PointLight2.Color = Part0.Color
+local Target = Mouse.Hit.p
+local direction = Target - Position
+local direction = computeDirection(direction)
+local pos = Position + (direction * 2) 
+Part0.CFrame = CFrame.new(pos,  pos + direction) * CFrame.Angles(0,0,1.55)
+Part0.Velocity = direction * 750
+local asd = nil
+local loop = nil
+delay(5, function() Part0:Destroy() loop:disconnect() asd:disconnect() end)
+loop = rs:connect(function()
+local asdf = math.random(500,1000)/1000
+local Part1 = Instance.new("Part")
+local mesh2 = Instance.new("SpecialMesh",Part1)
+mesh2.MeshType = Enum.MeshType.Sphere
+Part1.Material = Enum.Material.Neon
+Part1.CanCollide = false
+Part1.BrickColor = BrickColor.new("White")
+Part1.Parent = DebrisModel
+Part1.Size = (Part0.Size*3) + Vector3.new(asdf,asdf,asdf)
+Part1.Anchored = true
+Part1.CFrame = CFrame.new(Part0.Position + Vector3.new(math.random(-1000,1000)/750,math.random(-1000,1000)/750,math.random(-1000,1000)/750))
+Part1.Name = "SMOKE"
+end)
+asd = Part0.Touched:connect(function(ht)
+local hit=ht.Parent
+if checkIfNotPlayer(ht) == true and ht.CanCollide == true then
+asd:disconnect()
+loop:disconnect()
+Part0:Destroy()
+
+sound(punch[math.random(1,#punch)],Part0.Position,10,math.random(3,5)/5,50)
+for i,v in pairs(findAllNearestTorso(Part0.Position,35)) do
+if v.Parent:FindFirstChildOfClass("Humanoid").MaxHealth >= 9e+99 then
+v:Destroy()
+else
+v.Parent:BreakJoints()
+local Fl = Instance.new("BodyVelocity",v.Parent.Head)
+			Fl.maxForce = Vector3.new(math.huge,math.huge,math.huge)
+			Fl.velocity = Part0.CFrame.lookVector*395
+			wait(0.05)
+			Fl:remove()
+
+end
+local Position = Part0.Position
+local Target = v.Position
+local direction = Target - Position
+local direction = computeDirection(direction)
+local bv = Instance.new("BodyVelocity",v)
+bv.Velocity = direction * (120 - ((Position - Target).magnitude/2))
+debris:AddItem(bv,1)
+end
+for i=1,10,0.5 do for x=1,math.random(0,1) do rs:wait() end
+for z=1,math.random(2,3) do
+local asdf = math.random(-5,5)*2-(i/2)*10
+local Part1 = Instance.new("Part")
+local mesh2 = Instance.new("SpecialMesh",Part1)
+mesh2.MeshType = Enum.MeshType.Sphere
+mesh2.Scale = Vector3.new(0,0,0)
+Part1.Material = Enum.Material.Neon
+Part1.CanCollide = false
+Part1.BrickColor = BrickColor.new("White")
+Part1.Parent = DebrisModel
+Part1.Size = Vector3.new(asdf,asdf,asdf)
+Part1.Anchored = true
+local a = i*0.7
+Part1.CFrame = CFrame.new(Part0.Position + Vector3.new(math.random(-2,2)*a,math.random(-4,4),math.random(-2,2)*a))
+Part1.Name = "EXPLOSION4"
+end
+end
+
+end
+end)
+end))
+end
+
+Mouse.KeyDown:connect(function(k)
+if k == "q" then
+	if Melee == false then
+	Melee = true
+	no_anim = true
+	instinct = false
+	
+	local Music = Instance.new("Sound",hed)
+		Music.SoundId = "rbxassetid://1047222775"
+		Music.Pitch = 1
+		Music.Looped = false
+		Music.Volume = 10
+				wait(0.0001)
+		Music:Play()	
+	local Grab = Instance.new("Part",char)
+	Grab.Size = Vector3.new(4,4,4)
+	Grab.CanCollide = false
+	Grab.BrickColor = BrickColor.new("Deep orange")
+	Grab.Transparency = math.huge
+	local Grabo = Instance.new("Weld",Grab)
+	Grabo.Part0 = rarm
+	Grabo.Part1 = Grab
+	Grabo.C0 = CFrame.new(0,-1.1,0)
+	Grab.Touched:connect(function(hit)
+	if hit.Parent:FindFirstChild("Humanoid")and hit.Parent ~= nil and hit.Parent.Name ~= owner.Character.Name then
+			
+hit.Parent.Humanoid:TakeDamage(1000)
+			
+			local Fl = Instance.new("BodyVelocity",hit.Parent.Head)
+			Fl.maxForce = Vector3.new(math.huge,math.huge,math.huge)
+			Fl.velocity = torso.CFrame.lookVector*10
+			wait(0.05)
+			Fl:remove()
+	end
+	end)
+coroutine.resume(coroutine.create(function()
+			for i = 1,10 do 
+			
+			
+			coroutine.resume(coroutine.create(function()
+			for i = 0,0.6,0.1 do
+			hed.Weld.C0 = Lerp(hed.Weld.C0, CFrame.new(0,1.5,0)*CFrame.Angles(math.rad(0),math.rad(70),math.rad(0)), 0.8)--head
+		             torso.Weld.C0 = Lerp(torso.Weld.C0, CFrame.new(0, -1, 0) * CFrame.Angles(math.rad(0),math.rad(-80),math.rad(0)), 0.8)--torso
+				    	rarm.Weld.C0 = Lerp(rarm.Weld.C0, CFrame.new(1.5,0.5,0)*CFrame.Angles(math.rad(-20),math.rad(0),math.rad(10)), 0.8)--rarm
+					   larm.Weld.C0 = Lerp(larm.Weld.C0, CFrame.new(-1.5,0.5,0)*CFrame.Angles(math.rad(90),math.rad(0),math.rad(-20)), 0.8)--larm
+					lleg.Weld.C0 = Lerp(lleg.Weld.C0, CFrame.new(-0.5, -1, 0) * CFrame.Angles(math.rad(0),math.rad(0),math.rad(-10)), 0.8)--lleg
+		             rleg.Weld.C0 = Lerp(rleg.Weld.C0, CFrame.new(0.5, -1, 0) * CFrame.Angles(math.rad(0),math.rad(0),math.rad(5)), 0.8)--rleg
+		wait(0.1)
+		 hed.Weld.C0 = Lerp(hed.Weld.C0, CFrame.new(0,1.5,0)*CFrame.Angles(math.rad(0),math.rad(-50),math.rad(0)), 0.8)--head
+		             torso.Weld.C0 = Lerp(torso.Weld.C0, CFrame.new(0, -1, 0) * CFrame.Angles(math.rad(0),math.rad(50),math.rad(0)), 0.8)--torso
+				    	rarm.Weld.C0 = Lerp(rarm.Weld.C0, CFrame.new(1.5,0.5,0)*CFrame.Angles(math.rad(90),math.rad(0),math.rad(20)), 0.8)--rarm
+					   larm.Weld.C0 = Lerp(larm.Weld.C0, CFrame.new(-1.5,0.5,0)*CFrame.Angles(math.rad(-10),math.rad(0),math.rad(-10)), 0.8)--larm
+					lleg.Weld.C0 = Lerp(lleg.Weld.C0, CFrame.new(-0.5, -1, 0) * CFrame.Angles(math.rad(0),math.rad(0),math.rad(-10)), 0.8)--lleg
+		             rleg.Weld.C0 = Lerp(rleg.Weld.C0, CFrame.new(0.5, -1, 0) * CFrame.Angles(math.rad(0),math.rad(0),math.rad(5)), 0.8)--rleg
+		wait(0.1)
+		hed.Weld.C0 = Lerp(hed.Weld.C0, CFrame.new(0,1.5,0)*CFrame.Angles(math.rad(0),math.rad(60),math.rad(0)), 0.8)--head
+	     	torso.Weld.C0 = Lerp(torso.Weld.C0, CFrame.new(0, -1, 0) * CFrame.Angles(math.rad(5), math.rad(-60), math.rad(0)), 0.8)--torso
+					rarm.Weld.C0 = Lerp(rarm.Weld.C0, CFrame.new(1.5,0.5,0)*CFrame.Angles(math.rad(0),math.rad(0),math.rad(10)), 0.8)--rarm
+					larm.Weld.C0 = Lerp(larm.Weld.C0, CFrame.new(-1.5,0.5,0)*CFrame.Angles(math.rad(0),math.rad(0),math.rad(-30)), 0.8)--larm
+			 lleg.Weld.C0 = Lerp(lleg.Weld.C0, CFrame.new(-0.5, -1, 0) * CFrame.Angles(math.rad(100), math.rad(0), math.rad(-40)), 0.8)--lleg
+		        rleg.Weld.C0 = Lerp(rleg.Weld.C0, CFrame.new(0.5, -1, 0) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(10)), 0.8)--rleg
+		wait(0.1)
+		hed.Weld.C0 = Lerp(hed.Weld.C0, CFrame.new(0,1.5,0)*CFrame.Angles(math.rad(0),math.rad(-60),math.rad(0)), 0.8)--head
+	     	torso.Weld.C0 = Lerp(torso.Weld.C0, CFrame.new(0, -1, 0) * CFrame.Angles(math.rad(2), math.rad(60), math.rad(0)), 0.8)--torso
+					rarm.Weld.C0 = Lerp(rarm.Weld.C0, CFrame.new(1.5,0.5,0)*CFrame.Angles(math.rad(0),math.rad(0),math.rad(30)), 0.8)--rarm
+					larm.Weld.C0 = Lerp(larm.Weld.C0, CFrame.new(-1.5,0.5,0)*CFrame.Angles(math.rad(0),math.rad(0),math.rad(-10)), 0.8)--larm
+			 lleg.Weld.C0 = Lerp(lleg.Weld.C0, CFrame.new(-0.5, -1, 0) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(-10)), 0.8)--lleg
+		        rleg.Weld.C0 = Lerp(rleg.Weld.C0, CFrame.new(0.5, -1, 0) * CFrame.Angles(math.rad(100), math.rad(0), math.rad(40)), 0.8)--rleg
+	
+			wait(0.00000000001)
+			end
+			no_anim = false
+			end))
+			wait(0.3)
+			end
+		end))
+			
+	coroutine.resume(coroutine.create(function()
+			wait(5)
+			Melee = false
+			instinct = true
+			Grab:remove()
+		end))
+	
+	end
+	end
+end)
+
+
+
+tp = true
+Mouse.KeyDown:connect(function(k)
+if k == "l" then
+if tp == true then
+tp = true
+Zano:Play()
+				wait(0.0001)
+
+
+   wait(0)
+Zanzoken = Instance.new("Part",char)
+Zanzoken.Anchored = true
+Zanzoken.Position = Vector3.new(999,999,999)
+Zanzoken.CFrame = Torso.CFrame
+game.Debris:AddItem(Zanzoken,0.5)
+Zanzoken.Transparency = 1
+wait()
+idk = Instance.new("BillboardGui",Zanzoken)
+idk.Size = UDim2.new(10,0,15,0)
+idk.AlwaysOnTop = false
+idk1 = Instance.new("ImageLabel",idk)
+idk1.BackgroundTransparency = 1
+idk.ExtentsOffset = Vector3.new(0,0,0)
+idk1.ImageTransparency = 0
+idk1.ImageColor3 = Color3.fromRGB(0,0,0)
+idk1.Size = UDim2.new(2,0,1,0)
+idk1.Position = UDim2.new(-0.5,0,-0.2,0)
+idk1.Image = "rbxassetid://319554883"
+tp = true
+
+
+end
+end
+end)
+Mouse.KeyDown:connect(function(k)
+if k == "h" and MUI == true then
+	instinct = false
+	no_anim = true
+			local HQ = Instance.new("Part",char)
+			HQ.Size = Vector3.new(0.1,0.1,0.1)
+			HQ.BrickColor = BrickColor.new("White")
+			HQ.Material = "Neon"
+			HQ.Anchored = true
+			HQ.CanCollide = false
+			HQ.CFrame = hed.CFrame*CFrame.new(0,32,0)*CFrame.Angles(0,0,0)
+			local HQ2 = Instance.new("SpecialMesh",HQ)
+			HQ2.MeshType = 3
+			HQ2.Scale = Vector3.new(0.5,0.5,0.5)
+		
+			
+			
+			
+			coroutine.resume(coroutine.create(function()
+			for i = 1,20 do
+			HQ2.Scale = HQ2.Scale + Vector3.new(10,10,10)
+		
+			HQ.CFrame = HQ.CFrame*CFrame.Angles(0,-0.2,0)
+			
+			
+			
+			wait(0.00000000001)
+			end
+			end))		
+	for i = 1, 20 do
+		wait()
+		hed.Weld.C0 = Lerp(hed.Weld.C0, CFrame.new(0,1.5,0)*CFrame.Angles(math.rad(0),math.rad(0),math.rad(0)), 0.3)--head
+		torso.Weld.C0 = Lerp(torso.Weld.C0, CFrame.new(0, 10, 0) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(0)), 0.3)--torso
+					rarm.Weld.C0 = Lerp(rarm.Weld.C0, CFrame.new(1.5,0.5,0)*CFrame.Angles(math.rad(-180),math.rad(0),math.rad(20)), 0.3)--rarm
+					larm.Weld.C0 = Lerp(larm.Weld.C0, CFrame.new(-1.5,0.5,0)*CFrame.Angles(math.rad(20),math.rad(0),math.rad(-20)), 0.3)--larm
+					lleg.Weld.C0 = Lerp(lleg.Weld.C0, CFrame.new(-0.5, -1, 0) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(-20)), 0.3)--lleg
+		rleg.Weld.C0 = Lerp(rleg.Weld.C0, CFrame.new(0.5, -1, 0) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(20)), 0.3)--rleg
+	end
+	
+	wait(2)
+	
+	HQ:Destroy()
+	
+	for i = 1, 20 do
+		wait()
+		hed.Weld.C0 = Lerp(hed.Weld.C0, CFrame.new(0,1.5,0)*CFrame.Angles(math.rad(0),math.rad(0),math.rad(0)), 0.1)--head
+		torso.Weld.C0 = Lerp(torso.Weld.C0, CFrame.new(0, 10, 0) * CFrame.Angles(math.rad(-30), math.rad(0), math.rad(0)), 0.1)--torso
+					rarm.Weld.C0 = Lerp(rarm.Weld.C0, CFrame.new(1.5,0.5,0)*CFrame.Angles(math.rad(100),math.rad(0),math.rad(20)), 0.1)--rarm
+					
+					lleg.Weld.C0 = Lerp(lleg.Weld.C0, CFrame.new(-0.5, -1, 0) * CFrame.Angles(math.rad(60), math.rad(0), math.rad(-20)), 0.1)--lleg
+		rleg.Weld.C0 = Lerp(rleg.Weld.C0, CFrame.new(0.5, -1, 0) * CFrame.Angles(math.rad(60), math.rad(0), math.rad(20)), 0.1)--rleg
+end
+
+
+
+	WhiteBall()
+	wait(0.5)
+	no_anim = false
+	instinct = true
+	
+	
+end
+end)
+
+
+
+local v3 = Vector3.new
+local num = 0
+local bc = BrickColor.new
+local new = Instance.new
+local cn = CFrame.new
+local Torso = torso
+local RootCF = CFrame.fromEulerAnglesXYZ(-1.57, 0, 3.14)
+local RHCF = CFrame.fromEulerAnglesXYZ(0, 1.6, 0)
+local LHCF = CFrame.fromEulerAnglesXYZ(0, -1.6, 0)
+RSH, LSH = nil, nil
+RW = Instance.new("Weld")
+LW = Instance.new("Weld")
+RH = torso["Right Hip"]
+LH = torso["Left Hip"]
+RSH = torso["Right Shoulder"]
+LSH = torso["Left Shoulder"]
+RSH.Parent = nil
+LSH.Parent = nil
+RW.Name = "RW"
+RW.Part0 = torso
+RW.C0 = cn(1.5, 0.5, 0)
+RW.C1 = cn(0, 0.5, 0)
+RW.Part1 = rarm
+RW.Parent = torso
+LW.Name = "LW"
+LW.Part0 = torso
+LW.C0 = cn(-1.5, 0.5, 0)
+LW.C1 = cn(0, 0.5, 0)
+LW.Part1 = larm
+LW.Parent = torso
+local angles = CFrame.Angles
+local RootJoint = root.RootJoint
+local NeckCF = cn(0, 1, 0, -1, 0, 0, 0, 0, 1, 0, 1, 0)
+local hit1 = false
+local hit2 = false
+local hit3 = false
+local hit4 = false
+function Combo3()
+	getplayer = new("Part",char)
+getplayer.Position = Vector3.new(999,999,999)
+getplayer.Transparency = 1
+getplayer.Size = v3(3,3,3)
+getplayer.CanCollide = false
+getplayer.CFrame = root.CFrame + root.CFrame.lookVector*3
+getplayer.Name = "GetPlayer"
+
+game.Debris:AddItem(getplayer,0.5)
+
+getplayer.Touched:connect(function(hit)
+			if hit.Parent:FindFirstChild("GetPlayer") == nil and hit.Parent:findFirstChild("HumanoidRootPart") ~= nil then
+				getplayer:Destroy()
+				to = hit.Parent:findFirstChild("HumanoidRootPart")
+				to.CFrame = CFrame.new(root.CFrame.p+v3(0,0.5,0)) + root.CFrame.lookVector*2
+				to.Anchored = true
+				root.Anchored = true
+	no_anim = true
+	
+
+		punchsound1:Play()
+		hit1 = true
+ for i = 0, 1, 0.1 do
+        
+        RootJoint.C0 = clerp(RootJoint.C0, RootCF * cn(0, 0, 0) * angles(math.rad(0), math.rad(-5), math.rad(-90)), 0.3)
+        Torso.Neck.C0 = clerp(Torso.Neck.C0, NeckCF * angles(math.rad(0), math.rad(0), math.rad(90)), 0.2)
+        RW.C0 = clerp(RW.C0, CFrame.new(1.2, 0.5, 0) * angles(math.rad(0), math.rad(0 * math.cos(sine / 25)), math.rad(0 * math.cos(sine / 25))), 0.2)
+        LW.C0 = clerp(LW.C0, CFrame.new(-1.3, 0.3, -0.2) * angles(math.rad(0 + 1 * math.cos(sine / 25)), math.rad(0), math.rad(-90 + 1 * math.cos(sine / 25))), 0.3)
+        RH.C0 = clerp(RH.C0, cn(0.9, -1 - 0.1 * math.cos(sine / 25), -0.6) * RHCF * angles(math.rad(-2 + 1 * math.cos(sine / 25)), math.rad(50), math.rad(10 + 2 * math.cos(sine / 25))), 0.2)
+        LH.C0 = clerp(LH.C0, cn(-0.9, -1 - 0.1 * math.cos(sine / 25), 0.4) * LHCF * angles(math.rad(-2 + 1 * math.cos(sine / 25)), math.rad(50), math.rad(20 + 2 * math.cos(sine / 25))), 0.2)		
+end
+punchsound1:Play()
+for i = 0, 1, 0.1 do
+        
+        RootJoint.C0 = clerp(RootJoint.C0, RootCF * cn(0, -0.5, 0) * angles(math.rad(0), math.rad(0), math.rad(45)), 0.3)
+        Torso.Neck.C0 = clerp(Torso.Neck.C0, NeckCF * angles(math.rad(0), math.rad(0), math.rad(-25)), 0.3)
+        RW.C0 = clerp(RW.C0, CFrame.new(1.2, 0.7, -0.8) * angles(math.rad(120), math.rad(0), math.rad(-35)), 0.3)
+        LW.C0 = clerp(LW.C0, CFrame.new(-1.5, 0.5, 0) * angles(math.rad(-25), math.rad(0), math.rad(0)), 0.3)
+        RH.C0 = clerp(RH.C0, cn(1, -1, 0) * RHCF * angles(math.rad(0), math.rad(-45), math.rad(0)), 0.3)
+        LH.C0 = clerp(LH.C0, cn(-1, -1, -0.2) * LHCF * angles(math.rad(0), math.rad(-25), math.rad(10)), 0.3)
+end
+punchsound1:Play()
+ for i = 0, 1, 0.1 do
+        
+        RootJoint.C0 = clerp(RootJoint.C0, RootCF * cn(0, 0, 0) * angles(math.rad(0), math.rad(-5), math.rad(-90)), 0.3)
+        Torso.Neck.C0 = clerp(Torso.Neck.C0, NeckCF * angles(math.rad(0), math.rad(0), math.rad(90)), 0.2)
+        RW.C0 = clerp(RW.C0, CFrame.new(1.2, 0.5, 0) * angles(math.rad(0), math.rad(0 * math.cos(sine / 25)), math.rad(0 * math.cos(sine / 25))), 0.2)
+        LW.C0 = clerp(LW.C0, CFrame.new(-1.3, 0.3, -0.2) * angles(math.rad(0 + 1 * math.cos(sine / 25)), math.rad(0), math.rad(-90 + 1 * math.cos(sine / 25))), 0.3)
+        RH.C0 = clerp(RH.C0, cn(0.9, -1 - 0.1 * math.cos(sine / 25), -0.6) * RHCF * angles(math.rad(-2 + 1 * math.cos(sine / 25)), math.rad(50), math.rad(10 + 2 * math.cos(sine / 25))), 0.2)
+        LH.C0 = clerp(LH.C0, cn(-0.9, -1 - 0.1 * math.cos(sine / 25), 0.4) * LHCF * angles(math.rad(-2 + 1 * math.cos(sine / 25)), math.rad(50), math.rad(20 + 2 * math.cos(sine / 25))), 0.2)		
+end
+	to.CFrame = CFrame.new(to.CFrame.p + v3(0,5,70))
+root.CFrame = CFrame.new(root.CFrame.p + v3(0,5,74))
+Zanzoken = Instance.new("Part",char)
+Zanzoken.Anchored = true
+Zanzoken.Position = v3(999,999,999)
+Zanzoken.CFrame = Torso.CFrame
+game.Debris:AddItem(Zanzoken,0.5)
+Zanzoken.Transparency = 1
+Zano:Play()
+wait()
+idk = Instance.new("BillboardGui",Zanzoken)
+idk.Size = UDim2.new(10,0,15,0)
+idk.AlwaysOnTop = false
+idk1 = Instance.new("ImageLabel",idk)
+idk1.BackgroundTransparency = 1
+idk.ExtentsOffset = v3(0,0,0)
+idk1.ImageTransparency = 0
+idk1.ImageColor3 = Color3.fromRGB(0,0,0)
+idk1.Size = UDim2.new(2,0,1,0)
+idk1.Position = UDim2.new(-0.5,0,-0.2,0)
+idk1.Image = "rbxassetid://319554883"
+root.CFrame = to.CFrame - to.CFrame.lookVector * 3
+wait()
+Zanzoken = Instance.new("Part",char)
+Zanzoken.Anchored = true
+Zanzoken.Position = v3(999,999,999)
+Zanzoken.CFrame = Torso.CFrame
+game.Debris:AddItem(Zanzoken,0.5)
+Zanzoken.Transparency = 1
+wait()
+idk = Instance.new("BillboardGui",Zanzoken)
+idk.Size = UDim2.new(20,0,20,0)
+idk.AlwaysOnTop = false
+idk1 = Instance.new("ImageLabel",idk)
+idk1.BackgroundTransparency = 1
+idk.ExtentsOffset = v3(0,0,0)
+idk1.ImageTransparency = 0
+idk1.ImageColor3 = Color3.fromRGB(0,0,0)
+idk1.Size = UDim2.new(2,0,1,0)
+idk1.Position = UDim2.new(-0.5,0,-0.2,0)
+idk1.Image = "rbxassetid://319554883"
+ for i = 0, 1, 0.1 do
+        
+        RootJoint.C0 = clerp(RootJoint.C0, RootCF * cn(0, 0, 0) * angles(math.rad(0), math.rad(-5), math.rad(-90)), 0.3)
+        Torso.Neck.C0 = clerp(Torso.Neck.C0, NeckCF * angles(math.rad(0), math.rad(0), math.rad(90)), 0.2)
+        RW.C0 = clerp(RW.C0, CFrame.new(1.2, 0.5, 0) * angles(math.rad(0), math.rad(0 * math.cos(sine / 25)), math.rad(0 * math.cos(sine / 25))), 0.2)
+        LW.C0 = clerp(LW.C0, CFrame.new(-1.3, 0.3, -0.2) * angles(math.rad(0 + 1 * math.cos(sine / 25)), math.rad(0), math.rad(-90 + 1 * math.cos(sine / 25))), 0.3)
+        RH.C0 = clerp(RH.C0, cn(0.9, -1 - 0.1 * math.cos(sine / 25), -0.6) * RHCF * angles(math.rad(-2 + 1 * math.cos(sine / 25)), math.rad(50), math.rad(10 + 2 * math.cos(sine / 25))), 0.2)
+        LH.C0 = clerp(LH.C0, cn(-0.9, -1 - 0.1 * math.cos(sine / 25), 0.4) * LHCF * angles(math.rad(-2 + 1 * math.cos(sine / 25)), math.rad(50), math.rad(20 + 2 * math.cos(sine / 25))), 0.2)		
+end
+punchsound1:Play()
+for i = 0, 1, 0.1 do
+        
+        RootJoint.C0 = clerp(RootJoint.C0, RootCF * cn(0, -0.5, 0) * angles(math.rad(0), math.rad(0), math.rad(45)), 0.3)
+        Torso.Neck.C0 = clerp(Torso.Neck.C0, NeckCF * angles(math.rad(0), math.rad(0), math.rad(-25)), 0.3)
+        RW.C0 = clerp(RW.C0, CFrame.new(1.2, 0.7, -0.8) * angles(math.rad(120), math.rad(0), math.rad(-35)), 0.3)
+        LW.C0 = clerp(LW.C0, CFrame.new(-1.5, 0.5, 0) * angles(math.rad(-25), math.rad(0), math.rad(0)), 0.3)
+        RH.C0 = clerp(RH.C0, cn(1, -1, 0) * RHCF * angles(math.rad(0), math.rad(-45), math.rad(0)), 0.3)
+        LH.C0 = clerp(LH.C0, cn(-1, -1, -0.2) * LHCF * angles(math.rad(0), math.rad(-25), math.rad(10)), 0.3)
+end
+punchsound1:Play()
+ for i = 0, 1, 0.1 do
+        
+        RootJoint.C0 = clerp(RootJoint.C0, RootCF * cn(0, 0, 0) * angles(math.rad(0), math.rad(-5), math.rad(-90)), 0.3)
+        Torso.Neck.C0 = clerp(Torso.Neck.C0, NeckCF * angles(math.rad(0), math.rad(0), math.rad(90)), 0.2)
+        RW.C0 = clerp(RW.C0, CFrame.new(1.2, 0.5, 0) * angles(math.rad(0), math.rad(0 * math.cos(sine / 25)), math.rad(0 * math.cos(sine / 25))), 0.2)
+        LW.C0 = clerp(LW.C0, CFrame.new(-1.3, 0.3, -0.2) * angles(math.rad(0 + 1 * math.cos(sine / 25)), math.rad(0), math.rad(-90 + 1 * math.cos(sine / 25))), 0.3)
+        RH.C0 = clerp(RH.C0, cn(0.9, -1 - 0.1 * math.cos(sine / 25), -0.6) * RHCF * angles(math.rad(-2 + 1 * math.cos(sine / 25)), math.rad(50), math.rad(10 + 2 * math.cos(sine / 25))), 0.2)
+        LH.C0 = clerp(LH.C0, cn(-0.9, -1 - 0.1 * math.cos(sine / 25), 0.4) * LHCF * angles(math.rad(-2 + 1 * math.cos(sine / 25)), math.rad(50), math.rad(20 + 2 * math.cos(sine / 25))), 0.2)		
+end
+ for i = 0, 1, 0.1 do
+        
+        RootJoint.C0 = clerp(RootJoint.C0, RootCF * cn(0, 0, 0) * angles(math.rad(0), math.rad(-5), math.rad(-90)), 0.3)
+        Torso.Neck.C0 = clerp(Torso.Neck.C0, NeckCF * angles(math.rad(0), math.rad(0), math.rad(90)), 0.2)
+        RW.C0 = clerp(RW.C0, CFrame.new(1.2, 0.5, 0) * angles(math.rad(0), math.rad(0 * math.cos(sine / 25)), math.rad(0 * math.cos(sine / 25))), 0.2)
+        LW.C0 = clerp(LW.C0, CFrame.new(-1.3, 0.3, -0.2) * angles(math.rad(0 + 1 * math.cos(sine / 25)), math.rad(0), math.rad(-90 + 1 * math.cos(sine / 25))), 0.3)
+        RH.C0 = clerp(RH.C0, cn(0.9, -1 - 0.1 * math.cos(sine / 25), -0.6) * RHCF * angles(math.rad(-2 + 1 * math.cos(sine / 25)), math.rad(50), math.rad(10 + 2 * math.cos(sine / 25))), 0.2)
+        LH.C0 = clerp(LH.C0, cn(-0.9, -1 - 0.1 * math.cos(sine / 25), 0.4) * LHCF * angles(math.rad(-2 + 1 * math.cos(sine / 25)), math.rad(50), math.rad(20 + 2 * math.cos(sine / 25))), 0.2)		
+end
+punchsound1:Play()
+for i = 0, 1, 0.1 do
+        
+        RootJoint.C0 = clerp(RootJoint.C0, RootCF * cn(0, -0.5, 0) * angles(math.rad(0), math.rad(0), math.rad(45)), 0.3)
+        Torso.Neck.C0 = clerp(Torso.Neck.C0, NeckCF * angles(math.rad(0), math.rad(0), math.rad(-25)), 0.3)
+        RW.C0 = clerp(RW.C0, CFrame.new(1.2, 0.7, -0.8) * angles(math.rad(120), math.rad(0), math.rad(-35)), 0.3)
+        LW.C0 = clerp(LW.C0, CFrame.new(-1.5, 0.5, 0) * angles(math.rad(-25), math.rad(0), math.rad(0)), 0.3)
+        RH.C0 = clerp(RH.C0, cn(1, -1, 0) * RHCF * angles(math.rad(0), math.rad(-45), math.rad(0)), 0.3)
+        LH.C0 = clerp(LH.C0, cn(-1, -1, -0.2) * LHCF * angles(math.rad(0), math.rad(-25), math.rad(10)), 0.3)
+end
+punchsound1:Play()
+ for i = 0, 1, 0.1 do
+        
+        RootJoint.C0 = clerp(RootJoint.C0, RootCF * cn(0, 0, 0) * angles(math.rad(0), math.rad(-5), math.rad(-90)), 0.3)
+        Torso.Neck.C0 = clerp(Torso.Neck.C0, NeckCF * angles(math.rad(0), math.rad(0), math.rad(90)), 0.2)
+        RW.C0 = clerp(RW.C0, CFrame.new(1.2, 0.5, 0) * angles(math.rad(0), math.rad(0 * math.cos(sine / 25)), math.rad(0 * math.cos(sine / 25))), 0.2)
+        LW.C0 = clerp(LW.C0, CFrame.new(-1.3, 0.3, -0.2) * angles(math.rad(0 + 1 * math.cos(sine / 25)), math.rad(0), math.rad(-90 + 1 * math.cos(sine / 25))), 0.3)
+        RH.C0 = clerp(RH.C0, cn(0.9, -1 - 0.1 * math.cos(sine / 25), -0.6) * RHCF * angles(math.rad(-2 + 1 * math.cos(sine / 25)), math.rad(50), math.rad(10 + 2 * math.cos(sine / 25))), 0.2)
+        LH.C0 = clerp(LH.C0, cn(-0.9, -1 - 0.1 * math.cos(sine / 25), 0.4) * LHCF * angles(math.rad(-2 + 1 * math.cos(sine / 25)), math.rad(50), math.rad(20 + 2 * math.cos(sine / 25))), 0.2)		
+end
+ for i = 0, 1, 0.1 do
+        
+        RootJoint.C0 = clerp(RootJoint.C0, RootCF * cn(0, 0, 0) * angles(math.rad(0), math.rad(-5), math.rad(-90)), 0.3)
+        Torso.Neck.C0 = clerp(Torso.Neck.C0, NeckCF * angles(math.rad(0), math.rad(0), math.rad(90)), 0.2)
+        RW.C0 = clerp(RW.C0, CFrame.new(1.2, 0.5, 0) * angles(math.rad(0), math.rad(0 * math.cos(sine / 25)), math.rad(0 * math.cos(sine / 25))), 0.2)
+        LW.C0 = clerp(LW.C0, CFrame.new(-1.3, 0.3, -0.2) * angles(math.rad(0 + 1 * math.cos(sine / 25)), math.rad(0), math.rad(-90 + 1 * math.cos(sine / 25))), 0.3)
+        RH.C0 = clerp(RH.C0, cn(0.9, -1 - 0.1 * math.cos(sine / 25), -0.6) * RHCF * angles(math.rad(-2 + 1 * math.cos(sine / 25)), math.rad(50), math.rad(10 + 2 * math.cos(sine / 25))), 0.2)
+        LH.C0 = clerp(LH.C0, cn(-0.9, -1 - 0.1 * math.cos(sine / 25), 0.4) * LHCF * angles(math.rad(-2 + 1 * math.cos(sine / 25)), math.rad(50), math.rad(20 + 2 * math.cos(sine / 25))), 0.2)		
+end
+punchsound1:Play()
+for i = 0, 1, 0.1 do
+        
+        RootJoint.C0 = clerp(RootJoint.C0, RootCF * cn(0, -0.5, 0) * angles(math.rad(0), math.rad(0), math.rad(45)), 0.3)
+        Torso.Neck.C0 = clerp(Torso.Neck.C0, NeckCF * angles(math.rad(0), math.rad(0), math.rad(-25)), 0.3)
+        RW.C0 = clerp(RW.C0, CFrame.new(1.2, 0.7, -0.8) * angles(math.rad(120), math.rad(0), math.rad(-35)), 0.3)
+        LW.C0 = clerp(LW.C0, CFrame.new(-1.5, 0.5, 0) * angles(math.rad(-25), math.rad(0), math.rad(0)), 0.3)
+        RH.C0 = clerp(RH.C0, cn(1, -1, 0) * RHCF * angles(math.rad(0), math.rad(-45), math.rad(0)), 0.3)
+        LH.C0 = clerp(LH.C0, cn(-1, -1, -0.2) * LHCF * angles(math.rad(0), math.rad(-25), math.rad(10)), 0.3)
+end
+punchsound1:Play()
+for i,v in pairs(to.Parent:GetChildren()) do
+					if v:IsA("Humanoid") then
+						v.Health = v.Health - 10
+						
+						v.PlatformStand = true
+					end
+	end
+ for i = 0, 1, 0.1 do
+        
+        RootJoint.C0 = clerp(RootJoint.C0, RootCF * cn(0, 0, 0) * angles(math.rad(0), math.rad(-5), math.rad(-90)), 0.3)
+        Torso.Neck.C0 = clerp(Torso.Neck.C0, NeckCF * angles(math.rad(0), math.rad(0), math.rad(90)), 0.2)
+        RW.C0 = clerp(RW.C0, CFrame.new(1.2, 0.5, 0) * angles(math.rad(0), math.rad(0 * math.cos(sine / 25)), math.rad(0 * math.cos(sine / 25))), 0.2)
+        LW.C0 = clerp(LW.C0, CFrame.new(-1.3, 0.3, -0.2) * angles(math.rad(0 + 1 * math.cos(sine / 25)), math.rad(0), math.rad(-90 + 1 * math.cos(sine / 25))), 0.3)
+        RH.C0 = clerp(RH.C0, cn(0.9, -1 - 0.1 * math.cos(sine / 25), -0.6) * RHCF * angles(math.rad(-2 + 1 * math.cos(sine / 25)), math.rad(50), math.rad(10 + 2 * math.cos(sine / 25))), 0.2)
+        LH.C0 = clerp(LH.C0, cn(-0.9, -1 - 0.1 * math.cos(sine / 25), 0.4) * LHCF * angles(math.rad(-2 + 1 * math.cos(sine / 25)), math.rad(50), math.rad(20 + 2 * math.cos(sine / 25))), 0.2)		
+end
+
+for i = 0, 1, 0.1 do
+        
+        RootJoint.C0 = clerp(RootJoint.C0, RootCF * cn(0, -0.5, 0) * angles(math.rad(0), math.rad(0), math.rad(45)), 0.3)
+        Torso.Neck.C0 = clerp(Torso.Neck.C0, NeckCF * angles(math.rad(0), math.rad(0), math.rad(-25)), 0.3)
+        RW.C0 = clerp(RW.C0, CFrame.new(1.2, 0.7, -0.8) * angles(math.rad(120), math.rad(0), math.rad(-35)), 0.3)
+        LW.C0 = clerp(LW.C0, CFrame.new(-1.5, 0.5, 0) * angles(math.rad(-25), math.rad(0), math.rad(0)), 0.3)
+        RH.C0 = clerp(RH.C0, cn(1, -1, 0) * RHCF * angles(math.rad(0), math.rad(-45), math.rad(0)), 0.3)
+        LH.C0 = clerp(LH.C0, cn(-1, -1, -0.2) * LHCF * angles(math.rad(0), math.rad(-25), math.rad(10)), 0.3)
+end
+punchsound1:Play()
+ for i = 0, 1, 0.1 do
+        
+        RootJoint.C0 = clerp(RootJoint.C0, RootCF * cn(0, 0, 0) * angles(math.rad(0), math.rad(-5), math.rad(-90)), 0.3)
+        Torso.Neck.C0 = clerp(Torso.Neck.C0, NeckCF * angles(math.rad(0), math.rad(0), math.rad(90)), 0.2)
+        RW.C0 = clerp(RW.C0, CFrame.new(1.2, 0.5, 0) * angles(math.rad(0), math.rad(0 * math.cos(sine / 25)), math.rad(0 * math.cos(sine / 25))), 0.2)
+        LW.C0 = clerp(LW.C0, CFrame.new(-1.3, 0.3, -0.2) * angles(math.rad(0 + 1 * math.cos(sine / 25)), math.rad(0), math.rad(-90 + 1 * math.cos(sine / 25))), 0.3)
+        RH.C0 = clerp(RH.C0, cn(0.9, -1 - 0.1 * math.cos(sine / 25), -0.6) * RHCF * angles(math.rad(-2 + 1 * math.cos(sine / 25)), math.rad(50), math.rad(10 + 2 * math.cos(sine / 25))), 0.2)
+        LH.C0 = clerp(LH.C0, cn(-0.9, -1 - 0.1 * math.cos(sine / 25), 0.4) * LHCF * angles(math.rad(-2 + 1 * math.cos(sine / 25)), math.rad(50), math.rad(20 + 2 * math.cos(sine / 25))), 0.2)		
+end
+for i,v in pairs(to.Parent:GetChildren()) do
+					if v:IsA("Humanoid") then
+						v.Health = v.Health - 3
+						
+						v.PlatformStand = true
+					end
+	end
+	to.CFrame = CFrame.new(to.CFrame.p + v3(60,5,0))
+root.CFrame = CFrame.new(root.CFrame.p + v3(60,5,0))
+Zanzoken = Instance.new("Part",char)
+Zanzoken.Anchored = true
+Zanzoken.Position = v3(999,999,999)
+Zanzoken.CFrame = Torso.CFrame
+game.Debris:AddItem(Zanzoken,0.5)
+Zanzoken.Transparency = 1
+Zano:Play()
+wait()
+idk = Instance.new("BillboardGui",Zanzoken)
+idk.Size = UDim2.new(10,0,15,0)
+idk.AlwaysOnTop = false
+idk1 = Instance.new("ImageLabel",idk)
+idk1.BackgroundTransparency = 1
+idk.ExtentsOffset = v3(0,0,0)
+idk1.ImageTransparency = 0
+idk1.ImageColor3 = Color3.fromRGB(0,0,0)
+idk1.Size = UDim2.new(2,0,1,0)
+idk1.Position = UDim2.new(-0.5,0,-0.2,0)
+idk1.Image = "rbxassetid://319554883"
+root.CFrame = to.CFrame - to.CFrame.lookVector * 3
+wait()
+Zanzoken = Instance.new("Part",char)
+Zanzoken.Anchored = true
+Zanzoken.Position = v3(999,999,999)
+Zanzoken.CFrame = Torso.CFrame
+game.Debris:AddItem(Zanzoken,0.5)
+Zanzoken.Transparency = 1
+wait()
+idk = Instance.new("BillboardGui",Zanzoken)
+idk.Size = UDim2.new(20,0,20,0)
+idk.AlwaysOnTop = false
+idk1 = Instance.new("ImageLabel",idk)
+idk1.BackgroundTransparency = 1
+idk.ExtentsOffset = v3(0,0,0)
+idk1.ImageTransparency = 0
+idk1.ImageColor3 = Color3.fromRGB(0,0,0)
+idk1.Size = UDim2.new(2,0,1,0)
+idk1.Position = UDim2.new(-0.5,0,-0.2,0)
+idk1.Image = "rbxassetid://319554883"
+ for i = 0, 1, 0.1 do
+        
+        RootJoint.C0 = clerp(RootJoint.C0, RootCF * cn(0, 0, 0) * angles(math.rad(0), math.rad(-5), math.rad(-90)), 0.3)
+        Torso.Neck.C0 = clerp(Torso.Neck.C0, NeckCF * angles(math.rad(0), math.rad(0), math.rad(90)), 0.2)
+        RW.C0 = clerp(RW.C0, CFrame.new(1.2, 0.5, 0) * angles(math.rad(0), math.rad(0 * math.cos(sine / 25)), math.rad(0 * math.cos(sine / 25))), 0.2)
+        LW.C0 = clerp(LW.C0, CFrame.new(-1.3, 0.3, -0.2) * angles(math.rad(0 + 1 * math.cos(sine / 25)), math.rad(0), math.rad(-90 + 1 * math.cos(sine / 25))), 0.3)
+        RH.C0 = clerp(RH.C0, cn(0.9, -1 - 0.1 * math.cos(sine / 25), -0.6) * RHCF * angles(math.rad(-2 + 1 * math.cos(sine / 25)), math.rad(50), math.rad(10 + 2 * math.cos(sine / 25))), 0.2)
+        LH.C0 = clerp(LH.C0, cn(-0.9, -1 - 0.1 * math.cos(sine / 25), 0.4) * LHCF * angles(math.rad(-2 + 1 * math.cos(sine / 25)), math.rad(50), math.rad(20 + 2 * math.cos(sine / 25))), 0.2)		
+end
+for i = 0, 1, 0.1 do
+        
+        RootJoint.C0 = clerp(RootJoint.C0, RootCF * cn(0, -0.5, 0) * angles(math.rad(0), math.rad(0), math.rad(45)), 0.3)
+        Torso.Neck.C0 = clerp(Torso.Neck.C0, NeckCF * angles(math.rad(0), math.rad(0), math.rad(-25)), 0.3)
+        RW.C0 = clerp(RW.C0, CFrame.new(1.2, 0.7, -0.8) * angles(math.rad(120), math.rad(0), math.rad(-35)), 0.3)
+        LW.C0 = clerp(LW.C0, CFrame.new(-1.5, 0.5, 0) * angles(math.rad(-25), math.rad(0), math.rad(0)), 0.3)
+        RH.C0 = clerp(RH.C0, cn(1, -1, 0) * RHCF * angles(math.rad(0), math.rad(-45), math.rad(0)), 0.3)
+        LH.C0 = clerp(LH.C0, cn(-1, -1, -0.2) * LHCF * angles(math.rad(0), math.rad(-25), math.rad(10)), 0.3)
+end
+punchsound1:Play()
+ for i = 0, 1, 0.1 do
+        
+        RootJoint.C0 = clerp(RootJoint.C0, RootCF * cn(0, 0, 0) * angles(math.rad(0), math.rad(-5), math.rad(-90)), 0.3)
+        Torso.Neck.C0 = clerp(Torso.Neck.C0, NeckCF * angles(math.rad(0), math.rad(0), math.rad(90)), 0.2)
+        RW.C0 = clerp(RW.C0, CFrame.new(1.2, 0.5, 0) * angles(math.rad(0), math.rad(0 * math.cos(sine / 25)), math.rad(0 * math.cos(sine / 25))), 0.2)
+        LW.C0 = clerp(LW.C0, CFrame.new(-1.3, 0.3, -0.2) * angles(math.rad(0 + 1 * math.cos(sine / 25)), math.rad(0), math.rad(-90 + 1 * math.cos(sine / 25))), 0.3)
+        RH.C0 = clerp(RH.C0, cn(0.9, -1 - 0.1 * math.cos(sine / 25), -0.6) * RHCF * angles(math.rad(-2 + 1 * math.cos(sine / 25)), math.rad(50), math.rad(10 + 2 * math.cos(sine / 25))), 0.2)
+        LH.C0 = clerp(LH.C0, cn(-0.9, -1 - 0.1 * math.cos(sine / 25), 0.4) * LHCF * angles(math.rad(-2 + 1 * math.cos(sine / 25)), math.rad(50), math.rad(20 + 2 * math.cos(sine / 25))), 0.2)		
+end
+for i,v in pairs(to.Parent:GetChildren()) do
+					if v:IsA("Humanoid") then
+						v.Health = v.Health - 3
+						
+						v.PlatformStand = true
+					end
+	end
+	to.CFrame = CFrame.new(to.CFrame.p + v3(90,20,0))
+root.CFrame = CFrame.new(root.CFrame.p + v3(90,20,0))
+Zanzoken = Instance.new("Part",char)
+Zanzoken.Anchored = true
+Zanzoken.Position = v3(999,999,999)
+Zanzoken.CFrame = Torso.CFrame
+game.Debris:AddItem(Zanzoken,0.5)
+Zanzoken.Transparency = 1
+Zano:Play()
+wait()
+idk = Instance.new("BillboardGui",Zanzoken)
+idk.Size = UDim2.new(10,0,15,0)
+idk.AlwaysOnTop = false
+idk1 = Instance.new("ImageLabel",idk)
+idk1.BackgroundTransparency = 1
+idk.ExtentsOffset = v3(0,0,0)
+idk1.ImageTransparency = 0
+idk1.ImageColor3 = Color3.fromRGB(0,0,0)
+idk1.Size = UDim2.new(2,0,1,0)
+idk1.Position = UDim2.new(-0.5,0,-0.2,0)
+idk1.Image = "rbxassetid://319554883"
+root.CFrame = to.CFrame - to.CFrame.lookVector * 3
+wait()
+Zanzoken = Instance.new("Part",char)
+Zanzoken.Anchored = true
+Zanzoken.Position = v3(999,999,999)
+Zanzoken.CFrame = Torso.CFrame
+game.Debris:AddItem(Zanzoken,0.5)
+Zanzoken.Transparency = 1
+wait()
+idk = Instance.new("BillboardGui",Zanzoken)
+idk.Size = UDim2.new(20,0,20,0)
+idk.AlwaysOnTop = false
+idk1 = Instance.new("ImageLabel",idk)
+idk1.BackgroundTransparency = 1
+idk.ExtentsOffset = v3(0,0,0)
+idk1.ImageTransparency = 0
+idk1.ImageColor3 = Color3.fromRGB(0,0,0)
+idk1.Size = UDim2.new(2,0,1,0)
+idk1.Position = UDim2.new(-0.5,0,-0.2,0)
+idk1.Image = "rbxassetid://319554883"
+punchsound1:Play()
+for i = 0, 1, 0.1 do
+        
+        RootJoint.C0 = clerp(RootJoint.C0, RootCF * cn(0, -0.5, 0) * angles(math.rad(0), math.rad(0), math.rad(45)), 0.3)
+        Torso.Neck.C0 = clerp(Torso.Neck.C0, NeckCF * angles(math.rad(0), math.rad(0), math.rad(-25)), 0.3)
+        RW.C0 = clerp(RW.C0, CFrame.new(1.2, 0.7, -0.8) * angles(math.rad(120), math.rad(0), math.rad(-35)), 0.3)
+        LW.C0 = clerp(LW.C0, CFrame.new(-1.5, 0.5, 0) * angles(math.rad(-25), math.rad(0), math.rad(0)), 0.3)
+        RH.C0 = clerp(RH.C0, cn(1, -1, 0) * RHCF * angles(math.rad(0), math.rad(-45), math.rad(0)), 0.3)
+        LH.C0 = clerp(LH.C0, cn(-1, -1, -0.2) * LHCF * angles(math.rad(0), math.rad(-25), math.rad(10)), 0.3)
+end
+punchsound1:Play()
+ for i = 0, 1, 0.1 do
+        
+        RootJoint.C0 = clerp(RootJoint.C0, RootCF * cn(0, 0, 0) * angles(math.rad(0), math.rad(-5), math.rad(-90)), 0.3)
+        Torso.Neck.C0 = clerp(Torso.Neck.C0, NeckCF * angles(math.rad(0), math.rad(0), math.rad(90)), 0.2)
+        RW.C0 = clerp(RW.C0, CFrame.new(1.2, 0.5, 0) * angles(math.rad(0), math.rad(0 * math.cos(sine / 25)), math.rad(0 * math.cos(sine / 25))), 0.2)
+        LW.C0 = clerp(LW.C0, CFrame.new(-1.3, 0.3, -0.2) * angles(math.rad(0 + 1 * math.cos(sine / 25)), math.rad(0), math.rad(-90 + 1 * math.cos(sine / 25))), 0.3)
+        RH.C0 = clerp(RH.C0, cn(0.9, -1 - 0.1 * math.cos(sine / 25), -0.6) * RHCF * angles(math.rad(-2 + 1 * math.cos(sine / 25)), math.rad(50), math.rad(10 + 2 * math.cos(sine / 25))), 0.2)
+        LH.C0 = clerp(LH.C0, cn(-0.9, -1 - 0.1 * math.cos(sine / 25), 0.4) * LHCF * angles(math.rad(-2 + 1 * math.cos(sine / 25)), math.rad(50), math.rad(20 + 2 * math.cos(sine / 25))), 0.2)		
+end
+
+
+for i,v in pairs(to.Parent:GetChildren()) do
+					if v:IsA("Humanoid") then
+						v.Health = v.Health - 20
+						
+						v.PlatformStand = true
+					end
+	end
+StrongPunch:Play()
+for i = 0, 1, 0.1 do
+        
+        RootJoint.C0 = clerp(RootJoint.C0, RootCF * cn(0, -1, 0) * angles(math.rad(0), math.rad(-10), math.rad(0)), 0.3)
+        Torso.Neck.C0 = clerp(Torso.Neck.C0, NeckCF * angles(math.rad(0), math.rad(-10), math.rad(0)), 0.3)
+        RW.C0 = clerp(RW.C0, CFrame.new(1.5, 0.5, 0) * angles(math.rad(-25), math.rad(0), math.rad(0)), 0.3)
+        LW.C0 = clerp(LW.C0, CFrame.new(-1.5, 0.5, 0) * angles(math.rad(-25), math.rad(0), math.rad(0)), 0.3)
+        RH.C0 = clerp(RH.C0, cn(1, -1, 0) * RHCF * angles(math.rad(0), math.rad(10), math.rad(90)), 0.3)
+        LH.C0 = clerp(LH.C0, cn(-1, -1, 0) * LHCF * angles(math.rad(0), math.rad(0), math.rad(45)), 0.3)
+      end
+ for i = 0, 1, 0.1 do
+        
+        RootJoint.C0 = clerp(RootJoint.C0, RootCF * cn(0, 0, 0) * angles(math.rad(0), math.rad(-5), math.rad(-90)), 0.3)
+        Torso.Neck.C0 = clerp(Torso.Neck.C0, NeckCF * angles(math.rad(0), math.rad(0), math.rad(90)), 0.2)
+        RW.C0 = clerp(RW.C0, CFrame.new(1.2, 0.5, 0) * angles(math.rad(0), math.rad(0 * math.cos(sine / 25)), math.rad(0 * math.cos(sine / 25))), 0.2)
+        LW.C0 = clerp(LW.C0, CFrame.new(-1.3, 0.3, -0.2) * angles(math.rad(0 + 1 * math.cos(sine / 25)), math.rad(0), math.rad(-90 + 1 * math.cos(sine / 25))), 0.3)
+        RH.C0 = clerp(RH.C0, cn(0.9, -1 - 0.1 * math.cos(sine / 25), -0.6) * RHCF * angles(math.rad(-2 + 1 * math.cos(sine / 25)), math.rad(50), math.rad(10 + 2 * math.cos(sine / 25))), 0.2)
+        LH.C0 = clerp(LH.C0, cn(-0.9, -1 - 0.1 * math.cos(sine / 25), 0.4) * LHCF * angles(math.rad(-2 + 1 * math.cos(sine / 25)), math.rad(50), math.rad(20 + 2 * math.cos(sine / 25))), 0.2)		
+end
+for i,v in pairs(to.Parent:GetChildren()) do
+					if v:IsA("Humanoid") then
+						v.Health = v.Health - 3
+						
+						v.PlatformStand = true
+					end
+	end
+	to.CFrame = CFrame.new(to.CFrame.p + v3(0,200,0))
+root.CFrame = CFrame.new(root.CFrame.p + v3(0,200,0))
+Zanzoken = Instance.new("Part",char)
+Zanzoken.Anchored = true
+Zanzoken.Position = v3(999,999,999)
+Zanzoken.CFrame = Torso.CFrame
+game.Debris:AddItem(Zanzoken,0.5)
+Zanzoken.Transparency = 1
+Zano:Play()
+wait()
+idk = Instance.new("BillboardGui",Zanzoken)
+idk.Size = UDim2.new(10,0,15,0)
+idk.AlwaysOnTop = false
+idk1 = Instance.new("ImageLabel",idk)
+idk1.BackgroundTransparency = 1
+idk.ExtentsOffset = v3(0,0,0)
+idk1.ImageTransparency = 0
+idk1.ImageColor3 = Color3.fromRGB(0,0,0)
+idk1.Size = UDim2.new(2,0,1,0)
+idk1.Position = UDim2.new(-0.5,0,-0.2,0)
+idk1.Image = "rbxassetid://319554883"
+root.CFrame = to.CFrame - to.CFrame.lookVector * 3
+wait()
+Zanzoken = Instance.new("Part",char)
+Zanzoken.Anchored = true
+Zanzoken.Position = v3(999,999,999)
+Zanzoken.CFrame = Torso.CFrame
+game.Debris:AddItem(Zanzoken,0.5)
+Zanzoken.Transparency = 1
+wait()
+idk = Instance.new("BillboardGui",Zanzoken)
+idk.Size = UDim2.new(20,0,20,0)
+idk.AlwaysOnTop = false
+idk1 = Instance.new("ImageLabel",idk)
+idk1.BackgroundTransparency = 1
+idk.ExtentsOffset = v3(0,0,0)
+idk1.ImageTransparency = 0
+idk1.ImageColor3 = Color3.fromRGB(0,0,0)
+idk1.Size = UDim2.new(2,0,1,0)
+idk1.Position = UDim2.new(-0.5,0,-0.2,0)
+idk1.Image = "rbxassetid://319554883"
+ for i = 0, 1, 0.1 do
+        
+        RootJoint.C0 = clerp(RootJoint.C0, RootCF * cn(0, 0, 0) * angles(math.rad(0), math.rad(-5), math.rad(-90)), 0.3)
+        Torso.Neck.C0 = clerp(Torso.Neck.C0, NeckCF * angles(math.rad(0), math.rad(0), math.rad(90)), 0.2)
+        RW.C0 = clerp(RW.C0, CFrame.new(1.2, 0.5, 0) * angles(math.rad(0), math.rad(0 * math.cos(sine / 25)), math.rad(0 * math.cos(sine / 25))), 0.2)
+        LW.C0 = clerp(LW.C0, CFrame.new(-1.3, 0.3, -0.2) * angles(math.rad(0 + 1 * math.cos(sine / 25)), math.rad(0), math.rad(-90 + 1 * math.cos(sine / 25))), 0.3)
+        RH.C0 = clerp(RH.C0, cn(0.9, -1 - 0.1 * math.cos(sine / 25), -0.6) * RHCF * angles(math.rad(-2 + 1 * math.cos(sine / 25)), math.rad(50), math.rad(10 + 2 * math.cos(sine / 25))), 0.2)
+        LH.C0 = clerp(LH.C0, cn(-0.9, -1 - 0.1 * math.cos(sine / 25), 0.4) * LHCF * angles(math.rad(-2 + 1 * math.cos(sine / 25)), math.rad(50), math.rad(20 + 2 * math.cos(sine / 25))), 0.2)		
+end
+punchsound1:Play()
+for i = 0, 1, 0.1 do
+        
+        RootJoint.C0 = clerp(RootJoint.C0, RootCF * cn(0, -0.5, 0) * angles(math.rad(0), math.rad(0), math.rad(45)), 0.3)
+        Torso.Neck.C0 = clerp(Torso.Neck.C0, NeckCF * angles(math.rad(0), math.rad(0), math.rad(-25)), 0.3)
+        RW.C0 = clerp(RW.C0, CFrame.new(1.2, 0.7, -0.8) * angles(math.rad(120), math.rad(0), math.rad(-35)), 0.3)
+        LW.C0 = clerp(LW.C0, CFrame.new(-1.5, 0.5, 0) * angles(math.rad(-25), math.rad(0), math.rad(0)), 0.3)
+        RH.C0 = clerp(RH.C0, cn(1, -1, 0) * RHCF * angles(math.rad(0), math.rad(-45), math.rad(0)), 0.3)
+        LH.C0 = clerp(LH.C0, cn(-1, -1, -0.2) * LHCF * angles(math.rad(0), math.rad(-25), math.rad(10)), 0.3)
+end
+punchsound1:Play()
+ for i = 0, 1, 0.1 do
+        
+        RootJoint.C0 = clerp(RootJoint.C0, RootCF * cn(0, 0, 0) * angles(math.rad(0), math.rad(-5), math.rad(-90)), 0.3)
+        Torso.Neck.C0 = clerp(Torso.Neck.C0, NeckCF * angles(math.rad(0), math.rad(0), math.rad(90)), 0.2)
+        RW.C0 = clerp(RW.C0, CFrame.new(1.2, 0.5, 0) * angles(math.rad(0), math.rad(0 * math.cos(sine / 25)), math.rad(0 * math.cos(sine / 25))), 0.2)
+        LW.C0 = clerp(LW.C0, CFrame.new(-1.3, 0.3, -0.2) * angles(math.rad(0 + 1 * math.cos(sine / 25)), math.rad(0), math.rad(-90 + 1 * math.cos(sine / 25))), 0.3)
+        RH.C0 = clerp(RH.C0, cn(0.9, -1 - 0.1 * math.cos(sine / 25), -0.6) * RHCF * angles(math.rad(-2 + 1 * math.cos(sine / 25)), math.rad(50), math.rad(10 + 2 * math.cos(sine / 25))), 0.2)
+        LH.C0 = clerp(LH.C0, cn(-0.9, -1 - 0.1 * math.cos(sine / 25), 0.4) * LHCF * angles(math.rad(-2 + 1 * math.cos(sine / 25)), math.rad(50), math.rad(20 + 2 * math.cos(sine / 25))), 0.2)		
+end
+for i = 0, 1, 0.1 do
+        
+        RootJoint.C0 = clerp(RootJoint.C0, RootCF * cn(0, -1, 0) * angles(math.rad(0), math.rad(-10), math.rad(0)), 0.3)
+        Torso.Neck.C0 = clerp(Torso.Neck.C0, NeckCF * angles(math.rad(0), math.rad(-10), math.rad(0)), 0.3)
+        RW.C0 = clerp(RW.C0, CFrame.new(1.5, 0.5, 0) * angles(math.rad(-25), math.rad(0), math.rad(0)), 0.3)
+        LW.C0 = clerp(LW.C0, CFrame.new(-1.5, 0.5, 0) * angles(math.rad(-25), math.rad(0), math.rad(0)), 0.3)
+        RH.C0 = clerp(RH.C0, cn(1, -1, 0) * RHCF * angles(math.rad(0), math.rad(10), math.rad(90)), 0.3)
+        LH.C0 = clerp(LH.C0, cn(-1, -1, 0) * LHCF * angles(math.rad(0), math.rad(0), math.rad(45)), 0.3)
+      end
+ for i = 0, 1, 0.1 do
+        
+        RootJoint.C0 = clerp(RootJoint.C0, RootCF * cn(0, 0, 0) * angles(math.rad(0), math.rad(-5), math.rad(-90)), 0.3)
+        Torso.Neck.C0 = clerp(Torso.Neck.C0, NeckCF * angles(math.rad(0), math.rad(0), math.rad(90)), 0.2)
+        RW.C0 = clerp(RW.C0, CFrame.new(1.2, 0.5, 0) * angles(math.rad(0), math.rad(0 * math.cos(sine / 25)), math.rad(0 * math.cos(sine / 25))), 0.2)
+        LW.C0 = clerp(LW.C0, CFrame.new(-1.3, 0.3, -0.2) * angles(math.rad(0 + 1 * math.cos(sine / 25)), math.rad(0), math.rad(-90 + 1 * math.cos(sine / 25))), 0.3)
+        RH.C0 = clerp(RH.C0, cn(0.9, -1 - 0.1 * math.cos(sine / 25), -0.6) * RHCF * angles(math.rad(-2 + 1 * math.cos(sine / 25)), math.rad(50), math.rad(10 + 2 * math.cos(sine / 25))), 0.2)
+        LH.C0 = clerp(LH.C0, cn(-0.9, -1 - 0.1 * math.cos(sine / 25), 0.4) * LHCF * angles(math.rad(-2 + 1 * math.cos(sine / 25)), math.rad(50), math.rad(20 + 2 * math.cos(sine / 25))), 0.2)		
+end
+	to.CFrame = CFrame.new(to.CFrame.p + v3(60,100,0))
+root.CFrame = CFrame.new(root.CFrame.p + v3(60,140,0))
+Zanzoken = Instance.new("Part",char)
+Zanzoken.Anchored = true
+Zanzoken.Position = v3(999,999,999)
+Zanzoken.CFrame = Torso.CFrame
+game.Debris:AddItem(Zanzoken,0.5)
+Zanzoken.Transparency = 1
+Zano:Play()
+wait()
+idk = Instance.new("BillboardGui",Zanzoken)
+idk.Size = UDim2.new(10,0,15,0)
+idk.AlwaysOnTop = false
+idk1 = Instance.new("ImageLabel",idk)
+idk1.BackgroundTransparency = 1
+idk.ExtentsOffset = v3(0,0,0)
+idk1.ImageTransparency = 0
+idk1.ImageColor3 = Color3.fromRGB(0,0,0)
+idk1.Size = UDim2.new(2,0,1,0)
+idk1.Position = UDim2.new(-0.5,0,-0.2,0)
+idk1.Image = "rbxassetid://319554883"
+root.CFrame = to.CFrame - to.CFrame.lookVector * 3
+wait()
+Zanzoken = Instance.new("Part",char)
+Zanzoken.Anchored = true
+Zanzoken.Position = v3(999,999,999)
+Zanzoken.CFrame = Torso.CFrame
+game.Debris:AddItem(Zanzoken,0.5)
+Zanzoken.Transparency = 1
+wait()
+idk = Instance.new("BillboardGui",Zanzoken)
+idk.Size = UDim2.new(20,0,20,0)
+idk.AlwaysOnTop = false
+idk1 = Instance.new("ImageLabel",idk)
+idk1.BackgroundTransparency = 1
+idk.ExtentsOffset = v3(0,0,0)
+idk1.ImageTransparency = 0
+idk1.ImageColor3 = Color3.fromRGB(0,0,0)
+idk1.Size = UDim2.new(2,0,1,0)
+idk1.Position = UDim2.new(-0.5,0,-0.2,0)
+idk1.Image = "rbxassetid://319554883"
+StrongPunch:Play()
+Break:Play()
+local Aura4 = Instance.new('ParticleEmitter')
+Aura4.Name = "Aura"
+Aura4.Texture = "rbxassetid://1046299182"
+Aura4.Parent = Torso
+Aura4.LightEmission = 1
+Aura4.Transparency = NumberSequence.new(0.7,1)
+Aura4.Color = ColorSequence.new(BrickColor.new("White").Color)
+Aura4.Size = NumberSequence.new(1,30)
+Aura4.Rotation = NumberRange.new(-360,360)
+Aura4.LockedToPart = true
+Aura4.Lifetime = NumberRange.new(0.2)
+Aura4.Rate = 100
+Aura4.Speed = NumberRange.new(0)
+Aura4.EmissionDirection = "Top"	
+for i = 0, 6, 0.1 do
+        
+        RootJoint.C0 = clerp(RootJoint.C0, RootCF * cn(0, 0, 0) * angles(math.rad(0), math.rad(-5), math.rad(-90)), 0.3)
+        Torso.Neck.C0 = clerp(Torso.Neck.C0, NeckCF * angles(math.rad(0), math.rad(0), math.rad(90)), 0.2)
+        RW.C0 = clerp(RW.C0, CFrame.new(1.2, 0.5, 0) * angles(math.rad(0), math.rad(0 * math.cos(sine / 25)), math.rad(0 * math.cos(sine / 25))), 0.2)
+        LW.C0 = clerp(LW.C0, CFrame.new(-1.3, 0.3, -0.2) * angles(math.rad(0 + 1 * math.cos(sine / 25)), math.rad(0), math.rad(-90 + 1 * math.cos(sine / 25))), 0.3)
+        RH.C0 = clerp(RH.C0, cn(0.9, -1 - 0.1 * math.cos(sine / 25), -0.6) * RHCF * angles(math.rad(-2 + 1 * math.cos(sine / 25)), math.rad(50), math.rad(10 + 2 * math.cos(sine / 25))), 0.2)
+        LH.C0 = clerp(LH.C0, cn(-0.9, -1 - 0.1 * math.cos(sine / 25), 0.4) * LHCF * angles(math.rad(-2 + 1 * math.cos(sine / 25)), math.rad(50), math.rad(20 + 2 * math.cos(sine / 25))), 0.2)
+      end
+Aura4:Destroy()
+wait(0.1)
+local Aura4 = Instance.new('ParticleEmitter')
+Aura4.Name = "Aura"
+Aura4.Texture = "rbxassetid://1046299182"
+Aura4.Parent = Torso
+Aura4.LightEmission = 1
+Aura4.Transparency = NumberSequence.new(0.7,1)
+Aura4.Color = ColorSequence.new(BrickColor.new("White").Color)
+Aura4.Size = NumberSequence.new(1,30)
+Aura4.Rotation = NumberRange.new(-360,360)
+Aura4.LockedToPart = true
+Aura4.Lifetime = NumberRange.new(0.2)
+Aura4.Rate = 100
+Aura4.Speed = NumberRange.new(0)
+Aura4.EmissionDirection = "Top"
+StrongPunch1:Play()
+Break:Play()
+ for i = 0, 6, 0.1 do
+        
+        RootJoint.C0 = clerp(RootJoint.C0, RootCF * cn(0, -0.5, 0) * angles(math.rad(0), math.rad(0), math.rad(45)), 0.3)
+        Torso.Neck.C0 = clerp(Torso.Neck.C0, NeckCF * angles(math.rad(0), math.rad(0), math.rad(-25)), 0.3)
+        RW.C0 = clerp(RW.C0, CFrame.new(1.2, 0.7, -0.8) * angles(math.rad(120), math.rad(0), math.rad(-35)), 0.3)
+        LW.C0 = clerp(LW.C0, CFrame.new(-1.5, 0.5, 0) * angles(math.rad(-25), math.rad(0), math.rad(0)), 0.3)
+        RH.C0 = clerp(RH.C0, cn(1, -1, 0) * RHCF * angles(math.rad(0), math.rad(-45), math.rad(0)), 0.3)
+        LH.C0 = clerp(LH.C0, cn(-1, -1, -0.2) * LHCF * angles(math.rad(0), math.rad(-25), math.rad(10)), 0.3)
+      end
+Aura4:Destroy()
+StrongPunch2:Play()
+Break:Play()
+local Aura4 = Instance.new('ParticleEmitter')
+Aura4.Name = "Aura"
+Aura4.Texture = "rbxassetid://1046299182"
+Aura4.Parent = Torso
+Aura4.LightEmission = 1
+Aura4.Transparency = NumberSequence.new(0.7,1)
+Aura4.Color = ColorSequence.new(BrickColor.new("White").Color)
+Aura4.Size = NumberSequence.new(1,30)
+Aura4.Rotation = NumberRange.new(-360,360)
+Aura4.LockedToPart = true
+Aura4.Lifetime = NumberRange.new(0.2)
+Aura4.Rate = 100
+Aura4.Speed = NumberRange.new(0)
+Aura4.EmissionDirection = "Top"
+   for i = 0, 7, 0.1 do
+        
+        RootJoint.C0 = clerp(RootJoint.C0, RootCF * cn(0, -1, 0) * angles(math.rad(0), math.rad(-10), math.rad(0)), 0.3)
+        Torso.Neck.C0 = clerp(Torso.Neck.C0, NeckCF * angles(math.rad(0), math.rad(-10), math.rad(0)), 0.3)
+        RW.C0 = clerp(RW.C0, CFrame.new(1.5, 0.5, 0) * angles(math.rad(-25), math.rad(0), math.rad(0)), 0.3)
+        LW.C0 = clerp(LW.C0, CFrame.new(-1.5, 0.5, 0) * angles(math.rad(-25), math.rad(0), math.rad(0)), 0.3)
+        RH.C0 = clerp(RH.C0, cn(1, -1, 0) * RHCF * angles(math.rad(0), math.rad(10), math.rad(90)), 0.3)
+        LH.C0 = clerp(LH.C0, cn(-1, -1, 0) * LHCF * angles(math.rad(0), math.rad(0), math.rad(45)), 0.3)
+end
+	to.CFrame = CFrame.new(to.CFrame.p + v3(-100,600,0))
+root.CFrame = CFrame.new(root.CFrame.p + v3(-100,600,0))
+Aura4:Destroy()
+Zanzoken = Instance.new("Part",char)
+Zanzoken.Anchored = true
+Zanzoken.Position = v3(999,999,999)
+Zanzoken.CFrame = Torso.CFrame
+game.Debris:AddItem(Zanzoken,0.5)
+Zanzoken.Transparency = 1
+Zano:Play()
+wait()
+idk = Instance.new("BillboardGui",Zanzoken)
+idk.Size = UDim2.new(10,0,15,0)
+idk.AlwaysOnTop = false
+idk1 = Instance.new("ImageLabel",idk)
+idk1.BackgroundTransparency = 1
+idk.ExtentsOffset = v3(0,0,0)
+idk1.ImageTransparency = 0
+idk1.ImageColor3 = Color3.fromRGB(0,0,0)
+idk1.Size = UDim2.new(2,0,1,0)
+idk1.Position = UDim2.new(-0.5,0,-0.2,0)
+idk1.Image = "rbxassetid://319554883"
+root.CFrame = to.CFrame - to.CFrame.lookVector * 3
+wait()
+Zanzoken = Instance.new("Part",char)
+Zanzoken.Anchored = true
+Zanzoken.Position = v3(999,999,999)
+Zanzoken.CFrame = Torso.CFrame
+game.Debris:AddItem(Zanzoken,0.5)
+Zanzoken.Transparency = 1
+wait()
+idk = Instance.new("BillboardGui",Zanzoken)
+idk.Size = UDim2.new(20,0,20,0)
+idk.AlwaysOnTop = false
+idk1 = Instance.new("ImageLabel",idk)
+idk1.BackgroundTransparency = 1
+idk.ExtentsOffset = v3(0,0,0)
+idk1.ImageTransparency = 0
+idk1.ImageColor3 = Color3.fromRGB(0,0,0)
+idk1.Size = UDim2.new(2,0,1,0)
+idk1.Position = UDim2.new(-0.5,0,-0.2,0)
+idk1.Image = "rbxassetid://319554883"
+ for i = 0, 1, 0.1 do
+        
+        RootJoint.C0 = clerp(RootJoint.C0, RootCF * cn(0, 0, 0) * angles(math.rad(0), math.rad(-5), math.rad(-90)), 0.3)
+        Torso.Neck.C0 = clerp(Torso.Neck.C0, NeckCF * angles(math.rad(0), math.rad(0), math.rad(90)), 0.2)
+        RW.C0 = clerp(RW.C0, CFrame.new(1.2, 0.5, 0) * angles(math.rad(0), math.rad(0 * math.cos(sine / 25)), math.rad(0 * math.cos(sine / 25))), 0.2)
+        LW.C0 = clerp(LW.C0, CFrame.new(-1.3, 0.3, -0.2) * angles(math.rad(0 + 1 * math.cos(sine / 25)), math.rad(0), math.rad(-90 + 1 * math.cos(sine / 25))), 0.3)
+        RH.C0 = clerp(RH.C0, cn(0.9, -1 - 0.1 * math.cos(sine / 25), -0.6) * RHCF * angles(math.rad(-2 + 1 * math.cos(sine / 25)), math.rad(50), math.rad(10 + 2 * math.cos(sine / 25))), 0.2)
+        LH.C0 = clerp(LH.C0, cn(-0.9, -1 - 0.1 * math.cos(sine / 25), 0.4) * LHCF * angles(math.rad(-2 + 1 * math.cos(sine / 25)), math.rad(50), math.rad(20 + 2 * math.cos(sine / 25))), 0.2)		
+end
+punchsound1:Play()
+for i = 0, 1, 0.1 do
+        
+        RootJoint.C0 = clerp(RootJoint.C0, RootCF * cn(0, -0.5, 0) * angles(math.rad(0), math.rad(0), math.rad(45)), 0.3)
+        Torso.Neck.C0 = clerp(Torso.Neck.C0, NeckCF * angles(math.rad(0), math.rad(0), math.rad(-25)), 0.3)
+        RW.C0 = clerp(RW.C0, CFrame.new(1.2, 0.7, -0.8) * angles(math.rad(120), math.rad(0), math.rad(-35)), 0.3)
+        LW.C0 = clerp(LW.C0, CFrame.new(-1.5, 0.5, 0) * angles(math.rad(-25), math.rad(0), math.rad(0)), 0.3)
+        RH.C0 = clerp(RH.C0, cn(1, -1, 0) * RHCF * angles(math.rad(0), math.rad(-45), math.rad(0)), 0.3)
+        LH.C0 = clerp(LH.C0, cn(-1, -1, -0.2) * LHCF * angles(math.rad(0), math.rad(-25), math.rad(10)), 0.3)
+end
+punchsound1:Play()
+ for i = 0, 1, 0.1 do
+        
+        RootJoint.C0 = clerp(RootJoint.C0, RootCF * cn(0, 0, 0) * angles(math.rad(0), math.rad(-5), math.rad(-90)), 0.3)
+        Torso.Neck.C0 = clerp(Torso.Neck.C0, NeckCF * angles(math.rad(0), math.rad(0), math.rad(90)), 0.2)
+        RW.C0 = clerp(RW.C0, CFrame.new(1.2, 0.5, 0) * angles(math.rad(0), math.rad(0 * math.cos(sine / 25)), math.rad(0 * math.cos(sine / 25))), 0.2)
+        LW.C0 = clerp(LW.C0, CFrame.new(-1.3, 0.3, -0.2) * angles(math.rad(0 + 1 * math.cos(sine / 25)), math.rad(0), math.rad(-90 + 1 * math.cos(sine / 25))), 0.3)
+        RH.C0 = clerp(RH.C0, cn(0.9, -1 - 0.1 * math.cos(sine / 25), -0.6) * RHCF * angles(math.rad(-2 + 1 * math.cos(sine / 25)), math.rad(50), math.rad(10 + 2 * math.cos(sine / 25))), 0.2)
+        LH.C0 = clerp(LH.C0, cn(-0.9, -1 - 0.1 * math.cos(sine / 25), 0.4) * LHCF * angles(math.rad(-2 + 1 * math.cos(sine / 25)), math.rad(50), math.rad(20 + 2 * math.cos(sine / 25))), 0.2)		
+end
+for i = 0, 1, 0.1 do
+        
+        RootJoint.C0 = clerp(RootJoint.C0, RootCF * cn(0, -1, 0) * angles(math.rad(0), math.rad(-10), math.rad(0)), 0.3)
+        Torso.Neck.C0 = clerp(Torso.Neck.C0, NeckCF * angles(math.rad(0), math.rad(-10), math.rad(0)), 0.3)
+        RW.C0 = clerp(RW.C0, CFrame.new(1.5, 0.5, 0) * angles(math.rad(-25), math.rad(0), math.rad(0)), 0.3)
+        LW.C0 = clerp(LW.C0, CFrame.new(-1.5, 0.5, 0) * angles(math.rad(-25), math.rad(0), math.rad(0)), 0.3)
+        RH.C0 = clerp(RH.C0, cn(1, -1, 0) * RHCF * angles(math.rad(0), math.rad(10), math.rad(90)), 0.3)
+        LH.C0 = clerp(LH.C0, cn(-1, -1, 0) * LHCF * angles(math.rad(0), math.rad(0), math.rad(45)), 0.3)
+      end
+ for i = 0, 1, 0.1 do
+        
+        RootJoint.C0 = clerp(RootJoint.C0, RootCF * cn(0, 0, 0) * angles(math.rad(0), math.rad(-5), math.rad(-90)), 0.3)
+        Torso.Neck.C0 = clerp(Torso.Neck.C0, NeckCF * angles(math.rad(0), math.rad(0), math.rad(90)), 0.2)
+        RW.C0 = clerp(RW.C0, CFrame.new(1.2, 0.5, 0) * angles(math.rad(0), math.rad(0 * math.cos(sine / 25)), math.rad(0 * math.cos(sine / 25))), 0.2)
+        LW.C0 = clerp(LW.C0, CFrame.new(-1.3, 0.3, -0.2) * angles(math.rad(0 + 1 * math.cos(sine / 25)), math.rad(0), math.rad(-90 + 1 * math.cos(sine / 25))), 0.3)
+        RH.C0 = clerp(RH.C0, cn(0.9, -1 - 0.1 * math.cos(sine / 25), -0.6) * RHCF * angles(math.rad(-2 + 1 * math.cos(sine / 25)), math.rad(50), math.rad(10 + 2 * math.cos(sine / 25))), 0.2)
+        LH.C0 = clerp(LH.C0, cn(-0.9, -1 - 0.1 * math.cos(sine / 25), 0.4) * LHCF * angles(math.rad(-2 + 1 * math.cos(sine / 25)), math.rad(50), math.rad(20 + 2 * math.cos(sine / 25))), 0.2)		
+end
+punchsound1:Play()
+for i = 0, 0.5, 0.1 do
+        
+        RootJoint.C0 = clerp(RootJoint.C0, RootCF * cn(0, -0.5, 0) * angles(math.rad(0), math.rad(0), math.rad(45)), 0.3)
+        Torso.Neck.C0 = clerp(Torso.Neck.C0, NeckCF * angles(math.rad(0), math.rad(0), math.rad(-25)), 0.3)
+        RW.C0 = clerp(RW.C0, CFrame.new(1.2, 0.7, -0.8) * angles(math.rad(120), math.rad(0), math.rad(-35)), 0.3)
+        LW.C0 = clerp(LW.C0, CFrame.new(-1.5, 0.5, 0) * angles(math.rad(-25), math.rad(0), math.rad(0)), 0.3)
+        RH.C0 = clerp(RH.C0, cn(1, -1, 0) * RHCF * angles(math.rad(0), math.rad(-45), math.rad(0)), 0.3)
+        LH.C0 = clerp(LH.C0, cn(-1, -1, -0.2) * LHCF * angles(math.rad(0), math.rad(-25), math.rad(10)), 0.3)
+end
+punchsound1:Play()
+ for i = 0, 0.5, 0.1 do
+        
+        RootJoint.C0 = clerp(RootJoint.C0, RootCF * cn(0, 0, 0) * angles(math.rad(0), math.rad(-5), math.rad(-90)), 0.3)
+        Torso.Neck.C0 = clerp(Torso.Neck.C0, NeckCF * angles(math.rad(0), math.rad(0), math.rad(90)), 0.2)
+        RW.C0 = clerp(RW.C0, CFrame.new(1.2, 0.5, 0) * angles(math.rad(0), math.rad(0 * math.cos(sine / 25)), math.rad(0 * math.cos(sine / 25))), 0.2)
+        LW.C0 = clerp(LW.C0, CFrame.new(-1.3, 0.3, -0.2) * angles(math.rad(0 + 1 * math.cos(sine / 25)), math.rad(0), math.rad(-90 + 1 * math.cos(sine / 25))), 0.3)
+        RH.C0 = clerp(RH.C0, cn(0.9, -1 - 0.1 * math.cos(sine / 25), -0.6) * RHCF * angles(math.rad(-2 + 1 * math.cos(sine / 25)), math.rad(50), math.rad(10 + 2 * math.cos(sine / 25))), 0.2)
+        LH.C0 = clerp(LH.C0, cn(-0.9, -1 - 0.1 * math.cos(sine / 25), 0.4) * LHCF * angles(math.rad(-2 + 1 * math.cos(sine / 25)), math.rad(50), math.rad(20 + 2 * math.cos(sine / 25))), 0.2)		
+end
+	to.CFrame = CFrame.new(to.CFrame.p + v3(0,-800,0))
+root.CFrame = CFrame.new(root.CFrame.p + v3(0,-800,0))
+Zanzoken = Instance.new("Part",char)
+Zanzoken.Anchored = true
+Zanzoken.Position = v3(999,999,999)
+Zanzoken.CFrame = Torso.CFrame
+game.Debris:AddItem(Zanzoken,0.5)
+Zanzoken.Transparency = 1
+Zano:Play()
+wait()
+idk = Instance.new("BillboardGui",Zanzoken)
+idk.Size = UDim2.new(10,0,15,0)
+idk.AlwaysOnTop = false
+idk1 = Instance.new("ImageLabel",idk)
+idk1.BackgroundTransparency = 1
+idk.ExtentsOffset = v3(0,0,0)
+idk1.ImageTransparency = 0
+idk1.ImageColor3 = Color3.fromRGB(0,0,0)
+idk1.Size = UDim2.new(2,0,1,0)
+idk1.Position = UDim2.new(-0.5,0,-0.2,0)
+idk1.Image = "rbxassetid://319554883"
+root.CFrame = to.CFrame - to.CFrame.lookVector * 3
+wait()
+Zanzoken = Instance.new("Part",char)
+Zanzoken.Anchored = true
+Zanzoken.Position = v3(999,999,999)
+Zanzoken.CFrame = Torso.CFrame
+game.Debris:AddItem(Zanzoken,0.5)
+Zanzoken.Transparency = 1
+wait()
+idk = Instance.new("BillboardGui",Zanzoken)
+idk.Size = UDim2.new(20,0,20,0)
+idk.AlwaysOnTop = false
+idk1 = Instance.new("ImageLabel",idk)
+idk1.BackgroundTransparency = 1
+idk.ExtentsOffset = v3(0,0,0)
+idk1.ImageTransparency = 0
+idk1.ImageColor3 = Color3.fromRGB(0,0,0)
+idk1.Size = UDim2.new(2,0,1,0)
+idk1.Position = UDim2.new(-0.5,0,-0.2,0)
+idk1.Image = "rbxassetid://319554883"
+ for i = 0, 0.4, 0.1 do
+        
+        RootJoint.C0 = clerp(RootJoint.C0, RootCF * cn(0, 0, 0) * angles(math.rad(0), math.rad(-5), math.rad(-90)), 0.3)
+        Torso.Neck.C0 = clerp(Torso.Neck.C0, NeckCF * angles(math.rad(0), math.rad(0), math.rad(90)), 0.2)
+        RW.C0 = clerp(RW.C0, CFrame.new(1.2, 0.5, 0) * angles(math.rad(0), math.rad(0 * math.cos(sine / 25)), math.rad(0 * math.cos(sine / 25))), 0.2)
+        LW.C0 = clerp(LW.C0, CFrame.new(-1.3, 0.3, -0.2) * angles(math.rad(0 + 1 * math.cos(sine / 25)), math.rad(0), math.rad(-90 + 1 * math.cos(sine / 25))), 0.3)
+        RH.C0 = clerp(RH.C0, cn(0.9, -1 - 0.1 * math.cos(sine / 25), -0.6) * RHCF * angles(math.rad(-2 + 1 * math.cos(sine / 25)), math.rad(50), math.rad(10 + 2 * math.cos(sine / 25))), 0.2)
+        LH.C0 = clerp(LH.C0, cn(-0.9, -1 - 0.1 * math.cos(sine / 25), 0.4) * LHCF * angles(math.rad(-2 + 1 * math.cos(sine / 25)), math.rad(50), math.rad(20 + 2 * math.cos(sine / 25))), 0.2)		
+end
+punchsound1:Play()
+for i = 0, 0.4, 0.1 do
+        
+        RootJoint.C0 = clerp(RootJoint.C0, RootCF * cn(0, -0.5, 0) * angles(math.rad(0), math.rad(0), math.rad(45)), 0.3)
+        Torso.Neck.C0 = clerp(Torso.Neck.C0, NeckCF * angles(math.rad(0), math.rad(0), math.rad(-25)), 0.3)
+        RW.C0 = clerp(RW.C0, CFrame.new(1.2, 0.7, -0.8) * angles(math.rad(120), math.rad(0), math.rad(-35)), 0.3)
+        LW.C0 = clerp(LW.C0, CFrame.new(-1.5, 0.5, 0) * angles(math.rad(-25), math.rad(0), math.rad(0)), 0.3)
+        RH.C0 = clerp(RH.C0, cn(1, -1, 0) * RHCF * angles(math.rad(0), math.rad(-45), math.rad(0)), 0.3)
+        LH.C0 = clerp(LH.C0, cn(-1, -1, -0.2) * LHCF * angles(math.rad(0), math.rad(-25), math.rad(10)), 0.3)
+end
+punchsound1:Play()
+ for i = 0, 1, 0.1 do
+        
+        RootJoint.C0 = clerp(RootJoint.C0, RootCF * cn(0, 0, 0) * angles(math.rad(0), math.rad(-5), math.rad(-90)), 0.3)
+        Torso.Neck.C0 = clerp(Torso.Neck.C0, NeckCF * angles(math.rad(0), math.rad(0), math.rad(90)), 0.2)
+        RW.C0 = clerp(RW.C0, CFrame.new(1.2, 0.5, 0) * angles(math.rad(0), math.rad(0 * math.cos(sine / 25)), math.rad(0 * math.cos(sine / 25))), 0.2)
+        LW.C0 = clerp(LW.C0, CFrame.new(-1.3, 0.3, -0.2) * angles(math.rad(0 + 1 * math.cos(sine / 25)), math.rad(0), math.rad(-90 + 1 * math.cos(sine / 25))), 0.3)
+        RH.C0 = clerp(RH.C0, cn(0.9, -1 - 0.1 * math.cos(sine / 25), -0.6) * RHCF * angles(math.rad(-2 + 1 * math.cos(sine / 25)), math.rad(50), math.rad(10 + 2 * math.cos(sine / 25))), 0.2)
+        LH.C0 = clerp(LH.C0, cn(-0.9, -1 - 0.1 * math.cos(sine / 25), 0.4) * LHCF * angles(math.rad(-2 + 1 * math.cos(sine / 25)), math.rad(50), math.rad(20 + 2 * math.cos(sine / 25))), 0.2)		
+end
+for i,v in pairs(to.Parent:GetChildren()) do
+					if v:IsA("Humanoid") then
+						v.Health = v.Health - 8
+						
+						v.PlatformStand = true
+					end
+	end
+
+	hit1 = false
+
+		punchsound1:Play()
+	hit2 = true
+      for i = 0, 1, 0.1 do
+        
+        RootJoint.C0 = clerp(RootJoint.C0, RootCF * cn(0, -0.5, 0) * angles(math.rad(0), math.rad(0), math.rad(45)), 0.3)
+        Torso.Neck.C0 = clerp(Torso.Neck.C0, NeckCF * angles(math.rad(0), math.rad(0), math.rad(-25)), 0.3)
+        RW.C0 = clerp(RW.C0, CFrame.new(1.2, 0.7, -0.8) * angles(math.rad(120), math.rad(0), math.rad(-35)), 0.3)
+        LW.C0 = clerp(LW.C0, CFrame.new(-1.5, 0.5, 0) * angles(math.rad(-25), math.rad(0), math.rad(0)), 0.3)
+        RH.C0 = clerp(RH.C0, cn(1, -1, 0) * RHCF * angles(math.rad(0), math.rad(-45), math.rad(0)), 0.3)
+        LH.C0 = clerp(LH.C0, cn(-1, -1, -0.2) * LHCF * angles(math.rad(0), math.rad(-25), math.rad(10)), 0.3)
+      end
+for i,v in pairs(to.Parent:GetChildren()) do
+					if v:IsA("Humanoid") then
+						v.Health = v.Health - 10
+						
+						v.PlatformStand = true
+					end
+	end
+hit2 = false
+
+	punchsound1:Play()
+hit3 = true
+hit4 = true
+
+
+punchsound1:Play()
+
+
+coroutine.wrap(function()
+				for i=1,2 do
+					wait()
+				
+		
+						
+
+	
+	for i,v in pairs(to.Parent:GetChildren()) do
+					if v:IsA("Humanoid") then
+						v.Health = v.Health - 30
+						
+						v.PlatformStand = true
+					end
+	end
+				end
+	
+					
+			wait(3)
+			end)()
+
+
+
+root.Anchored = false
+
+
+
+
+
+	StrongPunch:Play()
+	
+	
+ 
+
+
+	
+	for i,v in pairs(to.Parent:GetChildren()) do
+					if v:IsA("Humanoid") then
+						v.Health = v.Health - 20
+						
+						v.PlatformStand = true
+					end
+	end
+
+StrongPunch2:Play()
+
+
+	hitground = new("Part",char)
+	hitground.Size = Vector3.new(5,5,5)
+	hitground.Name =  "Ground"
+	hitground.Transparency = 1
+	hitground.CanCollide = false
+	game.Debris:AddItem(hitground,2)
+	hitground.Position = Vector3.new(999,999,999)
+	hitgroundweld = new("Weld",hitground)
+	hitgroundweld.Part0 = to
+	hitgroundweld.Part1 = hitground
+	hitground.Touched:connect(function(hit2)
+		if hit2.Size.x > 150 then
+			hitground:Destroy()
+			ad = new("Part",char)
+ad.Name = "NewPart"
+ad.Size = Vector3.new(30,0.1,30)	
+ad.CanCollide = false
+ad.Anchored = true
+ad.Position = Vector3.new(hitground.Position.x,hit2.Position.y,hitground.Position.z)
+ad.Transparency = 1
+aad = new("Decal",ad)
+
+aad.Face = "Top"
+aad.Transparency = 1
+		aad.Transparency = 0
+		aad.Texture = "http://www.roblox.com/asset/?id=108186785"
+			smoke = new("Part",to)
+			smokemesh = new("SpecialMesh",smoke)
+			smokemesh.MeshId = "rbxassetid://928329648"
+			smoke.BrickColor = hit2.BrickColor
+			smoke.Anchored = true
+			smoke.Position = hitground.Position
+			GroundImpact:Play()
+			for i = 1,20 do
+				wait()
+				smokemesh.Scale = smokemesh.Scale + Vector3.new(3,3,3)
+				smoke.Transparency = smoke.Transparency + 1/20
+			end
+			smoke:Destroy()
+			wait(0.5)
+			
+			for i = 1,20 do
+				wait(0.1)
+				aad.Transparency = aad.Transparency + 1/20
+			end
+		end
+	end)
+	ys = Instance.new("BodyVelocity",to)
+ys.Name = "GO"
+       
+ys.maxForce = Vector3.new(math.huge, math.huge, math.huge)
+
+ys.Velocity = v3(0,-90,0)
+        
+	wait(1)
+        ys:Destroy()
+
+	
+	
+
+  
+hit3 = false
+hit4 = false
+
+
+hit1 = false
+	hit2 = false
+	hit3 = false
+	hit4 = false
+no_anim = false
+  root.Anchored = false
+to.Anchored = false
+end
+end)
+end
+
+
+
+Mouse.KeyUp:connect(function(k)
+  if k == "m" then
+	Combo3()
+end
+end)
+
+Mouse.KeyDown:connect(function(k)
+if k == "t" and MUI == false then
+	MUI = true
+no_anim = true
+instinct = false
+Theme:Stop()
+UltraInstinct:Stop()
+UltimateBattle:Play()
+UILight.Color = Color3.new(0,255,255)
+for i = 1, 20 do
+		wait()
+		hed.Weld.C0 = Lerp(hed.Weld.C0, CFrame.new(0,1.5,-.10)*CFrame.Angles(math.rad(-20),math.rad(0),math.rad(0)), 0.4)--head
+		torso.Weld.C0 = Lerp(torso.Weld.C0, CFrame.new(0, -1.2, 0) * CFrame.Angles(math.rad(-20), math.rad(0), math.rad(0)), 0.2)--torso
+					rarm.Weld.C0 = Lerp(rarm.Weld.C0, CFrame.new(1.5,0.2,-.70)*CFrame.Angles(math.rad(150),math.rad(0),math.rad(10)), 0.2)--rarm
+					larm.Weld.C0 = Lerp(larm.Weld.C0, CFrame.new(-1.5,0.2,-.70)*CFrame.Angles(math.rad(150),math.rad(0),math.rad(-10)), 0.2)--larm
+					lleg.Weld.C0 = Lerp(lleg.Weld.C0, CFrame.new(-0.5, -0.6, -.40) * CFrame.Angles(math.rad(20), math.rad(0), math.rad(-20)), 0.4)--lleg
+		rleg.Weld.C0 = Lerp(rleg.Weld.C0, CFrame.new(0.5, -0.6, -.40) * CFrame.Angles(math.rad(20), math.rad(0), math.rad(10)), 0.4)--rleg
+end	
+wait(2)
+hed:FindFirstChildOfClass("Decal").Texture = "rbxassetid://1534954275"
+			for i = 1,1 do
+				game:GetService("RunService").RenderStepped:wait()
+				for i = 1,80 do
+					game:GetService("RunService").RenderStepped:wait(0.00000001)
+					
+					Hat.Color = Hat.Color:lerp(Color3.fromRGB(255, 255 , 255), 0.1)
+				end
+			
+				for i = 1,30 do
+					game:GetService("RunService").RenderStepped:wait(0.00000001)
+					
+					
+				end
+			end
+			
+	UltraInstincto = Instance.new("Sound",Head)
+		UltraInstincto.SoundId = "rbxassetid://2651838648"
+		UltraInstincto.Pitch = 1
+		UltraInstincto.Looped = false
+		UltraInstincto.Volume = 10
+		UltraInstincto:Play()
+	
+	coroutine.resume(coroutine.create(function()
+			for i = 3,12 do 
+			local Ball = Instance.new("Part",char)
+			Ball.Size = Vector3.new(1,1,1)
+			Ball.BrickColor = BrickColor.new("Electric blue")
+			Ball.Material = "Neon"
+			Ball.Anchored = true
+			Ball.CanCollide = false
+			Ball.Transparency = 0
+			Ball.CFrame = torso.CFrame*CFrame.new(0,0,-1)*CFrame.Angles(0,0,0)
+			local Ball2 = Instance.new("SpecialMesh",Ball)
+			Ball2.MeshType = 3
+			Ball2.Scale = Vector3.new(5,5,5)
+		
+		
+			
+			
+			coroutine.resume(coroutine.create(function()
+			for i = 1,10 do
+			Ball2.Scale = Ball2.Scale + Vector3.new(10,10,10)
+			Ball.Transparency = Ball.Transparency + 0.06
+			wait(0.00000000001)
+			end
+			Ball:Destroy()
+			
+				
+			end))
+			wait(0.3)
+			end
+	end))
+	
+	local Thing = Instance.new("Part", char)
+		Thing.Anchored = true
+		Thing.CanCollide = false
+		Thing.Position = torso.Position
+		Thing.Size = Vector3.new(1,1,1)
+		Thing.Material = "Neon"
+		local part = Instance.new("SpecialMesh", Thing)
+		part.MeshType = "Sphere"
+			for i = 1,3 do
+				game:GetService("RunService").RenderStepped:wait()
+				for i = 1,30 do
+					game:GetService("RunService").RenderStepped:wait(0.00000001)
+					Thing.Size = Thing.Size + Vector3.new(2, 2, 2)
+					Thing.Color = Thing.Color:lerp(Color3.fromRGB(255, 255, 255), 0.1)
+				end
+			
+				for i = 1,30 do
+					game:GetService("RunService").RenderStepped:wait(0.00000001)
+					Thing.Size = Thing.Size - Vector3.new(2, 2, 2)
+					Thing.Color = Thing.Color:lerp(Color3.fromRGB(255, 255, 255), 0.1)
+				end
+			end
+			wait(0.1)		
+Hat.BrickColor = BrickColor.new("Dark stone grey")
+AuraSFX:Stop()
+AuraSFX2:Play()
+			local HairAura = Instance.new('ParticleEmitter')
+HairAura.Name = "Aura"
+HairAura.Texture = "rbxassetid://1200947142"
+HairAura.Parent = hed
+HairAura.LightEmission = 1
+HairAura.Enabled = true
+HairAura.Color = ColorSequence.new(BrickColor.new("Magenta").Color)
+HairAura.Size = NumberSequence.new(1.9)
+HairAura.LockedToPart = true
+HairAura.Lifetime = NumberRange.new(2)
+HairAura.Rate = 5
+HairAura.Speed = NumberRange.new(0.1)
+HairAura.Rotation = NumberRange.new(-360,360)
+HairAura.EmissionDirection = "Top"
+HairAura.ZOffset = -1
+
+
+local RightAura = Instance.new('ParticleEmitter')
+RightAura.Name = "Aura"
+RightAura.Texture = "rbxassetid://1200947142"
+RightAura.Parent = rleg
+RightAura.LightEmission = 1
+RightAura.Enabled = true
+RightAura.Color = ColorSequence.new(BrickColor.new("Magenta").Color)
+RightAura.Size = NumberSequence.new(1.9)
+RightAura.LockedToPart = true
+RightAura.Lifetime = NumberRange.new(2)
+RightAura.Rate = 5
+RightAura.Speed = NumberRange.new(0.1)
+RightAura.Rotation = NumberRange.new(-360,360)
+RightAura.EmissionDirection = "Top"
+RightAura.ZOffset = -1
+
+local RightLow = Instance.new('ParticleEmitter')
+RightLow.Name = "Aura"
+RightLow.Texture = "rbxassetid://1200947142"
+RightLow.Parent = lleg
+RightLow.LightEmission = 1
+RightLow.Enabled = true
+RightLow.Color = ColorSequence.new(BrickColor.new("Magenta").Color)
+RightLow.Size = NumberSequence.new(1.9)
+RightLow.LockedToPart = true
+RightLow.Lifetime = NumberRange.new(2)
+RightLow.Rate = 5
+RightLow.Speed = NumberRange.new(0.1)
+RightLow.Rotation = NumberRange.new(-360,360)
+RightLow.EmissionDirection = "Top"
+RightLow.ZOffset = -1
+
+local LeftLow = Instance.new('ParticleEmitter')
+LeftLow.Name = "Aura"
+LeftLow.Texture = "rbxassetid://1200947142"
+LeftLow.Parent = larm
+LeftLow.LightEmission = 1
+LeftLow.Enabled = true
+LeftLow.Color = ColorSequence.new(BrickColor.new("Magenta").Color)
+LeftLow.Size = NumberSequence.new(1.9)
+LeftLow.LockedToPart = true
+LeftLow.Lifetime = NumberRange.new(2)
+LeftLow.Rate = 5
+LeftLow.Speed = NumberRange.new(0.1)
+LeftLow.Rotation = NumberRange.new(-360,360)
+LeftLow.EmissionDirection = "Top"
+LeftLow.ZOffset = -1
+
+local LeftLeg = Instance.new('ParticleEmitter')
+LeftLeg.Name = "Aura"
+LeftLeg.Texture = "rbxassetid://1200947142"
+LeftLeg.Parent = rarm
+LeftLeg.LightEmission = 1
+LeftLeg.Enabled = true
+LeftLeg.Color = ColorSequence.new(BrickColor.new("Magenta").Color)
+LeftLeg.Size = NumberSequence.new(1.9)
+LeftLeg.LockedToPart = true
+LeftLeg.Lifetime = NumberRange.new(2)
+LeftLeg.Rate = 5
+LeftLeg.Speed = NumberRange.new(0.1)
+LeftLeg.Rotation = NumberRange.new(-360,360)
+LeftLeg.EmissionDirection = "Top"
+LeftLeg.ZOffset = -1
+		
+FZcharge3.Texture = "rbxassetid://1509406387"
+FZcharge3.Speed = NumberRange.new(0)
+FZcharge3.Lifetime = NumberRange.new(0.2)
+FZcharge3.Rotation = NumberRange.new(-360,360)
+ShirtpartB.Transparency = 0
+part:Destroy()
+Thing:Destroy()
+			part.MeshType = "Cylinder"
+			Thing.Position = torso.Position
+			Thing.Orientation = Vector3.new(0,0,90) 
+			for i = 1,200 do
+				game:GetService("RunService").RenderStepped:wait(0.00000001)
+				part.Scale = part.Scale + Vector3.new(10, 0.1, 0.1)
+				Thing.Transparency = Thing.Transparency + 0.005
+				Thing.Color = Thing.Color:lerp(Color3.fromRGB(255, 255, 255), 0.1)
+			end
+			local Thing = Instance.new("Part", char)
+		Thing.Anchored = true
+		Thing.CanCollide = false
+		Thing.Position = torso.Position
+		Thing.Size = Vector3.new(1,1,1)
+		Thing.Material = "Neon"
+		local part = Instance.new("SpecialMesh", Thing)
+		part.MeshType = "Sphere"
+			for i = 1,3 do
+				game:GetService("RunService").RenderStepped:wait()
+				for i = 1,30 do
+					game:GetService("RunService").RenderStepped:wait(0.00000001)
+					Thing.Size = Thing.Size + Vector3.new(2, 2, 2)
+					Thing.Color = Thing.Color:lerp(Color3.fromRGB(255, 255, 255), 0.1)
+				end
+				end
+			Thing:Destroy()
+			part:Destroy()
+			
+wait(2)
+
+no_anim = false
+instinct = true
+
+		
+	
+
+
+end
+end)
+Mouse.KeyDown:connect(function(k)
+if k == "j" and MUI == true then
+	instinct = false
+	animid = 5
+	no_anim = true
+	hed.Weld.C0 = Lerp(hed.Weld.C0, CFrame.new(0,1.5,0)*CFrame.Angles(math.rad(0),math.rad(70),math.rad(0)), 0.8)--head
+		             torso.Weld.C0 = Lerp(torso.Weld.C0, CFrame.new(0, -1, 0) * CFrame.Angles(math.rad(0),math.rad(-80),math.rad(0)), 0.8)--torso
+				    	rarm.Weld.C0 = Lerp(rarm.Weld.C0, CFrame.new(1.5,0.5,0)*CFrame.Angles(math.rad(90),math.rad(0),math.rad(10)), 0.8)--rarm
+					   larm.Weld.C0 = Lerp(larm.Weld.C0, CFrame.new(-1.5,0.5,0)*CFrame.Angles(math.rad(50),math.rad(0),math.rad(-20)), 0.8)--larm
+					lleg.Weld.C0 = Lerp(lleg.Weld.C0, CFrame.new(-0.5, -1, 0) * CFrame.Angles(math.rad(0),math.rad(0),math.rad(-10)), 0.8)--lleg
+		             rleg.Weld.C0 = Lerp(rleg.Weld.C0, CFrame.new(0.5, -1, 0) * CFrame.Angles(math.rad(0),math.rad(0),math.rad(5)), 0.8)--rleg
+		wait(0.5)
+		hed.Weld.C0 = Lerp(hed.Weld.C0, CFrame.new(0,1.5,0)*CFrame.Angles(math.rad(0),math.rad(-50),math.rad(0)), 0.8)--head
+		             torso.Weld.C0 = Lerp(torso.Weld.C0, CFrame.new(0, -1, 0) * CFrame.Angles(math.rad(0),math.rad(50),math.rad(0)), 0.8)--torso
+				    	rarm.Weld.C0 = Lerp(rarm.Weld.C0, CFrame.new(1.5,0.5,0)*CFrame.Angles(math.rad(90),math.rad(0),math.rad(20)), 0.8)--rarm
+					   larm.Weld.C0 = Lerp(larm.Weld.C0, CFrame.new(-1.5,0.5,0)*CFrame.Angles(math.rad(-10),math.rad(0),math.rad(-10)), 0.8)--larm
+					lleg.Weld.C0 = Lerp(lleg.Weld.C0, CFrame.new(-0.5, -1, 0) * CFrame.Angles(math.rad(0),math.rad(0),math.rad(-10)), 0.8)--lleg
+		             rleg.Weld.C0 = Lerp(rleg.Weld.C0, CFrame.new(0.5, -1, 0) * CFrame.Angles(math.rad(0),math.rad(0),math.rad(5)), 0.8)--rleg
+	AirPunchStrong()
+	wait(0.2)
+	hed.Weld.C0 = Lerp(hed.Weld.C0, CFrame.new(0,1.5,0)*CFrame.Angles(math.rad(0),math.rad(70),math.rad(0)), 0.8)--head
+		             torso.Weld.C0 = Lerp(torso.Weld.C0, CFrame.new(0, -1, 0) * CFrame.Angles(math.rad(0),math.rad(-80),math.rad(0)), 0.8)--torso
+				    	rarm.Weld.C0 = Lerp(rarm.Weld.C0, CFrame.new(1.5,0.5,0)*CFrame.Angles(math.rad(90),math.rad(0),math.rad(10)), 0.8)--rarm
+					   larm.Weld.C0 = Lerp(larm.Weld.C0, CFrame.new(-1.5,0.5,0)*CFrame.Angles(math.rad(50),math.rad(0),math.rad(-20)), 0.8)--larm
+					lleg.Weld.C0 = Lerp(lleg.Weld.C0, CFrame.new(-0.5, -1, 0) * CFrame.Angles(math.rad(0),math.rad(0),math.rad(-10)), 0.8)--lleg
+		             rleg.Weld.C0 = Lerp(rleg.Weld.C0, CFrame.new(0.5, -1, 0) * CFrame.Angles(math.rad(0),math.rad(0),math.rad(5)), 0.8)--rleg
+		wait(0.5)
+		hed.Weld.C0 = Lerp(hed.Weld.C0, CFrame.new(0,1.5,0)*CFrame.Angles(math.rad(0),math.rad(70),math.rad(0)), 0.8)--head
+		             torso.Weld.C0 = Lerp(torso.Weld.C0, CFrame.new(0, -1, 0) * CFrame.Angles(math.rad(0),math.rad(-80),math.rad(0)), 0.8)--torso
+				    	rarm.Weld.C0 = Lerp(rarm.Weld.C0, CFrame.new(1.5,0.5,0)*CFrame.Angles(math.rad(-20),math.rad(0),math.rad(10)), 0.8)--rarm
+					   larm.Weld.C0 = Lerp(larm.Weld.C0, CFrame.new(-1.5,0.5,0)*CFrame.Angles(math.rad(90),math.rad(0),math.rad(-20)), 0.8)--larm
+					lleg.Weld.C0 = Lerp(lleg.Weld.C0, CFrame.new(-0.5, -1, 0) * CFrame.Angles(math.rad(0),math.rad(0),math.rad(-10)), 0.8)--lleg
+		             rleg.Weld.C0 = Lerp(rleg.Weld.C0, CFrame.new(0.5, -1, 0) * CFrame.Angles(math.rad(0),math.rad(0),math.rad(5)), 0.8)--rleg
+	AirPunchStrong()
+	wait(0.2)
+	hed.Weld.C0 = Lerp(hed.Weld.C0, CFrame.new(0,1.5,0)*CFrame.Angles(math.rad(0),math.rad(70),math.rad(0)), 0.8)--head
+		             torso.Weld.C0 = Lerp(torso.Weld.C0, CFrame.new(0, -1, 0) * CFrame.Angles(math.rad(0),math.rad(-80),math.rad(0)), 0.8)--torso
+				    	rarm.Weld.C0 = Lerp(rarm.Weld.C0, CFrame.new(1.5,0.5,0)*CFrame.Angles(math.rad(90),math.rad(0),math.rad(10)), 0.8)--rarm
+					   larm.Weld.C0 = Lerp(larm.Weld.C0, CFrame.new(-1.5,0.5,0)*CFrame.Angles(math.rad(50),math.rad(0),math.rad(-20)), 0.8)--larm
+					lleg.Weld.C0 = Lerp(lleg.Weld.C0, CFrame.new(-0.5, -1, 0) * CFrame.Angles(math.rad(0),math.rad(0),math.rad(-10)), 0.8)--lleg
+		             rleg.Weld.C0 = Lerp(rleg.Weld.C0, CFrame.new(0.5, -1, 0) * CFrame.Angles(math.rad(0),math.rad(0),math.rad(5)), 0.8)--rleg
+		wait(0.5)
+		hed.Weld.C0 = Lerp(hed.Weld.C0, CFrame.new(0,1.5,0)*CFrame.Angles(math.rad(0),math.rad(-50),math.rad(0)), 0.8)--head
+		             torso.Weld.C0 = Lerp(torso.Weld.C0, CFrame.new(0, -1, 0) * CFrame.Angles(math.rad(0),math.rad(50),math.rad(0)), 0.8)--torso
+				    	rarm.Weld.C0 = Lerp(rarm.Weld.C0, CFrame.new(1.5,0.5,0)*CFrame.Angles(math.rad(90),math.rad(0),math.rad(20)), 0.8)--rarm
+					   larm.Weld.C0 = Lerp(larm.Weld.C0, CFrame.new(-1.5,0.5,0)*CFrame.Angles(math.rad(-10),math.rad(0),math.rad(-10)), 0.8)--larm
+					lleg.Weld.C0 = Lerp(lleg.Weld.C0, CFrame.new(-0.5, -1, 0) * CFrame.Angles(math.rad(0),math.rad(0),math.rad(-10)), 0.8)--lleg
+		             rleg.Weld.C0 = Lerp(rleg.Weld.C0, CFrame.new(0.5, -1, 0) * CFrame.Angles(math.rad(0),math.rad(0),math.rad(5)), 0.8)--rleg
+	AirPunchStrong()
+	wait(0.2)
+	no_anim = false
+	instinct = true
+end
+end)
+
+Mouse.KeyDown:connect(function(k)
+if k == "j" and MUI == false then
+	instinct = false
+	animid = 5
+	no_anim = true
+	hed.Weld.C0 = Lerp(hed.Weld.C0, CFrame.new(0,1.5,0)*CFrame.Angles(math.rad(0),math.rad(70),math.rad(0)), 0.8)--head
+		             torso.Weld.C0 = Lerp(torso.Weld.C0, CFrame.new(0, -1, 0) * CFrame.Angles(math.rad(0),math.rad(-80),math.rad(0)), 0.8)--torso
+				    	rarm.Weld.C0 = Lerp(rarm.Weld.C0, CFrame.new(1.5,0.5,0)*CFrame.Angles(math.rad(90),math.rad(0),math.rad(10)), 0.8)--rarm
+					   larm.Weld.C0 = Lerp(larm.Weld.C0, CFrame.new(-1.5,0.5,0)*CFrame.Angles(math.rad(50),math.rad(0),math.rad(-20)), 0.8)--larm
+					lleg.Weld.C0 = Lerp(lleg.Weld.C0, CFrame.new(-0.5, -1, 0) * CFrame.Angles(math.rad(0),math.rad(0),math.rad(-10)), 0.8)--lleg
+		             rleg.Weld.C0 = Lerp(rleg.Weld.C0, CFrame.new(0.5, -1, 0) * CFrame.Angles(math.rad(0),math.rad(0),math.rad(5)), 0.8)--rleg
+		wait(2)
+		hed.Weld.C0 = Lerp(hed.Weld.C0, CFrame.new(0,1.5,0)*CFrame.Angles(math.rad(0),math.rad(-50),math.rad(0)), 0.8)--head
+		             torso.Weld.C0 = Lerp(torso.Weld.C0, CFrame.new(0, -1, 0) * CFrame.Angles(math.rad(0),math.rad(50),math.rad(0)), 0.8)--torso
+				    	rarm.Weld.C0 = Lerp(rarm.Weld.C0, CFrame.new(1.5,0.5,0)*CFrame.Angles(math.rad(90),math.rad(0),math.rad(20)), 0.8)--rarm
+					   larm.Weld.C0 = Lerp(larm.Weld.C0, CFrame.new(-1.5,0.5,0)*CFrame.Angles(math.rad(-10),math.rad(0),math.rad(-10)), 0.8)--larm
+					lleg.Weld.C0 = Lerp(lleg.Weld.C0, CFrame.new(-0.5, -1, 0) * CFrame.Angles(math.rad(0),math.rad(0),math.rad(-10)), 0.8)--lleg
+		             rleg.Weld.C0 = Lerp(rleg.Weld.C0, CFrame.new(0.5, -1, 0) * CFrame.Angles(math.rad(0),math.rad(0),math.rad(5)), 0.8)--rleg
+	AirPunch()
+	wait(0.5)
+	no_anim = false
+	instinct = true
+end
+end)
+
+holdclick=false
+Mouse.KeyDown:connect(function(k)
+if k == "g" and MUI == false then
+	instinct = false
+	animid = 5
+	no_anim = true
+	
+	local Charge = Instance.new("Sound",hed)
+		Charge.SoundId = "rbxassetid://1112364900"
+		Charge.Pitch = 1
+		Charge.Looped = false
+		Charge.Volume = 7
+				wait(0.0001)
+		Charge:Play()	
+
+	
+	coroutine.resume(coroutine.create(function()
+			for i = 3,12 do 
+			local HQ = Instance.new("Part",char)
+			HQ.Size = Vector3.new(1,0,1)
+			HQ.BrickColor = BrickColor.new("Grey")
+			HQ.Material = "Neon"
+			HQ.Anchored = true
+			HQ.CanCollide = false
+			HQ.CFrame = root.CFrame*CFrame.new(0,-2,0)*CFrame.Angles(0,0,0)
+			local HQ2 = Instance.new("SpecialMesh",HQ)
+			HQ2.MeshId = "rbxassetid://20329976"
+			HQ2.Scale = Vector3.new(1,1,1)
+		
+			local HQG = Instance.new("Part",char)
+			HQG.Size = Vector3.new(1,0,1)
+			HQG.BrickColor = BrickColor.new("Grey")
+			HQG.Material = "Neon"
+			HQG.Anchored = true
+			HQG.CanCollide = false
+			HQG.CFrame = root.CFrame*CFrame.new(0,-2,0)*CFrame.Angles(0,0,0)
+			local HQG2 = Instance.new("SpecialMesh",HQG)
+			HQG2.MeshId = "rbxassetid://20329976"
+			HQG2.Scale = Vector3.new(1,1,1)
+			
+			
+			coroutine.resume(coroutine.create(function()
+			for i = 1,10 do
+			HQ2.Scale = HQ2.Scale + Vector3.new(3,0.3,3)
+			HQ.Transparency = HQ.Transparency + 0.09
+			HQ.CFrame = HQ.CFrame*CFrame.Angles(0,-0.2,0)
+			
+			HQG2.Scale = HQG2.Scale + Vector3.new(1,0.5,1)
+			HQG.Transparency = HQG.Transparency + 0.09
+			HQG.CFrame = HQ.CFrame*CFrame.Angles(0,-0.2,0)
+			
+			wait(0.00000000001)
+			end
+			HQ:Destroy()
+			HQ2:Destroy()
+			HQG:Destroy()
+			HQG2:Destroy()
+				
+			end))
+			wait(0.3)
+			end
+	end))
+	
+	
+	coroutine.resume(coroutine.create(function()
+			for i = 3,12 do 
+			local Ball = Instance.new("Part",char)
+			Ball.Size = Vector3.new(1,1,1)
+			Ball.BrickColor = BrickColor.new("Cyan")
+			Ball.Material = "Neon"
+			Ball.Anchored = true
+			Ball.CanCollide = false
+			Ball.Transparency = 0
+			Ball.CFrame = torso.CFrame*CFrame.new(0,0,-1)*CFrame.Angles(0,0,0)
+			local Ball2 = Instance.new("SpecialMesh",Ball)
+			Ball2.MeshType = 3
+			Ball2.Scale = Vector3.new(4,4,4)
+		
+		
+			
+			
+			coroutine.resume(coroutine.create(function()
+			for i = 1,10 do
+			Ball2.Scale = Ball2.Scale - Vector3.new(1,1,1)
+			Ball.Transparency = Ball.Transparency + 0.06
+			wait(0.00000000001)
+			end
+			Ball:Destroy()
+			
+				
+			end))
+			wait(0.3)
+			end
+		end))
+		
+		coroutine.resume(coroutine.create(function()
+			for i = 3,12 do 
+			local Spinn = Instance.new("Part",char)
+				Spinn.Size = Vector3.new(1,1,1)
+				Spinn.BrickColor = BrickColor.new("Cyan")
+				Spinn.CanCollide = false
+				Spinn.Transparency = 0.1
+				Spinn.Anchored = true
+				Spinn.Material = "Neon"
+				Spinn.CFrame = torso.CFrame*CFrame.new(0,0,0)*CFrame.Angles(0,0,0)
+				local Spinn2 = Instance.new("SpecialMesh",Spinn)
+				Spinn2.MeshId = "rbxassetid://881808813"
+				Spinn2.Scale = Vector3.new(6,6,6)	
+		
+		
+			
+			
+			coroutine.resume(coroutine.create(function()
+			for i = 1,80 do
+			Spinn.Transparency = Spinn.Transparency + 0.02
+					
+					Spinn.CFrame = Spinn.CFrame*CFrame.Angles(0.1,0.1,0.1)
+			wait(0.00000000001)
+			end
+			Spinn:Destroy()
+			
+				
+			end))
+			wait(0.3)
+			end
+		end))
+	
+	hed.Weld.C0 = Lerp(hed.Weld.C0, CFrame.new(0,1.5,0)*CFrame.Angles(math.rad(0),math.rad(85),math.rad(0)), 1)--head
+		torso.Weld.C0 = Lerp(torso.Weld.C0, CFrame.new(0, -1, 0) * CFrame.Angles(math.rad(0), math.rad(-85), math.rad(0)), 1)--torso
+					rarm.Weld.C0 = Lerp(rarm.Weld.C0, CFrame.new(1.2,0.4,0)*CFrame.Angles(math.rad(30),math.rad(-40),math.rad(-10)), 1)--rarm
+					larm.Weld.C0 = Lerp(larm.Weld.C0, CFrame.new(-1,0.2,-0.2)*CFrame.Angles(math.rad(30),math.rad(40),math.rad(40)), 1)--larm
+					lleg.Weld.C0 = Lerp(lleg.Weld.C0, CFrame.new(-0.5, -1, 0) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(-10)), 1)--lleg
+		rleg.Weld.C0 = Lerp(rleg.Weld.C0, CFrame.new(0.5, -1, 0) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(10)), 1)--rleg
+		wait(3)
+		Charge:Destroy()
+		local Fire = Instance.new("Sound",hed)
+		Fire.SoundId = "rbxassetid://977360812"
+		Fire.Pitch = 1
+		Fire.Looped = false
+		Fire.Volume = 10
+				
+		Fire:Play()	
+	
+		hed.Weld.C0 = Lerp(hed.Weld.C0, CFrame.new(0,1.5,0)*CFrame.Angles(math.rad(0),math.rad(0),math.rad(0)), 1)--head
+		torso.Weld.C0 = Lerp(torso.Weld.C0, CFrame.new(0, -1, 0) * CFrame.Angles(math.rad(-5), math.rad(0), math.rad(0)), 1)--torso
+					rarm.Weld.C0 = Lerp(rarm.Weld.C0, CFrame.new(1,0.5,0)*CFrame.Angles(math.rad(95),math.rad(-10),math.rad(-20)), 1)--rarm
+					larm.Weld.C0 = Lerp(larm.Weld.C0, CFrame.new(-1,0.5,-0.2)*CFrame.Angles(math.rad(75),math.rad(170),math.rad(-20)), 1)--larm
+					lleg.Weld.C0 = Lerp(lleg.Weld.C0, CFrame.new(-0.5, -1, 0) * CFrame.Angles(math.rad(5), math.rad(0), math.rad(-10)), 1)--lleg
+		rleg.Weld.C0 = Lerp(rleg.Weld.C0, CFrame.new(0.5, -1, 0) * CFrame.Angles(math.rad(5), math.rad(0), math.rad(10)), 1)--rleg
+		laz0r()
+		
+		
+	
+		
+		wait(2)
+		Fire:Destroy()
+		instinct = true
+		no_anim = false
+		if animid == 0 then
+animid = 1
+else
+animid = 0
+end
+end
+end)
+
+
+Mouse.KeyDown:connect(function(k)
+if k == "g" and MUI == true then
+	instinct = false
+	animid = 5
+	no_anim = true
+	
+	local Charge = Instance.new("Sound",hed)
+		Charge.SoundId = "rbxassetid://1112364900"
+		Charge.Pitch = 1
+		Charge.Looped = false
+		Charge.Volume = 7
+				wait(0.0001)
+		Charge:Play()	
+
+	
+	coroutine.resume(coroutine.create(function()
+			for i = 3,12 do 
+			local HQ = Instance.new("Part",char)
+			HQ.Size = Vector3.new(1,0,1)
+			HQ.BrickColor = BrickColor.new("Grey")
+			HQ.Material = "Neon"
+			HQ.Anchored = true
+			HQ.CanCollide = false
+			HQ.CFrame = root.CFrame*CFrame.new(0,-2,0)*CFrame.Angles(0,0,0)
+			local HQ2 = Instance.new("SpecialMesh",HQ)
+			HQ2.MeshId = "rbxassetid://20329976"
+			HQ2.Scale = Vector3.new(1,1,1)
+		
+			local HQG = Instance.new("Part",char)
+			HQG.Size = Vector3.new(1,0,1)
+			HQG.BrickColor = BrickColor.new("Grey")
+			HQG.Material = "Neon"
+			HQG.Anchored = true
+			HQG.CanCollide = false
+			HQG.CFrame = root.CFrame*CFrame.new(0,-2,0)*CFrame.Angles(0,0,0)
+			local HQG2 = Instance.new("SpecialMesh",HQG)
+			HQG2.MeshId = "rbxassetid://20329976"
+			HQG2.Scale = Vector3.new(1,1,1)
+			
+			
+			coroutine.resume(coroutine.create(function()
+			for i = 1,10 do
+			HQ2.Scale = HQ2.Scale + Vector3.new(7,0.3,7)
+			HQ.Transparency = HQ.Transparency + 0.09
+			HQ.CFrame = HQ.CFrame*CFrame.Angles(0,-0.2,0)
+			
+			HQG2.Scale = HQG2.Scale + Vector3.new(3,3,3)
+			HQG.Transparency = HQG.Transparency + 0.09
+			HQG.CFrame = HQ.CFrame*CFrame.Angles(0,-0.2,0)
+			
+			wait(0.00000000001)
+			end
+			HQ:Destroy()
+			HQ2:Destroy()
+			HQG:Destroy()
+			HQG2:Destroy()
+				
+			end))
+			wait(0.3)
+			end
+	end))
+	
+	
+	coroutine.resume(coroutine.create(function()
+			for i = 3,12 do 
+			local Ball = Instance.new("Part",char)
+			Ball.Size = Vector3.new(1,1,1)
+			Ball.BrickColor = BrickColor.new("Cyan")
+			Ball.Material = "Neon"
+			Ball.Anchored = true
+			Ball.CanCollide = false
+			Ball.Transparency = 0
+			Ball.CFrame = torso.CFrame*CFrame.new(0,0,-1)*CFrame.Angles(0,0,0)
+			local Ball2 = Instance.new("SpecialMesh",Ball)
+			Ball2.MeshType = 3
+			Ball2.Scale = Vector3.new(4,4,4)
+		
+		
+			
+			
+			coroutine.resume(coroutine.create(function()
+			for i = 1,10 do
+			Ball2.Scale = Ball2.Scale - Vector3.new(1,1,1)
+			Ball.Transparency = Ball.Transparency + 0.06
+			wait(0.00000000001)
+			end
+			Ball:Destroy()
+			
+				
+			end))
+			wait(0.3)
+			end
+		end))
+		
+		coroutine.resume(coroutine.create(function()
+			for i = 3,12 do 
+			local Spinn = Instance.new("Part",char)
+				Spinn.Size = Vector3.new(1,1,1)
+				Spinn.BrickColor = BrickColor.new("Cyan")
+				Spinn.CanCollide = false
+				Spinn.Transparency = 0.1
+				Spinn.Anchored = true
+				Spinn.Material = "Neon"
+				Spinn.CFrame = torso.CFrame*CFrame.new(0,0,0)*CFrame.Angles(0,0,0)
+				local Spinn2 = Instance.new("SpecialMesh",Spinn)
+				Spinn2.MeshId = "rbxassetid://881808813"
+				Spinn2.Scale = Vector3.new(6,6,6)	
+		
+		
+			
+			
+			coroutine.resume(coroutine.create(function()
+			for i = 1,80 do
+			Spinn.Transparency = Spinn.Transparency + 0.02
+					
+					Spinn.CFrame = Spinn.CFrame*CFrame.Angles(0.1,0.1,0.1)
+			wait(0.00000000001)
+			end
+			Spinn:Destroy()
+			
+				
+			end))
+			wait(0.3)
+			end
+		end))
+	
+	hed.Weld.C0 = Lerp(hed.Weld.C0, CFrame.new(0,1.5,0)*CFrame.Angles(math.rad(0),math.rad(85),math.rad(0)), 1)--head
+		torso.Weld.C0 = Lerp(torso.Weld.C0, CFrame.new(0, -1, 0) * CFrame.Angles(math.rad(0), math.rad(-85), math.rad(0)), 1)--torso
+					rarm.Weld.C0 = Lerp(rarm.Weld.C0, CFrame.new(1.2,0.4,0)*CFrame.Angles(math.rad(30),math.rad(-40),math.rad(-10)), 1)--rarm
+					larm.Weld.C0 = Lerp(larm.Weld.C0, CFrame.new(-1,0.2,-0.2)*CFrame.Angles(math.rad(30),math.rad(40),math.rad(40)), 1)--larm
+					lleg.Weld.C0 = Lerp(lleg.Weld.C0, CFrame.new(-0.5, -1, 0) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(-10)), 1)--lleg
+		rleg.Weld.C0 = Lerp(rleg.Weld.C0, CFrame.new(0.5, -1, 0) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(10)), 1)--rleg
+		wait(3)
+		Charge:Destroy()
+		local Fire = Instance.new("Sound",hed)
+		Fire.SoundId = "rbxassetid://977360812"
+		Fire.Pitch = 1
+		Fire.Looped = false
+		Fire.Volume = 10
+				
+		Fire:Play()	
+	
+		hed.Weld.C0 = Lerp(hed.Weld.C0, CFrame.new(0,1.5,0)*CFrame.Angles(math.rad(0),math.rad(0),math.rad(0)), 1)--head
+		torso.Weld.C0 = Lerp(torso.Weld.C0, CFrame.new(0, -1, 0) * CFrame.Angles(math.rad(-5), math.rad(0), math.rad(0)), 1)--torso
+					rarm.Weld.C0 = Lerp(rarm.Weld.C0, CFrame.new(1,0.5,0)*CFrame.Angles(math.rad(95),math.rad(-10),math.rad(-20)), 1)--rarm
+					larm.Weld.C0 = Lerp(larm.Weld.C0, CFrame.new(-1,0.5,-0.2)*CFrame.Angles(math.rad(75),math.rad(170),math.rad(-20)), 1)--larm
+					lleg.Weld.C0 = Lerp(lleg.Weld.C0, CFrame.new(-0.5, -1, 0) * CFrame.Angles(math.rad(5), math.rad(0), math.rad(-10)), 1)--lleg
+		rleg.Weld.C0 = Lerp(rleg.Weld.C0, CFrame.new(0.5, -1, 0) * CFrame.Angles(math.rad(5), math.rad(0), math.rad(10)), 1)--rleg
+		laz0rmui()
+		
+		
+	
+		
+		wait(0.5)
+		Fire:Destroy()
+		instinct = true
+		no_anim = false
+		if animid == 0 then
+animid = 1
+else
+animid = 0
+end
+end
+end)
+
+Mouse.KeyDown:connect(function(k)
+if k == "f" and MUI == true then
+	instinct = false
+	animid = 0
+	if animid == 0 then
+animid = 1
+else
+animid = 0
+end
+	aiming_anim = true
+	bigboomrektxd()
+	wait(0.5)
+	instinct = true
+	aiming_anim = false
+end
+end)
+local attacktype = 1
+cloneMod = Instance.new('Model',workspace)
+cloneMod.Name = "Miggate No Gokui"
+rad = math.rad
+shadows = {}
+entang = false
+shadAtck = false
+invis = false
+
+entInvis = false
+fin = true
+random = math.random
+function smoothPart(part)
+	part.TopSurface = Enum.SurfaceType.SmoothNoOutlines
+	part.BottomSurface = Enum.SurfaceType.SmoothNoOutlines
+	part.BackSurface = Enum.SurfaceType.SmoothNoOutlines
+	part.FrontSurface = Enum.SurfaceType.SmoothNoOutlines
+	part.LeftSurface = Enum.SurfaceType.SmoothNoOutlines
+	part.RightSurface = Enum.SurfaceType.SmoothNoOutlines
+end
+
+
+
+	
+
+
+
+
+
+
+
+
+function dashasdf()
+debounce = true
+
+canjump = false
+attack = true
+
+for i,v in pairs(char:GetChildren()) do
+if v ~= root then
+if v:IsA("Part") then
+v.Transparency = 1
+elseif v:IsA("Accoutrement") then
+v:FindFirstChildOfClass("Part").Transparency = 1
+end
+end
+end
+
+local tempattachment = Instance.new("Attachment",root)
+tempattachment.Position = Vector3.new(0,0,-4)
+
+for i=1,20 do rs:wait()
+root.Velocity = Vector3.new(0,0,0)
+root.CFrame = CFrame.new(tempattachment.WorldPosition) * CFrame.Angles(math.rad(root.Orientation.X),math.rad(root.Orientation.Y),math.rad(root.Orientation.Z))
+local asdf = math.random(500,1000)/100
+local Part1 = Instance.new("Part")
+local mesh2 = Instance.new("SpecialMesh",Part1)
+mesh2.MeshType = Enum.MeshType.Sphere
+Part1.Material = Enum.Material.Neon
+Part1.CanCollide = false
+Part1.BrickColor = BrickColor.new("Cyan")
+Part1.Parent = DebrisModel
+Part1.Size = Vector3.new(asdf,asdf,asdf)
+Part1.Anchored = true
+Part1.CFrame = CFrame.new(root.Position + Vector3.new(math.random(-1000,1000)/500,math.random(-1000,1000)/500,math.random(-1000,1000)/500))
+Part1.Name = "SMOKE"
+end
+
+tempattachment:Destroy()
+
+for i,v in pairs(char:GetChildren()) do
+if v ~= root then
+if v:IsA("Part") then
+v.Transparency = 0
+elseif v:IsA("Accoutrement") then
+v:FindFirstChildOfClass("Part").Transparency = 0
+end
+end
+end
+
+canjump = true
+attack = false
+
+delay(0.1,function() debounce = false end)
+end
+
+function laz0r()
+
+local Position = nil
+if animid == 0 then
+Position = root.Position
+else
+Position = root.Position
+end
+
+local Part1 = Instance.new("Part")
+local mesh2 = Instance.new("SpecialMesh",Part1)
+mesh2.MeshId = "rbxassetid://559831844"
+mesh2.Scale = Vector3.new(0,0,0.4)
+Part1.Material = Enum.Material.Neon
+Part1.CanCollide = false
+Part1.BrickColor = BrickColor.new("White")
+Part1.Parent = DebrisModel
+Part1.Size = Vector3.new(0,0,0)
+Part1.Anchored = true
+Part1.CFrame = CFrame.new(Position)
+Part1.Name = "EXPLOSION3"
+
+local Part0 = Instance.new("Part",DebrisModel)
+Part0.Name = "Bullet"
+Part0.Material = Enum.Material.Neon
+Part0.BrickColor = BrickColor.new("Cyan")
+Part0.Anchored = true
+local mesh = Instance.new("SpecialMesh",Part0)
+mesh.MeshType = Enum.MeshType.Sphere
+Part0.CanCollide = false
+local Target = Mouse.Hit.p
+local direction = Target - Position
+local direction = computeDirection(direction)
+local ray = Ray.new(Position, (Target).unit*1048)
+local part, endPoint = workspace:FindPartOnRay(ray, char)
+Part0.Size = Vector3.new(9,1,9)
+mesh.Scale = Vector3.new(1,(Position-endPoint).magnitude,1)
+local pos = Position + (direction * (mesh.Scale.Y/2))
+Part0.CFrame = CFrame.new(pos,  pos + direction) * CFrame.Angles((math.pi/2)+math.rad(180), 0, 0)
+
+clashpart = Instance.new("Part",DebrisModel)
+clashpart.Size = Vector3.new(50,50,50)
+clashpart.CanCollide = false
+clashpart.Anchored = true
+clashpart.Transparency = 1
+clashpart.BrickColor = BrickColor.new("Cyan")
+clashpart.Name = "StarLightClash"
+clashpart.CFrame = CFrame.new(endPoint, Mouse.Hit.p)
+
+
+
+local z = 10
+for i = 1,100 do rs:wait()
+if animid == 0 then
+	root.CFrame = CFrame.new(root.Position,Vector3.new(Mouse.Hit.p.X, Mouse.Hit.p.Y, Mouse.Hit.p.Z))
+Position = larm.Position
+else
+	root.CFrame = CFrame.new(root.Position,Vector3.new(Mouse.Hit.p.X, Mouse.Hit.p.Y, Mouse.Hit.p.Z))
+Position = rarm.Position
+end
+
+local Target = Mouse.Hit.p
+local direction = Target - Position
+local direction = computeDirection(direction)
+local ray = Ray.new(Position, (Target-Position).unit*1048)
+local part, endPoint = workspace:FindPartOnRay(ray, char)
+Part0.Size = Vector3.new(5-((i/100)*5),1,5-((i/100)*5))
+mesh.Scale = Vector3.new(1,(Position-endPoint).magnitude,1)
+mesh.Offset = Vector3.new(math.random(-10000,10000)/20000,math.random(-10000,10000)/20000,0)
+local pos = Position + (direction * (mesh.Scale.Y/2))
+Part0.CFrame = CFrame.new(pos,  pos + direction) * CFrame.Angles((math.pi/2)+math.rad(180), 0, 0)
+clashpart.CFrame = CFrame.new(endPoint, root.Position)
+
+local Position = Mouse.Hit.p
+local Target = root.Position
+local direction = Target - Position
+local direction = computeDirection(direction)
+root.Velocity = direction * 5
+
+if i >= z then z = i + 10 sound(explosionid[math.random(1,#explosionid)],endPoint,10,math.random(6,9)/10,200) end
+
+Part1 = Part0:Clone()
+Part1.Parent = DebrisModel
+Part1.BrickColor = BrickColor.new("Cyan")
+Part1.Name = "SMOKE2"
+
+if part ~= nil then
+if part.Name == "StarLightClash" then
+local asdf = math.random(0,5)*20
+local Part1 = Instance.new("Part")
+local mesh2 = Instance.new("SpecialMesh",Part1)
+mesh2.MeshType = Enum.MeshType.Sphere
+mesh2.Scale = Vector3.new(0,0,0)
+Part1.Material = Enum.Material.Neon
+Part1.CanCollide = false
+Part1.BrickColor = BrickColor.new("Cyan")
+Part1.Size = Vector3.new(asdf,asdf,asdf)
+Part1.Anchored = true
+local a = 1.5
+Part1.CFrame = CFrame.new(endPoint + Vector3.new(math.random(-2,2)*a,math.random(-4,4),math.random(-2,2)*a))
+Part1.Name = "EXPLOSION"
+else
+local asdf = math.random(0,5)*10
+local Part1 = Instance.new("Part")
+local mesh2 = Instance.new("SpecialMesh",Part1)
+mesh2.MeshType = Enum.MeshType.Sphere
+mesh2.Scale = Vector3.new(0,0,0)
+Part1.Material = Enum.Material.Neon
+Part1.CanCollide = false
+Part1.BrickColor = BrickColor.new("Cyan")
+Part1.Parent = DebrisModel
+Part1.Size = Vector3.new(asdf,asdf,asdf)
+Part1.Anchored = true
+local a = 1.5
+Part1.CFrame = CFrame.new(endPoint + Vector3.new(math.random(-2,2)*a,math.random(-4,4),math.random(-2,2)*a))
+Part1.Name = "EXPLOSION"
+end
+end
+
+for i,v in pairs(findAllNearestTorso(endPoint,50)) do
+if v.Parent:FindFirstChildOfClass("Humanoid").MaxHealth >= 100000000000000000000000000000000000 then
+v:Destroy()
+else
+v.Parent:BreakJoints()
+end
+local Position = Mouse.Hit.p
+local Target = v.Position
+local direction = Target - Position
+local direction = computeDirection(direction)
+local bv = Instance.new("BodyVelocity",v)
+bv.Velocity = direction * (10 - ((Position - Target).magnitude/2))
+debris:AddItem(bv,1)
+end
+
+end
+clashpart:Destroy()
+Part0:Destroy()
+wait(0.3)
+aiming_anim = false
+delay(0.3,function() debounce = false end)
+end
+
+
+
+function laz0rmui()
+
+local Position = nil
+if animid == 0 then
+Position = root.Position
+else
+Position = root.Position
+end
+
+local Part1 = Instance.new("Part")
+local mesh2 = Instance.new("SpecialMesh",Part1)
+mesh2.MeshId = "rbxassetid://559831844"
+mesh2.Scale = Vector3.new(0,0,0.4)
+Part1.Material = Enum.Material.Neon
+Part1.CanCollide = false
+Part1.BrickColor = BrickColor.new("White")
+Part1.Parent = DebrisModel
+Part1.Size = Vector3.new(0,0,0)
+Part1.Anchored = true
+Part1.CFrame = CFrame.new(Position)
+Part1.Name = "EXPLOSION3"
+
+local Part0 = Instance.new("Part",DebrisModel)
+Part0.Name = "Bullet"
+Part0.Material = Enum.Material.Neon
+Part0.BrickColor = BrickColor.new("Cyan")
+Part0.Anchored = true
+local mesh = Instance.new("SpecialMesh",Part0)
+mesh.MeshType = Enum.MeshType.Sphere
+Part0.CanCollide = false
+local Target = Mouse.Hit.p
+local direction = Target - Position
+local direction = computeDirection(direction)
+local ray = Ray.new(Position, (Target).unit*1048)
+local part, endPoint = workspace:FindPartOnRay(ray, char)
+Part0.Size = Vector3.new(9,1,9)
+mesh.Scale = Vector3.new(1,(Position-endPoint).magnitude,1)
+local pos = Position + (direction * (mesh.Scale.Y/2))
+Part0.CFrame = CFrame.new(pos,  pos + direction) * CFrame.Angles((math.pi/2)+math.rad(180), 0, 0)
+
+clashpart = Instance.new("Part",DebrisModel)
+clashpart.Size = Vector3.new(50,50,50)
+clashpart.CanCollide = false
+clashpart.Anchored = true
+clashpart.Transparency = 1
+clashpart.BrickColor = BrickColor.new("Cyan")
+clashpart.Name = "StarLightClash"
+clashpart.CFrame = CFrame.new(endPoint, Mouse.Hit.p)
+
+
+
+local z = 10
+for i = 1,100 do rs:wait()
+if animid == 0 then
+	root.CFrame = CFrame.new(root.Position,Vector3.new(Mouse.Hit.p.X, Mouse.Hit.p.Y, Mouse.Hit.p.Z))
+Position = larm.Position
+else
+	root.CFrame = CFrame.new(root.Position,Vector3.new(Mouse.Hit.p.X, Mouse.Hit.p.Y, Mouse.Hit.p.Z))
+Position = rarm.Position
+end
+
+local Target = Mouse.Hit.p
+local direction = Target - Position
+local direction = computeDirection(direction)
+local ray = Ray.new(Position, (Target-Position).unit*1048)
+local part, endPoint = workspace:FindPartOnRay(ray, char)
+Part0.Size = Vector3.new(5-((i/100)*5),1,5-((i/100)*5))
+mesh.Scale = Vector3.new(1,(Position-endPoint).magnitude,1)
+mesh.Offset = Vector3.new(math.random(-10000,10000)/20000,math.random(-10000,10000)/20000,0)
+local pos = Position + (direction * (mesh.Scale.Y/2))
+Part0.CFrame = CFrame.new(pos,  pos + direction) * CFrame.Angles((math.pi/2)+math.rad(180), 0, 0)
+clashpart.CFrame = CFrame.new(endPoint, root.Position)
+
+local Position = Mouse.Hit.p
+local Target = root.Position
+local direction = Target - Position
+local direction = computeDirection(direction)
+root.Velocity = direction * 5
+
+if i >= z then z = i + 10 sound(explosionid[math.random(1,#explosionid)],endPoint,10,math.random(6,9)/10,200) end
+
+Part1 = Part0:Clone()
+Part1.Parent = DebrisModel
+Part1.BrickColor = BrickColor.new("Cyan")
+Part1.Name = "SMOKE2"
+
+if part ~= nil then
+if part.Name == "StarLightClash" then
+local asdf = math.random(0,5)*20
+local Part1 = Instance.new("Part")
+local mesh2 = Instance.new("SpecialMesh",Part1)
+mesh2.MeshType = Enum.MeshType.Sphere
+mesh2.Scale = Vector3.new(0,0,0)
+Part1.Material = Enum.Material.Neon
+Part1.CanCollide = false
+Part1.BrickColor = BrickColor.new("Cyan")
+Part1.Size = Vector3.new(asdf,asdf,asdf)
+Part1.Anchored = true
+local a = 1.5
+Part1.CFrame = CFrame.new(endPoint + Vector3.new(math.random(-2,2)*a,math.random(-4,4),math.random(-2,2)*a))
+Part1.Name = "EXPLOSION"
+else
+local asdf = math.random(0,5)*10
+local Part1 = Instance.new("Part")
+local mesh2 = Instance.new("SpecialMesh",Part1)
+mesh2.MeshType = Enum.MeshType.Sphere
+mesh2.Scale = Vector3.new(0,0,0)
+Part1.Material = Enum.Material.Neon
+Part1.CanCollide = false
+Part1.BrickColor = BrickColor.new("Cyan")
+Part1.Parent = DebrisModel
+Part1.Size = Vector3.new(asdf,asdf,asdf)
+Part1.Anchored = true
+local a = 1.5
+Part1.CFrame = CFrame.new(endPoint + Vector3.new(math.random(-2,2)*a,math.random(-4,4),math.random(-2,2)*a))
+Part1.Name = "EXPLOSION"
+end
+end
+
+for i,v in pairs(findAllNearestTorso(endPoint,50)) do
+if v.Parent:FindFirstChildOfClass("Humanoid").MaxHealth >= 100000000000000000000000000000000000 then
+v:Destroy()
+else
+v.Parent:BreakJoints()
+end
+local Position = Mouse.Hit.p
+local Target = v.Position
+local direction = Target - Position
+local direction = computeDirection(direction)
+local bv = Instance.new("BodyVelocity",v)
+bv.Velocity = direction * (10 - ((Position - Target).magnitude/2))
+debris:AddItem(bv,1)
+end
+
+end
+clashpart:Destroy()
+Part0:Destroy()
+wait(0.3)
+aiming_anim = false
+delay(0.3,function() debounce = false end)
+end
+
+function nukewelpo()
+coroutine.resume(coroutine.create(function()
+local magnitude = nil
+local Position = nil
+if animid == 0 then
+Position = larm.Position
+else
+Position = rarm.Position
+end
+--sound(743499393,Position,10,math.random(6,8)/10)
+sound(440145223,Position,10,math.random(4,5)/10,100)
+
+local Part1 = Instance.new("Part")
+local mesh2 = Instance.new("SpecialMesh",Part1)
+mesh2.MeshId = "rbxassetid://559831844"
+mesh2.Scale = Vector3.new(0,0,0.4)
+Part1.Material = Enum.Material.Neon
+Part1.CanCollide = false
+Part1.Color = Color3.fromHSV(0,0,main.v)
+Part1.Parent = DebrisModel
+Part1.Size = Vector3.new(0,0,0)
+Part1.Anchored = true
+Part1.CFrame = CFrame.new(Position,Mouse.Hit.p)
+Part1.Name = "EXPLOSION3"
+
+local Part0 = Instance.new("Part",DebrisModel)
+local PointLight2 = Instance.new("PointLight")
+Part0.Name = "Bullet"
+Part0.Material = Enum.Material.Neon
+Part0.Color = Color3.fromHSV(0,0,main.v)
+Part0.Anchored = false
+Part0.Size = Vector3.new(5, 5, 5)
+local mesh = Instance.new("SpecialMesh",Part0)
+mesh.MeshType = Enum.MeshType.Sphere
+mesh.Scale = Vector3.new(3,3,3)
+local bforce = Instance.new("BodyForce",Part0)
+bforce.force = Vector3.new(0, ((bforce.Parent:getMass())*workspace.Gravity), 0)
+Part0.CanCollide = false
+PointLight2.Parent = Part0
+PointLight2.Color = Part0.Color
+local Target = Mouse.Hit.p
+local direction = Target - Position
+local direction = computeDirection(direction)
+local pos = Position + (direction * 2) 
+Part0.CFrame = CFrame.new(pos,  pos + direction) * CFrame.Angles((math.pi/2)+math.rad(180), 0, 0)
+Part0.Velocity = direction * 150
+local asd = nil
+local loop = nil
+delay(5, function() Part0:Destroy() loop:disconnect() asd:disconnect() end)
+loop = rs:connect(function()
+local asdf = math.random(500,1000)/1000
+local Part1 = Instance.new("Part")
+local mesh2 = Instance.new("SpecialMesh",Part1)
+mesh2.MeshType = Enum.MeshType.Sphere
+Part1.Material = Enum.Material.Neon
+Part1.CanCollide = false
+Part1.Color = Color3.fromHSV(Color3.toHSV(main_color),math.random(0,10000)/10000,main.v)
+Part1.Parent = DebrisModel
+Part1.Size = (Part0.Size*3) + Vector3.new(asdf,asdf,asdf)
+Part1.Anchored = true
+Part1.CFrame = CFrame.new(Part0.Position + Vector3.new(math.random(-3000,3000)/750,math.random(-3000,3000)/750,math.random(-3000,3000)/750))
+Part1.Name = "SMOKE"
+end)
+asd = Part0.Touched:connect(function(ht)
+local hit=ht.Parent
+if checkIfNotPlayer(ht) == true and ht.CanCollide == true then
+asd:disconnect()
+loop:disconnect()
+Part0:Destroy()
+
+sound(explosionid[math.random(1,#explosionid)],Part0.Position,10,math.random(3,5)/10,500)
+for i,v in pairs(findAllNearestTorso(Part0.Position,160)) do
+if v.Parent:FindFirstChildOfClass("Humanoid").MaxHealth >= 9e+99 then
+v:Destroy()
+else
+v.Parent:FindFirstChildOfClass("Humanoid"):TakeDamage(1000)
+end
+local Position = Part0.Position
+local Target = v.Position
+local direction = Target - Position
+local direction = computeDirection(direction)
+local bv = Instance.new("BodyVelocity",v)
+bv.Velocity = direction * (200 - ((Position - Target).magnitude/2))
+debris:AddItem(bv,1)
+end
+for i=1,10,0.5 do for x=1,math.random(0,1) do rs:wait() end
+for z=1,math.random(2,3) do
+local asdf = math.random(-5,5)*10-(i/20)*12
+local Part1 = Instance.new("Part")
+local mesh2 = Instance.new("SpecialMesh",Part1)
+mesh2.MeshType = Enum.MeshType.Sphere
+mesh2.Scale = Vector3.new(0,0,0)
+Part1.Material = Enum.Material.Neon
+Part1.CanCollide = false
+Part1.Color = Color3.fromHSV(Color3.toHSV(main_color),math.random(0,10000)/10000,main.v)
+Part1.Parent = DebrisModel
+Part1.Size = Vector3.new(asdf,asdf,asdf)
+Part1.Anchored = true
+local a = i*5
+Part1.CFrame = CFrame.new(Part0.Position + Vector3.new(math.random(-2,2)*a,math.random(-30,30),math.random(-2,2)*a))
+Part1.Name = "EXPLOSION4"
+end
+end
+
+end
+end)
+end))
+end
+
+holdq = false
+holdr = false
+cooldownult = false
+
+Mouse.KeyDown:connect(function(key)
+if debounce == false then
+if key == "e" then
+dashasdf()
+elseif key == "=" and cooldownult == false then
+cooldownult = true
+if animid == 0 then
+animid = 1
+else
+animid = 0
+end
+debounce = true
+holdr = true
+aiming_anim = true
+wait(0.2)
+repeat 
+rs:wait()
+timer = 150
+until holdr == false
+nukewelpo()
+
+local Position = Mouse.Hit.p
+local Target = root.Position
+local direction = Target - Position
+local direction = computeDirection(direction)
+root.Velocity = direction * 300
+
+aiming_anim = false
+delay(5,function() cooldownult = false end)
+delay(1,function() debounce = false end)
+
+elseif key == "=" then
+debounce = true
+if animid == 0 then
+animid = 1
+else
+animid = 0
+end
+holdq = true
+attack = true
+
+			
+		
+
+repeat rs:wait() timer = 150 until holdq == false
+laz0r()
+attack = false
+		
+end
+end
+
+end)
+
+Mouse.KeyUp:connect(function(key)
+if key == "=" then
+holdq = false
+elseif key == "=" then
+holdr = false
+end
+end)
+--
+hum.Name = 'Goku'
+----------------------------------------------------------------------------
+music(themeid,themepitch)
+velocityYFall=0
+velocityYFall2=0
+velocityYFall3=0
+velocityYFall4=0
+neckrotY=0
+neckrotY2=0
+torsorotY=0
+torsorotY2=0
+torsoY=0
+torsoY2=0
+sine = 0
+newWeld(torso, larm, -1.5, 0.5, 0)
+larm.Weld.C1 = CFrame.new(0, 0.5, 0)
+newWeld(torso, rarm, 1.5, 0.5, 0)
+rarm.Weld.C1 = CFrame.new(0, 0.5, 0)
+newWeld(torso, hed, 0, 1.5, 0)
+newWeld(torso, lleg, -0.5, -1, 0)
+lleg.Weld.C1 = CFrame.new(0, 1, 0)
+newWeld(torso, rleg, 0.5, -1, 0)
+rleg.Weld.C1 = CFrame.new(0, 1, 0)
+newWeld(root, torso, 0, -1, 0)
+torso.Weld.C1 = CFrame.new(0, -1, 0)
+
+rs:connect(function()
+
+bg.MaxTorque = Vector3.new(0,0,0)
+
+for i,v in pairs(DebrisModel:GetChildren()) do
+    
+
+if v.Name == "EXPLOSION" then
+local change = 0.04-(v.Transparency*0.02)
+local vm = v:FindFirstChildOfClass("SpecialMesh")
+vm.Scale = vm.Scale + Vector3.new(change,change,change)
+v.Transparency = v.Transparency + 0.02
+if v.Transparency >= 1 then
+v:Destroy()
+end
+
+elseif v.Name == "EXPLOSION2" then
+local change = 0.04-(v.Transparency*0.04)
+local vm = v:FindFirstChildOfClass("SpecialMesh")
+vm.Scale = vm.Scale + Vector3.new(change,change,0)
+v.Transparency = v.Transparency + 0.025
+if v.Transparency >= 1 then
+v:Destroy()
+end
+
+elseif v.Name == "EXPLOSION3" then
+local change = 0.5-(v.Transparency*0.5)
+local vm = v:FindFirstChildOfClass("SpecialMesh")
+vm.Scale = vm.Scale + Vector3.new(change,change,0)
+v.Transparency = v.Transparency + 0.1
+if v.Transparency >= 1 then
+v:Destroy()
+end
+
+elseif v.Name == "EXPLOSION4" then
+local change = 0.15-(v.Transparency*0.125)
+local vm = v:FindFirstChildOfClass("SpecialMesh")
+vm.Scale = vm.Scale + Vector3.new(change,change,change)
+v.Transparency = v.Transparency + 0.01
+if v.Transparency >= 1 then
+v:Destroy()
+end
+
+elseif v.Name == "SMOKE" then
+local vm = v:FindFirstChildOfClass("SpecialMesh")
+vm.Scale = vm.Scale - Vector3.new(0.075,0.075,0.075)
+if vm.Scale.X <= 0 then
+v:Destroy()
+end
+
+elseif v.Name == "SMOKE2" then
+local change = 2-(v.Transparency*2)
+local vm = v:FindFirstChildOfClass("SpecialMesh")
+local Position = nil
+if animid == 0 then
+Position = larm.Position
+else
+Position = rarm.Position
+end
+local Target = Mouse.Hit.p
+local direction = Target - Position
+local direction = computeDirection(direction)
+local ray = Ray.new(Position, (Target-Position).unit*1048)
+local part, endPoint = workspace:FindPartOnRay(ray, char)
+vm.Scale = Vector3.new(vm.Scale.X,(Position-endPoint).magnitude,vm.Scale.Z) + Vector3.new(change,0,change)
+local pos = Position + (direction * (vm.Scale.Y/2))
+v.CFrame = CFrame.new(pos,  pos + direction) * CFrame.Angles((math.pi/2)+math.rad(180), 0, 0)
+vm.Offset = Vector3.new(math.random(-10000,10000)/10000,math.random(-10000,10000)/10000,0)
+v.Transparency = v.Transparency + 0.1
+if v.Transparency >= 1 then
+v:Destroy()
+end
+
+elseif v.Name == "LIGHTNING" then
+local vm = v:FindFirstChildOfClass("BlockMesh")
+vm.Scale = vm.Scale - Vector3.new(0.1,0.1,0)
+if vm.Scale.X <= 0 then
+v:Destroy()
+end
+
+end
+end
+
+if -root.Velocity.Y/1.5 > 0 and -root.Velocity.Y/1.5 < 160 then
+velocityYFall = root.Velocity.Y/1.5
+end
+if -root.Velocity.Y/180 > 0 and -root.Velocity.Y/180 < 1.2 then
+velocityYFall2 = root.Velocity.Y/180
+end
+if -root.Velocity.Y/1.5 > -5 and -root.Velocity.Y/1.5 < 50 then
+velocityYFall3 = root.Velocity.Y/1.5
+end
+if -root.Velocity.Y/1.5 > -50 and -root.Velocity.Y/1.5 < 20 then
+velocityYFall4 = root.Velocity.Y/1.5
+end
+if root.RotVelocity.Y/6 < 1 and root.RotVelocity.Y/6 > -1 then
+neckrotY = root.RotVelocity.Y/6
+end
+if root.RotVelocity.Y/8 < 0.6 and root.RotVelocity.Y/8 > -0.6 then
+neckrotY2 = root.RotVelocity.Y/8
+end
+
+if root.RotVelocity.Y/6 < 0.2 and root.RotVelocity.Y/6 > -0.2 then
+torsorotY = root.RotVelocity.Y/6
+end
+if root.RotVelocity.Y/8 < 0.2 and root.RotVelocity.Y/8 > -0.2 then
+torsorotY2 = root.RotVelocity.Y/8
+end
+
+
+torsoY = -(torso.Velocity*Vector3.new(1, 0, 1)).magnitude/20
+torsoY2 = -(torso.Velocity*Vector3.new(1, 0, 1)).magnitude/36
+
+if attack == true then
+hum.WalkSpeed = 0
+else
+hum.WalkSpeed = 20
+end
+
+if canjump == true then
+hum.JumpPower = 50
+else
+hum.JumpPower = 0
+end
+
+local jumped = false
+local ray1 = Ray.new(root.Position+Vector3.new(1,0,0),Vector3.new(0, -6, 0))
+local part1, endPoint = workspace:FindPartOnRay(ray1, char)
+local ray2 = Ray.new(root.Position-Vector3.new(1,0,0),Vector3.new(0, -6, 0))
+local part2, endPoint = workspace:FindPartOnRay(ray2, char)
+local ray3 = Ray.new(root.Position+Vector3.new(0,0,0.5),Vector3.new(0, -6, 0))
+local part3, endPoint = workspace:FindPartOnRay(ray3, char)
+local ray4 = Ray.new(root.Position-Vector3.new(0,0,0.5),Vector3.new(0, -6, 0))
+local part4, endPoint = workspace:FindPartOnRay(ray4, char)
+
+if part1 or part2 or part3 or part4 then jumped = false else endPoint = 0 jumped = true end
+
+local rlegray = Ray.new(rleg.Position+Vector3.new(0,0.5,0),Vector3.new(0, -1.75, 0))
+local rlegpart, rlegendPoint = workspace:FindPartOnRay(rlegray, char)
+
+local llegray = Ray.new(lleg.Position+Vector3.new(0,0.5,0),Vector3.new(0, -1.75, 0))
+local llegpart, llegendPoint = workspace:FindPartOnRay(llegray, char)
+
+if no_anim == false then
+if hum.Health > 0 then
+if (torso.Velocity*Vector3.new(1, 0, 1)).magnitude >= 5 and jumped == false then
+hed.Weld.C0 = Lerp(hed.Weld.C0, CFrame.new(0,1.5,-.2)*CFrame.Angles(math.rad(-18),math.rad(0+math.rad(0+2*math.cos(sine/2))),0), 0.1)
+hed.Weld.C1 = Lerp(hed.Weld.C1, CFrame.Angles(math.rad(-10),0,0),0.1)
+rarm.Weld.C0 = Lerp(rarm.Weld.C0, CFrame.new(1.5,0.62-(movement/30)*math.cos(sine/4)/2,(movement/50)*math.cos(sine/4))*CFrame.Angles(math.rad(-5-(movement*2)*math.cos(sine/4))+ -(movement/10)*math.sin(sine/4),math.rad(0-(movement*2)*math.cos(sine/4)),math.rad(0)), 0.2)
+larm.Weld.C0 = Lerp(larm.Weld.C0, CFrame.new(-1.5,0.62+(movement/30)*math.cos(sine/4)/2,-(movement/50)*math.cos(sine/4))*CFrame.Angles(math.rad(-5+(movement*2)*math.cos(sine/4))+ (movement/10)*math.sin(sine/4),math.rad(0-(movement*2)*math.cos(sine/4)),math.rad(0)), 0.2)
+torso.Weld.C0 = Lerp(torso.Weld.C0, CFrame.new(0, -1+(movement/20)*math.cos(sine/2), 0) * CFrame.Angles(math.rad(-(change*20)-4*math.cos(sine/2)), torsorotY2+math.rad(0-4*math.cos(sine/4)), torsorotY2+math.rad(0-1*math.cos(sine/4))), 0.1)
+lleg.Weld.C0 = Lerp(lleg.Weld.C0, CFrame.new(-0.5,-0.85-(movement/10)*math.cos(sine/4)/2,-0.1+(movement/15)*math.cos(sine/4))*CFrame.Angles(math.rad(-10+(change*5)-movement*math.cos(sine/4))+ -(movement/10)*math.sin(sine/4),math.rad(0+(movement*2)*math.cos(sine/4)),math.rad(0)), 0.2)
+rleg.Weld.C0 = Lerp(rleg.Weld.C0, CFrame.new(0.5,-0.85+(movement/10)*math.cos(sine/4)/2,-0.1-(movement/15)*math.cos(sine/4))*CFrame.Angles(math.rad(-10+(change*5)+movement*math.cos(sine/4))+ (movement/10)*math.sin(sine/4),math.rad(0+(movement*2)*math.cos(sine/4)),math.rad(0)), 0.2)
+elseif jumped == true then
+hed.Weld.C0 = Lerp(hed.Weld.C0, CFrame.new(0,1.5,-.2)*CFrame.Angles(math.rad(-18),math.rad(0+math.rad(0+2*math.cos(sine/2))),0), 0.1)
+hed.Weld.C1 = Lerp(hed.Weld.C1, CFrame.Angles(0,0,0),0.1)
+larm.Weld.C0 = Lerp(larm.Weld.C0, CFrame.new(-1.5,1-0.1*math.cos(sine/16)/2,0.1*math.cos(sine/16))*CFrame.Angles(math.rad(0),math.rad(0-1*math.cos(sine/16)),math.rad(-50-1*math.cos(sine/8))), 0.2)
+rarm.Weld.C0 = Lerp(rarm.Weld.C0, CFrame.new(1.5,1-0.1*math.cos(sine/16)/2,0.1*math.cos(sine/16))*CFrame.Angles(math.rad(0),math.rad(0-1*math.cos(sine/16)),math.rad(50+1*math.cos(sine/8))), 0.2)
+torso.Weld.C0 = Lerp(torso.Weld.C0, CFrame.new(0, -1-0.1*math.cos(sine/16), 0) * CFrame.Angles(math.rad(0-2*math.cos(sine/16)),math.rad(0), math.rad(0-1*math.cos(sine/32))), 0.1)
+lleg.Weld.C0 = Lerp(lleg.Weld.C0, CFrame.new(-0.5,-0.925+0.1*math.cos(sine/16),0)*CFrame.Angles(math.rad(-35-1*math.cos(sine/16)),math.rad(0-1*math.cos(sine/16)),math.rad(-2-0.5*math.cos(sine/8))), 0.2)
+rleg.Weld.C0 = Lerp(rleg.Weld.C0, CFrame.new(0.5,0+0.1*math.cos(sine/16),-0.8)*CFrame.Angles(math.rad(-25+1*math.cos(sine/16)),math.rad(0-1*math.cos(sine/16)),math.rad(2+0.5*math.cos(sine/8))), 0.2)
+elseif (torso.Velocity*Vector3.new(1, 0, 1)).magnitude < 5 then
+hed.Weld.C0 = Lerp(hed.Weld.C0, CFrame.new(0,1.5,-.1)*CFrame.Angles(math.rad(-18),math.rad(0+math.rad(0+2*math.cos(sine/2))),0), 0.1)
+hed.Weld.C1 = Lerp(hed.Weld.C1, CFrame.Angles(math.rad(-15),0,0),0.1)
+larm.Weld.C0 = Lerp(larm.Weld.C0, CFrame.new(-1.5,0.55-0.1*math.cos(sine/16)/2,-0.1*math.cos(sine/16))*CFrame.Angles(math.rad(0),math.rad(0-1*math.cos(sine/16)),math.rad(-5-1*math.cos(sine/8))), 0.2)
+rarm.Weld.C0 = Lerp(rarm.Weld.C0, CFrame.new(1.5,0.55-0.1*math.cos(sine/16)/2,-0.1*math.cos(sine/16))*CFrame.Angles(math.rad(0),math.rad(0-1*math.cos(sine/16)),math.rad(5+1*math.cos(sine/8))), 0.2)
+torso.Weld.C0 = Lerp(torso.Weld.C0, CFrame.new(0, -1.1-0.1*math.cos(sine/16), 0) * CFrame.Angles(math.rad(0-2*math.cos(sine/16)),math.rad(0), math.rad(0-1*math.cos(sine/32))), 0.1)
+lleg.Weld.C0 = Lerp(lleg.Weld.C0, CFrame.new(0,llegendPoint.Y-lleg.Position.Y,0)*CFrame.new(-0.5,0+0.1*math.cos(sine/16),0)*CFrame.Angles(math.rad(0-1*math.cos(sine/16)),math.rad(0-1*math.cos(sine/16)),math.rad(-2-0.5*math.cos(sine/8))), 0.2)
+rleg.Weld.C0 = Lerp(rleg.Weld.C0, CFrame.new(0,rlegendPoint.Y-rleg.Position.Y,0)*CFrame.new(0.5,0+0.1*math.cos(sine/16),0)*CFrame.Angles(math.rad(0+1*math.cos(sine/16)),math.rad(0-1*math.cos(sine/16)),math.rad(2+0.5*math.cos(sine/8))), 0.2)
+end
+for i=1,5 do
+if aiming_anim == true then
+bg.MaxTorque = Vector3.new(9e9,9e9,9e9)
+if jumped == false then
+bg.CFrame = CFrame.new(root.Position,Vector3.new(Mouse.Hit.x,root.Position.Y,Mouse.Hit.z))
+else
+bg.CFrame = CFrame.new(root.Position,Mouse.Hit.p)
+end
+if animid == 0 then
+hed.Weld.C1 =  Lerp(hed.Weld.C1,CFrame.Angles(0,math.rad(-80),0),0.4)
+torso.Weld.C0 = Lerp(torso.Weld.C0,CFrame.new(0, -1.1-0.1*math.cos(sine/16), 0) * CFrame.Angles(math.rad(0-2*math.cos(sine/16)),math.rad(-80), math.rad(0-1*math.cos(sine/32))),0.2)
+larm.Weld.C0 = Lerp(larm.Weld.C0,CFrame.new(-1.5,0.55-0.1*math.cos(sine/16)/2,-0.1*math.cos(sine/16))*CFrame.Angles(math.rad(0),math.rad(-10-1*math.cos(sine/16)),math.rad(-90-1*math.cos(sine/8))),0.4)
+else
+	if animid == 5 then
+hed.Weld.C0 = Lerp(hed.Weld.C0, CFrame.new(0,1.5,0)*CFrame.Angles(math.rad(0),math.rad(85),math.rad(0)), 1)--head
+		torso.Weld.C0 = Lerp(torso.Weld.C0, CFrame.new(0, -1, 0) * CFrame.Angles(math.rad(0), math.rad(-85), math.rad(0)), 1)--torso
+					rarm.Weld.C0 = Lerp(rarm.Weld.C0, CFrame.new(1.2,0.4,0)*CFrame.Angles(math.rad(30),math.rad(-40),math.rad(-10)), 1)--rarm
+					larm.Weld.C0 = Lerp(larm.Weld.C0, CFrame.new(-1,0.2,-0.2)*CFrame.Angles(math.rad(30),math.rad(40),math.rad(40)), 1)--larm
+					lleg.Weld.C0 = Lerp(lleg.Weld.C0, CFrame.new(-0.5, -1, 0) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(-10)), 1)--lleg
+		rleg.Weld.C0 = Lerp(rleg.Weld.C0, CFrame.new(0.5, -1, 0) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(10)), 1)--rleg
+else
+hed.Weld.C1 =  Lerp(hed.Weld.C1,CFrame.Angles(0,math.rad(80),0),0.4)
+torso.Weld.C0 = Lerp(torso.Weld.C0,CFrame.new(0, -1.1-0.1*math.cos(sine/16), 0) * CFrame.Angles(math.rad(0-2*math.cos(sine/16)),math.rad(80), math.rad(0-1*math.cos(sine/32))),0.2)
+rarm.Weld.C0 = Lerp(rarm.Weld.C0,CFrame.new(1.5,0.55-0.1*math.cos(sine/16)/2,-0.1*math.cos(sine/16))*CFrame.Angles(math.rad(0),math.rad(10-1*math.cos(sine/16)),math.rad(90+1*math.cos(sine/8))),0.4)
+	end
+	end
+else
+if timer <= 0 then
+animid = math.random(0,1)
+else
+timer = timer - 1
+end
+end
+end
+end
+end
+main_color = Color3.fromRGB(main.r,main.g,main.b)
+HName.TextStrokeColor3 = Color3.fromHSV(Color3.toHSV(main_color),1,main.v/2)
+HName.TextColor3 = Color3.fromHSV(Color3.toHSV(main_color),1,main.v)
+sine = sine + change
+if hum.Health <= 0 then
+debounce = true
+end
+end)
