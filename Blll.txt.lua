@@ -8,9 +8,9 @@ wait(0.2)
 Player = game:GetService("Players").LocalPlayer.Character
 PlayerGui = Players--.PlayerGui
 Cam = workspace.CurrentCamera
-Backpack = Player.Backpack
-Character = Player.Character
-Humanoid = Character.Humanoid
+Backpack = Player--.Backpack
+Character = Player--.Character
+Humanoid = Character--.Humanoid
 RootPart = Character["HumanoidRootPart"]
 Torso = Character["Torso"]
 Head = Character["Head"]
