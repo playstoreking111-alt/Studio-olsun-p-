@@ -6,7 +6,7 @@
 wait(0.2)
 
 Player = game:GetService("Players").LocalPlayer.Character
-PlayerGui = Player.PlayerGui
+PlayerGui = Players--.PlayerGui
 Cam = workspace.CurrentCamera
 Backpack = Player.Backpack
 Character = Player.Character
