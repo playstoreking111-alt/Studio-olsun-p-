@@ -23,7 +23,6 @@ local walking = true
 local idle1 = true
 local canchange = false
 local idle = true
-local char = p.Character
 local mouse = p:GetMouse()
 local larm = char["Left Arm"]
 local rarm = char["Right Arm"]
