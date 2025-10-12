@@ -3,7 +3,7 @@
 --|| Converted by  Melon ||--
 --\\=====================//--
 
-local plr = game.Players.LocalPlayer if plr.Character then plr.Character.Name = "non" end repeat wait() until game.Workspace:FindFirstChild("non")
+local plr = game.Players.LocalPlayer if plr.Character then plr.Character.Name = "non" end repeat wait() until game.Workspace:FindFirstChild("MaxDesignPro")
 
 wait(0.2)
 script = game:GetObjects("rbxassetid://3957677381")[1].BlindReaper
