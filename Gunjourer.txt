@@ -4,7 +4,7 @@
 
 wait(0.2)
 
-Player = owner
+Player = game:GetService("Players").LocalPlayer
 PlayerGui = Player.PlayerGui
 Cam = workspace.CurrentCamera
 Backpack = Player.Backpack
