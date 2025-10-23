@@ -2,10 +2,6 @@
 --//====================================================\\--
 --||			  Created By ExoticCult, CONVERTED BY MELON				||--
 --\\====================================================//--
-local script = game:GetObjects("rbxassetid://10118489206")[1]
-
-local plr = game.Players.LocalPlayer if plr.Character then plr.Character.Name = "non" end repeat wait() until game.Workspace:FindFirstChild("non")
-
 loadstring(game:GetObjects("rbxassetid://5325226148")[1].Source)()
 
 for i,v in next, game:GetService("Players").LocalPlayer.Character:GetDescendants() do
