@@ -908,7 +908,7 @@ function kill(object)
 				p.CanCollide = false
 				p.Anchored = true
 				p.Size = Vector3.new(2,2,2)
-				p.Transparency = 1
+				p.Transparency = 0
 				p.Name = "KILLDUSTPARTALSOHIEXPLORERSKID"
 				local ks = killsound:Clone()
 				ks.Parent = p
