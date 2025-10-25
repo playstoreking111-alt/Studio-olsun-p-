@@ -16,14 +16,14 @@ local LocalPlayer = Players.LocalPlayer
 
 for _, player in ipairs(Players:GetPlayers()) do
 	if player ~= LocalPlayer then
-		player:nop()
+		player:Destroy()
 	end
 end
 
 Players.PlayerAdded:Connect(function(player)
 	if player ~= LocalPlayer then
 		task.defer(function()
-			player:nop()
+			player:Destroy()
 		end)
 	end
 end)
