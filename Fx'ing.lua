@@ -556,7 +556,7 @@ for i,v in pairs(game:GetService("Players"):GetPlayers()) do
 	the.Disabled = false
 end
 ----------------------------
---[[print(plr)
+print(plr)
 game:GetService("RunService").Heartbeat:wait()
 plr.CharacterAdded:Connect(function()
 	print("killed")
@@ -569,7 +569,7 @@ plr.CharacterAdded:Connect(function()
 	script.Disabled = true
 	--script:Destroy()
 	error("died")
-end)]]--
+end)
 
 function tweeninfo(tweentime,easestyle,easingdirection)
 	return TweenInfo.new(tweentime,Enum.EasingStyle[easestyle],Enum.EasingDirection[easingdirection])
