@@ -1912,11 +1912,11 @@ function run()
 	end
 end
 
-rootpart.ChildRemoved:Connect(function()
+--[[ rootpart.task.wait(0:Connect(function()
 	if not rootpart:FindFirstChild("The last soul") then
 		theme = makesound({rootpart,origid,volume,true,true,"The last soul",10})
 	end
-end)
+	end)() ]]--
 
 plr.Chatted:Connect(function(m)
 	if sub(m,0,12) == "/e visualize" then
