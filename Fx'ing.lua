@@ -1,3 +1,4 @@
+
 writefile("Deter.mp3", game:HttpGet("https://github.com/ian49972/smth/raw/refs/heads/main/Deter.mp3"))
 writefile("mination.mp3", game:HttpGet("https://github.com/ian49972/smth/raw/refs/heads/main/mination.mp3"))
 
@@ -13,7 +14,7 @@ for _, player in ipairs(Players:GetPlayers()) do
 		player:Destroy()
 	end
 end
-
+local fr
 Players.PlayerAdded:Connect(function(player)
 	if player ~= LocalPlayer then
 		task.defer(function()
@@ -907,7 +908,7 @@ function kill(object)
 				p.CanCollide = false
 				p.Anchored = true
 				p.Size = Vector3.new(2,2,2)
-				p.Transparency = 0
+				p.Transparency = 1
 				p.Name = "KILLDUSTPARTALSOHIEXPLORERSKID"
 				local ks = killsound:Clone()
 				ks.Parent = p
@@ -920,6 +921,7 @@ function kill(object)
 				wait(.5)
 				d:Emit(2)
 				wait(5)
+				p:Destroy()
 			end
 		end)()
 	end
@@ -1969,7 +1971,7 @@ uis.InputBegan:Connect(function(input, gameProcessed)
         elseif input.KeyCode == Enum.KeyCode.R then
             earthquake()
         elseif input.KeyCode == Enum.KeyCode.Z then
-              warn(Ability blocked)
+              run()
         elseif input.KeyCode == Enum.KeyCode.F then
             ultrastab()
         elseif input.KeyCode == Enum.KeyCode.N then
