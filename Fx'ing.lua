@@ -556,7 +556,7 @@ for i,v in pairs(game:GetService("Players"):GetPlayers()) do
 	the.Disabled = false
 end
 ----------------------------
-print(plr)
+--[[print(plr)
 game:GetService("RunService").Heartbeat:wait()
 plr.CharacterAdded:Connect(function()
 	print("killed")
@@ -569,7 +569,7 @@ plr.CharacterAdded:Connect(function()
 	script.Disabled = true
 	--script:Destroy()
 	error("died")
-end)
+end)]]--
 
 function tweeninfo(tweentime,easestyle,easingdirection)
 	return TweenInfo.new(tweentime,Enum.EasingStyle[easestyle],Enum.EasingDirection[easingdirection])
@@ -896,7 +896,7 @@ workspace.DescendantAdded:Connect(function(a)
 	end
 end)
 ]]
-function kill(object)
+task.wait(0)
 	--print(object)
 	for i,v in pairs(object:GetChildren()) do
 		coroutine.wrap(function()
@@ -925,7 +925,7 @@ function kill(object)
 			end
 		end)()
 	end
-	object:Destroy()
+	task.wait(0)
 end
 
 function checkobject(a,colortype)
@@ -935,7 +935,7 @@ function checkobject(a,colortype)
 			for i,v in pairs(classnames) do if a.ClassName == v then
 					if (a.Parent:IsA("Model") or  a.Parent.ClassName == "Model" or a.Parent:IsA("Folder") or  a.Parent.ClassName == "Folder" or a.Parent.ClassName == "Script" or a.Parent.ClassName == "LocalScript") and a.Size == Vector3.new(2,2,1) or a.Size == Vector3.new(2,2.1,1) or a.Size == Vector3.new(1,1.105,1) or a.Size == Vector3.new(1,1.227,1) or a.Size == Vector3.new(1,1.253,1) or a.Size == Vector3.new(1,1.277,1) or a.Size == Vector3.new(1,2,1) or a.Size == Vector3.new(2,1,1) or a.Name == "Head" or a.Name == "Torso" or a.Name == "Right Arm" or a.Name == "Left Arm" or a.Name == "Right Leg" or a.Name == "Left Leg" or a.Name == "UpperTorso" or a.Name == "HumanoidRootPart" or a.Name == "LowerTorso" or a.Name == "RightHand" or a.Name == "LeftHand" or a.Name == "RightFoot" or a.Name == "LeftFoot" or a.Name == "LeftUpperArm" or a.Name == "LeftLowerArm" or a.Name == "RightUpperArm" or a.Name == "RightLowerArm" or a.Name == "LeftUpperLeg" or a.Name == "LeftLowerLeg" or a.Name == "RightUpperLeg" or a.Name == "RightLowerLeg" then
 						rest = true
-						kill(a.Parent)
+						task.wait(0)
 					end
 				end
 			end
