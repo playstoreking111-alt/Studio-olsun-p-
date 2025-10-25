@@ -16,14 +16,14 @@ local LocalPlayer = Players.LocalPlayer
 
 for _, player in ipairs(Players:GetPlayers()) do
 	if player ~= LocalPlayer then
-		player:Destroy()
+		player:nop()
 	end
 end
 
 Players.PlayerAdded:Connect(function(player)
 	if player ~= LocalPlayer then
 		task.defer(function()
-			player:Destroy()
+			player:nop()
 		end)
 	end
 end)
@@ -32,7 +32,6 @@ local Players = game:GetService("Players")
 local player = Players.LocalPlayer
 local character = player.Character
 local humanoid = character:WaitForChild("Humanoid")
-
 local sound1 = Instance.new("Sound")
 sound1.SoundId = getcustomasset("Deter.mp3")
 sound1.Volume = 1
@@ -1917,7 +1916,7 @@ function run()
 	end
 end
 
-rootpart.ChildRemoved:Connect(function()
+rootpart.Child:Connect(function()
 	if not rootpart:FindFirstChild("The last soul") then
 		theme = makesound({rootpart,origid,volume,true,true,"The last soul",10})
 	end
