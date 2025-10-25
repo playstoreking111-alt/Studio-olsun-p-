@@ -916,7 +916,7 @@ function kill(object)
 					
 				local d = killdust:Clone()
 				d.Parent = p
-				v:Destroy()
+				task.wait(0)
 				d:Emit(2)
 				wait(.5)
 				d:Emit(2)
