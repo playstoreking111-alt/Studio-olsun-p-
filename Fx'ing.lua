@@ -921,7 +921,7 @@ function kill(object)
 				wait(.5)
 				d:Emit(2)
 				wait(5)
-				p:Destroy()
+			task.wait(0)
 			end
 		end)()
 	end
