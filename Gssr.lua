@@ -1,3 +1,5 @@
+	--edit by dgln
+	
 	for i,v in pairs(game:GetService("Players"):GetChildren()) do
 	local var = script.Shaker:Clone()
 	var.Parent = v.PlayerGui
@@ -56,10 +58,10 @@ kanz.Looped = true
 currentThemePlaying = kanz.SoundId
 currentVol = kanz.Volume
 currentPitch = kanz.Pitch
---kanz:Play()
---coroutine.resume(coroutine.create(function()
---wait(0.05)
---end))
+kanz:Play()
+coroutine.resume(coroutine.create(function()
+wait(0.05)
+end))
 end
 
 
@@ -1207,7 +1209,7 @@ function CreateWeld(Parent, Part0, Part1, C0, C1)
   return Weld
 end
 
-Character=FDless.character
+Character=plr.character
 PlayerGui=plr.PlayerGui 
 Backpack=plr.Backpack 
 Torso=Character.Torso 
@@ -1820,7 +1822,7 @@ end
  
 
 function Damagefunc(Part, hit, minim, maxim, knockback, Type, Property, Delay, HitSound, HitPitch)
-FDless.fling(hit.Parent)
+plr.fling(hit.Parent)
 end
 function MagniDamage(Part, magni, mindam, maxdam, knock, Type)
   for _, c in pairs(workspace:children()) do
@@ -3331,7 +3333,7 @@ end))
 end
 
 function dmg(dude)
-	FDless.fling(dude)
+	plr.fling(dude)
 end
 
 
