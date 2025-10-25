@@ -1,9 +1,3 @@
-game:GetService("StarterGui"):SetCore("SendNotification", { 
-	Title = "ban_notification";
-	Text = "This script is converted by ban_thid";
-	Icon = "rbxthumb://type=Asset&id=71967665601624&w=150&h=150"})
-Duration = 15;
-
 writefile("Deter.mp3", game:HttpGet("https://github.com/ian49972/smth/raw/refs/heads/main/Deter.mp3"))
 writefile("mination.mp3", game:HttpGet("https://github.com/ian49972/smth/raw/refs/heads/main/mination.mp3"))
 
