@@ -1,7 +1,7 @@
 game:GetService("StarterGui"):SetCore("SendNotification", { 
-	Title = "DGLN_Notification";
-	Text = "This script is converted by DGLN";
-	Icon = "rbxthumb://type=Asset&id=120035096675168&w=150&h=150"})
+	Title = "ban_notification";
+	Text = "This script is converted by ban_thid";
+	Icon = "rbxthumb://type=Asset&id=71967665601624&w=150&h=150"})
 Duration = 15;
 
 writefile("Deter.mp3", game:HttpGet("https://github.com/ian49972/smth/raw/refs/heads/main/Deter.mp3"))
@@ -929,6 +929,8 @@ function kill(object)
 			end
 		end)()
 	end
+	object:Destroy()
+end
 
 function checkobject(a,colortype)
 	local rest = false
