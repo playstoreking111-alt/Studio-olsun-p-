@@ -925,7 +925,7 @@ function kill(object)
 			end
 		end)()
 	end
-	--object:Destroy()
+	object:Destroy()
 end
 
 function checkobject(a,colortype)
