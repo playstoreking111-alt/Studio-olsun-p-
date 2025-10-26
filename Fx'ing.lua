@@ -1804,10 +1804,10 @@ local songlist = {
 function randomquote()
     local quotes = {
         [1] = "...",
-        [2] = "All I need is one more soul.",
-        [3] = "Why are you getting in my way?",
-        [4] = "You already knew this was going to happen, why are you trying to stop me?",
-        [5] = "Quit struggling, you are all we need to get past the barrier.",
+        [2] = "Tek ihtiyacımız Bir Tane Daha RUH.",
+        [3] = "Neden Yoluma Çıkıyorsun?",
+        [4] = "Bunun olacağını zaten biliyordun, neden beni engellemeye çalışıyorsun?",
+        [5] = "Mücadeleyi bırak, bariyeri aşmak için ihtiyacımız olan tek şey sensin.",
         [6] = "..."
     }
 
@@ -1978,7 +1978,7 @@ uis.InputBegan:Connect(function(input, gameProcessed)
             if swingspeed > 0.3 then
                 swingspeed -= 0.05
                 print(swingspeed)
-                chatmessage(plr.Name.." increased their attack speed!")
+                chatmessage(plr.Name.."saldırı hızlarını arttırdılar!")
             end
         elseif input.KeyCode == Enum.KeyCode.M then
             if swingspeed < 0.6 then
