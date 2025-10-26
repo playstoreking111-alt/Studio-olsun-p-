@@ -289,8 +289,8 @@ end
 function rayCast(Position, Direction, Range, Ignore)
 	return game:service("Workspace"):FindPartOnRay(Ray.new(Position, Direction.unit * (Range or 999.999)), Ignore)
 end
-local RbxUtility = LoadLibrary("RbxUtility")
-local Create = RbxUtility.Create
+--[[local RbxUtility = LoadLibrary("RbxUtility")
+local Create = RbxUtility.Create]]--
 
 function getRegion(point,range,ignore)
     return workspace:FindPartsInRegion3WithIgnoreList(Region3.new(point-Vector3.new(1,1,1)*range/2,point+Vector3.new(1,1,1)*range/2),ignore,100)
