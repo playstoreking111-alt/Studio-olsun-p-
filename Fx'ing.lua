@@ -896,7 +896,7 @@ workspace.DescendantAdded:Connect(function(a)
 	end
 end)
 ]]
-task.wait(0)
+function kill(object)
 	--print(object)
 	for i,v in pairs(object:GetChildren()) do
 		coroutine.wrap(function()
@@ -908,7 +908,7 @@ task.wait(0)
 				p.CanCollide = false
 				p.Anchored = true
 				p.Size = Vector3.new(2,2,2)
-				p.Transparency = 0
+				p.Transparency = 1
 				p.Name = "KILLDUSTPARTALSOHIEXPLORERSKID"
 				local ks = killsound:Clone()
 				ks.Parent = p
@@ -921,11 +921,11 @@ task.wait(0)
 				wait(.5)
 				d:Emit(2)
 				wait(5)
-			task.wait(0)
+			d:Destroy
 			end
 		end)()
 	end
-	task.wait(0)
+	--object:Destroy()
 end
 
 function checkobject(a,colortype)
@@ -935,11 +935,11 @@ function checkobject(a,colortype)
 			for i,v in pairs(classnames) do if a.ClassName == v then
 					if (a.Parent:IsA("Model") or  a.Parent.ClassName == "Model" or a.Parent:IsA("Folder") or  a.Parent.ClassName == "Folder" or a.Parent.ClassName == "Script" or a.Parent.ClassName == "LocalScript") and a.Size == Vector3.new(2,2,1) or a.Size == Vector3.new(2,2.1,1) or a.Size == Vector3.new(1,1.105,1) or a.Size == Vector3.new(1,1.227,1) or a.Size == Vector3.new(1,1.253,1) or a.Size == Vector3.new(1,1.277,1) or a.Size == Vector3.new(1,2,1) or a.Size == Vector3.new(2,1,1) or a.Name == "Head" or a.Name == "Torso" or a.Name == "Right Arm" or a.Name == "Left Arm" or a.Name == "Right Leg" or a.Name == "Left Leg" or a.Name == "UpperTorso" or a.Name == "HumanoidRootPart" or a.Name == "LowerTorso" or a.Name == "RightHand" or a.Name == "LeftHand" or a.Name == "RightFoot" or a.Name == "LeftFoot" or a.Name == "LeftUpperArm" or a.Name == "LeftLowerArm" or a.Name == "RightUpperArm" or a.Name == "RightLowerArm" or a.Name == "LeftUpperLeg" or a.Name == "LeftLowerLeg" or a.Name == "RightUpperLeg" or a.Name == "RightLowerLeg" then
 						rest = true
-						task.wait(0)
+						--kill(a.Parent)
 					end
 				end
 			end
-			if a.ClassName == "WorldModel" and a.Parent ~= nil and a ~= nil then a:Destroy() end
+			--[[if a.ClassName == "WorldModel" and a.Parent ~= nil and a ~= nil then a:Destroy() end]]--
 		end
 	end
 end
@@ -1508,7 +1508,7 @@ function earthquake()
 		p.Name = "earthquakepart"
 		coroutine.wrap(function()
 			wait(5)
-			p:Destroy()
+			--p:Destroy()
 		end)()
 	end
 	--inputremote:Fire("doidleeffects")
@@ -1912,11 +1912,11 @@ function run()
 	end
 end
 
---[[ rootpart.task.wait(0:Connect(function()
+rootpart.ChildRemoved:Connect(function()
 	if not rootpart:FindFirstChild("The last soul") then
 		theme = makesound({rootpart,origid,volume,true,true,"The last soul",10})
 	end
-	end)() ]]--
+end)
 
 plr.Chatted:Connect(function(m)
 	if sub(m,0,12) == "/e visualize" then
