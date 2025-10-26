@@ -1378,7 +1378,7 @@ function earthquake()
 	inputremote:Fire("effectcolor",c3(217, 140, 72))
 	hum.WalkSpeed = 0
    task.spawn(function()
-   chatmessage("Feel the wrath of earth.")
+   chatmessage("Dünyanın gazabını hisset.")
    end)
 	local pp1 = specialp1:Clone()
 	local pp2 = specialp2:Clone()
@@ -1539,7 +1539,7 @@ function ultrastab() -- not done
 	coroutine.wrap(function()
 		wait(1)
       task.spawn(function()
-		chatmessage("Ignorant.")
+		chatmessage("Cahil.")
      end)
 	end)()
 	for i = 0,15,.1 do
@@ -1978,7 +1978,7 @@ uis.InputBegan:Connect(function(input, gameProcessed)
             if swingspeed > 0.3 then
                 swingspeed -= 0.05
                 print(swingspeed)
-                chatmessage(plr.Name.."saldırı hızlarını arttırdılar!")
+                chatmessage(plr.Name.." saldırı hızlarını arttırdı!")
             end
         elseif input.KeyCode == Enum.KeyCode.M then
             if swingspeed < 0.6 then
