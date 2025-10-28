@@ -1005,7 +1005,7 @@ function killnearest(position,range,maxstrength)
     end
 end
 
-	local defence = Instance.new("BoolValue",Humanoid.Parent)
+	--[[local defence = Instance.new("BoolValue",Humanoid.Parent)
 	defence.Name = ("HitBy"..Player.Name)
 	game:GetService("Debris"):AddItem(defence, 0.001)
 	Damage = Damage * DAMAGEMULTIPLIER
@@ -1049,7 +1049,7 @@ function ApplyAoE(POSITION,RANGE,MINDMG,MAXDMG,FLING,INSTAKILL)
 				end
 			end
 		end
-	end
+	end]]--
 
 
 
