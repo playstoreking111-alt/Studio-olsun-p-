@@ -978,7 +978,7 @@ end
 --||			DAMAGING
 --\\=================================//
 
-function killnearest(position,range,maxstrength)
+--[[function killnearest(position,range,maxstrength)
     for i,v in ipairs(workspace:GetChildren()) do
     local body = v:GetChildren()
         for part = 1, #body do
@@ -1005,18 +1005,20 @@ function killnearest(position,range,maxstrength)
     end
 end
 
-	--[[local defence = Instance.new("BoolValue",Humanoid.Parent)
+function ApplyDamage(Humanoid,Damage,TorsoPart)
+	local defence = Instance.new("BoolValue",Humanoid.Parent)
 	defence.Name = ("HitBy"..Player.Name)
 	game:GetService("Debris"):AddItem(defence, 0.001)
 	Damage = Damage * DAMAGEMULTIPLIER
 	if Humanoid.Health ~= 0 then
-		local CritChance = MRANDOM(0,0)
+		local CritChance = MRANDOM(1,100)
 		if Damage > Humanoid.Health then
 			Damage = math.ceil(Humanoid.Health)
 			if Damage == 0 then
-				Damage = 0
+				Damage = 0.1
 			end
 		end
+		Humanoid.Health = Humanoid.Health - Damage
 	end
 end
 
@@ -1033,6 +1035,7 @@ function ApplyAoE(POSITION,RANGE,MINDMG,MAXDMG,FLING,INSTAKILL)
 							CHILD:BreakJoints()
 						else
 							local DMG = MRANDOM(MINDMG,MAXDMG)
+							ApplyDamage(HUM,DMG,TORSO)
 						end
 						if FLING > 0 then
 							for _, c in pairs(CHILD:GetChildren()) do
@@ -1049,8 +1052,8 @@ function ApplyAoE(POSITION,RANGE,MINDMG,MAXDMG,FLING,INSTAKILL)
 				end
 			end
 		end
-	end]]--
-
+	end
+]]--
 
 
 ---banish
@@ -2099,6 +2102,7 @@ function Neckless()
 						ROOT:remove()
 					end
 					FOE:BreakJoints()
+					ApplyDamage(HUM,0,true)
 					Chunks(HEAD)
 					HEAD.CFrame = HEAD.CFrame  * ANGLES(RAD(0), RAD(90), RAD(0))
 					CreateSound(363808674, HEAD, 15, 1, false)
