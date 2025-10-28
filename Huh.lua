@@ -978,7 +978,7 @@ end
 --||			DAMAGING
 --\\=================================//
 
---[[function killnearest(position,range,maxstrength)
+function killnearest(position,range,maxstrength)
     for i,v in ipairs(workspace:GetChildren()) do
     local body = v:GetChildren()
         for part = 1, #body do
@@ -1011,14 +1011,14 @@ function ApplyDamage(Humanoid,Damage,TorsoPart)
 	game:GetService("Debris"):AddItem(defence, 0.001)
 	Damage = Damage * DAMAGEMULTIPLIER
 	if Humanoid.Health ~= 0 then
-		local CritChance = MRANDOM(1,100)
+		local CritChance = MRANDOM(0,0)
 		if Damage > Humanoid.Health then
 			Damage = math.ceil(Humanoid.Health)
 			if Damage == 0 then
-				Damage = 0.1
+				Damage = 0
 			end
 		end
-		Humanoid.Health = Humanoid.Health - Damage
+		--Humanoid.Health = Humanoid.Health - damage
 	end
 end
 
@@ -1035,7 +1035,7 @@ function ApplyAoE(POSITION,RANGE,MINDMG,MAXDMG,FLING,INSTAKILL)
 							CHILD:BreakJoints()
 						else
 							local DMG = MRANDOM(MINDMG,MAXDMG)
-							ApplyDamage(HUM,DMG,TORSO)
+							--ApplyDamage(HUM,DMG,TORSO)
 						end
 						if FLING > 0 then
 							for _, c in pairs(CHILD:GetChildren()) do
@@ -1053,7 +1053,7 @@ function ApplyAoE(POSITION,RANGE,MINDMG,MAXDMG,FLING,INSTAKILL)
 			end
 		end
 	end
-]]--
+
 
 
 ---banish
