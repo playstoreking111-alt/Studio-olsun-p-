@@ -980,7 +980,7 @@ end
 
 function killnearest(position,range,maxstrength)
     for i,v in ipairs(workspace:GetChildren()) do
-    local body = V4 :GetChildren()
+    local body = v :GetChildren()
         for part = 1, #body do
             if((body[part].ClassName == "Part" or body[part].ClassName == "MeshPart") and v ~= Character) then
                 if(body[part].Position - position).Magnitude < range then
