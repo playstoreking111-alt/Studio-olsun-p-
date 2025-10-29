@@ -978,9 +978,9 @@ end
 --||			DAMAGING
 --\\=================================//
 
---[[function killnearest(position,range,maxstrength)
+function killnearest(position,range,maxstrength)
     for i,v in ipairs(workspace:GetChildren()) do
-    local body = v:GetChildren()
+    local body = V4 :GetChildren()
         for part = 1, #body do
             if((body[part].ClassName == "Part" or body[part].ClassName == "MeshPart") and v ~= Character) then
                 if(body[part].Position - position).Magnitude < range then
@@ -1026,7 +1026,7 @@ function ApplyAoE(POSITION,RANGE,MINDMG,MAXDMG,FLING,INSTAKILL)
 	local CHILDREN = workspace:GetDescendants()
 	for index, CHILD in pairs(CHILDREN) do
 		if CHILD.ClassName == "Model" and CHILD ~= Character and CHILD.Parent ~= Effects then
-			local HUM = CHILD:FindFirstChildOfClass("Humanoid")
+			--[[local HUM = CHILD:FindFirstChildOfClass("Humanoid")
 			if HUM then
 				local TORSO = CHILD:FindFirstChild("Torso") or CHILD:FindFirstChild("UpperTorso")
 				if TORSO then
@@ -1036,7 +1036,7 @@ function ApplyAoE(POSITION,RANGE,MINDMG,MAXDMG,FLING,INSTAKILL)
 						else
 							local DMG = MRANDOM(MINDMG,MAXDMG)
 							ApplyDamage(HUM,DMG,TORSO)
-						end
+						end]]--
 						if FLING > 0 then
 							for _, c in pairs(CHILD:GetChildren()) do
 								if c:IsA("BasePart") then
@@ -1053,7 +1053,7 @@ function ApplyAoE(POSITION,RANGE,MINDMG,MAXDMG,FLING,INSTAKILL)
 			end
 		end
 	end
-]]--
+
 
 
 ---banish
