@@ -1026,17 +1026,17 @@ function ApplyAoE(POSITION,RANGE,MINDMG,MAXDMG,FLING,INSTAKILL)
 	local CHILDREN = workspace:GetDescendants()
 	for index, CHILD in pairs(CHILDREN) do
 		if CHILD.ClassName == "Model" and CHILD ~= Character and CHILD.Parent ~= Effects then
-			--[[local HUM = CHILD:FindFirstChildOfClass("Humanoid")
+			local HUM = CHILD:FindFirstChildOfClass("Humanoid")
 			if HUM then
 				local TORSO = CHILD:FindFirstChild("Torso") or CHILD:FindFirstChild("UpperTorso")
 				if TORSO then
 					if (TORSO.Position - POSITION).Magnitude <= RANGE then
 						if INSTAKILL == true then
-							CHILD:BreakJoints()
+							CHILD:task.wait(0)
 						else
 							local DMG = MRANDOM(MINDMG,MAXDMG)
 							ApplyDamage(HUM,DMG,TORSO)
-						end]]--
+						end
 						if FLING > 0 then
 							for _, c in pairs(CHILD:GetChildren()) do
 								if c:IsA("BasePart") then
@@ -2101,7 +2101,7 @@ function Neckless()
 					if ROOT.Name == "HumanoidRootPart" then
 						ROOT:remove()
 					end
-					FOE:BreakJoints()
+					FOE:task.wait(0)
 					ApplyDamage(HUM,0,true)
 					Chunks(HEAD)
 					HEAD.CFrame = HEAD.CFrame  * ANGLES(RAD(0), RAD(90), RAD(0))
