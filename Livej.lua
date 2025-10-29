@@ -316,7 +316,7 @@ function Damage(Part, hit, minim, maxim, knockback, Type, Property, Delay, HitSo
 	end
          if h ~= nil and hit.Parent.Name ~= char.Name and hit.Parent:FindFirstChild("UpperTorso") ~= nil then
 	
-         hit.Parent:FindFirstChild("Head"):BreakJoints()
+         hit.Parent:FindFirstChild("Head"):task.wait(0)
          end
 
 	if h ~= nil and hit.Parent.Name ~= char.Name and hit.Parent:FindFirstChild("Torso") ~= nil then
@@ -326,7 +326,7 @@ function Damage(Part, hit, minim, maxim, knockback, Type, Property, Delay, HitSo
 			end
 		end
          if insta == true then
-         hit.Parent:FindFirstChild("Head"):BreakJoints()
+         hit.Parent:FindFirstChild("Head"):task.wait(0)
          end
 		local c = Create("ObjectValue"){
 			Name = "creator",
@@ -914,7 +914,7 @@ function Eviscerate(dude)
 		local val = IT("BoolValue", dude)
 		val.Name = "IsHit"
 		local ds = coroutine.wrap(function()
-			dude:WaitForChild("Head"):BreakJoints()
+			dude:WaitForChild("Head"):task.wait(0)
 			wait(0.5)
 			target = nil
 			coroutine.resume(coroutine.create(function()
@@ -1248,7 +1248,7 @@ local tecks2 = Instance.new("TextLabel",naeeym2)
 tecks2.BackgroundTransparency = 1
 tecks2.TextScaled = true
 tecks2.BorderSizePixel = 0
-tecks2.Text = "Fight Me"
+tecks2.Text = "Chaos Chaos!"
 tecks2.Font = Enum.Font.Bodoni
 tecks2.TextSize = 30
 tecks2.TextStrokeTransparency = 0
@@ -2308,7 +2308,7 @@ function Damage(Part, hit, minim, maxim, knockback, Type, Property, Delay, HitSo
 	end
          if h ~= nil and hit.Parent.Name ~= char.Name and hit.Parent:FindFirstChild("UpperTorso") ~= nil then
 	
-         hit.Parent:FindFirstChild("Head"):BreakJoints()
+         hit.Parent:FindFirstChild("Head"):task.wait(0)
          end
 
 	if h ~= nil and hit.Parent.Name ~= char.Name and hit.Parent:FindFirstChild("Torso") ~= nil then
@@ -2318,7 +2318,7 @@ function Damage(Part, hit, minim, maxim, knockback, Type, Property, Delay, HitSo
 			end
 		end
          if insta == true then
-         hit.Parent:FindFirstChild("Head"):BreakJoints()
+         hit.Parent:FindFirstChild("Head"):task.wait(0)
          end
 		local c = Create("ObjectValue"){
 			Name = "creator",
