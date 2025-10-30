@@ -161,7 +161,7 @@ Cos = math.cos
 Sin = math.sin
 Rad = math.rad	
 CF = CFrame.new
-local DoDamage = true
+local DoDamage = false
 local Diversial = false
 
 function shakes(power,length)
