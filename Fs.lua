@@ -1,10 +1,9 @@
-local FDless = game:GetService("Players").LocalPlayer
-local playerGui = FDless:WaitForChild("PlayerGui")
 
-script = game:GetObjects("rbxassetid://5000769890")[1].SGSR
-script.GUI.IgnoreGuiInset = true
-script.GUI.Parent = playerGui
-plr = FDless
+local FDless = game:GetService("Players").LocalPlayer
+
+script=game:GetObjects("rbxassetid://5000769890")[1].SGSR
+script.GUI.IgnoreGuiInset=true
+plr = game.Players.LocalPlayer
 mouse = plr:GetMouse()
 char = FDless.character
 hum = char.Humanoid
