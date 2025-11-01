@@ -31,9 +31,70 @@ restart
 
 warn([[I recommend use the volume in .5 or .7]])
 
+--// VSB Compatibility Layer - Roblox & Executor Safe \\--
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local Debris = game:GetService("Debris")
 
+-- Owner yerine LocalPlayer
+owner = Players.LocalPlayer or Players:GetPlayers()[1]
 
+-- create() fonksiyonunu yeniden tanımla
+function create(class)
+	return function(props)
+		local obj = Instance.new(class)
+		for prop, val in pairs(props) do
+			pcall(function()
+				obj[prop] = val
+			end)
+		end
+		return obj
+	end
+end
 
+-- swait (VSB bekleme fonksiyonu)
+function swait(t)
+	t = t or 0
+	local s = tick()
+	while tick() - s < (t / 60) do
+		RunService.Heartbeat:Wait()
+	end
+end
+
+-- debris ekleme fonksiyonu (VSB'deki gibi)
+function debrisAdd(obj, time)
+	Debris:AddItem(obj, time or 5)
+end
+
+-- VSB’nin NS (Normal Script) ve NLS (Local Script) fonksiyonlarını simüle et
+function NS(source, parent)
+	local s = Instance.new("Script")
+	s.Source = source
+	s.Parent = parent or workspace
+	return s
+end
+
+function NLS(source, parent)
+	local s = Instance.new("LocalScript")
+	s.Source = source
+	s.Parent = parent or owner:FindFirstChildOfClass("PlayerGui") or owner.Character
+	return s
+end
+
+-- quick utility: Raycast yerine FindPartOnRay benzeri VSB fonksiyonlarını engelleme
+if not Raycast then
+	function Raycast(pos, dir, ignore)
+		local params = RaycastParams.new()
+		params.FilterDescendantsInstances = {ignore or workspace}
+		params.FilterType = Enum.RaycastFilterType.Blacklist
+		return workspace:Raycast(pos, dir, params)
+	end
+end
+
+-- garbage collect / task.spawn güvenliği
+task.spawn = task.spawn or coroutine.wrap
+wait = task.wait or function(t) RunService.Heartbeat:Wait() 
+  end
 
 
 local Player = game:GetService("Players").LocalPlayer
@@ -254,7 +315,7 @@ coroutine.resume(coroutine.create(function()
       local intensity = 1*Intensity
       local rotM = 0.01*Intensity
 for i = 0, Length, 0.1 do
-swait()
+task.wait()
 intensity = intensity - 0.05*Intensity/Length
 rotM = rotM - 0.0005*Intensity/Length
       hum.CameraOffset = Vec3(radian(random(-intensity, intensity)), radian(random(-intensity, intensity)), radian(random(-intensity, intensity)))
@@ -506,7 +567,8 @@ function particles(art)
 	emitterDU:Clone().Parent = art
 end
 
-m2=create("Model"){
+local m2 = Instance.new("Model")
+m2.Parent = game:GetService("Players").LocalPlayer.Character
 Parent=chr,
 Name="WModel"}
 e=create("Model"){
