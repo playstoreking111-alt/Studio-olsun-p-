@@ -2222,8 +2222,8 @@ mouse.KeyDown:connect(function(key)
 end)
 
 mouse.Button1Down:connect(function(key)
-	if attack == true then
-		die()
+	if attack == false then
+		print("Azimliyim")
 	end
 end)
 
