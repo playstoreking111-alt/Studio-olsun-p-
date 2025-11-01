@@ -479,8 +479,8 @@ massv.Position = UDim2.new(0.5,-800,0.5,-800)
 
 
 
-local Create = LoadLibrary("RbxUtility").Create
-create=LoadLibrary("RbxUtility").Create
+--[[local Create = LoadLibrary("RbxUtility").Create
+create=LoadLibrary("RbxUtility").Create]]--
 
 
 local NSn=NumberSequence.new
