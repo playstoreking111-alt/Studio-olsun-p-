@@ -1,4 +1,4 @@
-
+local FDless = game:GetService("Players").LocalPlayer
 
 script = game:GetObjects("rbxassetid://4789736147")[1].Main
 workspace=game.Workspace
