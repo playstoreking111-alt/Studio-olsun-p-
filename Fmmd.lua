@@ -1412,7 +1412,7 @@ M2.TextureId = "http://www.roblox.com/asset/?id=50252366"
 			end
 M2.MeshId = "http://www.roblox.com/asset/?id=0"
 M2.TextureId = "http://www.roblox.com/asset/?id=0"
-	attack = true
+	attack = false
 end
 
 
@@ -1447,7 +1447,7 @@ function dance()
 		RW.C0 = clerp(RW.C0, CF(1* Player_Size, 0.3 + 0.06 * Sin(sine / 20)* Player_Size, .6* Player_Size) * angles(Rad(-35), Rad(-25 + 2.5 * Sin(sine / 20)), Rad(-55 + 2.5 * Sin(sine / 20))), 0.12)
 		LW.C0 = clerp(LW.C0, CF(-1* Player_Size, 0.3 + 0.06 * Sin(sine / 20)* Player_Size, .6* Player_Size) * angles(Rad(-35), Rad(25 + 2.5 * Sin(sine / 20)), Rad(55 + 2.5 * Sin(sine / 20))), 0.12)
 	end
-	attack = true
+	attack = false
 	hum.WalkSpeed = 20
 end
 
@@ -1464,7 +1464,7 @@ function aaa()
 		LW.C0 = clerp(LW.C0, CF(-1* Player_Size, 0.1 + 0.05 * Sin(sine / 12)* Player_Size, -0.5* Player_Size) * angles(Rad(45), Rad(6), Rad(86)), 0.1)
 	end
 	hum.WalkSpeed = 16
-	attack = true
+	attack = false
 end
 
 function finalChaos()
@@ -1501,8 +1501,9 @@ function finalChaos()
 		beam.Transparency = i / 10
 		wait()
 	end
-end)
-	attack = true
+	p:Destroy()
+	end)
+	attack = false
 end
 
 function beam()
@@ -1624,7 +1625,7 @@ function beam()
 	a2:Destroy()
 	ba:Destroy()
 	InnerRing1:Destroy()
-	attack = true
+	attack = false
 	hum.WalkSpeed = 10
 	hum.CameraOffset = Vector3.new(0,0,0)
 end
@@ -1660,7 +1661,7 @@ function Call_Upon_The_Eyes()
 		RW.C0 = clerp(RW.C0, CF(1.5* Player_Size, 0.5 + 0.06 * Sin(sine / 20)* Player_Size, 0* Player_Size) * angles(Rad(45), Rad(0), Rad(15 + 2.5 * Sin(sine / 20))), 0.2)
 		LW.C0 = clerp(LW.C0, CF(-1* Player_Size, 0.3 + 0.06 * Sin(sine / 20)* Player_Size, .6* Player_Size) * angles(Rad(-35), Rad(25 + 2.5 * Sin(sine / 20)), Rad(55 + 2.5 * Sin(sine / 20))), 0.12)
 	end
-	attack = true
+	attack = false
 	hum.WalkSpeed = 10
 end
 
@@ -1691,7 +1692,7 @@ function CHAOS()
 			Eviscerate(v)
 		end
 	end
-	attack = true
+	attack = false
 end
 function Chain2()
 	if Mouse.Target.Parent ~= char and Mouse.Target.Parent.Parent ~= char and Mouse.Target.Parent:FindFirstChildOfClass("Humanoid") ~= nil then
@@ -1757,7 +1758,7 @@ function Chain2()
 		LW.C0 = clerp(LW.C0, CF(-1.5* Player_Size, 0.5 + 0.02 * Sin(sine / 20)* Player_Size, 0.4* Player_Size) * angles(Rad(90), Rad(-.6), Rad(-25)), 0.1)
 	end
 		hum.WalkSpeed = 16
-		attack = true
+		attack = false
 		Hook2:Destroy()
 		end
 	end
@@ -1797,7 +1798,7 @@ function dejzrXD()
         RW.C0 = clerp(RW.C0, CF(1.5* Player_Size, 0.5 + 0.02 * Sin(sine / 20)* Player_Size, 0* Player_Size) * angles(Rad(45), Rad(-7.5 * Sin(sine / 20)), Rad(40)), 0.2)
         LW.C0 = clerp(LW.C0, CF(-1.5* Player_Size, 0.5 + 0.02 * Sin(sine / 20)* Player_Size, 0* Player_Size) * angles(Rad(-25), Rad(7.5 * Sin(sine / 20)), Rad(-25)), 0.2)
     end
-	attack = true
+	attack = false
 	Speed = 20
 end
 
@@ -1819,7 +1820,7 @@ killsky.MoonAngularSize = 0
 killsky.MoonTextureId = ""
 killsky.CelestialBodiesShown = false
 	if HITFLOOR ~= nil then
-		ATTACK = true
+		ATTACK = false
 		Rooted = false
 		local RINGSPIN = true
 		local CONSTRUCTING = true
@@ -1852,7 +1853,7 @@ killsky.CelestialBodiesShown = false
 		end
 		end
 	hum.WalkSpeed = 20
-	attack = true
+	attack = false
 end
 function icando()
 	attack = true
@@ -1875,7 +1876,7 @@ function icando()
         TEST:Play()
         TEST:Remove()
         print('I CAN DO ANYTHING')
-		attack = true
+		attack = false
 		hum.WalkSpeed = 20
 end
 
@@ -1926,7 +1927,7 @@ M2.TextureId = "http://www.roblox.com/asset/?id=50252366"
 	M2.Scale = Vector3.new(1, 1, 1)
 M2.MeshId = "http://www.roblox.com/asset/?id=0"
 M2.TextureId = "http://www.roblox.com/asset/?id=0"
-	attack = true
+	attack = false
 end
 
 function DRAG_THEM_TO_HELL()
@@ -2068,7 +2069,7 @@ function DRAG_THEM_TO_HELL()
 		LW.C0 = clerp(LW.C0, CF(-1.5* Player_Size, 0.5 + 0.02 * Sin(sine / 20)* Player_Size, 0* Player_Size) * angles(Rad(30), Rad(-.6), Rad(-25)), 0.1)
 	end
 		hum.WalkSpeed = 16
-		attack = true
+		attack = false
 		Hook:Destroy()
 		A:remove()
 		B:remove()
@@ -2182,14 +2183,14 @@ hed.face.Texture = "rbxassetid://241553801"
             wait()
         end
     end)
-	attack = true
+	attack = false
 	hum.WalkSpeed = 75
 end
 -------------------------------------------------------
 --End Attacks N Stuff--
 -------------------------------------------------------
 mouse.KeyDown:connect(function(key)
-	if attack == true then
+	if attack == false then
 		if key == "t" then
                       dance()
 		elseif key == 'y' then
@@ -2486,7 +2487,7 @@ while true do
 		end
 		if 1 < root.Velocity.y and hitfloor == nil then
 			Anim = "Jump"
-			if attack == true then
+			if attack == false then
 				rootj.C0 = clerp(rootj.C0, RootCF * CF(0* Player_Size, 0* Player_Size, 0.9 + 0.5* Player_Size * Cos(sine / -15)) * angles(Rad(0), Rad(0), Rad(0)), 0.17)
 				neck.C0 = clerp(neck.C0, necko* CF(0, 0, 0 + ((1* Player_Size) - 1)) * angles(Rad(10 - 2.5 * Sin(sine / 30)), Rad(0), Rad(0)), 0.3)
 				RH.C0 = clerp(RH.C0, CF(1* Player_Size, -.2 - 0.1 * Cos(sine / 20)* Player_Size, -.3* Player_Size) * RHCF * angles(Rad(-2.5), Rad(0), Rad(0)), 0.15)
@@ -2496,7 +2497,7 @@ while true do
 			end
 		elseif -1 > root.Velocity.y and hitfloor == nil then
 			Anim = "Fall"
-			if attack == true then
+			if attack == false then
 				rootj.C0 = clerp(rootj.C0, RootCF * CF(0* Player_Size, 0* Player_Size, -0.1 + 0.1 * Cos(sine / 20)* Player_Size) * angles(Rad(24), Rad(0), Rad(0)), 0.15)
 				neck.C0 = clerp(neck.C0, necko* CF(0, 0, 0 + ((1* Player_Size) - 1)) * angles(Rad(10 - 2.5 * Sin(sine / 30)), Rad(0), Rad(0)), 0.3)
 				RH.C0 = clerp(RH.C0, CF(1* Player_Size, -1 - 0.1 * Cos(sine / 20)* Player_Size, -.3* Player_Size) * RHCF * angles(Rad(-3.5), Rad(0), Rad(0)), 0.15)
@@ -2530,7 +2531,7 @@ while true do
 		elseif torvel >= 25 and hitfloor ~= nil then
 			Anim = "Sprint"
 			change = 1.35
-			if attack == true then
+			if attack == false then
 	                rootj.C0 = clerp(rootj.C0, RootCF * CF(0* Player_Size, 0* Player_Size, 0.9 + 0.5* Player_Size * Cos(sine / -15)) * angles(Rad(0), Rad(0), Rad(0)), 0.17)
 		        neck.C0 = clerp(neck.C0, necko* CF(0, 0, 0 + ((1* Player_Size) - 1)) * angles(Rad(10 - 2.5 * Sin(sine / 30)), Rad(0), Rad(0)), 0.3)
 			RH.C0 = clerp(RH.C0, CF(1* Player_Size, -0.3 - 0.1 * Cos(sine / 20)* Player_Size, -.4* Player_Size) * angles(Rad(0), Rad(80), Rad(0)) * angles(Rad(-10.5 + 3.5 * Sin(sine / 20)), Rad(0), Rad(-20)), 0.15)
