@@ -3375,7 +3375,7 @@ col={"Bright orange","Deep orange"}
 theme.SoundId="rbxassetid://78534559289195"
 elseif choice==8 then
 rainb=true
-theme.SoundId="rbxassetid://122304523836872"
+theme.SoundId="rbxassetid://119220775302653"
 end
 if rainb==false then
 LockEffect(e,col[1],RArm.CFrame,RArm,10,10,10,.6,.6,.6,.04,"Sphere",6,0,"")
@@ -3491,7 +3491,7 @@ elseif k=="u" and choice~=9 and aaa==false then
 choice=9
 unleashed=false
 theme.Volume=1.15
-theme.SoundId="rbxassetid://1138145518"
+theme.SoundId="rbxassetid://122304523836872"
 theme.TimePosition=0
 theme:Play()
 local raise=-10
