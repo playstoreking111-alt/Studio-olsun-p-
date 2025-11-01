@@ -116,7 +116,7 @@ local maincolor = BrickColor.new("Bright purple")
 cam = game.Workspace.CurrentCamera
 CF = CFrame.new
 angles = CFrame.Angles
-attack = true
+attack = false
 Euler = CFrame.fromEulerAnglesXYZ
 Rad = math.rad
 IT = Instance.new
@@ -2222,7 +2222,7 @@ mouse.KeyDown:connect(function(key)
 end)
 
 mouse.Button1Down:connect(function(key)
-	if attack == false then
+	if attack == true then
 		die()
 	end
 end)
