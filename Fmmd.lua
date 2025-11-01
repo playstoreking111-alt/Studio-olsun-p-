@@ -1379,8 +1379,8 @@ coroutine.resume(coroutine.create(function()
     end
 end))
 
-task.wait(0)
-	attack = true
+
+ attack = true
 M2.MeshId = "http://www.roblox.com/asset/?id=28140935"
 M2.TextureId = "http://www.roblox.com/asset/?id=50252366"
 	for i = 0, 2.6, 0.1 do
@@ -2223,7 +2223,7 @@ end)
 
 mouse.Button1Down:connect(function(key)
 	if attack == false then
-		task.wait(0)
+		wait(0)
 	end
 end)
 
