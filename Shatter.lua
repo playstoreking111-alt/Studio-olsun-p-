@@ -40,7 +40,7 @@ local Player = game:GetService("Players").LocalPlayer
 plr = game:GetService("Players").LocalPlayer
 char = plr.Character
 hum = char.Humanoid
-workspace.CurrentCamera.Focus = owner.Character.Head.CFrame
+workspace.CurrentCamera.Focus = plr.Character.Head.CFrame
 local cam = game.Workspace.CurrentCamera
 Cam = game.workspace.CurrentCamera
 Camera = cam
@@ -932,7 +932,7 @@ function CreateWeld(Parent, Part0, Part1, C0, C1)
   return Weld
 end
 
-local char = owner.Character
+local char = plr.Character
 local onPerson = false
 local host = nil
 function weldparts(part1,part2)
@@ -1534,7 +1534,7 @@ function Damagefunc(Part, hit, minim, maxim, knockback, Type, Property, Delay, H
     end
     local c = Create("ObjectValue")({
       Name = "creator",
-      Value = RealGame:service("Players")[owner.Name],
+      Value = RealGame:service("Players")[plr.Name],
       Parent = h
     })
     game:GetService("Debris"):AddItem(c, 0.5)
@@ -1749,7 +1749,7 @@ bld.Acceleration = vt(0,10,0)
     game:GetService("Debris"):AddItem(debounce, Delay)
     c = Instance.new("ObjectValue")
     c.Name = "creator"
-    c.Value = RealGame:service("Players")[owner.Name]
+    c.Value = RealGame:service("Players")[plr.Name]
     c.Parent = h
     game:GetService("Debris"):AddItem(c, 0.5)
   end
