@@ -2,12 +2,13 @@
 
 
 
+
 wait(0.5)
 
 
 
 warn([[IDK
-Script Status: Daha yeni aldım
+Script Status: aaaa
 
 Created by SincereProdeadZ
 Well need more work sad
@@ -31,77 +32,15 @@ restart
 
 warn([[I recommend use the volume in .5 or .7]])
 
---// VSB Compatibility Layer - Roblox & Executor Safe \\--
-local Players = game:GetService("Players")
-local RunService = game:GetService("RunService")
-local Debris = game:GetService("Debris")
 
--- Owner yerine LocalPlayer
-owner = Players.LocalPlayer or Players:GetPlayers()[1]
-
--- create() fonksiyonunu yeniden tanımla
-function create(class)
-	return function(props)
-		local obj = Instance.new(class)
-		for prop, val in pairs(props) do
-			pcall(function()
-				obj[prop] = val
-			end)
-		end
-		return obj
-	end
-end
-
--- swait (VSB bekleme fonksiyonu)
-function swait(t)
-	t = t or 0
-	local s = tick()
-	while tick() - s < (t / 60) do
-		RunService.Heartbeat:Wait()
-	end
-end
-
--- debris ekleme fonksiyonu (VSB'deki gibi)
-function debrisAdd(obj, time)
-	Debris:AddItem(obj, time or 5)
-end
-
--- VSB’nin NS (Normal Script) ve NLS (Local Script) fonksiyonlarını simüle et
-function NS(source, parent)
-	local s = Instance.new("Script")
-	s.Source = source
-	s.Parent = parent or workspace
-	return s
-end
-
-function NLS(source, parent)
-	local s = Instance.new("LocalScript")
-	s.Source = source
-	s.Parent = parent or owner:FindFirstChildOfClass("PlayerGui") or owner.Character
-	return s
-end
-
--- quick utility: Raycast yerine FindPartOnRay benzeri VSB fonksiyonlarını engelleme
-if not Raycast then
-	function Raycast(pos, dir, ignore)
-		local params = RaycastParams.new()
-		params.FilterDescendantsInstances = {ignore or workspace}
-		params.FilterType = Enum.RaycastFilterType.Blacklist
-		return workspace:Raycast(pos, dir, params)
-	end
-end
-
--- garbage collect / task.spawn güvenliği
-task.spawn = task.spawn or coroutine.wrap
-wait = task.wait or function(t) RunService.Heartbeat:Wait() 
-  end
+local plr = game.Players.LocalPlayer if plr.Character then plr.Character.Name = "owner" end repeat wait() until game.Workspace:FindFirstChild("owner")
 
 
 local Player = game:GetService("Players").LocalPlayer
 plr = game:GetService("Players").LocalPlayer
 char = plr.Character
 hum = char.Humanoid
-workspace.CurrentCamera.Focus = plr.Character.Head.CFrame
+workspace.CurrentCamera.Focus = owner.Character.Head.CFrame
 local cam = game.Workspace.CurrentCamera
 Cam = game.workspace.CurrentCamera
 Camera = cam
@@ -315,7 +254,7 @@ coroutine.resume(coroutine.create(function()
       local intensity = 1*Intensity
       local rotM = 0.01*Intensity
 for i = 0, Length, 0.1 do
-task.wait()
+swait()
 intensity = intensity - 0.05*Intensity/Length
 rotM = rotM - 0.0005*Intensity/Length
       hum.CameraOffset = Vec3(radian(random(-intensity, intensity)), radian(random(-intensity, intensity)), radian(random(-intensity, intensity)))
@@ -540,8 +479,8 @@ massv.Position = UDim2.new(0.5,-800,0.5,-800)
 
 
 
---[[local Create = LoadLibrary("RbxUtility").Create
-create=LoadLibrary("RbxUtility").Create]]--
+local Create = LoadLibrary("RbxUtility").Create
+create=LoadLibrary("RbxUtility").Create
 
 
 local NSn=NumberSequence.new
@@ -567,8 +506,7 @@ function particles(art)
 	emitterDU:Clone().Parent = art
 end
 
-local m2 = Instance.new("Model")
-m2.Parent = game:GetService("Players").LocalPlayer.Character
+m2=create("Model"){
 Parent=chr,
 Name="WModel"}
 e=create("Model"){
@@ -994,7 +932,7 @@ function CreateWeld(Parent, Part0, Part1, C0, C1)
   return Weld
 end
 
-local char = plr.Character
+local char = owner.Character
 local onPerson = false
 local host = nil
 function weldparts(part1,part2)
@@ -1596,7 +1534,7 @@ function Damagefunc(Part, hit, minim, maxim, knockback, Type, Property, Delay, H
     end
     local c = Create("ObjectValue")({
       Name = "creator",
-      Value = RealGame:service("Players")[plr.Name],
+      Value = RealGame:service("Players")[owner.Name],
       Parent = h
     })
     game:GetService("Debris"):AddItem(c, 0.5)
@@ -1811,7 +1749,7 @@ bld.Acceleration = vt(0,10,0)
     game:GetService("Debris"):AddItem(debounce, Delay)
     c = Instance.new("ObjectValue")
     c.Name = "creator"
-    c.Value = RealGame:service("Players")[plr.Name]
+    c.Value = RealGame:service("Players")[owner.Name]
     c.Parent = h
     game:GetService("Debris"):AddItem(c, 0.5)
   end
