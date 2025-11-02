@@ -48,7 +48,7 @@ local l = game:GetService("Lighting")
 local rs = game:GetService("RunService").RenderStepped
 ff = Instance.new("ForceField",char)
 ff.Visible = false
-ArtificialHB = Create("BindableEvent", script){
+
     Parent = script,
     Name = "Heartbeat",
 }
