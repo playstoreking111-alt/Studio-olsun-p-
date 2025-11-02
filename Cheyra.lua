@@ -46,7 +46,6 @@ local shot = 0
 local debris=game:service"Debris"
 local l = game:GetService("Lighting")
 local rs = game:GetService("RunService").RenderStepped
-local Create = LoadLibrary("RbxUtility").Create
 ff = Instance.new("ForceField",char)
 ff.Visible = false
 ArtificialHB = Create("BindableEvent", script){
