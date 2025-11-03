@@ -1,33 +1,6 @@
 local plr = game.Players.LocalPlayer if plr.Character then plr.Character.Name = "non" end repeat wait() until game.Workspace:FindFirstChild("non")
 
 
------OPTIONS
-local ToolName = "MeshPartAccessory" ----- the hats name on explorer/dex (not name in catalog)
-local NoSound = false ----- sound or no sound (Background Music)
-local OldModel = false ----- Use Old Model or your accessory
-
-local IsDead = false
-local StateMover = true
-
-local playerss = workspace.non
-local maybe = playerss[game.Players.LocalPlayer.Name][ToolName].Handle
-
-maybe:FindFirstChildOfClass("AlignPosition").Name = "AlignPosition2"
-maybe:FindFirstChildOfClass("AlignOrientation").Name = "AlignOrientation2"
-
-
-if maybe:FindFirstChild("AccessoryWeld") then maybe:FindFirstChild("AccessoryWeld"):Destroy() end
-if game.Players.LocalPlayer.Character[ToolName].Handle:FindFirstChild("AccessoryWeld") then game.Players.LocalPlayer.Character[ToolName].Handle:FindFirstChild("AccessoryWeld"):Destroy() end
-
-
-playerss.Torso.WaistBackAttachment.Position = Vector3.new(-0, -0, 0.6)
-playerss.Torso.WaistBackAttachment.Orientation = Vector3.new(-4.16, -179.28, 99.8)
-
-local CDDF = {}
-local DamageFling = function(DmgPer)
-	
-end
-
 cors = {}
 mas = Instance.new("Model",game:GetService("Lighting"))
 Model0 = Instance.new("Model")
