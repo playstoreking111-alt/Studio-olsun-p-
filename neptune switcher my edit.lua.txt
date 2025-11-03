@@ -1,5 +1,10 @@
- wait(2)
 
+
+
+wait(2)
+
+local plr = game.Players.LocalPlayer if plr.Character then plr.Character.Name = "non" end repeat wait() until game.Workspace:FindFirstChild("non")
+ 
 
 regplus = _G.regplus
 warn("Deeri's Neptune Switcher")
