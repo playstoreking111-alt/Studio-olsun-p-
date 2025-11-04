@@ -749,7 +749,7 @@ function refit()
 		end
 	end
 end
-Humanoid.Died:connect(function()
+--[[Humanoid.Died:connect(function()
 	refit()
 end)
 function ApplyDamage(Humanoid, Damage)
@@ -800,7 +800,7 @@ function ApplyAoE(POSITION, RANGE, MINDMG, MAXDMG, FLING, INSTAKILL)
 			end
 		end
 	end
-end
+end]]--
 function TemporalTemper()
 	ATTACK = true
 	Rooted = true
