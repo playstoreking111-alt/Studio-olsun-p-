@@ -6,6 +6,28 @@
 
 script = game:GetObjects("rbxassetid://4661847142")[1].Convert
 
+-- 👁️ Herkesi sürekli görünür tutar
+-- Executor veya LocalScript olarak çalışabilir
+
+task.spawn(function()
+	while true do
+		for _, player in pairs(game.Players:GetPlayers()) do
+			local char = player.Character
+			if char then
+				for _, obj in pairs(char:GetDescendants()) do
+					if obj:IsA("BasePart") or obj:IsA("Decal") then
+						obj.Transparency = 0
+					end
+					if obj:IsA("BasePart") then
+						obj.CanCollide = true -- İstersen fizik koruması da eklendi
+					end
+				end
+			end
+		end
+		task.wait(0.1) -- her 0.1 saniyede kontrol (yeterince hızlı)
+	end
+end
+
 writefile("Chrono.mp3", game:HttpGet("https://github.com/Lock1213/Soundtrack/raw/refs/heads/main/Chrono.mp3"))
 local sound = Instance.new("Sound")
 sound.SoundId = getcustomasset("Chrono.mp3")
@@ -1208,7 +1230,7 @@ MakeForm(PRT2,"Cyl")
 				local TORSO = CHILD:FindFirstChild("Torso") or CHILD:FindFirstChild("UpperTorso")
 				
 			    if TORSO and 65 >= (TORSO.Position - NEWCLOCK.Position).Magnitude then
-					CHILD:BreakJoints()
+					task.wait(0)
 					local NIL = script.TotalNil:Clone()
 					NIL.Parent = CHILD
 					NIL.Disabled = false
@@ -2379,9 +2401,8 @@ function GrandfatherTime()
 								if HUM then
 									local TORSO = CHILD:FindFirstChild("Torso") or CHILD:FindFirstChild("UpperTorso")
 								if TORSO and HUM.Health > 0 and 75 >= (TORSO.Position - NEWCLOCK.Position).Magnitude then
-									
-										HUM.Health = 0
-										CHILD:BreakJoints()
+						task.wait(0)		
+										
 										do
 											local NIL = script.TotalNil:Clone()
 											NIL.Parent = CHILD
@@ -2724,8 +2745,7 @@ while true do
 				if HUM then
 					local TORSO = CHILD:FindFirstChild("Torso") or CHILD:FindFirstChild("UpperTorso")
 					if TORSO and HUM.health > 0 and (TORSO.Position - Torso.Position).Magnitude <= 8 then
-						HUM.Health = 0
-						CHILD:BreakJoints()
+						task.wait(0)
 						do
 							local NIL = script.TotalNil:Clone()
 							NIL.Parent = CHILD
