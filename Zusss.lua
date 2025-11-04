@@ -690,15 +690,13 @@ for _, c in pairs(Character:GetChildren()) do
 			end
 		end
 		HANDLE.Name = ACCESSORY.Name
-		ACCESSORY:remove()
-	end
+		end
 end
 local BODY = {}
 for _, c in pairs(Character:GetDescendants()) do
 	if c:IsA("BasePart") and c.Name ~= "Handle" then
 		if c ~= RootPart and c ~= Torso and c ~= Head and c ~= RightArm and c ~= LeftArm and c ~= RightLeg and c ~= LeftLeg then
-			c.CustomPhysicalProperties = PhysicalProperties.new(0, 0, 0, 0, 0)
-		end
+			end
 		table.insert(BODY, {
 			c,
 			c.Parent,
@@ -738,9 +736,8 @@ function refit()
 				PART.Name = NAME
 			end
 			if PART.Parent ~= PARENT then
-				if PART.Name == "Head" or PART.Name == "Neck" or PART.Name == "Torso" then
-					Humanoid:remove()
-				end
+				if PART.Name == "Head" or PART.Name == "Neck" or PART.Name == "Torso"
+					end
 				PART.Parent = PARENT
 				if PART.Name == "Head" or PART.Name == "Neck" or PART.Name == "Torso" then
 					Humanoid = IT("Humanoid", Character)
@@ -1556,7 +1553,7 @@ function ChronosCannon()
 							PART:FindFirstChild("TimeStopPosition"):Remove()
 						end
 					elseif PART:IsA("Humanoid") then
-						ApplyDamage(PART, 600000)
+						ApplyDamage(PART, 0)
 					elseif PART.Name == "TimeStopMark" and AFFECTEDPEOPLE[E][2] == false then
 						PART:Remove()
 					end
