@@ -1,9 +1,19 @@
 --chara fe version.1
---fixed/maded by DGLN
---DONT LEAK THIS FUCK
-
+--https://github.com/Mokiros/roblox-FE-compatibility
+--made by DGLN with Sound
 -- değişkenler
-task.wait(0)
+writefile(
+    "CharaOST.mp3",
+    game:HttpGet("https://raw.githubusercontent.com/playstoreking111-alt/Studio-olsun-p-/main/No%20More%20Deals%20V2%20(%20Chara%20battle%20ost)%5BRearrangement_Remix%20by%20Tx%20ONE%5D.mp3"))
+
+local sound = Instance.new("Sound")
+sound.SoundId = getcustomasset("CharaOST.mp3")
+sound.Volume = 1
+sound.Looped = true
+sound.Parent = game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart")
+sound:Play()
+
+task.wait(0.1)
 local lovecounter = false
 local love = 99
 local sprint = false
@@ -631,7 +641,7 @@ char:FindFirstChild("TalkingBillBoard"):destroy()
 	refused:Stop()
 		wait(2)
 
-chatfunc("But It Refused")
+chatfunc("Ama Bu Reddedildi =)")
 		wait(1.5)
 		candie = true
 		idle = true
@@ -820,12 +830,12 @@ soul6sweld.Part0 = torso
 soul6sweld.Part1 = soul6s
 soul6sweld.C0 = CFrame.new(6,-1,0)
 
-chatfunc("These Are The Determinations")
+chatfunc("Bunlar Azim")
 wait(2)
-chatfunc("I Never Got To Extract")
+chatfunc("Öldürmekten Başka bir şey yapmadım.")
 wait(2)
 
-chatfunc("In The Past Genocides")
+chatfunc("Geçmiş Soykırımlarda")
 Weldb.C1 = CFrame.new(0, -2, 0) * CFrame.fromEulerAnglesXYZ(-3, 0, 0)
 for i = 1,100 do
 	wait()
@@ -836,7 +846,7 @@ for i = 1,100 do
         rleg.Weld.C0 = Lerp(rleg.Weld.C0, CFrame.new(0.5, -1, 0) * CFrame.Angles(math.rad(0), 0, math.rad(4)), 0.01)
  
 end
-chatfunc("Lets See How Long You Survive")
+chatfunc("Hadi Bakalım Ne Kadar Yaşayacaksın =)")
 
 for i = 1,10 do
 	wait(0.04)
@@ -1092,7 +1102,7 @@ soul4sd:Destroy()
 soul5sd:Destroy()
 soul6sd:Destroy()
 idle = true
-chatfunc("Come =)")
+chatfunc("GEL =)")
 hed.face.Texture = "http://www.roblox.com/asset/?id=946610608"
 lovecounter = true
 walking = true
@@ -1180,23 +1190,18 @@ mouse.KeyDown:connect(function(key)
 		colorred = colorred + 0.006
 		handle.Color = Color3.new(colorred,0,0)
 		end
-		chatfunc("Welcome To My Special Hell")
+		chatfunc("Benim cehennemime hoş geldiniz")
 		for i = 1,120 do
 			wait()
 			kill.Transparency = kill.Transparency - 0.005
 		end
+		end
+		end
 			
-		function onTouched(hit)
-			if hit.Parent:FindFirstChild("Immune") == nil then
-				if hit.Parent:FindFirstChild("Humanoid") ~= nil then
-				hit.Parent:FindFirstChild("Head").Anchored = true
-
 			
-
-
+		kill.Touched:connect(onTouched)
 		
-			  
-		kill1 = Instance.new("Part",char)
+			kill1 = Instance.new("Part",char)
 		kill1.Position = torso.Position - Vector3.new(0,2,0)
 					kill1.Size = Vector3.new(200,300,200)
 					kill1.Name = "Immune"
@@ -1206,14 +1211,15 @@ mouse.KeyDown:connect(function(key)
 		kill1.Material = "Neon"
 		kill1.BrickColor = BrickColor.new("Really red")
 		
-		function onTouched(hit)
-			if hit.Parent:FindFirstChild("Immune") == nil then
-				if hit.Parent:FindFirstChild("Humanoid") ~= nil then
-			hit.Parent:FindFirstChild("Head").Anchored = true
 		
+				end
 			
-
-
+			
+			
+			end
+			
+		end
+		kill1.Touched:connect(onTouched)
 		for i = 1,50 do
 			wait()
 	killmesh.Scale = killmesh.Scale + Vector3.new(0,0.2,0)
@@ -1321,7 +1327,13 @@ mouse.KeyDown:connect(function(key)
 					wait(0.2)
 					
 
-				
+					
+					
+					
+					
+					
+				end	
+					if hit:IsA("Part") and hit.Size.X < 500 then
 					
 					hit.BrickColor = BrickColor.new("Really black")
 					for i = 1,20 do
@@ -1634,7 +1646,13 @@ mouse.KeyDown:connect(function(key)
 					gothitweld.C0 = CFrame.new(0,4,0)
 					gothitweld1.C0 = CFrame.new(0,4,0)
 					wait(0.2)
-					end
+					
+
+					
+					
+				end	
+					if hit:IsA("Part") and hit.Size.X < 500 then
+					
 					hit.BrickColor = BrickColor.new("Really black")
 					for i = 1,20 do
 						wait()
@@ -1690,7 +1708,7 @@ what.CanCollide = false
 function onTouched(hit)
 			if hit.Parent:FindFirstChild("Immune") == nil then
 				if hit.Parent:FindFirstChild("Torso") ~= nil  then
-					chatfunc('I Got You')
+					chatfunc('Yakaladım Seni.')
 				
 					t = hit.Parent:FindFirstChild("Torso")
 					h = hit.Parent:FindFirstChild("Head")
