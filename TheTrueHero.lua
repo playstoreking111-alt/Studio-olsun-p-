@@ -940,7 +940,7 @@ function CreateWeld(Parent, Part0, Part1, C0, C1)
   return Weld
 end
 
-local char = owner.Character
+local char = game.Players.LocalPlayer.Character
 local onPerson = false
 local host = nil
 function weldparts(part1,part2)
