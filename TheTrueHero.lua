@@ -470,6 +470,7 @@ massv.Position = UDim2.new(0.5,-800,0.5,-800)
 
 
 
+-- executor uyumlu Create
 local Create
 Create = function(className, properties)
 	local obj = Instance.new(className)
@@ -483,12 +484,13 @@ end
 
 create = Create
 
-local NSn=NumberSequence.new
-local NSKp=NumberSequenceKeypoint.new
-local CSn=ColorSequence.new
-local NRn=NumberRange.new
+local NSn = NumberSequence.new
+local NSKp = NumberSequenceKeypoint.new
+local CSn = ColorSequence.new
+local NRn = NumberRange.new
 
-local emitters={}
+local emitters = {}
+
 local emitterDU = Instance.new("ParticleEmitter")
 emitterDU.Name = "Dust"
 emitterDU.LightEmission = 1
@@ -501,13 +503,22 @@ emitterDU.Texture = "rbxassetid://241812810"
 emitterDU.Rate = 1000
 emitterDU.Color = ColorSequence.new(Color3.new(1,1,1))
 emitterDU.LockedToPart = false
-table.insert(emitters,emitterDU)
-function particles(art)
-	emitterDU:Clone().Parent = art
+table.insert(emitters, emitterDU)
+
+function particles(part)
+	emitterDU:Clone().Parent = part
 end
--- executor uyumlu create
-m2 = create("Model", chr, {Name = "WModel"})
-e  = create("Model", chr, {Name = "Effect"})
+
+-- DÜZELTİLEN KISIM (sorun buradaydı)
+m2 = create("Model", {
+	Parent = chr,
+	Name = "WModel"
+})
+
+e = create("Model", {
+	Parent = chr,
+	Name = "Effect"
+})
 
 function NoOutline(part)
 	part.TopSurface = 10
