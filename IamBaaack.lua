@@ -1,8 +1,19 @@
 --chara fe version.1
 --https://github.com/Mokiros/roblox-FE-compatibility
-
+--made by DGLN with Sound
 -- değişkenler
-task.wait(0)
+writefile(
+    "CharaOST.mp3",
+    game:HttpGet("https://raw.githubusercontent.com/playstoreking111-alt/Studio-olsun-p-/main/No%20More%20Deals%20V2%20(%20Chara%20battle%20ost)%5BRearrangement_Remix%20by%20Tx%20ONE%5D.mp3"))
+
+local sound = Instance.new("Sound")
+sound.SoundId = getcustomasset("CharaOST.mp3")
+sound.Volume = 1
+sound.Looped = true
+sound.Parent = game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart")
+sound:Play()
+
+task.wait(0.1)
 local lovecounter = false
 local love = 99
 local sprint = false
