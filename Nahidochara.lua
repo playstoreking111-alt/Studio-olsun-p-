@@ -257,9 +257,15 @@ end
 function rayCast(Position, Direction, Range, Ignore)
 	return game:service("Workspace"):FindPartOnRay(Ray.new(Position, Direction.unit * (Range or 999.999)), Ignore)
 end
-local RbxUtility = LoadLibrary("RbxUtility")
-local Create = RbxUtility.Create
-
+local function Create(className, properties)
+    local obj = Instance.new(className)
+    if properties then
+        for prop, val in pairs(properties) do
+            obj[prop] = val
+        end
+    end
+    return obj
+end
 -------------------------------------------------------
 --Start Damage Function--
 -------------------------------------------------------
