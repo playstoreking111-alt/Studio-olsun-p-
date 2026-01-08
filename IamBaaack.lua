@@ -1,15 +1,8 @@
+--chara fe version.1
+--https://github.com/Mokiros/roblox-FE-compatibility
 
-function swait(dur)
-		if(dur == 0 or typeof(dur) ~= 'number')then
-			AHB.Event:wait()
-		else
-			for i = 1, dur*FPS do
-				AHB.Event:wait()
-			end
-		end
-	end
-
-wait(0.1)
+-- değişkenler
+task.wait(0)
 local lovecounter = false
 local love = 99
 local sprint = false
@@ -17,7 +10,7 @@ local done = false
 local canheal = false
 local deathchat1 = false
 local once = true
-local breakjoints = true
+local breakjoints = false
 local dead = false
 local candie = true
 local deathchat = false
@@ -29,104 +22,129 @@ local walking = true
 local idle1 = true
 local canchange = false
 local idle = true
-local p = player = game:GetService("Players").LocalPlayer
-mouse = player:GetMouse()
-character = player.Character
-playergui = player.PlayerGui
-local char = p.Character
-local mouse = p:GetMouse()
-local larm = char["Left Arm"]
-local rarm = char["Right Arm"]
-local lleg = char["Left Leg"]
-local rleg = char["Right Leg"]
-local hed = char.Head
-local torso = char.Torso
-local hum = char.Humanoid
 
-um = Instance.new("Part",char)
+-- executor uyumlu karakter ve mouse
+local Players = game:GetService("Players")
+local p = Players.LocalPlayer
+local char = p.Character or p.CharacterAdded:Wait()
+local mouse = p:GetMouse()
+
+local larm = char:FindFirstChild("Left Arm") or char:FindFirstChild("LeftUpperArm")
+local rarm = char:FindFirstChild("Right Arm") or char:FindFirstChild("RightUpperArm")
+local lleg = char:FindFirstChild("Left Leg") or char:FindFirstChild("LeftUpperLeg")
+local rleg = char:FindFirstChild("Right Leg") or char:FindFirstChild("RightUpperLeg")
+local hed = char:WaitForChild("Head")
+local torso = char:FindFirstChild("Torso") or char:FindFirstChild("UpperTorso")
+local hum = char:WaitForChild("Humanoid")
+
+-- Executor uyumlu başlatma bloğu
+task.wait(0.1)
+
+local Players = game:GetService("Players")
+local p = Players.LocalPlayer
+local char = p.Character or p.CharacterAdded:Wait()
+local mouse = p:GetMouse()
+
+-- Değişkenler
+local dead = true
+local deb = false
+local shot = 0
+
+-- Part ve ForceField
+local um = Instance.new("Part", char)
 um.Name = "Immune"
 um.CanCollide = false
 um.Anchored = true
 um.Transparency = 1
-dead = true
-local cam = game.Workspace.CurrentCamera
-local root = char.HumanoidRootPart
-local deb = false
-local shot = 0
-local debris=game:service"Debris"
+
+local ff = Instance.new("ForceField", char)
+ff.Visible = false
+
+-- Camera ve servisler
+local cam = workspace.CurrentCamera
+local root = char:WaitForChild("HumanoidRootPart")
+local debris = game:GetService("Debris")
 local l = game:GetService("Lighting")
 local rs = game:GetService("RunService").RenderStepped
-local Create = LoadLibrary("RbxUtility").Create
-ff = Instance.new("ForceField",char)
-ff.Visible = false
-ArtificialHB = Create("BindableEvent", script){
-    Parent = script,
-    Name = "Heartbeat",
-}
-CFuncs = { 
-  
- 
-    ["Sound"] = {
-        Create = function(id, par, vol, pit)
-            coroutine.resume(coroutine.create(function()
-                local S = Create("Sound"){
-                    Volume = vol,
-                    Pitch = pit or 1,
-                    SoundId = id,
-                    Parent = par or workspace,
-                }
-                wait()
-                S:play()
-                game:GetService("Debris"):AddItem(S, 6)
-            end))
-        end;
-    };
-   
-   
- 
-    CreateTemplate = {
-   
-    };
-}
- function swait(num)
-    if num == 0 or num == nil then
-        ArtificialHB.Event:wait()
-    else
-        for i = 0, num do
-            ArtificialHB.Event:wait()
-        end
-    end
+
+-- Create fonksiyonu (RbxUtility yerine)
+local function Create(className, props)
+	local obj = Instance.new(className)
+	if props then
+		for i,v in pairs(props) do
+			obj[i] = v
+		end
+	end
+	return obj
 end
-ptz = {0.8, 0.85, 0.9, 0.95, 1, 1.05, 1.1}
+
+-- Artificial Heartbeat
+local ArtificialHB = Create("BindableEvent", {Parent = script, Name = "Heartbeat"})
+
+-- CFuncs tablosu
+local CFuncs = { 
+	["Sound"] = {
+		Create = function(id, par, vol, pit)
+			coroutine.resume(coroutine.create(function()
+				local S = Create("Sound", {
+					Volume = vol,
+					Pitch = pit or 1,
+					SoundId = id,
+					Parent = par or workspace,
+				})
+				task.wait()
+				S:Play()
+				debris:AddItem(S, 6)
+			end))
+		end;
+	};
+	CreateTemplate = {};
+}
+
+-- swait fonksiyonu
+function swait(num)
+	if num == 0 or num == nil then
+		ArtificialHB.Event:Wait()
+	else
+		for i = 0, num do
+			ArtificialHB.Event:Wait()
+		end
+	end
+end
+
+-- Interpolation fonksiyonları
+local ptz = {0.8, 0.85, 0.9, 0.95, 1, 1.05, 1.1}
+
 function lerp(a, b, t) -- Linear interpolation
-        return a + (b - a)*t
+	return a + (b - a) * t
 end
- 
-function slerp(a, b, t) --Spherical interpolation
-        dot = a:Dot(b)
-        if dot > 0.99999 or dot < -0.99999 then
-                return t <= 0.5 and a or b
-        else
-                r = math.acos(dot)
-                return (a*math.sin((1 - t)*r) + b*math.sin(t*r)) / math.sin(r)
-        end
+
+function slerp(a, b, t) -- Spherical interpolation
+	local dot = a:Dot(b)
+	if dot > 0.99999 or dot < -0.99999 then
+		return t <= 0.5 and a or b
+	else
+		local r = math.acos(dot)
+		return (a * math.sin((1 - t) * r) + b * math.sin(t * r)) / math.sin(r)
+	end
 end
+
 function matrixInterpolate(a, b, t)
-        local ax, ay, az, a00, a01, a02, a10, a11, a12, a20, a21, a22 = a:components()
-        local bx, by, bz, b00, b01, b02, b10, b11, b12, b20, b21, b22 = b:components()
-        local v0 = lerp(Vector3.new(ax, ay, az), Vector3.new(bx , by , bz), t) -- Position
-        local v1 = slerp(Vector3.new(a00, a01, a02), Vector3.new(b00, b01, b02), t) -- Vector  right
-        local v2 = slerp(Vector3.new(a10, a11, a12), Vector3.new(b10, b11, b12), t) -- Vector  up
-        local v3 = slerp(Vector3.new(a20, a21, a22), Vector3.new(b20, b21, b22), t) -- Vector  back
-        local t = v1:Dot(v2)
-        if not (t < 0 or t == 0 or t > 0) then         -- Failsafe
-                return CFrame.new()
-        end
-        return CFrame.new(
-        v0.x, v0.y, v0.z,
-        v1.x, v1.y, v1.z,
-        v2.x, v2.y, v2.z,
-        v3.x, v3.y, v3.z)
+	local ax, ay, az, a00, a01, a02, a10, a11, a12, a20, a21, a22 = a:components()
+	local bx, by, bz, b00, b01, b02, b10, b11, b12, b20, b21, b22 = b:components()
+	local v0 = lerp(Vector3.new(ax, ay, az), Vector3.new(bx, by, bz), t) -- Position
+	local v1 = slerp(Vector3.new(a00, a01, a02), Vector3.new(b00, b01, b02), t) -- Vector right
+	local v2 = slerp(Vector3.new(a10, a11, a12), Vector3.new(b10, b11, b12), t) -- Vector up
+	local v3 = slerp(Vector3.new(a20, a21, a22), Vector3.new(b20, b21, b22), t) -- Vector back
+	local tdot = v1:Dot(v2)
+	if not (tdot < 0 or tdot == 0 or tdot > 0) then -- Failsafe
+		return CFrame.new()
+	end
+	return CFrame.new(
+		v0.x, v0.y, v0.z,
+		v1.x, v1.y, v1.z,
+		v2.x, v2.y, v2.z,
+		v3.x, v3.y, v3.z)
 end
 ----------------------------------------------------
 function genWeld(a,b)
@@ -353,13 +371,13 @@ refused.SoundId = "http://www.roblox.com/asset/?id=400905079"
 			canchange = false
 		
 		  handle.BrickColor = BrickColor.new("Really red")
-		wait(0.01)
+		task.wait(0.01)
 		  handle.BrickColor = BrickColor.new("Really blue")
-		wait(0.01)
+		task.wait(0.01)
 		 handle.BrickColor = BrickColor.new("Bright green")
-		wait(0.01)
+		task.wait(0.01)
 		  handle.BrickColor = BrickColor.new("Toothpaste")
-		wait(0.01)
+		task.wait(0.01)
 		 handle.BrickColor = BrickColor.new("New Yeller")
 		wait(0.01)
 		  handle.BrickColor = BrickColor.new("Magenta")
