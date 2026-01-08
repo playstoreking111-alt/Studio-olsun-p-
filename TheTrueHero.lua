@@ -505,101 +505,98 @@ table.insert(emitters,emitterDU)
 function particles(art)
 	emitterDU:Clone().Parent = art
 end
+-- executor uyumlu create
+m2 = create("Model", chr, {Name = "WModel"})
+e  = create("Model", chr, {Name = "Effect"})
 
-m2=create("Model"){
-Parent=chr,
-Name="WModel"}
-e=create("Model"){
-Parent=chr,
-Name="Effect"}
-
-function NoOutline(Part)
-Part.TopSurface,Part.BottomSurface,Part.LeftSurface,Part.RightSurface,Part.FrontSurface,Part.BackSurface = 10,10,10,10,10,10
+function NoOutline(part)
+	part.TopSurface = 10
+	part.BottomSurface = 10
+	part.LeftSurface = 10
+	part.RightSurface = 10
+	part.FrontSurface = 10
+	part.BackSurface = 10
 end
 
 function cwedges(Par,name,size,color,mat,ref,tra)
-local wedgez=create("CornerWedgePart"){
-Parent=Par,
-Name=name,
-Size=size,
-CanCollide=false,
-Anchored=false,
-BrickColor=BrickColor.new(color),
-Material=mat,
-Reflectance=ref,
-Transparency=tra}
---Position=Torso.Position}
-NoOutline(wedgez)
-wedgez:BreakJoints()
-return wedgez
+	local wedgez = create("CornerWedgePart", Par, {
+		Name = name,
+		Size = size,
+		CanCollide = false,
+		Anchored = false,
+		BrickColor = BrickColor.new(color),
+		Material = mat,
+		Reflectance = ref,
+		Transparency = tra
+	})
+	NoOutline(wedgez)
+	wedgez:BreakJoints()
+	return wedgez
 end
 
 function parts(Par,name,size,color,mat,ref,tra)
-local part=create("Part"){
-Parent=Par,
-Name=name,
-Size=size,
-CanCollide=false,
-Anchored=false,
-BrickColor=BrickColor.new(color),
-Material=mat,
-Reflectance=ref,
-Transparency=tra}
---Position=Torso.Position}
-NoOutline(part)
-part:BreakJoints()
-return part 
+	local part = create("Part", Par, {
+		Name = name,
+		Size = size,
+		CanCollide = false,
+		Anchored = false,
+		BrickColor = BrickColor.new(color),
+		Material = mat,
+		Reflectance = ref,
+		Transparency = tra
+	})
+	NoOutline(part)
+	part:BreakJoints()
+	return part
 end
 
 function meshs(Par,name,scale,mtype,id)
-local mesh=create("SpecialMesh"){
-Parent=Par,
-Name=name,
-Scale=scale,
-MeshType=mtype}
-if id~="" then
-mesh.MeshId="rbxassetid://"..id
-end
-return meshs
+	local mesh = create("SpecialMesh", Par, {
+		Name = name,
+		Scale = scale,
+		MeshType = mtype
+	})
+	if id and id ~= "" then
+		mesh.MeshId = "rbxassetid://"..id
+	end
+	return mesh
 end
 
 function welds(Par,name,p0,p1,c0,c1)
-local weld=create("Weld"){
-Parent=Par,
-Name=name,
-Part0=p0,
-Part1=p1,
-C0=c0,
-C1=c1}
-return weld
+	local weld = create("Weld", Par, {
+		Name = name,
+		Part0 = p0,
+		Part1 = p1,
+		C0 = c0,
+		C1 = c1
+	})
+	return weld
 end
 
 function sounds(Par,id,vol,pit,emitter)
-local sound=create("Sound"){
-Parent=Par,
-SoundId="rbxassetid://"..id,
-Volume=vol,
-PlaybackSpeed=pit,
-MaxDistance=66666666}
-if emitter~=nil then
-sound.EmitterSize=emitter
-end
-sound:Play()
-game:GetService("Debris"):AddItem(sound,10)
-return sound
+	local sound = create("Sound", Par, {
+		SoundId = "rbxassetid://"..id,
+		Volume = vol,
+		PlaybackSpeed = pit,
+		MaxDistance = 66666666
+	})
+	if emitter then
+		sound.EmitterSize = emitter
+	end
+	sound:Play()
+	game:GetService("Debris"):AddItem(sound,10)
+	return sound
 end
 
-
-function Weld(part0,part1,c0,c1)
+function Weld(part0, part1, c0, c1)
 	local weld = Instance.new("Weld")
 	weld.Parent = part0
 	weld.Part0 = part0
 	weld.Part1 = part1
-	weld.C0 = c0 or cf()
-	weld.C1 = c1 or cf()
+	weld.C0 = c0 or CFrame.new()
+	weld.C1 = c1 or CFrame.new()
 	return weld
 end
-
 
 
 
