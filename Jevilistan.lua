@@ -17,6 +17,11 @@ Enjoy ;)
 
 local Players = game:GetService("Players")
 local Player = Players.LocalPlayer
+local Character = Player.Character or Player.CharacterAdded:Wait()
+local Head = Character:WaitForChild("Head")
+
+local Players = game:GetService("Players")
+local Player = Players.LocalPlayer
 local PlayerGui = Player:WaitForChild("PlayerGui")
 local Cam = workspace.CurrentCamera
 local Backpack = Player:WaitForChild("Backpack")
@@ -80,10 +85,7 @@ function weld(a, b, acf)
 	return w
 end
 --------------------------------
-local face = char.Head:FindFirstChild("face")
-if face and face:IsA("Decal") then
-	face.Texture = "rbxassetid://241553801"
-end
+
 --------------------------------
 
 -------------------------------------------------------
