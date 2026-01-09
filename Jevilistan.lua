@@ -80,7 +80,10 @@ function weld(a, b, acf)
 	return w
 end
 --------------------------------
-char.Head.face.Texture = "rbxassetid://241553801"
+local face = char.Head:FindFirstChild("face")
+if face and face:IsA("Decal") then
+	face.Texture = "rbxassetid://241553801"
+end
 --------------------------------
 
 -------------------------------------------------------
