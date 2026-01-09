@@ -1,10 +1,6 @@
 --Undyne
-
-
-
-
-
-
+--made by berat
+--joke i just Fixed
 warn([[IDK
 Script Status: Fixed
 
