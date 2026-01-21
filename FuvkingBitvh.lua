@@ -1,4 +1,5 @@
--- Oyuncu ve karakter referanslarını al
+LocalPlayer.CharacterAdded:Wait()
+
 local plr = game.Players.LocalPlayer
 local char = plr.Character
 
