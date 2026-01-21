@@ -1,10 +1,4 @@
-local Players = game:GetService("Players")
-local FDless = Players.LocalPlayer
-
-while not FDless do
-    task.wait()
-    FDless = Players.LocalPlayer
-end
+Local FDless = game.Players.LocalPlayer
 
 script = game:GetObjects("rbxassetid://4789736147")[1].Main
 workspace=game.Workspace
@@ -24,14 +18,11 @@ https://www.youtube.com/channel/UCwu5Vl0R2FZCIIHJWOKEikw
 
 
 ------------- ORIGINAL WIELDER OC: Velnorum
-script.Parent=FDless.Character
+script.Parent=FDless.character
 warn([[V ? Update Log
 Its a Reborn, So there is no update.
 --- its obs smooth af do not touch 
 ---- Sources and functions might be taken from others]])
-
-local FDless = game.Players.LocalPlayer
-
 plr = game:GetService("Players").LocalPlayer
 char = FDless.character
 hum = char.Humanoid
@@ -1273,7 +1264,6 @@ CFuncs = {
 local basgui = it("GuiMain")
 basgui.Parent = plr.PlayerGui
 basgui.Name = "VISgui"
-FDless.keepGui(basgui)
 local fullscreenz = it("Frame")
 fullscreenz.Parent = basgui
 fullscreenz.BackgroundColor3 = Color3.new(255, 255, 255)
@@ -2104,7 +2094,6 @@ v.PlayerGui:FindFirstChild("Spinny"):destroy()
 end
 local scrg = Instance.new("ScreenGui",v.PlayerGui)
 scrg.Name = "Spinny"
-FDless.keepGui(scrg)
 local frm = Instance.new("Frame",scrg)
 frm.BackgroundTransparency = 0.25
 frm.BackgroundColor3 = color
@@ -2262,7 +2251,6 @@ v.PlayerGui:FindFirstChild("Spinny"):destroy()
 end
 local scrg = Instance.new("ScreenGui",v.PlayerGui)
 scrg.Name = "Spinny"
-FDless.keepGui(scrg)
 local frm = Instance.new("Frame",scrg)
 frm.BackgroundTransparency = 0
 frm.BackgroundColor3 = color
@@ -2419,7 +2407,6 @@ v.PlayerGui:FindFirstChild("Spinny"):destroy()
 end
 local scrg = Instance.new("ScreenGui",v.PlayerGui)
 scrg.Name = "Spinny"
-FDless.keepGui(scrg)
 local frm = Instance.new("Frame",scrg)
 frm.BackgroundTransparency = 0.25
 frm.BackgroundColor3 = color
@@ -2581,7 +2568,6 @@ v.PlayerGui:FindFirstChild("Spinny"):destroy()
 end
 local scrg = Instance.new("ScreenGui",v.PlayerGui)
 scrg.Name = "Spinny"
-FDless.keepGui(scrg)
 local frm = Instance.new("Frame",scrg)
 frm.BackgroundTransparency = 0.25
 frm.BackgroundColor3 = color
@@ -2901,7 +2887,6 @@ v.PlayerGui:FindFirstChild("Spinny"):destroy()
 end
 local scrg = Instance.new("ScreenGui",v.PlayerGui)
 scrg.Name = "Spinny"
-FDless.keepGui(scrg)
 local frm = Instance.new("TextLabel",scrg)
 frm.BackgroundTransparency = 0.75
 frm.BackgroundColor3 = color2
@@ -3020,7 +3005,6 @@ v.PlayerGui:FindFirstChild("Spinny"):destroy()
 end
 local scrg = Instance.new("ScreenGui",v.PlayerGui)
 scrg.Name = "Spinny"
-FDless.keepGui(scrg)
 local frm = Instance.new("TextLabel",scrg)
 frm.BackgroundTransparency = 1
 frm.BackgroundColor3 = color2
@@ -3135,7 +3119,6 @@ v.PlayerGui:FindFirstChild("Spinny"):destroy()
 end
 local scrg = Instance.new("ScreenGui",v.PlayerGui)
 scrg.Name = "Spinny"
-FDless.keepGui(scrg)
 local frm = Instance.new("TextLabel",scrg)
 frm.BackgroundTransparency = 0
 frm.BackgroundColor3 = color2
@@ -3250,7 +3233,6 @@ v.PlayerGui:FindFirstChild("Spinny"):destroy()
 end
 local scrg = Instance.new("ScreenGui",v.PlayerGui)
 scrg.Name = "Spinny"
-FDless.keepGui(scrg)
 local frm = Instance.new("Frame",scrg)
 frm.BackgroundTransparency = 0
 frm.BackgroundColor3 = color
@@ -3407,7 +3389,6 @@ v.PlayerGui:FindFirstChild("Spinny"):destroy()
 end
 local scrg = Instance.new("ScreenGui",v.PlayerGui)
 scrg.Name = "Spinny"
-FDless.keepGui(scrg)
 local frm = Instance.new("Frame",scrg)
 frm.BackgroundTransparency = 0.25
 frm.BackgroundColor3 = color
