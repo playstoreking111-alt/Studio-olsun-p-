@@ -1,89 +1,142 @@
--- Oyuncu ve karakter referanslarını al
-local plr = game.Players.LocalPlayer
-local char = plr.Character
+wait(.25)
 
--- Sword ve Accessory isimlerini düzenle (sadece kendi karakterine uygulanır)
-local swords = {
-    {"MeshPartAccessory", "Sword1"},
-    {"BladeMasterAccessory", "Sword2"},
-    {"MeshPartAccessory", "Sword3"},
-    {"MeshPartAccessory", "Sword4"},
-    {"ShadowBladeMasterAccessory", "Sword5"},
-    {"MeshPartAccessory", "Sword9"}
+spawn(function()
+
+player = nil
+Character = nil
+Player = nil
+aerguijhdfcvkejigknfd = "your mom"
+fury = false
+script = game:GetObjects("rbxassetid://7686260524")[1].LastStar
+
+wing1, wing2, wing3, wing4, wing5, wing6, wing7, wing8, wing9, wing10, wing11, wing12 =
+	script.Wing:Clone(), script.Wing:Clone(), script.Wing:Clone(), script.Wing:Clone(),
+	script.Wing:Clone(), script.Wing:Clone(), script.Wing:Clone(), script.Wing:Clone(),
+	script.Wing:Clone(), script.Wing:Clone(), script.Wing:Clone(), script.Wing:Clone()
+
+
+
+local plr = game.Players.LocalPlayer.Character
+
+
+
+function CreateCustomRemote()
+	local b1 = Instance.new("BindableEvent")
+	local b2 = Instance.new("BindableEvent")
+	return {
+		FireServer = function(_, ...) b1:Fire(Player, ...) end,
+		FireAllClients = function(_, ...) b2:Fire(...) end,
+		FireClient = function(_, _, ...) b2:Fire(...) end,
+		OnClientEvent = b1.Event,
+		OnServerEvent = b2.Event,
+	}
+end
+
+EffectEvent = CreateCustomRemote()
+CamShakeEvent = CreateCustomRemote()
+
+CFA = function(X,Y,Z) return CFrame.Angles(math.rad(X),math.rad(Y),math.rad(Z)) end
+CFN = CFrame.new
+V3 = Vector3.new
+C3R,C3H,C3N = Color3.fromRGB,Color3.fromHSV,Color3.new
+
+plr.Humanoid.MaxHealth = 1000000
+plr.Humanoid.Health = 1000000
+
+rs = game:GetService("RunService")
+heartbeat = rs.Heartbeat
+
+plr:WaitForChild("Humanoid")
+local a = Instance.new("Animation",plr.Humanoid)
+a.AnimationId = "rbxassetid://6456177076"
+local s = plr.Humanoid:LoadAnimation(a)
+s.Priority = Enum.AnimationPriority.Action
+s:Play()
+
+wait(.1)
+local x = plr:FindFirstChild("Animate")
+local y = plr.Humanoid:FindFirstChildOfClass("Animator")
+if x then x:Destroy() end
+if y then y:Destroy() end
+
+nametodisplay = string.upper(plr.Name)
+
+torsocframe,LAcframe,RAcframe,headcframe,LLcframe,RLcframe = CFN(),CFN(),CFN(),CFN(),CFN(),CFN()
+mousecframe,mousetarget = nil,nil
+
+bindingevent5 = Instance.new("BindableEvent")
+bindingevent6 = Instance.new("BindableEvent")
+
+MouseCFrame = {
+	FireServer = function(_, ...) bindingevent5:Fire(Player, ...) end,
+	FireAllClients = function(_, ...) bindingevent6:Fire(...) end,
+	FireClient = function(_, _, ...) bindingevent6:Fire(...) end,
+	OnClientEvent = bindingevent6.Event,
+	OnServerEvent = bindingevent5.Event,
 }
 
-for _, info in ipairs(swords) do
-    local acc = char:FindFirstChild(info[1])
-    if acc then
-        acc.Name = info[2]
-    end
+MouseCFrame.OnServerEvent:Connect(function(player,mcf,mt,torsocf,lacf,racf,headcf,llcf,rlcf)
+	mousecframe = mcf
+	mousetarget = mt
+	if torsocf then
+		torsocframe = torsocf
+		LAcframe = lacf
+		RAcframe = racf
+		LLcframe = llcf
+		RLcframe = rlcf
+		headcframe = headcf
+	end
+end)
+
+local tweens = game:GetService("TweenService")
+
+end)
+
+-- GIVES PLAYERS THE CFRAME SCRIPT
+--[[for i,v in pairs(workspace:GetChildren()) do
+	if game.Players:FindFirstChild(v.Name) then
+		if not v:FindFirstChild("CFrame"..plr.Name) then
+			local a = script.LocalCFrame:Clone()
+			a.Owner.Value = plr.Name
+			a.Parent = v
+			a.Name = "CFrame"..plr.Name
+			a.Disabled=false
+			plr.Humanoid.Died:Connect(function()
+				a:Destroy()
+			end)
+		end
+		if not v:FindFirstChild("LastStarEffects") then -- ADDS THE EFFECTS
+			local a = script.LastStarEffects:Clone()
+			a.Parent = v
+			a.Disabled=false
+		end
+	end
 end
 
-wait(0.25)
-
--- Kanat scripti
-local scriptModel = game:GetObjects("rbxassetid://7686260524")[1].LastStar
-
--- Kanatları klonla
-local wings = {}
-for i = 1, 12 do
-    wings[i] = scriptModel.Wing:Clone()
+-- MAKES A STARTERPLAYER CFRAME SCRIPT
+if not game.StarterPlayer.StarterCharacterScripts:WaitForChild("CFrame"..plr.Name,.5) then
+	local a = script.LocalCFrame:Clone()
+	a.Owner.Value = plr.Name
+	a.Parent = game.StarterPlayer.StarterCharacterScripts
+	a.Name = "CFrame"..plr.Name
+	a.Disabled=false
+end
+if not game.StarterPlayer.StarterCharacterScripts:WaitForChild("LastStarEffects",.5) then -- ADDS EFFECTS
+	local a = script.LastStarEffects:Clone()
+	a.Parent = game.StarterPlayer.StarterCharacterScripts
+	a.Disabled=false
 end
 
--- Fonksiyon: iki objeyi birbirine sabitle
-local function Attachments(P0, P1, POS, ORI)
-    local AlignPosition = Instance.new("AlignPosition", P0)
-    local AlignOrientation = Instance.new("AlignOrientation", P0)
-    local Attachment1 = Instance.new("Attachment", P0)
-    local Attachment2 = Instance.new("Attachment", P1)
+-- SAFETY CHECK FOR DESTROYING ALL CFRAME SCRIPTS
+plr.Humanoid.Died:Connect(function()
+	for i,v in pairs(workspace:GetDescendants()) do
+		if v:IsA("LocalScript") and v.Name == "CFrame"..plr.Name then
+			v:Destroy()
+		end
+	end
+end)
 
-    AlignPosition.MaxForce = 9e9
-    AlignOrientation.MaxTorque = 9e9
-    AlignPosition.Responsiveness = 9e9
-    AlignOrientation.Responsiveness = 9e9
-
-    AlignPosition.Attachment0 = Attachment1
-    AlignOrientation.Attachment0 = Attachment1
-    AlignPosition.Attachment1 = Attachment2
-    AlignOrientation.Attachment1 = Attachment2
-
-    Attachment1.Position = POS
-    Attachment1.Orientation = ORI
-end
-
--- Kanatları kılıçlara tak
-local swordList = {"Sword1", "Sword2", "Sword3", "Sword4", "Sword5", "Sword9"}
-for i, swordName in ipairs(swordList) do
-    local sword = char:FindFirstChild(swordName)
-    if sword and sword:FindFirstChild("Handle") then
-        local handle = sword.Handle
-        if handle:FindFirstChild("AccessoryWeld") then
-            handle.AccessoryWeld:Destroy()
-        end
-        Attachments(handle, wings[i].Primary, Vector3.new(-2,-1.5,0), Vector3.new(0,0,90))
-        handle.Attachment.Position = Vector3.new(-2.5, -2.5, 0)
-        handle.Attachment.Orientation = Vector3.new(0, 0, -135)
-    end
-end
-
--- Basit animasyon: sadece kendi karakterin
-local humanoid = char:FindFirstChildOfClass("Humanoid")
-if humanoid then
-    humanoid.MaxHealth = 1000000
-    humanoid.Health = 1000000
-
-    local anim = Instance.new("Animation")
-    anim.AnimationId = "rbxassetid://6456177076"
-    local playAnim = humanoid:LoadAnimation(anim)
-    playAnim.Priority = Enum.AnimationPriority.Action
-    playAnim:Play()
-end
-
--- Animate ve Animator scriptlerini temizle (sadece kendi karakterin)
-local animateScript = char:FindFirstChild("Animate")
-if animateScript then animateScript:Destroy() end
-local animator = humanoid:FindFirstChild("Animator")
-if animator then animator:Destroy() end
+script.LocalCFrame:Destroy()]]
 
  Head = plr:WaitForChild("Head")
  Torso = plr:WaitForChild("Torso")
