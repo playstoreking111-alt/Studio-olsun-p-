@@ -1,4 +1,10 @@
+local Players = game:GetService("Players")
+local FDless = Players.LocalPlayer
 
+while not FDless do
+    task.wait()
+    FDless = Players.LocalPlayer
+end
 
 script = game:GetObjects("rbxassetid://4789736147")[1].Main
 workspace=game.Workspace
@@ -18,7 +24,7 @@ https://www.youtube.com/channel/UCwu5Vl0R2FZCIIHJWOKEikw
 
 
 ------------- ORIGINAL WIELDER OC: Velnorum
-script.Parent=FDless.character
+script.Parent=FDless.Character
 warn([[V ? Update Log
 Its a Reborn, So there is no update.
 --- its obs smooth af do not touch 
