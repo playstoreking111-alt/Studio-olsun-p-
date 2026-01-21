@@ -1,5 +1,3 @@
- "Script RE-Made by: Ronald McDonald SS dev#219"
-
 local fury = false
 local chatlines = true
 local AnimationPlayer = game:GetObjects("rbxassetid://12088767913")[1]
