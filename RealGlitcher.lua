@@ -1,70 +1,295 @@
 game.Players.LocalPlayer.Character = game.Players.LocalPlayer.Character
 -- idk any lua but np
--- 1. ADIM: KARAKTERİ SABİTLE (BOZMA)
-local player = game.Players.LocalPlayer
-local char = player.Character
-local hum = char:WaitForChild("Humanoid")
-local torso = char:WaitForChild("Torso")
+    
+game.Players.LocalPlayer.Character["MeshPartAccessory"].Name = "Sword1"
 
--- 2. ADIM: KILIÇLARI HAZIRLA (Sadece İsimlendirme)
-pcall(function()
-    char["MeshPartAccessory"].Name = "Sword1"
-    char["BladeMasterAccessory"].Name = "Sword2"
-    char["ShadowBladeMasterAccessory"].Name = "Sword5"
-    -- Sword3, 4 ve 9 için de gerekirse benzer isimlendirmeler yapılabilir
-end)
+game.Players.LocalPlayer.Character["BladeMasterAccessory"].Name = "Sword2"
+game.Players.LocalPlayer.Character["MeshPartAccessory"].Name = "Sword3"
+game.Players.LocalPlayer.Character["MeshPartAccessory"].Name = "Sword4"
+game.Players.LocalPlayer.Character["ShadowBladeMasterAccessory"].Name = "Sword5"
+game.Players.LocalPlayer.Character["MeshPartAccessory"].Name = "Sword9"	
 
--- 3. ADIM: GEREKLİ MATEMATİK VE SİSTEM FONKSİYONLARI (SİLME!)
--- Bunlar animasyonların çalışması için şart.
-CFA = function(X,Y,Z) return(CFrame.Angles(math.rad(X),math.rad(Y),math.rad(Z))) end
+
+
+
+wait(.25)
+
+spawn(function()
+
+player = nil
+Character = nil
+Player = nil
+ aerguijhdfcvkejigknfd = "your mom"
+ fury = false
+ script = game:GetObjects("rbxassetid://7686260524")[1].LastStar
+ wing1, wing2, wing3, wing4, wing5, wing6, wing7,wing8,wing9,wing10,wing11,wing12 = script.Wing:Clone(), script.Wing:Clone(), script.Wing:Clone(), script.Wing:Clone(), script.Wing:Clone(), script.Wing:Clone(),script.Wing:Clone(), script.Wing:Clone(), script.Wing:Clone(), script.Wing:Clone(), script.Wing:Clone(), script.Wing:Clone()
+
+function Attachments(P0,P1,POS,ORI)
+    local AlignPosition = Instance.new("AlignPosition", P0)
+    local AlignOrientation = Instance.new("AlignOrientation", P0)
+    local Attachment1 = Instance.new("Attachment", P0)
+    local Attachment2 = Instance.new("Attachment", P1)
+    AlignPosition.MaxForce = 9e9
+    AlignOrientation.MaxTorque = 9e9
+    AlignPosition.Responsiveness = 9e9
+    AlignOrientation.Responsiveness = 9e9
+    
+    AlignPosition.Attachment0 = Attachment1
+    AlignOrientation.Attachment0 = Attachment1
+    AlignPosition.Attachment1 = Attachment2
+    AlignOrientation.Attachment1 = Attachment2
+    
+    Attachment1.Position = Vector3.new(-2,-1.5,0)
+    Attachment1.Orientation = Vector3.new(0, 0, 90)
+end
+
+AmogusWeldSus = game.Players.LocalPlayer.Character
+
+local S1 = AmogusWeldSus.Sword1.Handle
+
+S1.AccessoryWeld:Destroy()
+
+Attachments(S1,wing1.Primary,Vector3.new(-2,-1.5,0),Vector3.new(0, 0, 90))
+game.Players.LocalPlayer.Character.Sword1.Handle.Attachment.Position = Vector3.new(-2.5, -2.5, 0)
+game.Players.LocalPlayer.Character.Sword1.Handle.Attachment.Orientation = Vector3.new(-0, 0, -135)
+
+AmogusWeldSuss = game.Players.LocalPlayer.Character
+
+local S1 = AmogusWeldSuss.Sword2.Handle
+
+S1.AccessoryWeld:Destroy()
+
+Attachments(S1,wing2.Primary,Vector3.new(-2,-1.5,0),Vector3.new(0, 0, 105))
+game.Players.LocalPlayer.Character.Sword2.Handle.Attachment.Position = Vector3.new(-2.5, -2.3, 0)
+game.Players.LocalPlayer.Character.Sword2.Handle.Attachment.Orientation = Vector3.new(-0, 0, -130)
+
+local S1 = AmogusWeldSus.Sword3.Handle
+
+S1.AccessoryWeld:Destroy()
+
+Attachments(S1,wing3.Primary,Vector3.new(-2,-1.5,0),Vector3.new(0, 0, 90))
+game.Players.LocalPlayer.Character.Sword3.Handle.Attachment.Position = Vector3.new(-2.5, -2.5, 0)
+game.Players.LocalPlayer.Character.Sword3.Handle.Attachment.Orientation = Vector3.new(-0, 0, -135)
+
+local S1 = AmogusWeldSus.Sword4.Handle
+
+S1.AccessoryWeld:Destroy()
+
+Attachments(S1,wing4.Primary,Vector3.new(-2,-1.5,0),Vector3.new(0, 0, 90))
+game.Players.LocalPlayer.Character.Sword4.Handle.Attachment.Position = Vector3.new(-2.5, -2.5, 0)
+game.Players.LocalPlayer.Character.Sword4.Handle.Attachment.Orientation = Vector3.new(-0, 0, -135)
+
+
+
+local S1 = AmogusWeldSuss.Sword5.Handle
+
+S1.AccessoryWeld:Destroy()
+
+Attachments(S1,wing5.Primary,Vector3.new(-2,-1.5,0),Vector3.new(0, 0, 105))
+game.Players.LocalPlayer.Character.Sword5.Handle.Attachment.Position = Vector3.new(-2.5, -2.3, 0)
+game.Players.LocalPlayer.Character.Sword5.Handle.Attachment.Orientation = Vector3.new(-0, 0, -130)
+
+
+
+local S1 = AmogusWeldSus.Sword9.Handle
+
+S1.AccessoryWeld:Destroy()
+
+Attachments(S1,wing6.Primary,Vector3.new(-2,-1.5,0),Vector3.new(0, 0, 90))
+game.Players.LocalPlayer.Character.Sword9.Handle.Attachment.Position = Vector3.new(-2.5, -2.5, 0)
+game.Players.LocalPlayer.Character.Sword9.Handle.Attachment.Orientation = Vector3.new(-0, 0, -135)
+
+--[[
+
+Script written from scratch by Asarii_IV.
+A month-long project orientated around creating the ultimate multi-purpose glitcher.
+
+Credits:
+Asarii_IV - Original creator and owner.
+StratopshericAero - CFrame animation base.
+GunsForGunsKidd - CFrame animation rigs.
+
+]]
+
+-- /// CORE FUNCTIONS
+
+function CreateCustomRemote()
+local bindingevent10 = Instance.new("BindableEvent")
+local bindingevent11 = Instance.new("BindableEvent")
+local SwitchEvent = {
+	FireServer = function(amongus, ...) bindingevent10:Fire(Player, ...) end,
+	FireAllClients = function(amongus, ...) bindingevent11:Fire(...) end,
+	FireClient = function(amongus, player, ...) bindingevent11:Fire(...) end,
+	OnClientEvent = bindingevent10.Event,
+	OnServerEvent = bindingevent11.Event,
+}
+return SwitchEvent
+end
+EffectEvent = CreateCustomRemote()
+CamShakeEvent = CreateCustomRemote()
+CFA = function(X,Y,Z)
+	return(CFrame.Angles(math.rad(X),math.rad(Y),math.rad(Z)))
+end
 CFN = CFrame.new
 V3 = Vector3.new
-sine = 0
-rs = game:GetService("RunService")
-heartbeat = rs.Heartbeat
-
--- 4. ADIM: KANATLARI ÇEK VE TAK (Dönme Yapmaz)
-local assets = game:GetObjects("rbxassetid://7686260524")[1].LastStar
-wing1, wing2, wing3, wing4, wing5, wing6, wing7, wing8, wing9, wing10, wing11, wing12 = 
-    assets.Wing:Clone(), assets.Wing:Clone(), assets.Wing:Clone(), assets.Wing:Clone(), 
-    assets.Wing:Clone(), assets.Wing:Clone(), assets.Wing:Clone(), assets.Wing:Clone(), 
-    assets.Wing:Clone(), assets.Wing:Clone(), assets.Wing:Clone(), assets.Wing:Clone()
-
-local function EasyAttach(w, target)
-    w.Parent = char
-    local m = Instance.new("Motor6D", target)
-    m.Part0 = target
-    m.Part1 = w.PrimaryPart or w:FindFirstChild("Core")
-    m.C0 = CFN(0,0,1)
+function rand(x,z)
+	return(math.random(x,z))
+end
+function CFR(nX,mX,nY,mY,nZ,mZ)
+	return (CFrame.Angles(math.rad(rand(nX,nX)),math.rad(rand(nY,mY)),math.rad(rand(nZ,mZ))))
 end
 
--- Kanatları sırayla tak
-for _, w in pairs({wing1, wing2, wing3, wing4, wing5, wing6, wing7, wing8, wing9, wing10, wing11, wing12}) do
-    EasyAttach(w, torso)
+ In,Out,InOut = Enum.EasingDirection.In,Enum.EasingDirection.Out,Enum.EasingDirection.InOut
+ Linear,Sine,Quad,Quart,Quint,Back,Bounce,Elastic = Enum.EasingStyle.Linear,Enum.EasingStyle.Sine,Enum.EasingStyle.Quad,Enum.EasingStyle.Quart,Enum.EasingStyle.Quint,Enum.EasingStyle.Back,Enum.EasingStyle.Bounce,Enum.EasingStyle.Elastic
+ Expo,Circular,Cubic = Enum.EasingStyle.Exponential,Enum.EasingStyle.Circular,Enum.EasingStyle.Cubic
+
+ Neon,Forcefield = Enum.Material.Neon,Enum.Material.ForceField
+
+C3R,C3H,C3N = Color3.fromRGB,Color3.fromHSV,Color3.new
+
+
+ plr = game.Players.LocalPlayer.Character
+plr.Humanoid.MaxHealth = 1000000
+plr.Humanoid.Health = 1000000
+
+ sine = 0
+ kevingaming = 0
+
+ rs = game:GetService("RunService")
+ heartbeat = rs.Heartbeat
+
+plr:WaitForChild("Humanoid")
+local a = Instance.new("Animation",plr.Humanoid)
+a.AnimationId = "rbxassetid://6456177076"
+local s = plr.Humanoid:LoadAnimation(a)
+s.Priority = Enum.AnimationPriority.Action
+s:Play()
+wait(.1)
+ x = plr:FindFirstChild("Animate")
+ y = plr:FindFirstChildOfClass("Humanoid"):FindFirstChild("Animator")
+if x then x:Destroy() end
+if y then y:Destroy() end
+ nametodisplay = string.upper(plr.Name)
+
+ torsocframe,LAcframe,RAcframe,headcframe,LLcframe,RLcframe = CFN(),CFN(),CFN(),CFN(),CFN(),CFN()
+ mousecframe,mousetarget = nil,nil
+bindingevent5 = Instance.new("BindableEvent")
+bindingevent6 = Instance.new("BindableEvent")
+MouseCFrame = {
+	FireServer = function(amongus, ...) bindingevent5:Fire(Player, ...) end,
+	FireAllClients = function(amongus, ...) bindingevent6:Fire(...) end,
+	FireClient = function(amongus, player, ...) bindingevent6:Fire(...) end,
+	OnClientEvent = bindingevent6.Event,
+	OnServerEvent = bindingevent5.Event,
+}
+MouseCFrame.OnServerEvent:Connect(function(player,mcf,mt,torsocf,lacf,racf,headcf,llcf,rlcf)
+	if mcf ~= nil then
+		mousecframe = mcf
+	else
+		mousecframe = nil
+	end
+	if mt ~= nil then
+		mousetarget = mt
+	else
+		mousetarget = nil
+	end
+	if torsocf then
+		torsocframe = torsocf
+		LAcframe = lacf
+		RAcframe = racf
+		LLcframe = llcf
+		RLcframe = rlcf
+		headcframe = headcf
+	end
+end)
+
+for i,v in pairs(plr:GetChildren()) do
+	if v:IsA("CharacterMesh") or v:IsA("Accessory") then
+		local a = v:Clone()
+		a.Parent = script.TeleportEffect
+		if a:IsA("Accessory") then
+			local handle = a:FindFirstChildOfClass("Part")
+			if handle then
+				handle.Transparency = .5
+				local mesh = handle:FindFirstChildOfClass("SpecialMesh")
+				if mesh then
+					mesh.TextureId = ""
+				end
+			end
+			for _,c in pairs(a:GetDescendants()) do
+				if c:IsA("Sparkles") or c:IsA("Smoke") or c:IsA("Fire") then
+					c:Destroy()
+				end
+			end
+		end
+	end
 end
 
--- 5. ADIM: ANİMASYON DURDURUCU (Zorunlu)
-if char:FindFirstChild("Animate") then char.Animate:Destroy() end
-local animator = hum:FindFirstChildOfClass("Animator")
-if animator then animator:Destroy() end
+ teleportfx = script.TeleportEffect
+teleportfx.Parent = nil
 
-print("Karakter korundu, gereksiz Reanimate kısımları silindi.")
+local tweens = game:GetService("TweenService")
 
+-- GIVES PLAYERS THE CFRAME SCRIPT
+--[[for i,v in pairs(workspace:GetChildren()) do
+	if game.Players:FindFirstChild(v.Name) then
+		if not v:FindFirstChild("CFrame"..plr.Name) then
+			local a = script.LocalCFrame:Clone()
+			a.Owner.Value = plr.Name
+			a.Parent = v
+			a.Name = "CFrame"..plr.Name
+			a.Disabled=false
+			plr.Humanoid.Died:Connect(function()
+				a:Destroy()
+			end)
+		end
+		if not v:FindFirstChild("LastStarEffects") then -- ADDS THE EFFECTS
+			local a = script.LastStarEffects:Clone()
+			a.Parent = v
+			a.Disabled=false
+		end
+	end
+end
 
- Head = char:WaitForChild("Head")
- Torso = char:WaitForChild("Torso")
- Root = char:WaitForChild("HumanoidRootPart")
- LA = char:WaitForChild("Left Arm")
- RA = char:WaitForChild("Right Arm")
- LL = char:WaitForChild("Left Leg")
- RL = char:WaitForChild("Right Leg")
+-- MAKES A STARTERPLAYER CFRAME SCRIPT
+if not game.StarterPlayer.StarterCharacterScripts:WaitForChild("CFrame"..plr.Name,.5) then
+	local a = script.LocalCFrame:Clone()
+	a.Owner.Value = plr.Name
+	a.Parent = game.StarterPlayer.StarterCharacterScripts
+	a.Name = "CFrame"..plr.Name
+	a.Disabled=false
+end
+if not game.StarterPlayer.StarterCharacterScripts:WaitForChild("LastStarEffects",.5) then -- ADDS EFFECTS
+	local a = script.LastStarEffects:Clone()
+	a.Parent = game.StarterPlayer.StarterCharacterScripts
+	a.Disabled=false
+end
+
+-- SAFETY CHECK FOR DESTROYING ALL CFRAME SCRIPTS
+plr.Humanoid.Died:Connect(function()
+	for i,v in pairs(workspace:GetDescendants()) do
+		if v:IsA("LocalScript") and v.Name == "CFrame"..plr.Name then
+			v:Destroy()
+		end
+	end
+end)
+
+script.LocalCFrame:Destroy()]]
+
+ Head = plr:WaitForChild("Head")
+ Torso = plr:WaitForChild("Torso")
+ Root = plr:WaitForChild("HumanoidRootPart")
+ LA = plr:WaitForChild("Left Arm")
+ RA = plr:WaitForChild("Right Arm")
+ LL = plr:WaitForChild("Left Leg")
+ RL = plr:WaitForChild("Right Leg")
 
  RCF = Root.CFrame
  RV = Root.Velocity/4
 
  count = 0
  Loudness = 0
- core = assets.Core:Clone() 
+ core = script.Core
 
 for i,v in pairs(core:GetDescendants()) do
     if v:IsA('BasePart') then
@@ -72,12 +297,11 @@ for i,v in pairs(core:GetDescendants()) do
 	end
 end
 core.Base.Anchored=false
-core.Parent = char
- w = Instance.new("Motor6D",core.Base)
+core.Parent = plr
+ w = Instance.new("Motor6D",core)
 w.Part0 = core.Base
 w.Part1 = Torso
 w.Name = "CoreWeld"
-
 
 local W1PC,W1SC = wing1.Primary.Color,wing1.Secondary.Color
 for i,v in ipairs({wing1,wing2,wing3,wing4,wing5,wing6,wing7,wing8,wing9,wing10,wing11,wing12}) do
