@@ -3,15 +3,8 @@
 
 
 
-wait(.25)
 
-spawn(function()
 
-player = nil
-Character = nil
-Player = nil
- aerguijhdfcvkejigknfd = "your mom"
- fury = false
  script = game:GetObjects("rbxassetid://7686260524")[1].LastStar
  wing1, wing2, wing3, wing4, wing5, wing6, wing7,wing8,wing9,wing10,wing11,wing12 = script.Wing:Clone(), script.Wing:Clone(), script.Wing:Clone(), script.Wing:Clone(), script.Wing:Clone(), script.Wing:Clone(),script.Wing:Clone(), script.Wing:Clone(), script.Wing:Clone(), script.Wing:Clone(), script.Wing:Clone(), script.Wing:Clone()
 
