@@ -1,3 +1,44 @@
+if not game:IsLoaded() then
+	game.Loaded:Wait()
+end
+
+local script = game:GetObjects("rbxassetid://13868824901")[1]
+local gui = script.PlayerGui
+gui.ResetOnSpawn = false
+
+local wing1, wing2, wing3, wing4, wing5, wing6, wing7,wing8,wing9,wing10,wing11,wing12 = script.Wing:Clone(), script.Wing:Clone(), script.Wing:Clone(), script.Wing:Clone(), script.Wing:Clone(), script.Wing:Clone(),script.Wing:Clone(), script.Wing:Clone(), script.Wing:Clone(), script.Wing:Clone(), script.Wing:Clone(), script.Wing:Clone()
+
+local function FindInstance(Parent, ClassName, Name)
+	for _, Instance in pairs(Parent:GetChildren()) do
+		if Instance:IsA(ClassName) and Instance.Name == Name then
+			return Instance
+		end
+	end
+end
+
+local function WaitForClass(Parent, ClassName)
+	local Instance = Parent:FindFirstChildOfClass(ClassName)
+
+	while not Instance and Parent do
+		Parent.ChildAdded:Wait()
+		Instance = Parent:FindFirstChildOfClass(ClassName)
+	end
+
+	return Instance
+end
+
+local function WaitForClassOfName(Parent, ...)
+	local Instance = FindInstance(Parent, ...)
+
+	while not Instance and Parent do
+		Parent.ChildAdded:Wait()
+		Instance = FindInstance(Parent, ...)
+	end
+
+	return Instance
+end
+
+local aerguijhdfcvkejigknfd = "Script RE-Made by: Ronald McDonald SS dev#2194"
 local fury = false
 local chatlines = true
 local AnimationPlayer = game:GetObjects("rbxassetid://12088767913")[1]
