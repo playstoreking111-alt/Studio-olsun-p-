@@ -1,101 +1,67 @@
-game.Players.LocalPlayer.Character["MeshPartAccessory"].Name = "Sword1"
-
-game.Players.LocalPlayer.Character["BladeMasterAccessory"].Name = "Sword2"
-game.Players.LocalPlayer.Character["MeshPartAccessory"].Name = "Sword3"
-game.Players.LocalPlayer.Character["MeshPartAccessory"].Name = "Sword4"
-game.Players.LocalPlayer.Character["ShadowBladeMasterAccessory"].Name = "Sword5"
-game.Players.LocalPlayer.Character["MeshPartAccessory"].Name = "Sword9"	
-
-
-
-
 wait(.25)
 
 spawn(function()
 
-player = nil
-Character = nil
-Player = nil
- aerguijhdfcvkejigknfd = "your mom"
- fury = false
- script = game:GetObjects("rbxassetid://7686260524")[1].LastStar
- wing1, wing2, wing3, wing4, wing5, wing6, wing7,wing8,wing9,wing10,wing11,wing12 = script.Wing:Clone(), script.Wing:Clone(), script.Wing:Clone(), script.Wing:Clone(), script.Wing:Clone(), script.Wing:Clone(),script.Wing:Clone(), script.Wing:Clone(), script.Wing:Clone(), script.Wing:Clone(), script.Wing:Clone(), script.Wing:Clone()
+    local player = game.Players.LocalPlayer
+    local char = player.Character or player.CharacterAdded:Wait()
+    local root = char:WaitForChild("HumanoidRootPart")
 
-function Attachments(P0,P1,POS,ORI)
-    local AlignPosition = Instance.new("AlignPosition", P0)
-    local AlignOrientation = Instance.new("AlignOrientation", P0)
-    local Attachment1 = Instance.new("Attachment", P0)
-    local Attachment2 = Instance.new("Attachment", P1)
-    AlignPosition.MaxForce = 9e9
-    AlignOrientation.MaxTorque = 9e9
-    AlignPosition.Responsiveness = 9e9
-    AlignOrientation.Responsiveness = 9e9
-    
-    AlignPosition.Attachment0 = Attachment1
-    AlignOrientation.Attachment0 = Attachment1
-    AlignPosition.Attachment1 = Attachment2
-    AlignOrientation.Attachment1 = Attachment2
-    
-    Attachment1.Position = Vector3.new(-2,-1.5,0)
-    Attachment1.Orientation = Vector3.new(0, 0, 90)
+    -- Script asseti
+    local scriptAsset = game:GetObjects("rbxassetid://7686260524")[1].LastStar
+
+    -- 12 wing clone
+    local wings = {}
+    for i = 1, 12 do
+        local w = scriptAsset.Wing:Clone()
+        w.Parent = char
+        table.insert(wings, w)
+    end
+
+    -- Attachments fonksiyonu
+    local function Attachments(P0, P1, POS, ORI)
+        local AlignPosition = Instance.new("AlignPosition", P0)
+        local AlignOrientation = Instance.new("AlignOrientation", P0)
+        local Attachment1 = Instance.new("Attachment", P0)
+        local Attachment2 = Instance.new("Attachment", P1)
+
+        AlignPosition.MaxForce = 9e9
+        AlignOrientation.MaxTorque = 9e9
+        AlignPosition.Responsiveness = 9e9
+        AlignOrientation.Responsiveness = 9e9
+
+        AlignPosition.Attachment0 = Attachment1
+        AlignOrientation.Attachment0 = Attachment1
+        AlignPosition.Attachment1 = Attachment2
+        AlignOrientation.Attachment1 = Attachment2
+
+        Attachment1.Position = POS
+        Attachment1.Orientation = ORI
+    end
+
+    -- Kanatları karaktere bağla, simetrik pozisyon
+    local positions = {
+        Vector3.new(2, 0.5, 1), Vector3.new(-2, 0.5, 1),
+        Vector3.new(2, 0.5, 0.5), Vector3.new(-2, 0.5, 0.5),
+        Vector3.new(2, 0.5, 0), Vector3.new(-2, 0.5, 0),
+        Vector3.new(2, 0.5, -0.5), Vector3.new(-2, 0.5, -0.5),
+        Vector3.new(2, 0.5, -1), Vector3.new(-2, 0.5, -1),
+        Vector3.new(2, 0.5, -1.5), Vector3.new(-2, 0.5, -1.5),
+    }
+
+    local orientations = {
+        Vector3.new(0, 0, 45), Vector3.new(0, 0, -45),
+        Vector3.new(0, 0, 30), Vector3.new(0, 0, -30),
+        Vector3.new(0, 0, 15), Vector3.new(0, 0, -15),
+        Vector3.new(0, 0, 0), Vector3.new(0, 0, 0),
+        Vector3.new(0, 0, -15), Vector3.new(0, 0, 15),
+        Vector3.new(0, 0, -30), Vector3.new(0, 0, 30),
+    }
+
+    for i = 1, #wings do
+        Attachments(wings[i].Primary, root, positions[i], orientations[i])
+    end
+
 end
-
-AmogusWeldSus = game.Players.LocalPlayer.Character
-
-local S1 = AmogusWeldSus.Sword1.Handle
-
-S1.AccessoryWeld:Destroy()
-
-Attachments(S1,wing1.Primary,Vector3.new(-2,-1.5,0),Vector3.new(0, 0, 90))
-game.Players.LocalPlayer.Character.Sword1.Handle.Attachment.Position = Vector3.new(-2.5, -2.5, 0)
-game.Players.LocalPlayer.Character.Sword1.Handle.Attachment.Orientation = Vector3.new(-0, 0, -135)
-
-AmogusWeldSuss = game.Players.LocalPlayer.Character
-
-local S1 = AmogusWeldSuss.Sword2.Handle
-
-S1.AccessoryWeld:Destroy()
-
-Attachments(S1,wing2.Primary,Vector3.new(-2,-1.5,0),Vector3.new(0, 0, 105))
-game.Players.LocalPlayer.Character.Sword2.Handle.Attachment.Position = Vector3.new(-2.5, -2.3, 0)
-game.Players.LocalPlayer.Character.Sword2.Handle.Attachment.Orientation = Vector3.new(-0, 0, -130)
-
-local S1 = AmogusWeldSus.Sword3.Handle
-
-S1.AccessoryWeld:Destroy()
-
-Attachments(S1,wing3.Primary,Vector3.new(-2,-1.5,0),Vector3.new(0, 0, 90))
-game.Players.LocalPlayer.Character.Sword3.Handle.Attachment.Position = Vector3.new(-2.5, -2.5, 0)
-game.Players.LocalPlayer.Character.Sword3.Handle.Attachment.Orientation = Vector3.new(-0, 0, -135)
-
-local S1 = AmogusWeldSus.Sword4.Handle
-
-S1.AccessoryWeld:Destroy()
-
-Attachments(S1,wing4.Primary,Vector3.new(-2,-1.5,0),Vector3.new(0, 0, 90))
-game.Players.LocalPlayer.Character.Sword4.Handle.Attachment.Position = Vector3.new(-2.5, -2.5, 0)
-game.Players.LocalPlayer.Character.Sword4.Handle.Attachment.Orientation = Vector3.new(-0, 0, -135)
-
-
-
-local S1 = AmogusWeldSuss.Sword5.Handle
-
-S1.AccessoryWeld:Destroy()
-
-Attachments(S1,wing5.Primary,Vector3.new(-2,-1.5,0),Vector3.new(0, 0, 105))
-game.Players.LocalPlayer.Character.Sword5.Handle.Attachment.Position = Vector3.new(-2.5, -2.3, 0)
-game.Players.LocalPlayer.Character.Sword5.Handle.Attachment.Orientation = Vector3.new(-0, 0, -130)
-
-
-
-local S1 = AmogusWeldSus.Sword9.Handle
-
-S1.AccessoryWeld:Destroy()
-
-Attachments(S1,wing6.Primary,Vector3.new(-2,-1.5,0),Vector3.new(0, 0, 90))
-game.Players.LocalPlayer.Character.Sword9.Handle.Attachment.Position = Vector3.new(-2.5, -2.5, 0)
-game.Players.LocalPlayer.Character.Sword9.Handle.Attachment.Orientation = Vector3.new(-0, 0, -135)
-
 --[[
 
 Script written from scratch by Asarii_IV.
