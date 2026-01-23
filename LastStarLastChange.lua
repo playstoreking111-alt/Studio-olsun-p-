@@ -1,6 +1,3 @@
-_G.scripthere = function()
-    game.Players.LocalPlayer.Character = game.Workspace.Dummylolxdnoo -- ideky i need to say this but do not remove this line put your script under this but before the end
-    
 game.Players.LocalPlayer.Character["MeshPartAccessory"].Name = "Sword1"
 
 game.Players.LocalPlayer.Character["BladeMasterAccessory"].Name = "Sword2"
