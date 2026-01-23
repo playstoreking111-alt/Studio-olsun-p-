@@ -1,0 +1,1756 @@
+local FDless = game.Players.LocalPlayer
+
+script=game:GetObjects("rbxassetid://139768247532423")[1].Trimphase
+
+local Player = game:GetService("Players").LocalPlayer
+local Mouse,mouse=Player:GetMouse(),Player:GetMouse()
+
+--this was made for vlad
+
+--BasicFunctions
+local ins = Instance.new
+local v3 = Vector3.new
+local cf = CFrame.new
+local angles = CFrame.Angles
+local rad = math.rad
+local huge = math.huge
+local cos = math.cos
+local sin = math.sin
+local tan = math.tan
+local abs = math.abs
+local ray = Ray.new
+local random = math.random
+local ud = UDim.new
+local ud2 = UDim2.new
+local c3 = Color3.new
+local rgb = Color3.fromRGB
+local bc = BrickColor.new
+
+--Services
+local plrs = game:GetService("Players")
+local tweens = game:GetService("TweenService")
+local debrs = game:GetService("Debris")
+local runservice = game:GetService("RunService")
+script.Client.Disabled = false
+--Variables
+local plr = Player
+local plrg = plr.PlayerGui
+local char = FDless.character
+local h = char.Head
+local t = char.Torso
+local ra = char["Right Arm"]
+local la = char["Left Arm"]
+local rl = char["Right Leg"]
+local ll = char["Left Leg"]
+local rut = char.HumanoidRootPart
+local hum = char:FindFirstChildOfClass("Humanoid")
+local nec = t.Neck
+local rutj = rut.RootJoint
+local rs = t["Right Shoulder"]
+local ls = t["Left Shoulder"]
+local rh = t["Right Hip"]
+local lh = t["Left Hip"]
+
+necc0,necc1=cf(0,t.Size.Y/2,0),cf(0,-h.Size.Y/2,0)
+rutjc0,rutjc1=cf(0,0,0),cf(0,0,0)
+rsc0,rsc1=cf(t.Size.X/2,t.Size.Y/4,0),cf(-ra.Size.X/2,ra.Size.Y/4,0)
+lsc0,lsc1=cf(-t.Size.X/2,t.Size.Y/4,0),cf(la.Size.X/2,la.Size.Y/4,0)
+rhc0,rhc1=cf(t.Size.X/4,-t.Size.Y/2,0),cf(0,rl.Size.Y/2,0)
+lhc0,lhc1=cf(-t.Size.X/4,-t.Size.Y/2,0),cf(0,ll.Size.Y/2,0)
+
+local takingAStep = false
+local muted = false
+local using = false
+local gruntWhenJump = false
+local muted = false
+local dancin = false
+
+local anim = "idle"
+local asset = "rbxassetid://"
+
+local change = 1
+local sine = 0
+local dSine = -5000
+local mode = 1
+local timePos = 0
+local curID = 3641196110
+local curPitch = .67
+local combo = 1
+local keystroke = ""
+local keystrokeTime = 0
+
+local ws = 50
+local jp = 100
+
+--
+local directions = {In = Enum.EasingDirection.In,
+    Out = Enum.EasingDirection.Out,
+    InOut = Enum.EasingDirection.InOut
+}
+
+local styles = {Linear = Enum.EasingStyle.Linear,
+    Back = Enum.EasingStyle.Back,
+    Bounce = Enum.EasingStyle.Bounce,
+    Sine = Enum.EasingStyle.Sine,
+    Quad = Enum.EasingStyle.Quad,
+    Elastic = Enum.EasingStyle.Elastic,
+    Quart = Enum.EasingStyle.Quart,
+    Quint = Enum.EasingStyle.Quint
+}
+
+local grunts = {
+	1547211023,
+	1547213679,
+	1547215016
+}
+
+local wingCFs = {
+	mainCF = cf(0,2,2),
+	floatMainCF = cf(0,5,0) * angles(rad(-90),rad(0),rad(0)),
+	idleWingsCF = {
+		["w1"] = cf(-1.25,2,0) * angles(rad(20),rad(120),rad(0)) * angles(rad(30),rad(0),rad(0)),
+		["w2"] = cf(-2,0,-.5) * angles(rad(180),rad(60),rad(0)),
+		["w3"] = cf(-1.5,-1.5,0) * angles(rad(-20),rad(120),rad(0)) * angles(rad(-45),rad(0),rad(180)),
+		["w4"] = cf(1.25,2,0) * angles(rad(25),rad(-120),rad(0)) * angles(rad(30),rad(0),rad(0)),
+		["w5"] = cf(2,0,-.5) * angles(rad(180),rad(-60),rad(0)),
+		["w6"] = cf(1.5,-1.5,0) * angles(rad(-25),rad(-120),rad(0)) * angles(rad(-45),rad(0),rad(180))
+	},
+	walkWingsCF = {
+		["w1"] = cf(-1.5,2,0) * angles(rad(0),rad(90),rad(0)) * angles(rad(30),rad(0),rad(0)),
+		["w2"] = cf(-2,0,-.5) * angles(rad(180),rad(90),rad(0)),
+		["w3"] = cf(-1.5,-1.5,0) * angles(rad(0),rad(90),rad(0)) * angles(rad(-45),rad(0),rad(180)),
+		["w4"] = cf(1.5,2,0) * angles(rad(0),rad(-90),rad(0)) * angles(rad(30),rad(0),rad(0)),
+		["w5"] = cf(2,0,-.5) * angles(rad(180),rad(-90),rad(0)),
+		["w6"] = cf(1.5,-1.5,0) * angles(rad(0),rad(-90),rad(0)) * angles(rad(-45),rad(0),rad(180))
+	},
+	floatWingCF = {
+		["w1"] = cf(-1.25,2,0) * angles(rad(0),rad(90),rad(0)) * angles(rad(30),rad(0),rad(0)),
+		["w2"] = cf(-2,0,-.5) * angles(rad(180),rad(90),rad(0)),
+		["w3"] = cf(-1.5,-1.5,0) * angles(rad(0),rad(90),rad(0)) * angles(rad(-45),rad(0),rad(180)),
+		["w4"] = cf(1.25,2,0) * angles(rad(0),rad(-90),rad(0)) * angles(rad(30),rad(0),rad(0)),
+		["w5"] = cf(2,0,-.5) * angles(rad(180),rad(-90),rad(0)),
+		["w6"] = cf(1.5,-1.5,0) * angles(rad(0),rad(-90),rad(0)) * angles(rad(-45),rad(0),rad(180))
+	}
+}
+
+local modeColors = {
+	{
+		firstMain = bc("Really black").Color,
+		firstNeon = bc("Royal purple").Color,
+		firstMaterial = "Granite",
+		secondMain = bc("Institutional white").Color,
+		secondNeon = bc("CGA brown").Color,
+		secondMaterial = "SmoothPlastic"
+	},
+	{
+		firstMain = bc("Institutional white").Color,
+		firstNeon = bc("Teal").Color,
+		firstMaterial = "SmoothPlastic",
+		secondMain = bc("Institutional white").Color,
+		secondNeon = bc("Pastel blue-green").Color,
+		secondMaterial = "SmoothPlastic"
+	},
+	{
+		firstMain = bc("Carnation pink").Color,
+		firstNeon = bc("Hot pink").Color,
+		firstMaterial = "Neon",
+		secondMain = bc("Pink").Color,
+		secondNeon = bc("Hot pink").Color,
+		secondMaterial = "Neon"
+	},
+	{
+		firstMain = bc("Really black").Color,
+		firstNeon = bc("Maroon").Color,
+		firstMaterial = "Granite",
+		secondMain = bc("Maroon").Color,
+		secondNeon = bc("Really black").Color,
+		secondMaterial = "Granite"
+	}
+}
+
+local stepped = runservice.Heartbeat
+
+--Removing joints/Animations
+if char:FindFirstChild("Animate") then
+	char.Animate:Destroy()
+end
+
+if hum:FindFirstChildOfClass("Animator") then
+	char.Humanoid.Animator:Destroy()
+end
+
+local sound = char:FindFirstChild("Sound")
+if sound then
+	sound:Destroy()
+end
+
+nec.Parent = nil
+rutj.Parent = nil
+rs.Parent = nil
+ls.Parent = nil
+rh.Parent = nil
+lh.Parent = nil
+
+--Joints
+local nec = ins("Motor6D",t) nec.Name = "Neck" nec.Part0 = t nec.Part1 = h
+local rutj = ins("Motor6D",rut) rutj.Name = "RootJoint" rutj.Part0 = t rutj.Part1 = rut
+local rs = ins("Motor6D",t) rs.Name = "Right Shoulder" rs.Part0 = t rs.Part1 = ra
+local ls = ins("Motor6D",t) ls.Name = "Left Shoulder" ls.Part0 = t ls.Part1 = la
+local rh = ins("Motor6D",t) rh.Name = "Right Hip" rh.Part0 = t rh.Part1 = rl
+local lh = ins("Motor6D",t) lh.Name = "Left Hip" lh.Part0 = t lh.Part1 = ll
+
+--Setting CFrames
+nec.C1 = necc1
+nec.C0 = necc0
+rs.C1 = rsc1
+rs.C0 = rsc0
+ls.C1 = lsc1
+ls.C0 = lsc0
+rh.C1 = rhc1
+rh.C0 = rhc0
+lh.C1 = lhc1
+lh.C0 = lhc0
+rutj.C1 = rutjc1
+rutj.C0 = rutjc0
+
+--Functions1
+function createWeld(p1,p2,c0,c1)
+	c0 = c0 or cf(0,0,0)
+	c1 = c1 or cf(0,0,0)
+	local weld = ins("Motor6D",p1)
+	weld.Part0 = p1
+	weld.Part1 = p2
+	weld.C0 = c0
+	weld.C1 = c1
+	return weld
+end
+
+--Adds
+local ff = ins("ForceField",char)
+ff.Visible = false
+
+local effects = ins("Model",char)
+effects.Name = "Effects"
+
+local wingsModel = ins("Model",char)
+wingsModel.Name = "Wings"
+
+local bandR = script.Models.Band:Clone()
+bandR.Parent = char
+createWeld(ra,bandR.MaterialPartMain,cf(0,-.25,0) * angles(rad(0),rad(90),rad(0)))
+
+local bandL = script.Models.Band:Clone()
+bandL.Parent = char
+createWeld(la,bandL.MaterialPartMain,cf(0,-.25,0) * angles(rad(0),rad(-90),rad(0)))
+
+local theme = ins("Sound",t)
+theme.Looped = true
+theme.Volume = 1
+theme.EmitterSize = 5
+theme.MaxDistance = 150
+theme.SoundId = "rbxassetid://"..curID
+theme:Play()
+
+local message = script.UIs.TrimphaseMessage
+message.Parent = nil
+
+local wings = {}
+
+for i = 1,6 do
+	local wing = script.Models.Wing:Clone()
+	wing.Parent = wingsModel
+	local weld = createWeld(rut,wing.RingNeon)
+	wings["Wing"..i] = {wing,weld}
+end
+
+local shaker = script.DistShaker:Clone()
+
+--Functions2
+
+function remove(instance,time)
+	time = time or 0
+	game:GetService("Debris"):AddItem(instance,time)
+end
+
+function swait()
+	game:GetService("RunService").Stepped:Wait()
+end
+
+function rayc(spos,direc,ignore,dist)
+    local rai = ray(spos,direc.Unit * dist)
+    local rhit,rpos,rrot = workspace:FindPartOnRayWithIgnoreList(rai,ignore,false,false)
+    return rhit,rpos,rrot
+end
+
+function sound(id,vol,pitch,parent,maxdist)
+	local mdist = 30 or maxdist
+	local newsound = Instance.new("Sound",parent)
+	newsound.Volume = vol
+	newsound.SoundId = "rbxassetid://"..id
+	newsound.Pitch = pitch
+	newsound:Play()
+	coroutine.resume(coroutine.create(function()
+		wait(.1)
+		remove(newsound,newsound.TimeLength/newsound.Pitch)
+	end))
+	return newsound
+end
+
+function placesoundpart(rcf,id,vol,pitch,maxdist)
+	pcall(function()
+		local mdist = 30 or maxdist
+		local spart = ins("Part",effects)
+		spart.Anchored = true
+		spart.CanCollide = false
+		spart.Locked = true
+		spart.Transparency = 1
+		spart.Size = v3(0,0,0)
+		spart.CFrame = rcf
+		local ssound = sound(id,vol,pitch,spart,mdist)
+		remove(spart,ssound.TimeLength/ssound.Pitch)
+	end)
+end
+
+local tlerp = function(part,tablee,leinght,easingstyle,easingdirec)
+    local info = TweenInfo.new(
+    leinght,
+    easingstyle,
+    easingdirec,
+    0,
+    false,
+    0
+    )
+    local lerp = tweens:Create(part,info,tablee)
+    lerp:Play()
+end
+
+local Effects = {
+	Ring = function(pos,color,sSize,eSize,sTrans,eTrans,time,style)
+		style = style or "Linear"
+		local ring = script.Effects.Ring:Clone()
+		ring.Size = sSize
+		ring.Transparency = sTrans
+		ring.CFrame = pos
+		ring.Color = color
+		ring.Parent = effects
+		remove(ring,time)
+		tlerp(ring,{Size = eSize,Transparency = eTrans},time,styles[style],directions.Out)
+	end,
+	SpinningRing = function(pos,color,rotation,sSize,eSize,sTrans,eTrans,time,style)
+		style = style or "Linear"
+		local ring = script.Effects.Ring:Clone()
+		ring.Size = sSize
+		ring.Transparency = sTrans
+		ring.CFrame = pos
+		ring.Color = color
+		ring.Parent = effects
+		remove(ring,time)
+		tlerp(ring,{Size = eSize,Transparency = eTrans},time,styles[style],directions.Out)
+		coroutine.wrap(function()
+			repeat
+				ring.CFrame = ring.CFrame * rotation
+				wait(1/30)
+			until not ring.Parent
+		end)()
+	end,
+	Sphere = function(pos,color,sSize,eSize,sTrans,eTrans,time,style)
+		style = style or "Linear"
+		local sphere = ins("Part")
+		sphere.Shape = "Ball"
+		sphere.Size = v3(sSize,sSize,sSize)
+		sphere.Transparency = sTrans
+		sphere.CFrame = pos
+		sphere.Color = color
+		sphere.Parent = effects
+		sphere.Anchored = true
+		sphere.CanCollide = false
+		sphere.Locked = true
+		sphere.Material = "Neon"
+		remove(sphere,time)
+		tlerp(sphere,{Size = v3(eSize,eSize,eSize),Transparency = eTrans},time,styles[style],directions.Out)
+		return sphere
+	end,
+	Beam = function(pos,color,sLength,eLength,sThickness,eThickness,sTrans,eTrans,time,style)
+		style = style or "Linear"
+		local sphere = ins("Part")
+		sphere.Shape = "Block"
+		sphere.Size = v3(sThickness,sLength,sThickness)
+		sphere.Transparency = sTrans
+		sphere.CFrame = pos
+		sphere.Color = color
+		sphere.Parent = effects
+		sphere.Anchored = true
+		sphere.CanCollide = false
+		sphere.Locked = true
+		sphere.Material = "Neon"
+		ins("CylinderMesh",sphere)
+		remove(sphere,time)
+		tlerp(sphere,{Size = v3(eThickness,eLength,eThickness),Transparency = eTrans},time,styles[style],directions.Out)
+	end,
+	SpinningBlock = function(pos,color,sSize,eSize,sTrans,eTrans,cfRotation,time,style)
+		style = style or "Linear"
+		local part = ins("Part")
+		part.Size = v3(sSize,sSize,sSize)
+		part.Transparency = sTrans
+		part.CFrame = pos
+		part.Color = color
+		part.Parent = effects
+		part.Anchored = true
+		part.CanCollide = false
+		part.Locked = true
+		part.Material = "Neon"
+		remove(part,time)
+		tlerp(part,{Size = v3(eSize,eSize,eSize),Transparency = eTrans},time,styles[style],directions.Out)
+		coroutine.wrap(function()
+			repeat
+				part.CFrame = part.CFrame * cfRotation
+				wait(1/30)
+			until not part.Parent
+		end)()
+	end,
+	CustomSphere = function(pos,endPos,color,sSize,eSize,sTrans,eTrans,time,style)
+		style = style or "Linear"
+		local sphere = ins("Part")
+		sphere.Size = sSize
+		sphere.Transparency = sTrans
+		sphere.CFrame = pos
+		sphere.Color = color
+		sphere.Parent = effects
+		sphere.Anchored = true
+		sphere.CanCollide = false
+		sphere.Locked = true
+		sphere.Material = "Neon"
+		
+		local mesh = ins("SpecialMesh",sphere)
+		mesh.MeshType = "Sphere"
+		
+		remove(sphere,time)
+		tlerp(sphere,{Size = eSize,Transparency = eTrans,CFrame = endPos},time,styles[style],directions.Out)
+	end,
+	CustomSphereBoomerang = function(pos,endPos,color,sSize,eSize,sTrans,eTrans,time,style)
+		style = style or "Linear"
+		local sphere = ins("Part")
+		sphere.Size = sSize
+		sphere.Transparency = sTrans
+		sphere.CFrame = pos
+		sphere.Color = color
+		sphere.Parent = effects
+		sphere.Anchored = true
+		sphere.CanCollide = false
+		sphere.Locked = true
+		sphere.Material = "Neon"
+		
+		local mesh = ins("SpecialMesh",sphere)
+		mesh.MeshType = "Sphere"
+		coroutine.wrap(function()
+			remove(sphere,time)
+			tlerp(sphere,{Transparency = eTrans},time * 1.25,styles[style],directions.Out)
+			tlerp(sphere,{Size = eSize,CFrame = endPos},time/2,styles[style],directions.Out)
+			wait(time/2)
+			tlerp(sphere,{Size = sSize},time/2,styles[style],directions.Out)
+		end)()
+	end,
+	CustomSphereBoomerangPlusPos = function(pos,endPos,color,sSize,eSize,sTrans,eTrans,time,style)
+		style = style or "Linear"
+		local sphere = ins("Part")
+		sphere.Size = sSize
+		sphere.Transparency = sTrans
+		sphere.CFrame = pos
+		sphere.Color = color
+		sphere.Parent = effects
+		sphere.Anchored = true
+		sphere.CanCollide = false
+		sphere.Locked = true
+		sphere.Material = "Neon"
+		
+		local mesh = ins("SpecialMesh",sphere)
+		mesh.MeshType = "Sphere"
+		coroutine.wrap(function()
+			remove(sphere,time)
+			tlerp(sphere,{Transparency = eTrans},time * 1.25,styles[style],directions.Out)
+			tlerp(sphere,{Size = eSize,CFrame = endPos},time/2,styles[style],directions.Out)
+			wait(time/2)
+			tlerp(sphere,{Size = sSize,CFrame = pos},time/2,styles[style],directions.Out)
+		end)()
+	end,
+	Wind = function(pos,color,rotation,sSize,eSize,sTrans,eTrans,time,style)
+		style = style or "Linear"
+		local ring = script.Effects.Wind:Clone()
+		ring.Size = sSize
+		ring.Transparency = sTrans
+		ring.CFrame = pos
+		ring.Color = color
+		ring.Parent = effects
+		remove(ring,time)
+		tlerp(ring,{Size = eSize,Transparency = eTrans},time,styles[style],directions.Out)
+		coroutine.wrap(function()
+			repeat
+				ring.CFrame = ring.CFrame * angles(rad(0),rad(rotation),rad(0))
+				wait(1/30)
+			until not ring.Parent
+		end)()
+	end,
+	CreateCamShake = function(part,maxDist,intensivity,time)
+		maxDist = maxDist or 20
+		intensivity = intensivity or 1
+		time = time or .1
+		
+		local bool = ins("BoolValue",part)
+		bool.Name = "Shaking"
+		bool.Value = true
+		
+		local MaxDist = ins("NumberValue",bool)
+		MaxDist.Name = "MaxDist"
+		MaxDist.Value = maxDist
+		
+		local Intensivity = ins("NumberValue",bool)
+		Intensivity.Name = "Intensivity"
+		Intensivity.Value = intensivity
+		
+		remove(bool,time)
+	end,
+	SoundEffect = function(sound,effect)
+		ins(effect.."SoundEffect",sound)
+	end,
+	BeamCircle = function(pos,endPos,color,texture,sSize,eSize,sWidth,eWidth,sTrans,eTrans,time,style)
+		local transNum = ins("NumberValue")
+		transNum.Value = sTrans
+		style = style or "Linear"
+		local p = ins("Part")
+		p.Anchored = true
+		p.CanCollide = false
+		p.Locked = true
+		p.Massless = true
+		p.Size = v3(0,0,0)
+		p.Transparency = 1
+		p.CFrame = pos
+		p.Parent = effects
+		local att1 = ins("Attachment",p)
+		att1.Position = v3(0,0,sSize/2)
+		local att2 = ins("Attachment",p)
+		att2.Position = v3(0,0,-sSize/2)
+		local beam = ins("Beam",p)
+		beam.Attachment0 = att1
+		beam.Attachment1 = att2
+		beam.Transparency = NumberSequence.new(transNum.Value)
+		beam.Color = ColorSequence.new(color)
+		beam.Segments = 2
+		beam.CurveSize0 = (sSize/2)/0.74906367041199
+		beam.CurveSize1 = -(sSize/2)/0.74906367041199
+		beam.Width0 = sWidth
+		beam.Width1 = sWidth
+		beam.Texture = texture
+		beam.LightInfluence = 0
+		beam.LightEmission = 1
+		local beam1 = beam:Clone()
+		beam1.Parent = p
+		beam1.CurveSize0 = -(sSize/2)/0.74906367041199
+		beam1.CurveSize1 = (sSize/2)/0.74906367041199
+		remove(p,time)
+		coroutine.wrap(function()
+			tlerp(transNum,{Value = eTrans},time,styles[style],directions.Out)
+			transNum:GetPropertyChangedSignal("Value"):Connect(function()
+				beam.Transparency = NumberSequence.new(transNum.Value)
+				beam1.Transparency = NumberSequence.new(transNum.Value)
+			end)
+		end)()
+		tlerp(p,{CFrame = endPos},time,styles[style],directions.Out)
+		tlerp(att1,{Position = v3(0,0,eSize/2)},time,styles[style],directions.Out)
+		tlerp(att2,{Position = v3(0,0,-eSize/2)},time,styles[style],directions.Out)
+		tlerp(beam,{
+			Width0 = eWidth,
+			Width1 = eWidth,
+			CurveSize0 = (eSize/2)/0.74906367041199,
+			CurveSize1 = -(eSize/2)/0.74906367041199
+		},time,styles[style],directions.Out)
+		tlerp(beam1,{
+			Width0 = eWidth,
+			Width1 = eWidth,
+			CurveSize0 = -(eSize/2)/0.74906367041199,
+			CurveSize1 = (eSize/2)/0.74906367041199
+		},time,styles[style],directions.Out)
+	end
+}
+
+function turnto(to)
+    rut.CFrame = cf(rut.Position,v3(to.x,rut.Position.y,to.z))
+end
+
+function decompilePart(part,stud)
+	stud = stud or 1
+	local parts = {}
+	if part then
+		local point = part.CFrame * cf(part.Size/2) * cf(-v3(stud/2,stud/2,stud/2))
+		for i = 0,part.Size.X - stud,stud do
+			local p = ins("Part",effects)
+			p.Anchored = true
+			p.CanCollide = false
+			p.Size = v3(stud,stud,stud)
+			p.Transparency = part.Transparency
+			p.CFrame = point * cf(-i,0,0)
+			p.Color = part.Color
+			p.Material = part.Material
+			table.insert(parts,p)
+			for i = 0,part.Size.Y - stud,stud do
+				local point = p.CFrame
+				local pa = ins("Part",effects)
+				pa.Anchored = true
+				pa.CanCollide = false
+				pa.Size = v3(stud,stud,stud)
+				pa.CFrame = point * cf(0,-i,0)
+				pa.Color = part.Color
+				pa.Transparency = part.Transparency
+				pa.Material = part.Material
+				table.insert(parts,pa)
+				for i = stud,part.Size.Z - stud,stud do
+					local point = pa.CFrame
+					local p = ins("Part",effects)
+					p.Anchored = true
+					p.CanCollide = false
+					p.Transparency = part.Transparency
+					p.Size = v3(stud,stud,stud)
+					p.CFrame = point * cf(0,0,-i)
+					p.Color = part.Color
+					p.Material = part.Material
+					table.insert(parts,p)
+				end
+			end
+		end
+		return parts
+	end
+end
+
+function showDamage(pos,text,time)
+	pos = pos or t.CFrame
+	text = text or "NULL"
+	time = time or 1
+	
+	local animTime = 1
+	
+	local p = script.Effects.DamageDisplay:Clone()
+	local textL = p.DamageBill.MainFrame.Damage
+	local tri1 = p.DamageBill.MainFrame.Triangle1
+	local tri2 = p.DamageBill.MainFrame.Triangle2
+	
+	p.Parent = effects
+	p.CFrame = pos
+	textL.Text = text
+	
+	coroutine.wrap(function()
+		remove(p,time + animTime*2)
+		tlerp(p,{CFrame = cf(p.Position) * cf(0,random(15,50)/10,0)},animTime,styles.Back,directions.InOut)
+		tlerp(textL,{Position = ud2(0,0,0,0),TextStrokeTransparency = 0,TextStrokeColor3 = modeColors[mode].secondNeon},animTime/2,styles.Quart,directions.Out)
+		tlerp(tri1,{ImageTransparency = 0,ImageColor3 = modeColors[mode].firstNeon},animTime/2,styles.Quart,directions.Out)
+		wait(animTime/2)
+		tlerp(textL,{Position = ud2(0,0,0,0),TextTransparency = 0,TextColor3 = modeColors[mode].firstNeon},animTime/2,styles.Quart,directions.Out)
+		tlerp(tri2,{ImageTransparency = 0,ImageColor3 = modeColors[mode].secondNeon},animTime/2,styles.Quart,directions.Out)
+		wait(time + animTime/2)
+		tlerp(textL,{TextTransparency = 1},animTime/2,styles.Quart,directions.Out)
+		tlerp(tri2,{ImageTransparency = 1},animTime/2,styles.Quart,directions.Out)
+		wait(animTime/2)
+		tlerp(textL,{TextStrokeTransparency = 1,Position = ud2(0,0,1,0)},animTime/2,styles.Quart,directions.Out)
+		tlerp(tri1,{ImageTransparency = 1},animTime/2,styles.Quart,directions.Out)
+		wait(animTime/2)
+	end)()
+end
+
+function chat(plr,texts,style,animTime,Delay)
+	texts = texts or "hi|asdfads|am nob|iahtgsdfdg|did you learn to read|bye"
+	style = style or "drop"
+	animTime = animTime or 1
+	Delay = Delay or 1
+	if plr then
+		texts = texts.."|"
+		local cln = message:Clone()
+		cln.Parent = plr.PlayerGui
+		
+		local frm = cln.MainFrame
+		frm.AnimStyle.Value = style
+		frm.Texts.Value = texts
+		frm.Delay.Value = Delay
+		frm.AnimTime.Value = animTime
+		
+		frm.Tri1.ImageColor3,frm.Tri2.ImageColor3 = modeColors[mode].firstNeon,modeColors[mode].firstNeon
+		frm.Text_.TextColor3 = modeColors[mode].secondNeon
+		
+		frm.MessageManager.Disabled = false
+	end
+end
+
+function death(char)
+	local colors = {modeColors[mode].firstNeon,modeColors[mode].secondNeon}
+	if char then
+		char:BreakJoints()
+		remove(char,10)
+		coroutine.wrap(function()
+			wait(random(35,75)/100)
+			for i,v in pairs(char:GetChildren()) do
+				local part = v
+				if v:IsA("BasePart") then
+					local parts = decompilePart(v,1)
+					remove(v,.6)
+					tlerp(v,{Transparency = 1},.6,styles.Quart,directions.InOut)
+					for i,v in pairs(parts) do
+						local color = colors[random(1,#colors)]
+						v.Anchored = false
+						v.CanCollide = true
+						v.Transparency = 1
+						v.Locked = true
+						local pars = script.Effects.TriangleFire:Clone()
+						pars.Parent = v
+						pars.Color = ColorSequence.new(color)
+						coroutine.wrap(function()
+							wait(random(60,100)/100)
+							v.CanCollide = false
+							local bodyPos = ins("BodyPosition",v)
+							bodyPos.D = 1250
+							bodyPos.Position = v.Position + v3(random(-75,75)/10,random(50,75)/10,random(-75,75)/10)
+							wait(1)
+							pars.Enabled = false
+							pars = script.Effects.SpreadingTriangleFire:Clone()
+							pars.Parent = v
+							pars.Enabled = false
+							pars.Color = ColorSequence.new(color)
+							pars:Emit(50)
+							placesoundpart(part.CFrame,1192402877,.5,random(90,110)/100,1)
+							remove(v,1.5)
+						end)()
+					end
+				else
+					if not v:IsA("Humanoid") then
+						remove(v)
+					end
+				end
+			end
+		end)()
+	end
+end
+
+function damage(humanoid,Damage,knockback,knockbackStartPoint,knockbackTime,knockDelay,damageSound)
+FDless.fling(humanoid.Parent)
+end
+
+function magDamage(pos,partSize,size,Damage,knockback,knockbackTime,knockDelay,damageSound)
+	local reg
+	local knockPoint
+	if typeof(pos) == "Vector3" then
+		reg = Region3.new(pos - v3(size/2,size/2,size/2),pos + v3(size/2,size/2,size/2))
+		knockPoint = pos
+	elseif typeof(pos) == "Instance" then
+		knockPoint = pos.Position
+		if partSize then
+			reg = Region3.new(pos.Position - pos.Size/2,pos.Position + pos.Size/2)
+		else
+			reg = Region3.new(pos.Position - v3(size/2,size/2,size/2),pos.Position + v3(size/2,size/2,size/2))
+		end
+	end
+	if reg then
+		for i,v in pairs(workspace:FindPartsInRegion3WithIgnoreList(reg,{char},250)) do
+			local humm = v.Parent:FindFirstChildOfClass("Humanoid")
+			if humm then
+				damage(humm,Damage,knockback,knockPoint,knockbackTime,knockDelay,damageSound)
+			end
+		end
+	end
+end
+
+function keystrokeMatch(string)
+	if string:lower() == "helppleas" then
+		keystroke = ""
+		keystrokeTime = 0
+		mode = 3
+		curID = 692531041
+		curPitch = 1
+		chat(plr,"HELP|ME|PLEASE","drop",1,.5)
+		ws = 50
+		jp = 100
+		local colors = {modeColors[mode].firstNeon,modeColors[mode].secondNeon}
+		Effects.Sphere(t.CFrame,colors[random(1,#colors)],7.5,35,0,1,random(35,50)/100)
+		Effects.Sphere(t.CFrame,colors[random(1,#colors)],7.5,75,0,1,random(50,75)/100)
+		Effects.Sphere(t.CFrame,colors[random(1,#colors)],7.5,45,0,1,random(20,30)/100)
+		for i = 1,random(3,6) do
+			Effects.Wind(t.CFrame * angles(rad(random(-180,180)),rad(random(-180,180)),rad(random(-180,180))),colors[random(1,#colors)],random(-60,60),v3(6,0,7.5),v3(65,0,75),0,1,random(25,50)/100)
+		end
+		for i = 1,random(6,14) do
+			Effects.BeamCircle(rut.CFrame * cf(0,-3,0) * angles(rad(random(-720,720)),rad(random(-720,720)),rad(random(-720,720))),rut.CFrame * cf(0,-3,0) * angles(rad(random(-720,720)),rad(random(-720,720)),rad(random(-720,720))),colors[random(1,#colors)],"",random(50,75)/10,random(850,1350)/10,1.75,.5,0,1,random(100,350)/175,"Sine")
+		end
+		sound(288233304,5,random(90,110)/100,t,15)
+		sound(2785493,7.5,random(90,110)/100,t,15)
+		sound(1843023382,5,random(90,110)/100,t,15)
+		Effects.CreateCamShake(t,75,1.75,.15)
+	end
+end
+
+function regPunch()
+	using = true
+	local oldWS = ws
+	local oldJP = jp
+	ws = 4
+	jp = 0
+	sound(grunts[random(1,#grunts)],1.5,random(90,110)/100,t,.05)
+	local alpha = .55
+	for i = 0,1,.065 do
+		nec.C0 = nec.C0:Lerp(necc0 * cf(0,0,0) * angles(rad(0),rad(60),rad(0)),alpha)
+		rutj.C0 = rutj.C0:Lerp(rutjc0 * cf(0,0,-.25) * angles(rad(-5),rad(60),rad(-7.5)),alpha)
+		rs.C0 = rs.C0:Lerp(rsc0 * cf(0,0,.25) * angles(rad(90),rad(0),rad(-45)),alpha)
+		ls.C0 = ls.C0:Lerp(lsc0 * cf(0,-.25,.15) * angles(rad(30),rad(10),rad(-10)),alpha)
+		rh.C0 = rh.C0:Lerp(rhc0 * cf(0,.1,-.25) * angles(rad(-20),rad(-7.5),rad(5)),alpha)
+		lh.C0 = lh.C0:Lerp(lhc0 * cf(0,0,0) * angles(rad(15),rad(5),rad(-5)),alpha)
+		alpha = alpha-.045
+		swait()
+	end
+	alpha = .65
+	for i = 0,1,.085 do
+		magDamage(ra,true,0,random(15,20),random(10,20),.125,.3,sound(2974876428,1.5,random(90,110)/100,nil,1))
+		nec.C0 = nec.C0:Lerp(necc0 * cf(0,0,0) * angles(rad(0),rad(-50),rad(0)),alpha)
+		rutj.C0 = rutj.C0:Lerp(rutjc0 * cf(0,0,.75) * angles(rad(5),rad(-50),rad(7.5)),alpha)
+		rs.C0 = rs.C0:Lerp(rsc0 * cf(0,0,-.75) * angles(rad(90),rad(0),rad(-5)),alpha)
+		ls.C0 = ls.C0:Lerp(lsc0 * cf(0,-.25,.1) * angles(rad(-10),rad(10),rad(-10)),alpha)
+		rh.C0 = rh.C0:Lerp(rhc0 * cf(0,.1,-.35) * angles(rad(-30),rad(-12.5),rad(10)),alpha)
+		lh.C0 = lh.C0:Lerp(lhc0 * cf(0,-.05,-.15) * angles(rad(-15),rad(7.5),rad(5)),alpha)
+		alpha = alpha-.055
+		swait()
+	end
+	ws = oldWS
+	jp = oldJP
+	using = false
+end
+
+function regPunch1()
+	using = true
+	local oldWS = ws
+	local oldJP = jp
+	ws = 4
+	jp = 0
+	sound(grunts[random(1,#grunts)],1.5,random(90,110)/100,t,.05)
+	local alpha = .55
+	for i = 0,1,.065 do
+		nec.C0 = nec.C0:Lerp(necc0 * cf(0,0,0) * angles(rad(0),rad(-60),rad(0)),alpha)
+		rutj.C0 = rutj.C0:Lerp(rutjc0 * cf(0,0,-.25) * angles(rad(-5),rad(-60),rad(7.5)),alpha)
+		rs.C0 = rs.C0:Lerp(rsc0 * cf(0,-.25,.25) * angles(rad(30),rad(-10),rad(10)),alpha)
+		ls.C0 = ls.C0:Lerp(lsc0 * cf(0,0,.15) * angles(rad(90),rad(0),rad(45)),alpha)
+		rh.C0 = rh.C0:Lerp(rhc0 * cf(0,0,0) * angles(rad(15),rad(-5),rad(5)),alpha)
+		lh.C0 = lh.C0:Lerp(lhc0 * cf(0,.1,-.25) * angles(rad(-20),rad(7.5),rad(-5)),alpha)
+		alpha = alpha-.045
+		swait()
+	end
+	alpha = .65
+	for i = 0,1,.085 do
+		magDamage(ra,true,0,random(15,20),random(10,20),.125,.3,sound(2974876428,1.5,random(90,110)/100,nil,1))
+		nec.C0 = nec.C0:Lerp(necc0 * cf(0,0,0) * angles(rad(0),rad(50),rad(0)),alpha)
+		rutj.C0 = rutj.C0:Lerp(rutjc0 * cf(0,0,.75) * angles(rad(5),rad(50),rad(-7.5)),alpha)
+		rs.C0 = rs.C0:Lerp(rsc0 * cf(0,-.25,.1) * angles(rad(-10),rad(-10),rad(-10)),alpha)
+		ls.C0 = ls.C0:Lerp(lsc0 * cf(0,0,-.75) * angles(rad(90),rad(0),rad(-5)),alpha)
+		rh.C0 = rh.C0:Lerp(rhc0 * cf(0,-.05,-.15) * angles(rad(-15),rad(-7.5),rad(5)),alpha)
+		lh.C0 = lh.C0:Lerp(lhc0 * cf(0,.1,-.35) * angles(rad(-30),rad(12.5),rad(-10)),alpha)
+		alpha = alpha-.055
+		swait()
+	end
+	ws = oldWS
+	jp = oldJP
+	using = false
+end
+
+function explodingLine()
+	using = true
+	local oldWS = ws
+	local oldJP = jp
+	ws = 4
+	jp = 0
+	bandL.MaterialPartMain.Fire.Enabled = true
+	sound(136007472,2.5,random(170,190)/100,t,1)
+	local alpha = .35
+	for i = 0,1,.045 do
+		nec.C0 = nec.C0:Lerp(necc0 * cf(0,0,0) * angles(rad(15),rad(15),rad(0)),alpha)
+		rutj.C0 = rutj.C0:Lerp(rutjc0 * cf(0,0,.15) * angles(rad(-5),rad(15),rad(0)),alpha)
+		rs.C0 = rs.C0:Lerp(rsc0 * cf(0,0,0) * angles(rad(2.5),rad(10),rad(5)),alpha)
+		ls.C0 = ls.C0:Lerp(lsc0 * cf(0,-.35,-.1) * angles(rad(170),rad(7.5),rad(0)),alpha)
+		rh.C0 = rh.C0:Lerp(rhc0 * cf(0,0,-.15) * angles(rad(-20),rad(-7.5),rad(2.5)),alpha)
+		lh.C0 = lh.C0:Lerp(lhc0 * cf(0,0,-.05) * angles(rad(-2.5),rad(10),rad(-7.5)),alpha)
+		alpha = alpha-.025
+		swait()
+	end
+	coroutine.wrap(function()
+		wait(.125)
+			local colors = {modeColors[mode].firstNeon,modeColors[mode].secondNeon}
+		local beamCF = rut.CFrame * cf(0,-3,-7.5)
+		for i = 1,7 do
+			coroutine.wrap(function()
+				local color = colors[random(1,#colors)]
+				local pos = beamCF * cf(random(-150,150)/100,0,random(-150,150)/100)
+				local beamPosAlpha = pos * cf(random(-25,25),500,random(-25,25))
+				local beamPos = cf(beamPosAlpha.Position,pos.Position) * angles(rad(-90),0,0)
+				local beamSize = (pos.Position-beamPos.Position).Magnitude
+				magDamage(pos.Position,true,15,random(15,30),random(15,30),0,.2)
+				for i = 1,random(4,8) do
+					local sparkPos = pos * angles(rad(random(-0,180)),rad(random(-90,90)),rad(random(-90,90)))
+					Effects.CustomSphere(sparkPos,sparkPos * cf(0,0,-random(125,250)/10) * angles(rad(random(-180,180)),rad(random(-180,180)),rad(random(-180,180))),color,v3(.5,5,.5),v3(.15,10,.15),0,1,2,"Quint")
+				end
+				for i = 1,random(1,2) do
+					Effects.BeamCircle(pos,pos * angles(rad(random(-180,180)),rad(random(-180,180)),rad(random(-180,180))),colors[random(1,#colors)],"",random(60,80)/10,random(160,250)/10,1.15,.25,0,1,random(35,75)/100,"Sine")
+				end
+				Effects.CustomSphere(pos,pos,color,v3(5,.1,5),v3(6.5,0,6.5),0,1,2,"Quart")
+				local camShakePos = Effects.Sphere(pos,color,5,20,0,1,.25)
+				Effects.Sphere(pos,color,5,7.5,0,1,1.5,"Quart")
+				Effects.Beam(beamPos * cf(0,beamSize/2,0),color,beamSize,beamSize,1.5,5,0,1,.75,"Quart")
+				Effects.CreateCamShake(camShakePos,25,1.5,.125)
+				placesoundpart(beamCF,1060191237,2.5,random(95,105)/100,1)
+				placesoundpart(beamCF,192410089,2.5,random(95,105)/100,1)
+				placesoundpart(beamCF,1177785010,2.5,random(95,105)/100,1)
+			end)()
+			beamCF = beamCF * cf(0,0,-4.5)
+			wait(.05)
+		end
+	end)()
+	alpha = .55
+	for i = 0,1,.065 do
+		nec.C0 = nec.C0:Lerp(necc0 * cf(0,0,0) * angles(rad(-5),rad(15),rad(0)),alpha)
+		rutj.C0 = rutj.C0:Lerp(rutjc0 * cf(0,0,.15) * angles(rad(-5),rad(15),rad(0)),alpha)
+		rs.C0 = rs.C0:Lerp(rsc0 * cf(0,0,0) * angles(rad(2.5),rad(10),rad(5)),alpha)
+		ls.C0 = ls.C0:Lerp(lsc0 * cf(0,-.15,-.1) * angles(rad(60),rad(7.5),rad(0)),alpha)
+		rh.C0 = rh.C0:Lerp(rhc0 * cf(0,0,-.15) * angles(rad(-20),rad(-7.5),rad(2.5)),alpha)
+		lh.C0 = lh.C0:Lerp(lhc0 * cf(0,0,-.05) * angles(rad(-2.5),rad(10),rad(-7.5)),alpha)
+		alpha = alpha-.045
+		swait()
+	end
+	bandL.MaterialPartMain.Fire.Enabled = false
+	ws = oldWS
+	jp = oldJP
+	using = false
+end
+
+function smallStomp()
+	using = true
+	local oldWS = ws
+	local oldJP = jp
+	ws = 4
+	jp = 0
+	local s = sound(grunts[3],7.5,.95,t,5)
+	s.MaxDistance = 50
+	local alpha = .35
+	for i = 0,1,.045 do
+		nec.C0 = nec.C0:Lerp(necc0 * cf(0,0,0) * angles(rad(-10),rad(0),rad(0)),alpha)
+		rutj.C0 = rutj.C0:Lerp(rutjc0 * cf(0,0,-.15) * angles(rad(-10),rad(0),rad(0)),alpha)
+		rs.C0 = rs.C0:Lerp(rsc0 * cf(0,0,-.25) * angles(rad(50),rad(10),rad(25)),alpha)
+		ls.C0 = ls.C0:Lerp(lsc0 * cf(0,0,-.25) * angles(rad(50),rad(-10),rad(-25)),alpha)
+		rh.C0 = rh.C0:Lerp(rhc0 * cf(0,1,-.5) * angles(rad(-5),rad(-5),rad(2.5)),alpha)
+		lh.C0 = lh.C0:Lerp(lhc0 * cf(0,0,0) * angles(rad(-10),rad(5),rad(-2.5)),alpha)
+		alpha = alpha -.025
+		swait()
+	end
+	coroutine.wrap(function()
+		wait(.125)
+		local colors = {modeColors[mode].firstNeon,modeColors[mode].secondNeon}
+		sound(331666100,10,random(90,110)/100,t,10)
+		sound(1843023382,4,random(90,110)/100,t,10)
+		sound(1060191237,4,random(90,110)/100,t,10)
+		Effects.CustomSphere(rut.CFrame * cf(0,-3,0),rut.CFrame * cf(0,-3,0),colors[random(1,#colors)],v3(7.5,.1,7.5),v3(17.5,0,17.5),0,1,2,"Quart")
+		Effects.CustomSphere(rut.CFrame * cf(0,-3,0),rut.CFrame * cf(0,-3,0),colors[random(1,#colors)],v3(7.5,.1,7.5),v3(40,0,40),0,1,.5,"Quart")
+		Effects.Sphere(rut.CFrame * cf(0,-3,0),colors[random(1,#colors)],7.5,25,0,1,2.5,"Quart")
+		Effects.Sphere(rut.CFrame * cf(0,-3,0),colors[random(1,#colors)],7.5,50,0,1,.35,"Quart")
+		Effects.CreateCamShake(t,50,2.5,.1)
+		magDamage(rut.CFrame * cf(0,-3,0).Position,false,25,random(35,60),random(30,60),.1,.1)
+		for i = 1,random(4,9) do
+			Effects.BeamCircle(rut.CFrame * cf(0,-3,0) * angles(rad(random(-720,720)),rad(random(-720,720)),rad(random(-720,720))),rut.CFrame * cf(0,-3,0) * angles(rad(random(-720,720)),rad(random(-720,720)),rad(random(-720,720))),colors[random(1,#colors)],"",random(135,180)/10,random(377,475)/10,1.75,.5,0,1,random(50,105)/100,"Sine")
+		end
+		for i = 1,random(7,14) do
+			local pos = rut.CFrame * cf(random(-125,125)/10,-3,random(-125,125)/10) * angles(rad(random(-35,35)),rad(random(-35,35)),rad(random(-35,35)))
+			Effects.CustomSphere(pos,pos * cf(0,random(150,300)/10,0),colors[random(1,#colors)],v3(1.25,5,1.25),v3(.5,15,.5),0,1,random(15,25)/10,"Quint")
+		end
+		for i = 1,random(10,16) do
+			local sparkPos = rut.CFrame * cf(0,-3,0) * angles(rad(random(-0,180)),rad(random(-90,90)),rad(random(-90,90)))
+			Effects.CustomSphere(sparkPos,sparkPos * cf(0,0,-random(300,600)/10) * angles(rad(random(-180,180)),rad(random(-180,180)),rad(random(-180,180))),colors[random(1,#colors)],v3(.5,10,.5),v3(.15,25,.15),0,1,random(25,50)/10,"Quint")
+		end
+	end)()
+	local alpha = .5
+	for i = 0,1,.065 do
+		nec.C0 = nec.C0:Lerp(necc0 * cf(0,0,0) * angles(rad(10),rad(0),rad(0)),alpha)
+		rutj.C0 = rutj.C0:Lerp(rutjc0 * cf(0,0,.1) * angles(rad(10),rad(0),rad(0)),alpha)
+		rs.C0 = rs.C0:Lerp(rsc0 * cf(0,-.25,.25) * angles(rad(-10),rad(5),rad(15)),alpha)
+		ls.C0 = ls.C0:Lerp(lsc0 * cf(0,-.25,.25) * angles(rad(-10),rad(-5),rad(-15)),alpha)
+		rh.C0 = rh.C0:Lerp(rhc0 * cf(0,0,-.25) * angles(rad(17.5),rad(-5),rad(2.5)),alpha)
+		lh.C0 = lh.C0:Lerp(lhc0 * cf(0,0,0) * angles(rad(10),rad(5),rad(-2.5)),alpha)
+		alpha = alpha -.065
+		swait()
+	end
+	ws = oldWS
+	jp = oldJP
+	using = false
+end
+
+function plasmaticExplosion()
+	local colors = {modeColors[mode].firstNeon,modeColors[mode].secondNeon}
+	using = true
+	local oldWS = ws
+	local oldJP = jp
+	ws = 0
+	jp = 0
+	bandR.MaterialPartMain.Fire.Enabled = true
+	turnto(mouse.Hit.Position)
+	local attackPos = cf(mouse.Hit.Position)
+	local curCF = attackPos
+	local oldPos = attackPos
+	local plasmaPos = attackPos * cf(0,15,0)
+	local alpha = .35
+	local size = .5
+	local plasmaSize = 1
+	placesoundpart(curCF,136007472,7.5,random(95,105)/100,1)
+	for i = 0,1,.035 do
+		--Effects.BeamCircle(attackPos,attackPos * angles(rad(random(-15,15)),rad(random(-15,15)),rad(random(-15,15))),colors[random(1,#colors)],"",random(plasmaSize/2,plasmaSize/2)/10,random(plasmaSize * 15,plasmaSize * 35)/10,plasmaSize/2,plasmaSize/15,0,1,random(35,70)/100,"Quint")
+		Effects.BeamCircle(curCF * angles(rad(random(-180,180)),rad(random(-180,180)),rad(random(-180,180))),curCF * angles(rad(random(-180,180)),rad(random(-180,180)),rad(random(-180,180))),colors[random(1,#colors)],"",random(plasmaSize * 50,plasmaSize * 150)/10,random(plasmaSize/2,plasmaSize/2)/10,plasmaSize/5,plasmaSize/25,1,.25,random(25,65)/100)
+		local sparkPos = attackPos * cf(random(-size * 25,size * 25)/2,0,random(-size * 25,size * 25)/2)
+		nec.C0 = nec.C0:Lerp(necc0 * cf(0,0,0) * angles(rad(0),rad(-65),rad(0)),alpha)
+		rutj.C0 = rutj.C0:Lerp(rutjc0 * cf(0,0,0) * angles(rad(0),rad(-65),rad(0)),alpha)
+		rs.C0 = rs.C0:Lerp(rsc0 * cf(.25,.25,-.25) * angles(rad(150),rad(5),rad(75)),alpha)
+		ls.C0 = ls.C0:Lerp(lsc0 * cf(0,-.25,.15) * angles(rad(15),rad(-10),rad(5)),alpha)
+		rh.C0 = rh.C0:Lerp(rhc0 * cf(0,0,0) * angles(rad(0),rad(-5),rad(2.5)),alpha)
+		lh.C0 = lh.C0:Lerp(lhc0 * cf(0,0,0) * angles(rad(0),rad(5),rad(-2.5)),alpha)
+		Effects.CustomSphereBoomerang(attackPos,attackPos,colors[random(1,#colors)],v3(size*25,.1,size*25),v3(size*50,0,size*50),0,1,.5,"Quart")
+		Effects.CustomSphereBoomerangPlusPos(sparkPos,sparkPos * cf(0,size*25,0),colors[random(1,#colors)],v3(size*1.25,size*7.5,size*2.5),v3(size,size*25,size),0,1,.5,"Back")
+		Effects.CustomSphereBoomerang(curCF,curCF,colors[random(1,#colors)],v3(0,0,0),v3(plasmaSize,plasmaSize,plasmaSize),0,1,.75,"Quart")
+		Effects.CustomSphere(curCF * cf((random(-25,25)/10) * plasmaSize,(random(-25,25)/10) * plasmaSize,(random(-25,25)/10) * plasmaSize),curCF,colors[random(1,#colors)],v3(plasmaSize/2.5,plasmaSize/2.5,plasmaSize/2.5),v3(plasmaSize/10,plasmaSize/10,plasmaSize/10),0,1,.75,"Quart")
+		curCF = curCF:Lerp(plasmaPos,.1)
+		alpha = alpha -.025
+		size = size -.0175
+		plasmaSize = plasmaSize +.25
+		swait()
+	end
+	coroutine.wrap(function()
+		for i = 1,25 do
+			--Effects.BeamCircle(attackPos,attackPos * angles(rad(random(-15,15)),rad(random(-15,15)),rad(random(-15,15))),colors[random(1,#colors)],"",random(plasmaSize/2,plasmaSize/2)/10,random(plasmaSize * 15,plasmaSize * 35)/10,plasmaSize/2,plasmaSize/15,0,1,random(35,70)/100,"Quint")
+			Effects.BeamCircle(curCF * angles(rad(random(-180,180)),rad(random(-180,180)),rad(random(-180,180))),curCF * angles(rad(random(-180,180)),rad(random(-180,180)),rad(random(-180,180))),colors[random(1,#colors)],"",random(plasmaSize * 25,plasmaSize * 150)/10,random(plasmaSize/2,plasmaSize/2)/10,plasmaSize/5,plasmaSize/25,1,.25,random(25,65)/100)
+			Effects.CustomSphereBoomerang(curCF,curCF,colors[random(1,#colors)],v3(0,0,0),v3(plasmaSize,plasmaSize,plasmaSize),0,1,1,"Quart")
+			Effects.CustomSphere(curCF * cf((random(-25,25)/10) * plasmaSize,(random(-25,25)/10) * plasmaSize,(random(-25,25)/10) * plasmaSize),curCF,colors[random(1,#colors)],v3(plasmaSize/2.5,plasmaSize/2.5,plasmaSize/2.5),v3(plasmaSize/10,plasmaSize/10,plasmaSize/10),0,1,1,"Quart")
+			plasmaSize = plasmaSize +.25
+			swait()
+		end
+		for i = 1,25 do
+			--Effects.BeamCircle(attackPos,attackPos * angles(rad(random(-15,15)),rad(random(-15,15)),rad(random(-15,15))),colors[random(1,#colors)],"",random(plasmaSize/2,plasmaSize/2)/10,random(plasmaSize * 15,plasmaSize * 35)/10,plasmaSize/2,plasmaSize/15,0,1,random(35,70)/100,"Quint")
+			Effects.BeamCircle(curCF * angles(rad(random(-180,180)),rad(random(-180,180)),rad(random(-180,180))),curCF * angles(rad(random(-180,180)),rad(random(-180,180)),rad(random(-180,180))),colors[random(1,#colors)],"",random(plasmaSize/2,plasmaSize/2)/10,random(plasmaSize * 15,plasmaSize * 35)/10,plasmaSize/5,plasmaSize/25,0,1,random(15,30)/100,"Bounce")
+			Effects.CustomSphereBoomerang(curCF,curCF,colors[random(1,#colors)],v3(0,0,0),v3(plasmaSize,plasmaSize,plasmaSize),.75,1,1,"Quart")
+			swait()
+		end
+		placesoundpart(curCF,1060191237,3.5,random(95,105)/100,1)
+		placesoundpart(curCF,192410089,10,random(95,105)/100,1)
+		placesoundpart(curCF,1177785010,10,random(95,105)/100,1)
+		placesoundpart(curCF,1843023382,6.5,random(95,105)/100,1)
+		Effects.Sphere(curCF,colors[random(1,#colors)],10,100,0,1,1.5,"Quart")
+		Effects.Sphere(curCF,colors[random(1,#colors)],10,100,0,1,1.25,"Quart")
+		Effects.Sphere(curCF,colors[random(1,#colors)],10,75,0,1,.4,"Quart")
+		local shakePos = Effects.Sphere(curCF,colors[random(1,#colors)],10,55,0,1,.75,"Quart")
+		Effects.CreateCamShake(shakePos,100,5,.3)
+		magDamage(curCF.Position,false,125,random(50,75),random(50,75),.15,0)
+		for i = 1,random(6,12) do
+			Effects.Wind(curCF * angles(rad(random(-180,180)),rad(random(-180,180)),rad(random(-180,180))),colors[random(1,#colors)],random(-60,60),v3(22.5,0,25),v3(200,0,225),0,1,random(25,75)/100)
+		end
+		for i = 1,random(12,24) do
+			local pos = curCF * angles(rad(random(-180,180)),rad(random(-180,180)),rad(random(-180,180)))
+			Effects.CustomSphere(pos,pos * cf(0,random(700,1200)/10,0),colors[random(1,#colors)],v3(plasmaSize/5,plasmaSize,plasmaSize/5),v3(plasmaSize/10,plasmaSize*2.5,plasmaSize/10),0,1,random(60,120)/100,"Quart")
+		end
+	end)()
+	bandR.MaterialPartMain.Fire.Enabled = false
+	ws = oldWS
+	jp = oldJP
+	using = false
+end
+
+function smallWarp()
+	local colors = {modeColors[mode].firstNeon,modeColors[mode].secondNeon}
+	using = true
+	local oldWS = ws
+	local oldJP = jp
+	ws = 0
+	jp = 0
+	local alpha = .35
+	for i = 0,1,.05 do
+		nec.C0 = nec.C0:Lerp(necc0 * cf(0,0,0) * angles(rad(10),rad(0),rad(0)),alpha)
+		rutj.C0 = rutj.C0:Lerp(rutjc0 * cf(0,.25,.25) * angles(rad(15),rad(0),rad(0)),alpha)
+		rs.C0 = rs.C0:Lerp(rsc0 * cf(-.15,-.2,-.15) * angles(rad(30),rad(20),rad(-5)),alpha)
+		ls.C0 = ls.C0:Lerp(lsc0 * cf(.15,-.2,-.15) * angles(rad(30),rad(-20),rad(5)),alpha)
+		rh.C0 = rh.C0:Lerp(rhc0 * cf(0,.15,-.15) * angles(rad(20),rad(-5),rad(2.5)),alpha)
+		lh.C0 = lh.C0:Lerp(lhc0 * cf(0,.25,-.25) * angles(rad(-15),rad(7.5),rad(-2.5)),alpha)
+		alpha = alpha -.015
+		swait()
+	end
+	sound(181004957,7.5,1,t,20)
+	local alpha = .65
+	for i = 0,1,.1 do
+		Effects.CreateCamShake(Effects.Sphere(rut.CFrame * cf(0,0,-2.5),colors[random(1,#colors)],5,0,0,1,.5),35,.5,.25)
+		Effects.Sphere(rut.CFrame * cf(0,0,-2.5),colors[random(1,#colors)],5,15,0,1,.15)
+		for i = 1,random(5,10) do
+			local pos = rut.CFrame * cf(random(-75,75)/10,random(-75,75)/10,random(-75,75)/10) * angles(rad(90),rad(random(-30,30)),rad(random(-30,30)))
+			Effects.CustomSphere(pos,pos * cf(0,random(5,20),0),colors[random(1,#colors)],v3(1,2.5,1),v3(.25,10,.25),0,1,random(25,75)/100,"Quart")
+			Effects.CustomSphereBoomerang(pos,pos,colors[random(1,#colors)],v3(1,1,1),v3(2.5,2.5,2.5),0,1,random(15,35)/100,"Quint")
+		end
+		sound(1060191237,1.5,random(90,110)/100,rut,1)
+		magDamage(rut,false,15,random(1,2),random(25,50),.1,0,sound(2767090,2.5,random(90,110)/100,nil,5))
+		nec.C0 = nec.C0:Lerp(necc0 * cf(0,0,0) * angles(rad(20),rad(0),rad(0)),alpha)
+		rutj.C0 = rutj.C0:Lerp(rutjc0 * cf(0,-.5,.75) * angles(rad(25),rad(0),rad(0)),alpha)
+		rs.C0 = rs.C0:Lerp(rsc0 * cf(-.1,0,.15) * angles(rad(-60),rad(-30),rad(5)),alpha)
+		ls.C0 = ls.C0:Lerp(lsc0 * cf(.1,0,.15) * angles(rad(-60),rad(30),rad(-5)),alpha)
+		rh.C0 = rh.C0:Lerp(rhc0 * cf(0,.15,-.15) * angles(rad(-45),rad(-10),rad(-2.5)),alpha)
+		lh.C0 = lh.C0:Lerp(lhc0 * cf(0,.25,-.25) * angles(rad(-65),rad(10),rad(7.5)),alpha)
+		turnto(mouse.Hit.Position)
+		local frRay = rayc(rut.Position,rut.CFrame.LookVector,{char},6.5)
+		local downRay = rayc(rut.CFrame * cf(0,0,-5).Position,-rut.CFrame.UpVector,{char},150)
+		if downRay and not frRay then
+			rut.CFrame = rut.CFrame * cf(0,0,-5)
+		end
+		FDless.setCfr(FDless.character.HumanoidRootPart.CFrame * cf(0,0,-5))
+		alpha = alpha -.04
+		swait()
+	end
+	ws = oldWS
+	jp = oldJP
+	using = false
+end
+
+--[[
+	local alpha = .35
+	for i = 0,1,.025 do
+		nec.C0 = nec.C0:Lerp(necc0 * cf(0,0,0) * angles(rad(0),rad(0),rad(0)),alpha)
+		rutj.C0 = rutj.C0:Lerp(rutjc0 * cf(0,0,0) * angles(rad(0),rad(0),rad(0)),alpha)
+		rs.C0 = rs.C0:Lerp(rsc0 * cf(0,0,0) * angles(rad(0),rad(0),rad(0)),alpha)
+		ls.C0 = ls.C0:Lerp(lsc0 * cf(0,0,0) * angles(rad(0),rad(0),rad(0)),alpha)
+		rh.C0 = rh.C0:Lerp(rhc0 * cf(0,0,0) * angles(rad(0),rad(0),rad(0)),alpha)
+		lh.C0 = lh.C0:Lerp(lhc0 * cf(0,0,0) * angles(rad(0),rad(0),rad(0)),alpha)
+		alpha = alpha -.025
+		swait()
+	end
+function base()
+	using = true
+	local oldWS = ws
+	local oldJP = jp
+	ws = 0
+	jp = 0
+	
+	ws = oldWS
+	jp = oldJP
+	using = false
+end
+--]]
+
+local combos = {regPunch,regPunch1,explodingLine,smallStomp}
+
+mouse.Button1Down:Connect(function()
+	if not using then
+		combos[combo]()
+		combo = combo +1
+		if combo >#combos then
+			combo = 1
+		end
+	end
+end)
+
+mouse.KeyDown:Connect(function(key)
+	if not using then
+		if #key == 1 then
+			keystrokeTime = 50
+			keystroke = keystroke..key:lower()
+			keystrokeMatch(keystroke)
+		end
+		if key == "q" and mode ~= 1 then
+			mode = 1
+			curID = 3641196110
+			curPitch = .67
+			ws = 50
+			jp = 100
+			local colors = {modeColors[mode].firstNeon,modeColors[mode].secondNeon}
+			Effects.Sphere(t.CFrame,colors[random(1,#colors)],7.5,35,0,1,random(35,50)/100)
+			Effects.Sphere(t.CFrame,colors[random(1,#colors)],7.5,75,0,1,random(50,75)/100)
+			Effects.Sphere(t.CFrame,colors[random(1,#colors)],7.5,45,0,1,random(20,30)/100)
+			for i = 1,random(3,6) do
+				Effects.Wind(t.CFrame * angles(rad(random(-180,180)),rad(random(-180,180)),rad(random(-180,180))),colors[random(1,#colors)],random(-60,60),v3(6,0,7.5),v3(65,0,75),0,1,random(25,50)/100)
+			end
+			for i = 1,random(6,14) do
+				Effects.BeamCircle(rut.CFrame * cf(0,-3,0) * angles(rad(random(-720,720)),rad(random(-720,720)),rad(random(-720,720))),rut.CFrame * cf(0,-3,0) * angles(rad(random(-720,720)),rad(random(-720,720)),rad(random(-720,720))),colors[random(1,#colors)],"",random(50,75)/10,random(850,1350)/10,1.75,.5,0,1,random(100,350)/175,"Sine")
+			end
+			sound(288233304,5,random(90,110)/100,t,15)
+			sound(2785493,7.5,random(90,110)/100,t,15)
+			sound(1843023382,5,random(90,110)/100,t,15)
+			Effects.CreateCamShake(t,75,1.75,.15)
+		elseif key == "e" and mode ~= 2 then
+			mode = 2
+			curID = 998142984
+			curPitch = 1
+			ws = 8
+			jp = 50
+			local colors = {modeColors[mode].firstNeon,modeColors[mode].secondNeon}
+			Effects.Sphere(t.CFrame,colors[random(1,#colors)],7.5,35,0,1,random(35,50)/100)
+			Effects.Sphere(t.CFrame,colors[random(1,#colors)],7.5,75,0,1,random(50,75)/100)
+			Effects.Sphere(t.CFrame,colors[random(1,#colors)],7.5,45,0,1,random(20,30)/100)
+			for i = 1,random(3,6) do
+				Effects.Wind(t.CFrame * angles(rad(random(-180,180)),rad(random(-180,180)),rad(random(-180,180))),colors[random(1,#colors)],random(-60,60),v3(6,0,7.5),v3(65,0,75),0,1,random(25,50)/100)
+			end
+			for i = 1,random(6,14) do
+				Effects.BeamCircle(rut.CFrame * cf(0,-3,0) * angles(rad(random(-720,720)),rad(random(-720,720)),rad(random(-720,720))),rut.CFrame * cf(0,-3,0) * angles(rad(random(-720,720)),rad(random(-720,720)),rad(random(-720,720))),colors[random(1,#colors)],"",random(50,75)/10,random(850,1350)/10,1.75,.5,0,1,random(100,350)/175,"Sine")
+			end
+			sound(288233304,5,random(90,110)/100,t,15)
+			sound(2785493,7.5,random(90,110)/100,t,15)
+			sound(1843023382,5,random(90,110)/100,t,15)
+			Effects.CreateCamShake(t,75,1.75,.15)
+		elseif key == "r" and mode ~= 4 then
+			mode = 4
+			curID = 340881649
+			curPitch = 1
+			ws = 50
+			jp = 100
+			chat(plr,"It's|your|time|to|go...","drop",2,.25)
+			local colors = {modeColors[mode].firstNeon,modeColors[mode].secondNeon}
+			Effects.Sphere(t.CFrame,colors[random(1,#colors)],7.5,35,0,1,random(35,50)/100)
+			Effects.Sphere(t.CFrame,colors[random(1,#colors)],7.5,75,0,1,random(50,75)/100)
+			Effects.Sphere(t.CFrame,colors[random(1,#colors)],7.5,45,0,1,random(20,30)/100)
+			for i = 1,random(3,6) do
+				Effects.Wind(t.CFrame * angles(rad(random(-180,180)),rad(random(-180,180)),rad(random(-180,180))),colors[random(1,#colors)],random(-60,60),v3(6,0,7.5),v3(65,0,75),0,1,random(25,50)/100)
+			end
+			for i = 1,random(6,14) do
+				Effects.BeamCircle(rut.CFrame * cf(0,-3,0) * angles(rad(random(-720,720)),rad(random(-720,720)),rad(random(-720,720))),rut.CFrame * cf(0,-3,0) * angles(rad(random(-720,720)),rad(random(-720,720)),rad(random(-720,720))),colors[random(1,#colors)],"",random(50,75)/10,random(850,1350)/10,1.75,.5,0,1,random(100,350)/175,"Sine")
+			end
+			sound(288233304,5,random(90,110)/100,t,15)
+			sound(2785493,7.5,random(90,110)/100,t,15)
+			sound(1843023382,5,random(90,110)/100,t,15)
+			Effects.CreateCamShake(t,75,1.75,.15)
+		end
+		if mode == 1 then
+			if key == "z" then
+				plasmaticExplosion()
+			end
+			if key == "x" then
+				smallWarp()
+			end
+		end
+	end
+	
+	if key == "n" and not using  and not dancin then
+		dancin = true
+		using = true
+	elseif key == "n" and using  and dancin then
+		dancin = false
+		using = false
+	end
+	if key == "m" then
+		muted = not muted
+	end
+end)
+
+stepped:Connect(function()
+	sine = sine + change
+	dSine = dSine + change
+	
+	if dSine >-500 and dSine <500 then
+		dSine = 500
+	end
+	
+	if dSine > 5000 then
+		dSine = -5000
+	end
+	
+	local verVel = rut.Velocity.y
+	local horVel = (rut.Velocity * v3(1,0,1)).Magnitude
+
+	local Ccf=rut.CFrame
+	
+	local dir = hum.MoveDirection
+	
+	if dir == v3(0,0,0) then
+		dir = rut.Velocity/10
+	end
+
+	local Walktest1 = dir * Ccf.LookVector
+	local Walktest2 = dir * Ccf.RightVector
+
+	local rotfb = Walktest1.X+Walktest1.Z
+	local rotrl = Walktest2.X+Walktest2.Z
+	
+	if rotfb >1 then
+		rotfb = 1
+	elseif rotfb <-1 then
+		rotfb = -1
+	end
+	
+	if rotrl >1 then
+		rotrl = 1
+	elseif rotrl <-1 then
+		rotrl = -1
+	end
+	
+	if not dancin then
+		hum.WalkSpeed = ws
+		hum.JumpPower = jp
+	else
+		hum.WalkSpeed = 2
+		hum.JumpPower = 0
+	end
+	
+
+	
+	if not theme.Parent then
+		theme = ins("Sound",t)
+		theme.Looped = true
+		theme.Volume = 1
+		theme.EmitterSize = 5
+		theme.MaxDistance = 150
+		theme.SoundId = "rbxassetid://"..curID
+		theme.TimePosition = timePos
+		theme:Play()
+	end
+	
+	theme:Resume()
+	if muted then
+		theme.Volume = 0
+	else
+		theme.Volume = 1.5
+	end
+	theme.Pitch = curPitch
+	theme.EmitterSize = 10
+	theme.MaxDistance = 150
+	theme.SoundId = "rbxassetid://"..curID
+	timePos = theme.TimePosition
+	theme.Name = "TriTheme"
+	
+	local hit,pos,nId = rayc(rut.Position + v3(0,-rut.Size.y/2,0),v3(rut.Position.x,-10000,rut.Position.z),{char},3)
+	
+	local num = 1
+	for i,v in pairs(wings) do
+		v[1].RingNeon.Weld.C0 = v[1].RingNeon.Weld.C0:Lerp(angles((tan(sine/150) * cos(sine/500) * sin(sine/100)) * rad(360),0,0),.2)
+		num = num +1
+	end
+	
+	local cNum = 1
+	for i,wing in pairs(wings) do
+		if cNum == 1 or cNum == 3 or cNum == 4 or cNum == 6 then
+			for i,part in pairs(wing[1]:GetDescendants()) do
+				if string.find(part.Name:lower(),"material") then
+					part.Color = part.Color:Lerp(modeColors[mode].firstMain,.25)
+					part.Material = modeColors[mode].firstMaterial
+				elseif string.find(part.Name:lower(),"neon") then
+					part.Color = part.Color:Lerp(modeColors[mode].firstNeon,.25)
+				elseif part:IsA("ParticleEmitter") or part:IsA("Trail") then
+					part.Color = ColorSequence.new(modeColors[mode].firstNeon)
+				elseif part:IsA("PointLight") then
+					part.Color = part.Color:Lerp(modeColors[mode].firstNeon,.25)
+				end
+			end
+		elseif cNum == 2 or cNum == 5 then
+			for i,part in pairs(wing[1]:GetDescendants()) do
+				if string.find(part.Name:lower(),"material") then
+					part.Color = part.Color:Lerp(modeColors[mode].secondMain,.25)
+					part.Material = modeColors[mode].secondMaterial
+				elseif string.find(part.Name:lower(),"neon") then
+					part.Color = part.Color:Lerp(modeColors[mode].secondNeon,.25)
+				elseif part:IsA("ParticleEmitter") or part:IsA("Trail") then
+					part.Color = ColorSequence.new(modeColors[mode].secondNeon)
+				elseif part:IsA("PointLight") then
+					part.Color = part.Color:Lerp(modeColors[mode].secondNeon,.25)
+				end
+			end
+		end
+		cNum = cNum +1
+	end
+	
+	keystrokeTime = keystrokeTime -1
+	if keystrokeTime <= 0 then
+		keystrokeTime = 0
+		keystroke = ""
+	end
+	
+	for i,v in pairs(bandR:GetDescendants()) do
+		if v.Name == "MaterialPart" or v.Name == "MaterialPartMain" then
+			v.Color = v.Color:Lerp(modeColors[mode].firstMain,.25)
+			v.Material = modeColors[mode].firstMaterial
+		end
+		if v.Name == "NeonPart" then
+			v.Color = v.Color:Lerp(modeColors[mode].firstNeon,.25)
+		end
+		if v:IsA("ParticleEmitter") then
+			v.Color = ColorSequence.new(modeColors[mode].firstNeon)
+		end
+	end
+	
+	for i,v in pairs(bandL:GetDescendants()) do
+		if v.Name == "MaterialPart" or v.Name == "MaterialPartMain" then
+			v.Color = v.Color:Lerp(modeColors[mode].secondMain,.25)
+			v.Material = modeColors[mode].secondMaterial
+		end
+		if v.Name == "NeonPart" then
+			v.Color = v.Color:Lerp(modeColors[mode].secondNeon,.25)
+		end
+		if v:IsA("ParticleEmitter") then
+			v.Color = ColorSequence.new(modeColors[mode].secondNeon)
+		end
+	end
+	
+	for i,v in pairs(effects:GetDescendants()) do
+		if v.Name == "Triangle1" then
+			v.Rotation = v.Rotation +2.5
+		end
+		if v.Name == "Triangle2" then
+			v.Rotation = v.Rotation -2.5
+		end
+	end
+	
+	if using then
+		anim = "idle"
+	end
+	
+	if anim == "idle" and hit and not dancin then
+		if mode == 1 then
+			nec.C1 = nec.C1:Lerp(necc1 * cf(0,0,0) * angles(sin(sine/20) * rad(5),sin(sine/40) * rad(10),sin(sine/60) * rad(5)),.1)
+			rutj.C1 = rutj.C1:Lerp(rutjc1 * cf(sin(sine/60)/7.5,-.1 + sin(sine/20)/17.5,0) * angles(sin(sine/20) * rad(2.5),rad(0),-sin(sine/60) * rad(2.5)),.1)
+			rs.C1 = rs.C1:Lerp(rsc1 * cf(0,sin(sine/20)/20,0) * angles(sin(sine/20) * rad(5),rad(0),sin(sine/60) * rad(5)),.1)
+			ls.C1 = ls.C1:Lerp(lsc1 * cf(0,sin(sine/20)/20,0) * angles(sin(sine/20) * rad(5),rad(0),sin(sine/60) * rad(5)),.1)
+			rh.C1 = rh.C1:Lerp(rhc1 * cf(0,sin(sine/20)/17.5,0) * angles(sin(sine/20) * rad(3.5),rad(0),sin(sine/60) * rad(2.5)),.1)
+			lh.C1 = lh.C1:Lerp(lhc1 * cf(0,sin(sine/20)/17.5,0) * angles(sin(sine/20) * rad(3.5),rad(0),sin(sine/60) * rad(2.5)),.1)
+			local num = 1
+			for i,v in pairs(wings) do
+				if num == 1 or num == 3 or num == 4 or num == 6 then
+					v[2].C1 = v[2].C1:Lerp(cf(sin(sine/35)/10,sin(sine/25)/5,cos(sine/50)/5) * angles(sin(sine/25) * rad(7.5),cos(sine/50) * rad(7.5),sin(sine/25) * rad(12.5)),.2)
+				elseif num == 2 or num == 5 then
+					v[2].C1 = v[2].C1:Lerp(cf(-sin(sine/35)/10,-sin(sine/25)/5,-cos(sine/50)/5) * angles(-sin(sine/25) * rad(10),-cos(sine/50) * rad(7.5),sin(sine/25) * rad(12.5)),.2)
+				end
+				num = num +1
+			end
+		elseif mode == 2 then
+			nec.C1 = nec.C1:Lerp(necc1 * cf(0,0,0) * angles(sin(sine/20) * rad(5),sin(sine/40) * rad(10),sin(sine/60) * rad(5)),.1)
+			rutj.C1 = rutj.C1:Lerp(rutjc1 * cf(sin(sine/60)/7.5,-.1 + sin(sine/20)/17.5,0) * angles(sin(sine/20) * rad(2.5),rad(0),-sin(sine/60) * rad(2.5)),.1)
+			rs.C1 = rs.C1:Lerp(rsc1 * cf(0,sin(sine/20)/20,0) * angles(sin(sine/20) * rad(5),rad(0),sin(sine/60) * rad(5)),.1)
+			ls.C1 = ls.C1:Lerp(lsc1 * cf(0,sin(sine/20)/20,0) * angles(sin(sine/20) * rad(5),rad(0),sin(sine/60) * rad(5)),.1)
+			rh.C1 = rh.C1:Lerp(rhc1 * cf(0,sin(sine/20)/17.5,0) * angles(sin(sine/20) * rad(3.5),rad(0),sin(sine/60) * rad(2.5)),.1)
+			lh.C1 = lh.C1:Lerp(lhc1 * cf(0,sin(sine/20)/17.5,0) * angles(sin(sine/20) * rad(3.5),rad(0),sin(sine/60) * rad(2.5)),.1)
+			local num = 1
+			for i,v in pairs(wings) do
+				if num == 1 or num == 3 or num == 4 or num == 6 then
+					v[2].C1 = v[2].C1:Lerp(cf(sin(sine/35)/10,sin(sine/25)/5,cos(sine/50)/5) * angles(sin(sine/25) * rad(7.5),cos(sine/50) * rad(7.5),sin(sine/25) * rad(12.5)),.2)
+				elseif num == 2 or num == 5 then
+					v[2].C1 = v[2].C1:Lerp(cf(-sin(sine/35)/10,-sin(sine/25)/5,-cos(sine/50)/5) * angles(-sin(sine/25) * rad(10),-cos(sine/50) * rad(7.5),sin(sine/25) * rad(12.5)),.2)
+				end
+				num = num +1
+			end
+		elseif mode == 3 then
+			nec.C1 = nec.C1:Lerp(necc1 * cf(0,0,0) * angles(cos(sine/10) * rad(110),rad(0),rad(0)),.1)
+			rutj.C1 = rutj.C1:Lerp(rutjc1 * cf(0,-abs(sin(sine/10)) - .5,-sin(sine/10) * 2.5) * angles(sin(sine/10) * rad(170),rad(0),rad(0)),.1)
+			rs.C1 = rs.C1:Lerp(rsc1 * cf(0,0,0) * angles(cos(sine/10) * rad(220),sin(sine/5) * rad(10),rad(0)),.1)
+			ls.C1 = ls.C1:Lerp(lsc1 * cf(0,0,0) * angles(cos(sine/10) * rad(220),-sin(sine/5) * rad(10),rad(0)),.1)
+			rh.C1 = rh.C1:Lerp(rhc1 * cf(0,0,0) * angles(sin(sine/10) * rad(225),rad(0),rad(0)),.1)
+			lh.C1 = lh.C1:Lerp(lhc1 * cf(0,0,0) * angles(sin(sine/10) * rad(225),rad(0),rad(0)),.1)
+			local num = 1
+			for i,v in pairs(wings) do
+				if num == 1 or num == 3 or num == 4 or num == 6 then
+					v[2].C1 = v[2].C1:Lerp(cf(sin(sine/35)/10,sin(sine/25)/5,cos(sine/50)/5) * angles(sin(sine/25) * rad(7.5),cos(sine/50) * rad(7.5),sin(sine/25) * rad(12.5)),.2)
+				elseif num == 2 or num == 5 then
+					v[2].C1 = v[2].C1:Lerp(cf(-sin(sine/35)/10,-sin(sine/25)/5,-cos(sine/50)/5) * angles(-sin(sine/25) * rad(10),-cos(sine/50) * rad(7.5),sin(sine/25) * rad(12.5)),.2)
+				end
+				num = num +1
+			end
+		elseif mode == 4 then
+			nec.C1 = nec.C1:Lerp(necc1 * cf(0,0,0) * angles(sin(sine/20) * rad(5),sin(sine/40) * rad(10),sin(sine/60) * rad(5)),.1)
+			rutj.C1 = rutj.C1:Lerp(rutjc1 * cf(sin(sine/60)/7.5,-.1 + sin(sine/20)/17.5,0) * angles(sin(sine/20) * rad(2.5),rad(0),-sin(sine/60) * rad(2.5)),.1)
+			rs.C1 = rs.C1:Lerp(rsc1 * cf(0,sin(sine/20)/20,0) * angles(sin(sine/20) * rad(5),rad(0),sin(sine/60) * rad(5)),.1)
+			ls.C1 = ls.C1:Lerp(lsc1 * cf(0,sin(sine/20)/20,0) * angles(sin(sine/20) * rad(5),rad(0),sin(sine/60) * rad(5)),.1)
+			rh.C1 = rh.C1:Lerp(rhc1 * cf(0,sin(sine/20)/17.5,0) * angles(sin(sine/20) * rad(3.5),rad(0),sin(sine/60) * rad(2.5)),.1)
+			lh.C1 = lh.C1:Lerp(lhc1 * cf(0,sin(sine/20)/17.5,0) * angles(sin(sine/20) * rad(3.5),rad(0),sin(sine/60) * rad(2.5)),.1)
+			local num = 1
+			for i,v in pairs(wings) do
+				if num == 1 or num == 3 or num == 4 or num == 6 then
+					v[2].C1 = v[2].C1:Lerp(cf(sin(sine/35)/10,sin(sine/25)/5,cos(sine/50)/5) * angles(sin(sine/25) * rad(7.5),cos(sine/50) * rad(7.5),sin(sine/25) * rad(12.5)),.2)
+				elseif num == 2 or num == 5 then
+					v[2].C1 = v[2].C1:Lerp(cf(-sin(sine/35)/10,-sin(sine/25)/5,-cos(sine/50)/5) * angles(-sin(sine/25) * rad(10),-cos(sine/50) * rad(7.5),sin(sine/25) * rad(12.5)),.2)
+				end
+				num = num +1
+			end
+		end
+	elseif anim == "fall" and not hit and not dancin then
+		if mode == 1 or mode == 2 or mode == 3 or mode == 4 then
+			nec.C1 = nec.C1:Lerp(necc1 * cf(0,0,0) * angles(rad(0),rad(0),rad(0)),.1)
+			rutj.C1 = rutj.C1:Lerp(rutjc1 * cf(0,0,0) * angles(rad(0),rad(0),rad(0)),.1)
+			rs.C1 = rs.C1:Lerp(rsc1 * cf(0,0,0) * angles(rad(0),rad(0),rad(0)),.1)
+			ls.C1 = ls.C1:Lerp(lsc1 * cf(0,0,0) * angles(rad(0),rad(0),rad(0)),.1)
+			rh.C1 = rh.C1:Lerp(rhc1 * cf(0,0,0) * angles(rad(0),rad(0),rad(0)),.1)
+			lh.C1 = lh.C1:Lerp(lhc1 * cf(0,0,0) * angles(rad(0),rad(0),rad(0)),.1)
+			local num = 1
+			for i,v in pairs(wings) do
+				if num == 2 then
+					v[2].C1 = v[2].C1:Lerp(cf(cos(sine/30)/3.5,cos(sine/15)/2.5,sin(sine/15)/5) * angles(sin(sine/15) * rad(15),cos(sine/15) * rad(7.5),-sin(sine/15) * rad(7.5)) * angles(-rotrl/2,rotfb/1.5,0),.2)
+				end
+				if num == 5 then
+					v[2].C1 = v[2].C1:Lerp(cf(-cos(sine/30)/3.5,cos(sine/15)/2.5,sin(sine/15)/5) * angles(sin(sine/15) * rad(15),cos(sine/15) * rad(7.5),sin(sine/15) * rad(7.5)) * angles(rotrl/2,-rotfb/1.5,0),.2)
+				end
+				if num == 1 or num == 6 then
+					v[2].C1 = v[2].C1:Lerp(cf(-cos(sine/30)/7,cos(sine/15)/5,sin(sine/15)/10) * angles(sin(sine/15) * rad(15),cos(sine/15) * rad(7.5),sin(sine/15) * rad(7.5)) * angles(rotrl/2,-rotfb/1.5,0),.2)
+				end
+				if num == 4 or num == 3 then
+					v[2].C1 = v[2].C1:Lerp(cf(cos(sine/30)/7,cos(sine/15)/5,sin(sine/15)/10) * angles(sin(sine/15) * rad(15),cos(sine/15) * rad(7.5),-sin(sine/15) * rad(7.5)) * angles(-rotrl/2,rotfb/1.5,0),.2)
+				end
+				num = num +1
+			end
+		end
+	elseif anim == "jump" and not hit and not dancin then
+		if mode == 1 or mode == 2 or mode == 3 or mode == 4 then
+			nec.C1 = nec.C1:Lerp(necc1 * cf(0,0,0) * angles(rad(0),rad(0),rad(0)),.1)
+			rutj.C1 = rutj.C1:Lerp(rutjc1 * cf(0,0,0) * angles(rad(0),rad(0),rad(0)),.1)
+			rs.C1 = rs.C1:Lerp(rsc1 * cf(0,0,0) * angles(rad(0),rad(0),rad(0)),.1)
+			ls.C1 = ls.C1:Lerp(lsc1 * cf(0,0,0) * angles(rad(0),rad(0),rad(0)),.1)
+			rh.C1 = rh.C1:Lerp(rhc1 * cf(0,0,0) * angles(rad(0),rad(0),rad(0)),.1)
+			lh.C1 = lh.C1:Lerp(lhc1 * cf(0,0,0) * angles(rad(0),rad(0),rad(0)),.1)
+			local num = 1
+			for i,v in pairs(wings) do
+				if num == 2 then
+					v[2].C1 = v[2].C1:Lerp(cf(cos(sine/30)/3.5,cos(sine/15)/2.5,sin(sine/15)/5) * angles(sin(sine/15) * rad(15),cos(sine/15) * rad(7.5),-sin(sine/15) * rad(7.5)) * angles(-rotrl/2,rotfb/1.5,0),.2)
+				end
+				if num == 5 then
+					v[2].C1 = v[2].C1:Lerp(cf(-cos(sine/30)/3.5,cos(sine/15)/2.5,sin(sine/15)/5) * angles(sin(sine/15) * rad(15),cos(sine/15) * rad(7.5),sin(sine/15) * rad(7.5)) * angles(rotrl/2,-rotfb/1.5,0),.2)
+				end
+				if num == 1 or num == 6 then
+					v[2].C1 = v[2].C1:Lerp(cf(-cos(sine/30)/7,cos(sine/15)/5,sin(sine/15)/10) * angles(sin(sine/15) * rad(15),cos(sine/15) * rad(7.5),sin(sine/15) * rad(7.5)) * angles(rotrl/2,-rotfb/1.5,0),.2)
+				end
+				if num == 4 or num == 3 then
+					v[2].C1 = v[2].C1:Lerp(cf(cos(sine/30)/7,cos(sine/15)/5,sin(sine/15)/10) * angles(sin(sine/15) * rad(15),cos(sine/15) * rad(7.5),-sin(sine/15) * rad(7.5)) * angles(-rotrl/2,rotfb/1.5,0),.2)
+				end
+				num = num +1
+			end
+		end
+	elseif anim == "walk" and hit and not dancin then
+		if mode == 1 then
+			nec.C1 = nec.C1:Lerp(necc1 * cf(0,0,0) * angles(sin(sine/1.25) * rad(7.5),rad(0),rad(0)) * angles(0,rotrl/1.5,0),.2)
+			rutj.C1 = rutj.C1:Lerp(rutjc1 * cf(0,sin(sine/1.25)/5,0) * angles(sin(sine/1.25) * rad(10),sin(sine/2.5) * rad(10),rad(0)) * angles(-rotfb/5,0,-rotrl/5),.2)
+			rs.C1 = rs.C1:Lerp(rsc1 * cf(0,cos(sine/2.5)/7.5,-cos(sine/2.5)/7.5) * angles(sin(sine/2.5) * rad(120) * rotfb,sin(sine/1.25) * rad(15),sin(sine/2.5) * rad(15) * rotrl),.2)
+			ls.C1 = ls.C1:Lerp(lsc1 * cf(0,-cos(sine/2.5)/7.5,cos(sine/2.5)/7.5) * angles(-sin(sine/2.5) * rad(120) * rotfb,sin(sine/1.25) * rad(15),-sin(sine/2.5) * rad(15) * rotrl),.2)
+			rh.C1 = rh.C1:Lerp(rhc1 * cf(0,-cos(sine/2.5)/1.5,cos(sine/2.5)/2) * angles((-sin(sine/2.5) * rad(100) + rad(15)) * rotfb,rad(0),-sin(sine/2.5) * rad(80) * rotrl),.2)
+			lh.C1 = lh.C1:Lerp(lhc1 * cf(0,cos(sine/2.5)/1.5,-cos(sine/2.5)/2) * angles((sin(sine/2.5) * rad(100) + rad(15)) * rotfb,rad(0),sin(sine/2.5) * rad(80) * rotrl),.2)
+			local num = 1
+			for i,v in pairs(wings) do
+				if num == 2 then
+					v[2].C1 = v[2].C1:Lerp(cf(cos(sine/30)/3.5,cos(sine/15)/2.5,sin(sine/15)/5) * angles(sin(sine/15) * rad(15),cos(sine/15) * rad(7.5),-sin(sine/15) * rad(7.5)) * angles(-rotrl/2,rotfb/1.5,0),.2)
+				end
+				if num == 5 then
+					v[2].C1 = v[2].C1:Lerp(cf(-cos(sine/30)/3.5,cos(sine/15)/2.5,sin(sine/15)/5) * angles(sin(sine/15) * rad(15),cos(sine/15) * rad(7.5),sin(sine/15) * rad(7.5)) * angles(rotrl/2,-rotfb/1.5,0),.2)
+				end
+				if num == 1 or num == 6 then
+					v[2].C1 = v[2].C1:Lerp(cf(-cos(sine/30)/7,cos(sine/15)/5,sin(sine/15)/10) * angles(sin(sine/15) * rad(15),cos(sine/15) * rad(7.5),sin(sine/15) * rad(7.5)) * angles(rotrl/2,-rotfb/1.5,0),.2)
+				end
+				if num == 4 or num == 3 then
+					v[2].C1 = v[2].C1:Lerp(cf(cos(sine/30)/7,cos(sine/15)/5,sin(sine/15)/10) * angles(sin(sine/15) * rad(15),cos(sine/15) * rad(7.5),-sin(sine/15) * rad(7.5)) * angles(-rotrl/2,rotfb/1.5,0),.2)
+				end
+				num = num +1
+			end
+		elseif mode == 2 then
+			nec.C1 = nec.C1:Lerp(necc1 * cf(0,0,0) * angles(-sin(sine/2.5) * rad(2),sin(sine/5) * rad(1),-sin(sine/5) * rad(1)) * angles(0,rotrl/2,0),.2)
+			rutj.C1 = rutj.C1:Lerp(rutjc1 * cf(0,cos(sine/2.5)/10,0) * angles(sin(sine/2.5) * rad(2),sin(sine/5) * rad(3.5),0) * angles(-rotfb/13.5,rut.RotVelocity.y/90,-rotrl/10),.2)
+			if not using then
+				rs.C1 = rs.C1:Lerp(rsc1 * cf(0,-cos(sine/5)/25,cos(sine/5)/15) * angles(-sin(sine/5) * rad(30) * rotfb,sin(sine/5) * rad(5),-sin(sine/2.5) * rad(2.5) + (-sin(sine/5) * rad(5) * rotrl)),.2)
+				ls.C1 = ls.C1:Lerp(lsc1 * cf(0,cos(sine/5)/25,-cos(sine/5)/15) * angles(sin(sine/5) * rad(30) * rotfb,sin(sine/5) * rad(5),-sin(sine/2.5) * rad(2.5) + (sin(sine/5) * rad(5) * rotrl)),.2)
+			else
+				rs.C1 = rs.C1:Lerp(rsc1 * cf(0,0,0) * angles(rad(0),rad(0),rad(0)),.2)
+				ls.C1 = ls.C1:Lerp(lsc1 * cf(0,0,0) * angles(rad(0),rad(0),rad(0)),.2)
+			end
+			rh.C1 = rh.C1:Lerp(rhc1 * cf(0,cos(sine/5)/6.5,-cos(sine/5)/7.5) * angles(rad(4) + sin(sine/5) * rad(30) * rotfb,rad(0),sin(sine/5) * rad(30) * rotrl),.2)
+			lh.C1 = lh.C1:Lerp(lhc1 * cf(0,-cos(sine/5)/6.5,cos(sine/5)/7.5) * angles(rad(4) + sin(sine/5) * rad(-30) * rotfb,rad(0),-sin(sine/5) * rad(30) * rotrl),.2)
+			local num = 1
+			for i,v in pairs(wings) do
+				if num == 3 or num == 2 or num == 4 then
+					v[2].C1 = v[2].C1:Lerp(cf(sin(sine/35)/10,sin(sine/25)/5,cos(sine/50)/5) * angles(sin(sine/25) * rad(7.5),cos(sine/50) * rad(7.5),sin(sine/25) * rad(12.5)) * angles(-rotrl/2,rotfb/1.5,rad(0)),.2)
+				elseif num == 1 or num == 6 or num == 5 then
+					v[2].C1 = v[2].C1:Lerp(cf(-sin(sine/35)/10,-sin(sine/25)/5,-cos(sine/50)/5) * angles(-sin(sine/25) * rad(10),-cos(sine/50) * rad(7.5),sin(sine/25) * rad(12.5)) * angles(rotrl/2,-rotfb/1.5,rad(0)),.2)
+				end
+				num = num +1
+			end
+		elseif mode == 3 then
+			nec.C1 = nec.C1:Lerp(necc1 * cf(0,0,0) * angles(cos(sine/150) * rad(250),tan(sine/500) * rad(90),rad(0)) * angles(0,rotrl/2,0),.2)
+			rutj.C1 = rutj.C1:Lerp(rutjc1 * cf(0,sin(sine/2.5),0) * angles(sin(sine/150) * rad(2500),tan(sine/500) * rad(90),-tan(sine/500) * rad(90)) * angles(-rotfb/2.5,rut.RotVelocity.y/90,-rotrl/3),.2)
+			if not using then
+				rs.C1 = rs.C1:Lerp(rsc1 * cf(0,0,0) * angles(cos(sine/150) * rad(2500),rad(0),rad(0)),.2)
+				ls.C1 = ls.C1:Lerp(lsc1 * cf(0,0,0) * angles(cos(sine/150) * rad(2500),rad(0),rad(0)),.2)
+			else
+				rs.C1 = rs.C1:Lerp(rsc1 * cf(0,0,0) * angles(rad(0),rad(0),rad(0)),.2)
+				ls.C1 = ls.C1:Lerp(lsc1 * cf(0,0,0) * angles(rad(0),rad(0),rad(0)),.2)
+			end
+			rh.C1 = rh.C1:Lerp(rhc1 * cf(0,0,0) * angles(cos(sine/150) * rad(2500),rad(0),rad(0)),.2)
+			lh.C1 = lh.C1:Lerp(lhc1 * cf(0,0,0) * angles(cos(sine/150) * rad(2500),rad(0),rad(0)),.2)
+			local num = 1
+			for i,v in pairs(wings) do
+				if num == 3 or num == 2 or num == 4 then
+					v[2].C1 = v[2].C1:Lerp(cf(sin(sine/35)/10,sin(sine/25)/5,cos(sine/50)/5) * angles(sin(sine/25) * rad(7.5),cos(sine/50) * rad(7.5),sin(sine/25) * rad(12.5)) * angles(-rotrl/2,rotfb/1.5,rad(0)),.2)
+				elseif num == 1 or num == 6 or num == 5 then
+					v[2].C1 = v[2].C1:Lerp(cf(-sin(sine/35)/10,-sin(sine/25)/5,-cos(sine/50)/5) * angles(-sin(sine/25) * rad(10),-cos(sine/50) * rad(7.5),sin(sine/25) * rad(12.5)) * angles(rotrl/2,-rotfb/1.5,rad(0)),.2)
+				end
+				num = num +1
+			end
+		elseif mode == 4 then
+			nec.C1 = nec.C1:Lerp(necc1 * cf(0,0,0) * angles(rad(0),rad(0),rad(0)) * angles(-rotfb/1.5,rotrl/2,0),.2)
+			rutj.C1 = rutj.C1:Lerp(rutjc1 * cf(0,0,0) * angles(rad(0),rad(0),rad(0)) * angles(-rotfb,rut.RotVelocity.y/90,-rotrl/2),.2)
+			if not using then
+				rs.C1 = rs.C1:Lerp(rsc1 * cf(0,0,0) * angles(rad(0),rad(0),rad(0)) * angles(rotfb/1.75,0,rotrl/2),.2)
+				ls.C1 = ls.C1:Lerp(lsc1 * cf(0,0,0) * angles(rad(0),rad(0),rad(0)) * angles(rotfb/1.75,0,rotrl/2),.2)
+			else
+				rs.C1 = rs.C1:Lerp(rsc1 * cf(0,0,0) * angles(rad(0),rad(0),rad(0)),.2)
+				ls.C1 = ls.C1:Lerp(lsc1 * cf(0,0,0) * angles(rad(0),rad(0),rad(0)),.2)
+			end
+			rh.C1 = rh.C1:Lerp(rhc1 * cf(0,0,0) * angles(rad(0),rad(0),rad(0)) * angles(rotfb/1.75,0,rotrl/2),.2)
+			lh.C1 = lh.C1:Lerp(lhc1 * cf(0,0,0) * angles(rad(0),rad(0),rad(0)) * angles(rotfb/1.75,0,rotrl/2),.2)
+			local num = 1
+			for i,v in pairs(wings) do
+				if num == 3 or num == 2 or num == 4 then
+					v[2].C1 = v[2].C1:Lerp(cf(sin(sine/35)/10,sin(sine/25)/5,cos(sine/50)/5) * angles(sin(sine/25) * rad(7.5),cos(sine/50) * rad(7.5),sin(sine/25) * rad(12.5)) * angles(-rotrl/2,rotfb/1.5,rad(0)),.2)
+				elseif num == 1 or num == 6 or num == 5 then
+					v[2].C1 = v[2].C1:Lerp(cf(-sin(sine/35)/10,-sin(sine/25)/5,-cos(sine/50)/5) * angles(-sin(sine/25) * rad(10),-cos(sine/50) * rad(7.5),sin(sine/25) * rad(12.5)) * angles(rotrl/2,-rotfb/1.5,rad(0)),.2)
+				end
+				num = num +1
+			end
+		end
+	elseif dancin then
+		local sSin = sin(dSine/75)
+		local sCos = cos(dSine/25)
+		local lSine = dSine * (sCos * sSin)/75
+		nec.C1 = nec.C1:Lerp(necc1 * cf(0,0,0) * angles(cos(lSine/5) * rad(5),sin(lSine/10) * rad(25),-cos(lSine/10) * rad(10)),.1)
+		rutj.C1 = rutj.C1:Lerp(rutjc1 * cf(0,sin(lSine/5)/5,0) * angles(sin(lSine/5) * rad(5),-cos(lSine/10) * rad(35),cos(lSine/10) * rad(10)),.1)
+		rs.C1 = rs.C1:Lerp(rsc1 * cf(0,0,cos(lSine/5)/2.5) * angles(rad(-105),rad(0),rad(0)) * angles(sin(lSine/20) * rad(20),sin(lSine/10) * rad(65),cos(lSine/10) * rad(55)),.1)
+		ls.C1 = ls.C1:Lerp(lsc1 * cf(0,0,-cos(lSine/5)/2.5) * angles(rad(-105),rad(0),rad(0)) * angles(-sin(lSine/20) * rad(20),sin(lSine/10) * rad(65),cos(lSine/10) * rad(55)),.1)
+		rh.C1 = rh.C1:Lerp(rhc1 * cf(0,(sin(lSine/5)/5) + cos(lSine/10)/10,0) * angles((sin(lSine/5) * rad(10)) - cos(lSine/10) * rad(15),-cos(lSine/10) * rad(10),cos(lSine/10) * rad(15)),.1)
+		lh.C1 = lh.C1:Lerp(lhc1 * cf(0,(sin(lSine/5)/5) - cos(lSine/10)/10,0) * angles((sin(lSine/5) * rad(10)) + cos(lSine/10) * rad(15),-cos(lSine/10) * rad(10),cos(lSine/10) * rad(15)),.1)
+		local num = 1
+		for i,v in pairs(wings) do
+			if num == 1 or num == 3 or num == 4 or num == 6 then
+				v[2].C1 = v[2].C1:Lerp(cf(sin(sine/35)/10,sin(sine/25)/5,cos(sine/50)/5) * angles(sin(sine/25) * rad(7.5),cos(sine/50) * rad(7.5),sin(sine/25) * rad(12.5)),.2)
+			elseif num == 2 or num == 5 then
+				v[2].C1 = v[2].C1:Lerp(cf(-sin(sine/35)/10,-sin(sine/25)/5,-cos(sine/50)/5) * angles(-sin(sine/25) * rad(10),-cos(sine/50) * rad(7.5),sin(sine/25) * rad(12.5)),.2)
+			end
+			num = num +1
+		end
+	end
+	if not using and not dancin then
+		if horVel > 5 and verVel >-10 and verVel <10 then
+			anim = "walk"
+			if mode == 1 then
+				change = .75
+			elseif mode == 2 then
+				change = .6
+			end
+			nec.C0 = nec.C0:Lerp(necc0 * cf(0,0,0) * angles(rad(0),rad(0),rad(0)),.2)
+			rutj.C0 = rutj.C0:Lerp(rutjc0 * cf(0,0,0) * angles(rad(0),rad(0),rad(0)),.2)
+			rs.C0 = rs.C0:Lerp(rsc0 * cf(0,0,0) * angles(rad(0),rad(0),rad(0)),.2)
+			ls.C0 = ls.C0:Lerp(lsc0 * cf(0,0,0) * angles(rad(0),rad(0),rad(0)),.2)
+			rh.C0 = rh.C0:Lerp(rhc0 * cf(0,0,0) * angles(rad(0),rad(0),rad(0)),.2)
+			lh.C0 = lh.C0:Lerp(lhc0 * cf(0,0,0) * angles(rad(0),rad(0),rad(0)),.2)
+			local num = 1
+			for i,v in pairs(wings) do
+				if mode == 1 or mode == 2 or mode == 3 then
+					v[2].C0 = v[2].C0:Lerp(wingCFs.mainCF * cf(rotrl,0,rotfb/2) * wingCFs.walkWingsCF["w"..num],.2)
+				elseif mode == 4 then
+					v[2].C0 = v[2].C0:Lerp(wingCFs.floatMainCF * cf(rotrl,0,rotfb/2) * wingCFs.floatWingCF["w"..num],.2)
+				end
+				num = num +1
+			end
+		elseif verVel >10 then
+			anim = "jump"
+			if gruntWhenJump then
+				local s = sound(grunts[1],.5,random(80,90)/100,t,.05)
+				s.TimePosition = .1
+				ins("EqualizerSoundEffect",s)
+				gruntWhenJump = false
+			end
+			change = 1
+			nec.C0 = nec.C0:Lerp(necc0 * cf(0,0,0) * angles(rad(15),rad(0),rad(0)),.3)
+			rutj.C0 = rutj.C0:Lerp(rutjc0 * cf(0,0,0) * angles(rad(-5),rad(0),rad(0)),.3)
+			rs.C0 = rs.C0:Lerp(rsc0 * cf(0,0,0) * angles(rad(142),rad(0),rad(7)),.3)
+			ls.C0 = ls.C0:Lerp(lsc0 * cf(0,0,0) * angles(rad(145),rad(0),rad(-8)),.3)
+			rh.C0 = rh.C0:Lerp(rhc0 * cf(0,.1,-.1) * angles(rad(-3.5),rad(0),rad(2)),.3)
+			lh.C0 = lh.C0:Lerp(lhc0 * cf(0,.3,-.25) * angles(rad(-9),rad(0),rad(-3.5)),.3)
+			local num = 1
+			for i,v in pairs(wings) do
+				v[2].C0 = v[2].C0:Lerp(wingCFs.mainCF * cf(rotrl,-2.5,rotfb/2) * angles(rad(25),rad(0),rad(0)) * wingCFs.walkWingsCF["w"..num],.2)
+				if num == 2 or num == 3 or num == 4 then
+					v[2].C1 = v[2].C1:Lerp(angles(-rotrl/2,rotfb/1.5,rad(0)),.2)
+				elseif num == 1 or num == 5 or num == 6 then
+					v[2].C1 = v[2].C1:Lerp(angles(rotrl/2,-rotfb/1.5,rad(0)),.2)
+				end
+				num = num +1
+			end
+		elseif verVel <-10 then
+			gruntWhenJump = true
+			anim = "fall"
+			change = 1
+			nec.C0 = nec.C0:Lerp(necc0 * cf(0,0,0) * angles(rad(-5),rad(0),rad(0)),.3)
+			rutj.C0 = rutj.C0:Lerp(rutjc0 * cf(0,0,0) * angles(rad(5),rad(0),rad(0)),.3)
+			rs.C0 = rs.C0:Lerp(rsc0 * cf(.45,-.46,0) * angles(rad(5),rad(0),rad(105)),.3)
+			ls.C0 = ls.C0:Lerp(lsc0 * cf(-.45,-.44,0) * angles(rad(6),rad(0),rad(-97.5)),.3)
+			rh.C0 = rh.C0:Lerp(rhc0 * cf(0,.3,-.25) * angles(rad(-9),rad(0),rad(2)),.3)
+			lh.C0 = lh.C0:Lerp(lhc0 * cf(0,.1,-.1) * angles(rad(-3.5),rad(0),rad(-3.5)),.3)
+			local num = 1
+			for i,v in pairs(wings) do
+				v[2].C0 = v[2].C0:Lerp(wingCFs.mainCF * cf(rotrl,2.5,rotfb/2) * angles(rad(-25),rad(0),rad(0)) * wingCFs.walkWingsCF["w"..num],.2)
+				if num == 2 or num == 3 or num == 4 then
+					v[2].C1 = v[2].C1:Lerp(angles(-rotrl/2,rotfb/1.5,rad(0)),.2)
+				elseif num == 1 or num == 5 or num == 6 then
+					v[2].C1 = v[2].C1:Lerp(angles(rotrl/2,-rotfb/1.5,rad(0)),.2)
+				end
+				num = num +1
+			end
+		elseif horVel < 5 and verVel >-10 and verVel <10 then
+			gruntWhenJump = true
+			anim = "idle"
+			change = 1
+			if mode == 1 then
+				nec.C0 = nec.C0:Lerp(necc0 * cf(0,0,0) * angles(rad(-7.5),rad(15),rad(0)),.1)
+				rutj.C0 = rutj.C0:Lerp(rutjc0 * cf(0,0,.15) * angles(rad(-5),rad(15),rad(0)),.1)
+				rs.C0 = rs.C0:Lerp(rsc0 * cf(0,0,0) * angles(rad(2.5),rad(10),rad(5)),.1)
+				ls.C0 = ls.C0:Lerp(lsc0 * cf(.25,0,.15) * angles(rad(-15),rad(25),rad(20)),.1)
+				rh.C0 = rh.C0:Lerp(rhc0 * cf(0,0,-.15) * angles(rad(-20),rad(-7.5),rad(2.5)),.1)
+				lh.C0 = lh.C0:Lerp(lhc0 * cf(0,0,-.05) * angles(rad(-2.5),rad(10),rad(-7.5)),.1)
+				local num = 1
+				for i,v in pairs(wings) do
+					v[2].C0 = v[2].C0:Lerp(wingCFs.mainCF *wingCFs.idleWingsCF["w"..num],.2)
+					num = num +1
+				end
+			elseif mode == 2 then
+				nec.C0 = nec.C0:Lerp(necc0 * cf(0,0,0) * angles(rad(-2.5),rad(0),rad(0)),.1)
+				rutj.C0 = rutj.C0:Lerp(rutjc0 * cf(0,0,0) * angles(rad(0),rad(0),rad(0)),.1)
+				rs.C0 = rs.C0:Lerp(rsc0 * cf(-.35,-.35,-.15) * angles(rad(90),rad(7.5),rad(-80)),.1)
+				ls.C0 = ls.C0:Lerp(lsc0 * cf(.3,-.35,-.225) * angles(rad(80),rad(5),rad(85)),.1)
+				rh.C0 = rh.C0:Lerp(rhc0 * cf(0,0,0) * angles(rad(0),rad(-5),rad(2.5)),.1)
+				lh.C0 = lh.C0:Lerp(lhc0 * cf(0,0,0) * angles(rad(0),rad(5),rad(-2.5)),.1)
+				local num = 1
+				for i,v in pairs(wings) do
+					v[2].C0 = v[2].C0:Lerp(wingCFs.mainCF *wingCFs.idleWingsCF["w"..num],.2)
+					num = num +1
+				end
+			elseif mode == 3 then
+				nec.C0 = nec.C0:Lerp(necc0 * cf(0,0,0) * angles(rad(0),rad(0),rad(0)),.1)
+				rutj.C0 = rutj.C0:Lerp(rutjc0 * cf(0,-1,0) * angles(rad(0),rad(0),rad(0)),.1)
+				rs.C0 = rs.C0:Lerp(rsc0 * cf(0,0,0) * angles(rad(0),rad(0),rad(2.5)),.1)
+				ls.C0 = ls.C0:Lerp(lsc0 * cf(0,0,0) * angles(rad(0),rad(0),rad(-2.5)),.1)
+				rh.C0 = rh.C0:Lerp(rhc0 * cf(0,0,0) * angles(rad(0),rad(-5),rad(2.5)),.1)
+				lh.C0 = lh.C0:Lerp(lhc0 * cf(0,0,0) * angles(rad(0),rad(5),rad(-2.5)),.1)
+				local num = 1
+				for i,v in pairs(wings) do
+					v[2].C0 = v[2].C0:Lerp(wingCFs.mainCF *wingCFs.idleWingsCF["w"..num],.2)
+					num = num +1
+				end
+			elseif mode == 4 then
+				nec.C0 = nec.C0:Lerp(necc0 * cf(0,0,0) * angles(rad(-13.5),rad(22.5),rad(0)),.1)
+				rutj.C0 = rutj.C0:Lerp(rutjc0 * cf(0,-1,0) * angles(rad(-15),rad(25),rad(7.5)),.1)
+				rs.C0 = rs.C0:Lerp(rsc0 * cf(0,0,0) * angles(rad(-12.5),rad(20),rad(5)),.1)
+				ls.C0 = ls.C0:Lerp(lsc0 * cf(0,.4,0) * angles(rad(165),rad(20),rad(7.5)),.1)
+				rh.C0 = rh.C0:Lerp(rhc0 * cf(0,.35,-.25) * angles(rad(-20),rad(-5),rad(-10)),.1)
+				lh.C0 = lh.C0:Lerp(lhc0 * cf(0,0,0) * angles(rad(-12.5),rad(7.5),rad(-3.5)),.1)
+				local num = 1
+				for i,v in pairs(wings) do
+					v[2].C0 = v[2].C0:Lerp(wingCFs.floatMainCF * angles(rad(0),rad(0),rad(sine * 5)) * wingCFs.floatWingCF["w"..num],.2)
+					num = num +1
+				end
+			end	
+		end
+	elseif using and dancin then
+		change = 1
+		nec.C0 = nec.C0:Lerp(necc0 * cf(0,0,0) * angles(rad(0),rad(0),rad(0)),.2)
+		rutj.C0 = rutj.C0:Lerp(rutjc0 * cf(0,0,0) * angles(rad(0),rad(0),rad(0)),.2)
+		rs.C0 = rs.C0:Lerp(rsc0 * cf(0,0,0) * angles(rad(0),rad(0),rad(0)),.2)
+		ls.C0 = ls.C0:Lerp(lsc0 * cf(0,0,0) * angles(rad(0),rad(0),rad(0)),.2)
+		rh.C0 = rh.C0:Lerp(rhc0 * cf(0,0,0) * angles(rad(0),rad(0),rad(2.5)),.2)
+		lh.C0 = lh.C0:Lerp(lhc0 * cf(0,0,0) * angles(rad(0),rad(0),rad(-2.5)),.2)
+		local num = 1
+		for i,v in pairs(wings) do
+			v[2].C0 = v[2].C0:Lerp(wingCFs.mainCF * wingCFs.idleWingsCF["w"..num],.2)
+			num = num +1
+		end
+	end
+end)
