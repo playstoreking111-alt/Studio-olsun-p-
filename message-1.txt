@@ -1,4 +1,4 @@
-local FDless = game.Players.Local.Player
+local FDless = game.Players.LocalPlayer
 
 Player = game:GetService("Players").LocalPlayer
         Cam = workspace.CurrentCamera
