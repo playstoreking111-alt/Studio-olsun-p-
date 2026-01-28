@@ -876,7 +876,7 @@ function BatonStun()
 					end))
 					if SPEAKING == false and MRANDOM(1,5) == 1 then
 						SPEAKING = true
-						Chatter("Let that be a warning.",0)
+						Chatter("Bunu bir uyarı olarak kabul et.",0)
 					end
 				end
 			end
@@ -925,7 +925,7 @@ function Cuffs()
 				RootPart.CFrame = ROOT.CFrame*CF(0,0,2)
 				ROOT.Anchored = true
 				CreateSound(289556450, RootPart, 5, 1.4, false)
-				Chatter("You have the right to remain silent.",0)
+				Chatter("Susma hakkına sahipsin.",0)
 				for i=0, 2, 0.1 / Animation_Speed do
 					Swait()
 					RootJoint.C0 = Clerp(RootJoint.C0,ROOTC0 * CF(0, 0, 0) * ANGLES(RAD(15), RAD(0), RAD(0)), 1 / Animation_Speed)
@@ -997,7 +997,7 @@ function Cuffs()
 				HUM.PlatformStand = true
 				ROOT.CFrame = ROOT.CFrame * ANGLES(RAD(15), RAD(0), RAD(0))
 				ROOT.Anchored = false
-				Chatter("Anything you say can and WILL be used against you.",0)
+				Chatter("Söylediğin her şey sana karşı kullanılabilir.",0)
 				for i=0, 3, 0.1 / Animation_Speed do
 					Swait()
 					RootJoint.C0 = Clerp(RootJoint.C0,ROOTC0 * CF(0, 0, 0) * ANGLES(RAD(-5), RAD(0), RAD(-35)), 1 / Animation_Speed)
@@ -1117,7 +1117,7 @@ function BatonBreaker()
 	ATTACK = true
 	Rooted = false
 	Speed = 4
-	Chatter("I'll break you!",0)
+	Chatter("Seni parçalayacağım!",0)
 	for i=0, 0.2, 0.1 / Animation_Speed do
 		Swait()
 		RootJoint.C0 = Clerp(RootJoint.C0,ROOTC0 * CF(0, 0, 0) * ANGLES(RAD(0), RAD(0), RAD(0)), 1 / Animation_Speed)
@@ -1227,7 +1227,7 @@ function TheRightToRemainSilent()
 				RootPart.CFrame = ROOT.CFrame*CF(0,0,2)
 				ROOT.Anchored = true
 				CreateSound(289556450, RootPart, 5, 1.4, false)
-				Chatter("You are to remain silent and DEAD!",0)
+				Chatter("Susacaksın ve ÖLÜ kalacaksın!",0)
 				for i=0, 0.4, 0.1 / Animation_Speed do
 					Swait()
 					RootJoint.C0 = Clerp(RootJoint.C0,ROOTC0 * CF(0, 0, 0) * ANGLES(RAD(0), RAD(0), RAD(0)), 1 / Animation_Speed)
@@ -1364,9 +1364,9 @@ function KeyDown(Key)
 
 	if Key == "t" and ATTACK == false then
 		if MODE == "GoodCop" then
-			Chatter("You should obey the law.",0.01)
+			Chatter("Kanuna uymalısın.",0.01)
 		elseif MODE == "BadCop" then
-			Chatter("I don't think so, Criminal!",0.01)
+			Chatter("Sanmıyorum, suçlu!",0.01)
 		end
 	end
 
@@ -1407,16 +1407,23 @@ function unanchor()
 			c.Anchored = false
 		end
 	end
-	for _, c in pairs(Weapon:GetChildren()) do
-		if c:IsA("BasePart") and c ~= RootPart then
-			c.Anchored = false
-		end
-	end
-	if UNANCHOR == true then
-		RootPart.Anchored = false
-	else
-		RootPart.Anchored = true
-	end
+	function unanchor()
+    -- Karakter parçalarını serbest bırak
+    for _, c in pairs(Character:GetChildren()) do
+        if c:IsA("BasePart") and c ~= RootPart then
+            c.Anchored = false
+        end
+    end
+
+    -- Silah parçalarını serbest bırak
+    for _, c in pairs(Weapon:GetChildren()) do
+        if c:IsA("BasePart") and c ~= RootPart then
+            c.Anchored = false
+        end
+    end
+
+    -- RootPart her zaman serbest
+    RootPart.Anchored = false
 end
 
 --//=================================\\
