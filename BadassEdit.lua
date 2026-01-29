@@ -1159,7 +1159,7 @@ function BatonBreaker()
 				if PASS == true then
 					CreateSound(260430079, BATON, 6, 0.8, false)
 					WACKYEFFECT({Time = 15, EffectType = "Sphere", Size = VT(0,0,0), Size2 = VT(3,3,3), Transparency = 0, Transparency2 = 1, CFrame = CF(TORSO.Position,BATON.Position)*CF(0,0,-0.5), MoveToPos = nil, RotationX = 0, RotationY = 0, RotationZ = 0, Material = "Glass", Glass = C3(1,1,1), SoundID = nil, SoundPitch = 1, SoundVolume = 4})
-					TORSO.Anchored = true
+					TORSO.Anchored = false
 					local POS = TORSO.CFrame
 					coroutine.resume(coroutine.create(function()
 						for i = 1, 15 do
@@ -1415,7 +1415,7 @@ function unanchor()
 	if UNANCHOR == true then
 		RootPart.Anchored = false
 	else
-		RootPart.Anchored = true
+		RootPart.Anchored = false
 	end
 end
 
