@@ -1,0 +1,2496 @@
+if not getgenv().MinosPrime then
+    getgenv().MinosPrime = {
+        MinosPrimeSkipAnimation = false, 
+        MorphMinosPrime = false
+    };
+elseif getgenv().MinosPrime.MorphMinosPrime == nil then
+    getgenv().MinosPrime.MorphMinosPrime = true;
+end;
+if getgenv().MinosPrime.MorphMinosPrime then
+    local l_LocalPlayer_0 = game:GetService("Players").LocalPlayer;
+    local function v5(v1, v2) --[[ Line: 0 ]] --[[ Name:  ]]
+        if v1 and v1:IsA("BasePart") then
+            v1.Shape = Enum.PartType.Block;
+            v1.Size = v2;
+            for _, v4 in ipairs(v1:GetChildren()) do
+                if v4:IsA("SpecialMesh") or v4:IsA("Mesh") then
+                    v4:Destroy();
+                end;
+            end;
+        end;
+    end;
+    do
+        local l_v5_0 = v5;
+        local function v21(v7) --[[ Line: 0 ]] --[[ Name:  ]]
+            -- upvalues: l_v5_0 (ref)
+            for _, v9 in ipairs(v7:GetChildren()) do
+                if v9:IsA("Shirt") or v9:IsA("Pants") or v9:IsA("ShirtGraphic") or v9:IsA("Accessory") then
+                    v9:Destroy();
+                end;
+            end;
+            local l_Head_0 = v7:FindFirstChild("Head");
+            if l_Head_0 then
+                l_Head_0.Transparency = 1;
+                for _, v12 in ipairs(l_Head_0:GetChildren()) do
+                    if v12:IsA("Decal") then
+                        v12.Transparency = 1;
+                    end;
+                end;
+                l_v5_0(l_Head_0, Vector3.new(2, 1, 1));
+            end;
+            local v13 = v7:FindFirstChild("Torso") or v7:FindFirstChild("UpperTorso");
+            if v13 then
+                l_v5_0(v13, Vector3.new(2, 2, 1));
+            end;
+            l_v5_0(v7:FindFirstChild("Left Arm") or v7:FindFirstChild("LeftUpperArm"), Vector3.new(1, 2, 1));
+            l_v5_0(v7:FindFirstChild("Right Arm") or v7:FindFirstChild("RightUpperArm"), Vector3.new(1, 2, 1));
+            l_v5_0(v7:FindFirstChild("Left Leg") or v7:FindFirstChild("LeftUpperLeg"), Vector3.new(1, 2, 1));
+            l_v5_0(v7:FindFirstChild("Right Leg") or v7:FindFirstChild("RightUpperLeg"), Vector3.new(1, 2, 1));
+            local v14 = "rbxassetid://18530888536";
+            local l_status_0, l_result_0 = pcall(function() --[[ Line: 0 ]] --[[ Name:  ]]
+                -- upvalues: v14 (ref)
+                return game:GetObjects(v14)[1];
+            end);
+            if l_status_0 and l_result_0 and l_Head_0 then
+                local v17 = l_result_0:IsA("BasePart") and l_result_0 or l_result_0:FindFirstChildWhichIsA("BasePart");
+                if v17 then
+                    l_result_0.Name = "HeadAttachmentItem";
+                    l_result_0.Parent = v7;
+                    v17.Anchored = false;
+                    v17.CanCollide = false;
+                    v17.CFrame = l_Head_0.CFrame * CFrame.new(0, 0.85, 0);
+                    local l_WeldConstraint_0 = Instance.new("WeldConstraint");
+                    l_WeldConstraint_0.Part0 = l_Head_0;
+                    l_WeldConstraint_0.Part1 = v17;
+                    l_WeldConstraint_0.Parent = v17;
+                end;
+            end;
+            local l_Shirt_0 = Instance.new("Shirt");
+            l_Shirt_0.ShirtTemplate = "rbxassetid://130088019698664";
+            l_Shirt_0.Parent = v7;
+            local l_Pants_0 = Instance.new("Pants");
+            l_Pants_0.PantsTemplate = "rbxassetid://14031412479";
+            l_Pants_0.Parent = v7;
+        end;
+        if l_LocalPlayer_0.Character then
+            v21(l_LocalPlayer_0.Character);
+        end;
+    end;
+end;
+game.StarterGui:SetCore("SendNotification", {
+    Title = "Make by KIET", 
+    Text = "Have fun :]", 
+    Icon = "", 
+    Duration = "3"
+});
+local v22 = game:HttpGet("https://raw.githubusercontent.com/KietVN02202/Slap-aura/refs/heads/main/Test.lua");
+local l_LocalPlayer_1 = game:GetService("Players").LocalPlayer;
+local l_TextChatService_0 = game:GetService("TextChatService");
+local v25 = {
+    MinosPrime710 = true, 
+    [l_LocalPlayer_1.Name] = true
+};
+local function v27(v26) --[[ Line: 0 ]] --[[ Name:  ]]
+    return v26 == "500killstreakCustom";
+end;
+local function v29(v28) --[[ Line: 0 ]] --[[ Name:  ]]
+    -- upvalues: v27 (ref)
+    if v27(v28) then
+        return "Owner Script", "#CC0000";
+    else
+        return "Minos Prime", "#0066CC";
+    end;
+end;
+l_TextChatService_0.OnIncomingMessage = function(v30) --[[ Line: 0 ]] --[[ Name:  ]]
+    -- upvalues: v25 (ref), v29 (ref)
+    local l_TextSource_0 = v30.TextSource;
+    if not l_TextSource_0 then
+        return;
+    else
+        local l_Name_0 = l_TextSource_0.Name;
+        if v25[l_Name_0] then
+            local v33, v34 = v29(l_Name_0);
+            local l_TextChatMessageProperties_0 = Instance.new("TextChatMessageProperties");
+            l_TextChatMessageProperties_0.PrefixText = string.format("<font color=\"%s\">[ %s ]</font> %s", v34, v33, l_Name_0);
+            return l_TextChatMessageProperties_0;
+        else
+            return;
+        end;
+    end;
+end;
+local l_Players_0 = game:GetService("Players");
+local _ = game:GetService("StarterGui");
+local l_PlayerGui_0 = l_Players_0.LocalPlayer:WaitForChild("PlayerGui");
+local function v41(v39) --[[ Line: 0 ]] --[[ Name:  ]]
+    if v39:IsA("ScreenGui") and v39.Name == "Component" then
+        local l_PlayButtons_0 = v39:FindFirstChild("PlayButtons");
+        if l_PlayButtons_0 and l_PlayButtons_0:IsA("Frame") then
+            l_PlayButtons_0:Destroy();
+        end;
+    end;
+end;
+for _, v43 in pairs(l_PlayerGui_0:GetChildren()) do
+    v41(v43);
+end;
+l_PlayerGui_0.ChildAdded:Connect(function(v44) --[[ Line: 0 ]] --[[ Name:  ]]
+    -- upvalues: v41 (ref)
+    v41(v44);
+end);
+local l_LocalPlayer_2 = game.Players.LocalPlayer;
+local l_TweenService_0 = game:GetService("TweenService");
+local l_ScreenGui_0 = Instance.new("ScreenGui");
+l_ScreenGui_0.Name = "SubtitleGui";
+l_ScreenGui_0.ResetOnSpawn = false;
+l_ScreenGui_0.Parent = l_LocalPlayer_2:WaitForChild("PlayerGui");
+local function v54(v48, v49) --[[ Line: 0 ]] --[[ Name:  ]]
+    -- upvalues: l_ScreenGui_0 (ref), l_TweenService_0 (ref)
+    local l_Frame_0 = Instance.new("Frame");
+    l_Frame_0.Parent = l_ScreenGui_0;
+    l_Frame_0.Size = UDim2.new(0.5, 0, 0.06, 0);
+    l_Frame_0.Position = UDim2.new(0.25, 0, 0.8, 0);
+    l_Frame_0.BackgroundColor3 = Color3.new(0, 0, 0);
+    l_Frame_0.BackgroundTransparency = 1;
+    l_Frame_0.BorderSizePixel = 0;
+    local l_TextLabel_0 = Instance.new("TextLabel");
+    l_TextLabel_0.Parent = l_Frame_0;
+    l_TextLabel_0.Size = UDim2.new(1, 0, 1, 0);
+    l_TextLabel_0.BackgroundTransparency = 1;
+    l_TextLabel_0.Text = "";
+    l_TextLabel_0.TextTransparency = 1;
+    l_TextLabel_0.TextStrokeTransparency = 1;
+    l_TextLabel_0.TextScaled = true;
+    l_TextLabel_0.Font = Enum.Font.Arcade;
+    l_TextLabel_0.TextStrokeColor3 = Color3.new(0, 0, 0);
+    l_TextLabel_0.TextColor3 = Color3.fromRGB(255, 255, 255);
+    l_TextLabel_0.TextXAlignment = Enum.TextXAlignment.Center;
+    l_TextLabel_0.TextYAlignment = Enum.TextYAlignment.Center;
+    l_TweenService_0:Create(l_Frame_0, TweenInfo.new(0.3), {
+        BackgroundTransparency = 0.3
+    }):Play();
+    task.spawn(function() --[[ Line: 0 ]] --[[ Name:  ]]
+        -- upvalues: v48 (ref), l_TextLabel_0 (ref), l_TweenService_0 (ref)
+        for v52 = 1, #v48 do
+            l_TextLabel_0.Text = string.sub(v48, 1, v52);
+            l_TweenService_0:Create(l_TextLabel_0, TweenInfo.new(0.1), {
+                TextTransparency = 0, 
+                TextStrokeTransparency = 0
+            }):Play();
+            task.wait(0.07);
+        end;
+    end);
+    task.delay(v49 or 3, function() --[[ Line: 0 ]] --[[ Name:  ]]
+        -- upvalues: l_TweenService_0 (ref), l_Frame_0 (ref), l_TextLabel_0 (ref)
+        l_TweenService_0:Create(l_Frame_0, TweenInfo.new(0.5), {
+            BackgroundTransparency = 1
+        }):Play();
+        local v53 = l_TweenService_0:Create(l_TextLabel_0, TweenInfo.new(0.5), {
+            TextTransparency = 1, 
+            TextStrokeTransparency = 1
+        });
+        v53:Play();
+        v53.Completed:Connect(function() --[[ Line: 0 ]] --[[ Name:  ]]
+            -- upvalues: l_Frame_0 (ref)
+            l_Frame_0:Destroy();
+        end);
+    end);
+end;
+local l_Part_0 = Instance.new("Part");
+l_Part_0.Size = Vector3.new(2048, 1, 2048);
+l_Part_0.Position = Vector3.new(-88.28, -41.22, 55.59);
+l_Part_0.Anchored = true;
+l_Part_0.Transparency = 1;
+l_Part_0.Parent = game.Workspace;
+local v56 = {
+    CFrame.new(35.236, -5.172, 53.628), 
+    CFrame.new(16.853, -5.172, -41.284), 
+    CFrame.new(-70.657, -5.172, -53.074), 
+    CFrame.new(-86.695, -5.172, 53.024)
+};
+local v57 = {};
+local v58 = {};
+local v59 = 1.5;
+local function v63(v60, v61) --[[ Line: 0 ]] --[[ Name:  ]]
+    local l_Sound_0 = Instance.new("Sound");
+    l_Sound_0.SoundId = "rbxassetid://" .. v60;
+    l_Sound_0.Parent = v61;
+    l_Sound_0.Volume = 3.5;
+    l_Sound_0:Play();
+end;
+l_Part_0.Touched:Connect(function(v64) --[[ Line: 0 ]] --[[ Name:  ]]
+    -- upvalues: v58 (ref), v59 (ref), v57 (ref), v56 (ref), v63 (ref), v54 (ref), l_Part_0 (ref)
+    local l_Parent_0 = v64.Parent;
+    local l_PlayerFromCharacter_0 = game.Players:GetPlayerFromCharacter(l_Parent_0);
+    if l_PlayerFromCharacter_0 and l_PlayerFromCharacter_0 == game.Players.LocalPlayer then
+        local v67 = os.clock();
+        if v58[l_PlayerFromCharacter_0] and v67 - v58[l_PlayerFromCharacter_0] < v59 then
+            return;
+        else
+            v58[l_PlayerFromCharacter_0] = v67;
+            v57[l_PlayerFromCharacter_0] = (v57[l_PlayerFromCharacter_0] or 0) + 1;
+            local l_HumanoidRootPart_0 = l_Parent_0:FindFirstChild("HumanoidRootPart");
+            if l_HumanoidRootPart_0 then
+                l_HumanoidRootPart_0.CFrame = v56[math.random(1, #v56)];
+                local v69 = l_PlayerFromCharacter_0.Character:FindFirstChild("Torso") or l_PlayerFromCharacter_0.Character:FindFirstChild("UpperTorso");
+                if v69 then
+                    if v57[l_PlayerFromCharacter_0] == 1 then
+                        v63("95421213415641", v69);
+                        v54("Useless", 3);
+                    elseif v57[l_PlayerFromCharacter_0] == 2 then
+                        v63("105270091788367", v69);
+                    end;
+                end;
+            end;
+            if v57[l_PlayerFromCharacter_0] == 3 then
+                v54("WEAK!", 3);
+                local v70 = 15;
+                local v71 = true;
+                local v72 = false;
+                local l_RunService_0 = game:GetService("RunService");
+                local l_Players_1 = game:GetService("Players");
+                local l_LocalPlayer_3 = l_Players_1.LocalPlayer;
+                local v76 = nil;
+                do
+                    local l_v70_0, l_v71_0, l_v72_0, l_l_RunService_0_0, l_l_Players_1_0, l_l_LocalPlayer_3_0, l_v76_0 = v70, v71, v72, l_RunService_0, l_Players_1, l_LocalPlayer_3, v76;
+                    (function() --[[ Line: 0 ]] --[[ Name:  ]]
+                        -- upvalues: l_v76_0 (ref), l_l_RunService_0_0 (ref), l_v71_0 (ref), l_l_LocalPlayer_3_0 (ref), l_l_Players_1_0 (ref), l_v72_0 (ref), l_v70_0 (ref)
+                        l_v76_0 = l_l_RunService_0_0.RenderStepped:Connect(function() --[[ Line: 0 ]] --[[ Name:  ]]
+                            -- upvalues: l_v71_0 (ref), l_l_LocalPlayer_3_0 (ref), l_l_Players_1_0 (ref), l_v72_0 (ref), l_v70_0 (ref)
+                            if l_v71_0 then
+                                if not l_l_LocalPlayer_3_0.Character or not l_l_LocalPlayer_3_0.Character:FindFirstChild("Humanoid") then
+                                    return;
+                                else
+                                    local l_Team_0 = l_l_LocalPlayer_3_0.Team;
+                                    for _, v86 in ipairs(l_l_Players_1_0:GetPlayers()) do
+                                        if v86 ~= l_l_LocalPlayer_3_0 and (not l_v72_0 or v86.Team ~= l_Team_0) then
+                                            local v87 = v86.Character and v86.Character:FindFirstChild("HumanoidRootPart");
+                                            if v87 then
+                                                v87.Size = Vector3.new(l_v70_0, l_v70_0, l_v70_0);
+                                                v87.Transparency = 1;
+                                                v87.BrickColor = BrickColor.new("Really blue");
+                                                v87.Material = Enum.Material.Neon;
+                                                v87.CanCollide = false;
+                                            end;
+                                        end;
+                                    end;
+                                end;
+                            end;
+                        end);
+                    end)();
+                    l_l_LocalPlayer_3_0.CharacterAdded:Connect(function() --[[ Line: 0 ]] --[[ Name:  ]]
+                        -- upvalues: l_v76_0 (ref)
+                        if l_v76_0 then
+                            l_v76_0:Disconnect();
+                            l_v76_0 = nil;
+                        end;
+                    end);
+                    local l_Players_2 = game:GetService("Players");
+                    local _ = game:GetService("TweenService");
+                    local l_RunService_1 = game:GetService("RunService");
+                    local l_LocalPlayer_4 = l_Players_2.LocalPlayer;
+                    local v92 = l_LocalPlayer_4.Character or l_LocalPlayer_4.CharacterAdded:Wait();
+                    local l_CurrentCamera_0 = workspace.CurrentCamera;
+                    local v94 = v92:FindFirstChild("UpperTorso") or v92:WaitForChild("Torso");
+                    local l_Sound_1 = Instance.new("Sound");
+                    l_Sound_1.SoundId = "rbxassetid://15511622183";
+                    l_Sound_1.Volume = 3;
+                    l_Sound_1.Parent = v94;
+                    l_Sound_1:Play();
+                    local l_Highlight_0 = Instance.new("Highlight");
+                    l_Highlight_0.Name = "LocalHighlight";
+                    l_Highlight_0.FillColor = Color3.fromRGB(173, 216, 230);
+                    l_Highlight_0.OutlineColor = Color3.new(1, 1, 1);
+                    l_Highlight_0.FillTransparency = 0.3;
+                    l_Highlight_0.OutlineTransparency = 0;
+                    l_Highlight_0.Parent = v92;
+                    (function(v97, v98) --[[ Line: 0 ]] --[[ Name:  ]]
+                        -- upvalues: l_CurrentCamera_0 (ref), l_RunService_1 (ref)
+                        local v99 = tick();
+                        local l_CFrame_0 = l_CurrentCamera_0.CFrame;
+                        local v101 = nil;
+                        v101 = l_RunService_1.RenderStepped:Connect(function() --[[ Line: 0 ]] --[[ Name:  ]]
+                            -- upvalues: v99 (ref), v97 (ref), v101 (ref), l_CurrentCamera_0 (ref), l_CFrame_0 (ref), v98 (ref)
+                            if tick() - v99 > v97 then
+                                v101:Disconnect();
+                                l_CurrentCamera_0.CFrame = l_CFrame_0;
+                                return;
+                            else
+                                local v102 = Vector3.new(math.random(-100, 100) / 100 * v98, math.random(-100, 100) / 100 * v98, math.random(-100, 100) / 100 * v98);
+                                l_CurrentCamera_0.CFrame = l_CFrame_0 * CFrame.new(v102);
+                                return;
+                            end;
+                        end);
+                    end)(0.5, 0.3);
+                    l_Part_0:Destroy();
+                end;
+            end;
+        end;
+    end;
+end);
+if getgenv().MinosPrime.MinosPrimeSkipAnimation then
+    local l_LocalPlayer_5 = game:GetService("Players").LocalPlayer;
+    local l_Humanoid_0 = (l_LocalPlayer_5.Character or l_LocalPlayer_5.CharacterAdded:Wait()):WaitForChild("Humanoid");
+    l_Humanoid_0.WalkSpeed = 0;
+    l_Humanoid_0.JumpPower = 0;
+    local l_LocalPlayer_6 = game:GetService("Players").LocalPlayer;
+    local v106 = l_LocalPlayer_6.Character or l_LocalPlayer_6.CharacterAdded:Wait();
+    local v107 = CFrame.new(-196.036377, -5.27817678, 0.0238081403, -0.00421487819, -3.52944554E-8, -0.999991119, -1.15515562E-13, 1, -3.5294768E-8, 0.999991119, -1.48647636E-10, -0.00421487819);
+    if v106:FindFirstChild("HumanoidRootPart") then
+        v106:WaitForChild("HumanoidRootPart").CFrame = v107;
+    end;
+    local l_LocalPlayer_7 = game:GetService("Players").LocalPlayer;
+    local l_Humanoid_1 = (l_LocalPlayer_7.Character or l_LocalPlayer_7.CharacterAdded:Wait()):WaitForChild("Humanoid");
+    local l_Animation_0 = Instance.new("Animation");
+    l_Animation_0.AnimationId = "rbxassetid://13675136513";
+    local v111 = l_Humanoid_1:LoadAnimation(l_Animation_0);
+    v111:Play(0, 1, 0.2);
+    v111.TimePosition = 2.9;
+    wait(5.5);
+    local l_LocalPlayer_8 = game:GetService("Players").LocalPlayer;
+    local v113 = l_LocalPlayer_8.Character or l_LocalPlayer_8.CharacterAdded:Wait();
+    local l_Humanoid_2 = v113:WaitForChild("Humanoid");
+    l_Humanoid_2.WalkSpeed = 16;
+    l_Humanoid_2.JumpPower = 50;
+    local l_Torso_0 = v113:WaitForChild("Torso");
+    local v116 = "MinosPrimeTheme.mp3";
+    local v117 = "https://raw.githubusercontent.com/KietVN02202/music/refs/heads/main/MinosPrimeTheme.mp3";
+    do
+        local l_l_Torso_0_0, l_v116_0, l_v117_0 = l_Torso_0, v116, v117;
+        pcall(function() --[[ Line: 0 ]] --[[ Name:  ]]
+            -- upvalues: l_v116_0 (ref), l_v117_0 (ref)
+            if not isfile(l_v116_0) then
+                writefile(l_v116_0, game:HttpGet(l_v117_0));
+            end;
+        end);
+        local l_status_1, l_result_1 = pcall(function() --[[ Line: 0 ]] --[[ Name:  ]]
+            -- upvalues: l_v116_0 (ref), l_l_Torso_0_0 (ref)
+            local l_Sound_2 = Instance.new("Sound");
+            l_Sound_2.SoundId = (getcustomasset or getsynasset)(l_v116_0);
+            l_Sound_2.Volume = 2;
+            l_Sound_2.Looped = true;
+            l_Sound_2.Parent = l_l_Torso_0_0;
+            l_Sound_2:Play();
+            return l_Sound_2;
+        end);
+        if l_status_1 and l_result_1 then
+            task.spawn(function() --[[ Line: 0 ]] --[[ Name:  ]]
+                -- upvalues: l_result_1 (ref)
+                while true do
+                    task.wait(2);
+                    if not l_result_1.IsPlaying then
+                        pcall(function() --[[ Line: 0 ]] --[[ Name:  ]]
+                            -- upvalues: l_result_1 (ref)
+                            l_result_1:Play();
+                        end);
+                    end;
+                end;
+            end);
+            l_Humanoid_2.Died:Connect(function() --[[ Line: 0 ]] --[[ Name:  ]]
+                -- upvalues: l_result_1 (ref)
+                pcall(function() --[[ Line: 0 ]] --[[ Name:  ]]
+                    -- upvalues: l_result_1 (ref)
+                    l_result_1:Stop();
+                end);
+            end);
+        end;
+        wait(0.1);
+        local l_LocalPlayer_9 = game:GetService("Players").LocalPlayer;
+        local l_Humanoid_3 = (l_LocalPlayer_9.Character or l_LocalPlayer_9.CharacterAdded:Wait()):WaitForChild("Humanoid");
+        local l_Animation_1 = Instance.new("Animation");
+        l_Animation_1.AnimationId = "rbxassetid://101931532422335";
+        local v127 = l_Humanoid_3:LoadAnimation(l_Animation_1);
+        v127.Priority = Enum.AnimationPriority.Movement;
+        local function v130(v128) --[[ Line: 0 ]] --[[ Name:  ]]
+            -- upvalues: l_Humanoid_3 (ref), v127 (ref)
+            local l_l_Humanoid_3_State_0 = l_Humanoid_3:GetState();
+            if v128 > 0 and l_l_Humanoid_3_State_0 ~= Enum.HumanoidStateType.Jumping and l_l_Humanoid_3_State_0 ~= Enum.HumanoidStateType.Freefall and l_l_Humanoid_3_State_0 ~= Enum.HumanoidStateType.Climbing and l_l_Humanoid_3_State_0 ~= Enum.HumanoidStateType.Seated then
+                if not v127.IsPlaying then
+                    v127:Play();
+                end;
+            elseif v127.IsPlaying then
+                v127:Stop();
+            end;
+        end;
+        l_Humanoid_3.Running:Connect(function(v131) --[[ Line: 0 ]] --[[ Name:  ]]
+            -- upvalues: v130 (ref)
+            v130(v131);
+        end);
+        l_Humanoid_3.StateChanged:Connect(function(_, _) --[[ Line: 0 ]] --[[ Name:  ]]
+            -- upvalues: v130 (ref), l_Humanoid_3 (ref)
+            v130(l_Humanoid_3.MoveDirection.Magnitude * l_Humanoid_3.WalkSpeed);
+        end);
+        local l_TweenService_2 = game:GetService("TweenService");
+        local l_Players_3 = game:GetService("Players");
+        local l_RunService_2 = game:GetService("RunService");
+        local l_UserInputService_0 = game:GetService("UserInputService");
+        local l_LocalPlayer_10 = l_Players_3.LocalPlayer;
+        local l_ScreenGui_1 = Instance.new("ScreenGui");
+        l_ScreenGui_1.Name = "MinosPrimeGUI";
+        l_ScreenGui_1.IgnoreGuiInset = true;
+        l_ScreenGui_1.Parent = l_LocalPlayer_10:WaitForChild("PlayerGui");
+        local l_Frame_1 = Instance.new("Frame");
+        l_Frame_1.Size = UDim2.new(0, 0, 0, 0);
+        l_Frame_1.Position = UDim2.new(0.5, 0, 0.55, 0);
+        l_Frame_1.AnchorPoint = Vector2.new(0.5, 0.5);
+        l_Frame_1.BackgroundColor3 = Color3.fromRGB(30, 30, 30);
+        l_Frame_1.BackgroundTransparency = 0.1;
+        l_Frame_1.ClipsDescendants = true;
+        l_Frame_1.Active = true;
+        l_Frame_1.Draggable = true;
+        l_Frame_1.Parent = l_ScreenGui_1;
+        local l_UICorner_0 = Instance.new("UICorner");
+        l_UICorner_0.CornerRadius = UDim.new(0, 10);
+        l_UICorner_0.Parent = l_Frame_1;
+        local l_UIStroke_0 = Instance.new("UIStroke");
+        l_UIStroke_0.Color = Color3.fromRGB(0, 0, 0);
+        l_UIStroke_0.Thickness = 2;
+        l_UIStroke_0.Transparency = 0.5;
+        l_UIStroke_0.ApplyStrokeMode = Enum.ApplyStrokeMode.Border;
+        l_UIStroke_0.Parent = l_Frame_1;
+        local l_TextLabel_1 = Instance.new("TextLabel");
+        l_TextLabel_1.Size = UDim2.new(1, 0, 0.18, 0);
+        l_TextLabel_1.Position = UDim2.new(0, 0, 0, 0);
+        l_TextLabel_1.BackgroundTransparency = 1;
+        l_TextLabel_1.Text = "MINOS PRIME";
+        l_TextLabel_1.Font = Enum.Font.Arcade;
+        l_TextLabel_1.TextSize = 24;
+        l_TextLabel_1.TextColor3 = Color3.fromRGB(255, 255, 255);
+        l_TextLabel_1.TextStrokeTransparency = 0.3;
+        l_TextLabel_1.TextStrokeColor3 = Color3.new(0, 0, 0);
+        l_TextLabel_1.Parent = l_Frame_1;
+        l_TweenService_2:Create(l_Frame_1, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+            Size = UDim2.new(0.3, 0, 0.33, 0)
+        }):Play();
+        local v144 = {};
+        local function v157(v145, v146, v147, v148, v149) --[[ Line: 0 ]] --[[ Name:  ]]
+            -- upvalues: l_Frame_1 (ref), v144 (ref), l_UserInputService_0 (ref)
+            local l_TextButton_0 = Instance.new("TextButton");
+            l_TextButton_0.Name = v145;
+            l_TextButton_0.Size = UDim2.new(0.85, 0, 0.19, 0);
+            l_TextButton_0.Position = UDim2.new(0.075, 0, 0.2 + v146 * 0.23, 0);
+            l_TextButton_0.BackgroundColor3 = Color3.fromRGB(0, 0, 0);
+            l_TextButton_0.BackgroundTransparency = 0.2;
+            l_TextButton_0.Text = v145 .. (v149 and " [" .. v149.Name .. "]" or "");
+            l_TextButton_0.TextColor3 = Color3.fromRGB(255, 255, 255);
+            l_TextButton_0.Font = Enum.Font.Arcade;
+            l_TextButton_0.TextSize = 24;
+            l_TextButton_0.TextStrokeTransparency = 0.3;
+            l_TextButton_0.TextStrokeColor3 = Color3.new(0, 0, 0);
+            l_TextButton_0.Parent = l_Frame_1;
+            local l_UICorner_1 = Instance.new("UICorner");
+            l_UICorner_1.CornerRadius = UDim.new(0, 6);
+            l_UICorner_1.Parent = l_TextButton_0;
+            v144[v145] = false;
+            local function v154() --[[ Line: 0 ]] --[[ Name:  ]]
+                -- upvalues: v144 (ref), v145 (ref), v147 (ref), v149 (ref), v148 (ref), l_TextButton_0 (ref)
+                if v144[v145] then
+                    return;
+                else
+                    v144[v145] = true;
+                    task.spawn(v147);
+                    local v152 = v145 .. (v149 and " [" .. v149.Name .. "]" or "");
+                    task.spawn(function() --[[ Line: 0 ]] --[[ Name:  ]]
+                        -- upvalues: v148 (ref), l_TextButton_0 (ref), v152 (ref), v144 (ref), v145 (ref)
+                        for v153 = math.floor(v148), 1, -1 do
+                            l_TextButton_0.Text = v152 .. " (" .. v153 .. "s)";
+                            task.wait(1);
+                        end;
+                        l_TextButton_0.Text = v152;
+                        v144[v145] = false;
+                    end);
+                    return;
+                end;
+            end;
+            l_TextButton_0.MouseButton1Click:Connect(v154);
+            if v149 then
+                l_UserInputService_0.InputBegan:Connect(function(v155, v156) --[[ Line: 0 ]] --[[ Name:  ]]
+                    -- upvalues: v149 (ref), v154 (ref)
+                    if not v156 and v155.KeyCode == v149 then
+                        v154();
+                    end;
+                end);
+            end;
+        end;
+        v157("Judgement", 2, function() --[[ Line: 0 ]] --[[ Name:  ]]
+            -- upvalues: l_Players_3 (ref), l_RunService_2 (ref)
+            local l_LocalPlayer_11 = game.Players.LocalPlayer;
+            local l_TweenService_3 = game:GetService("TweenService");
+            local l_ScreenGui_2 = Instance.new("ScreenGui");
+            l_ScreenGui_2.Name = "SubtitleGui";
+            l_ScreenGui_2.ResetOnSpawn = false;
+            l_ScreenGui_2.Parent = l_LocalPlayer_11:WaitForChild("PlayerGui");
+            local function v167(v161, v162) --[[ Line: 0 ]] --[[ Name:  ]]
+                -- upvalues: l_ScreenGui_2 (ref), l_TweenService_3 (ref)
+                local l_Frame_2 = Instance.new("Frame");
+                l_Frame_2.Parent = l_ScreenGui_2;
+                l_Frame_2.Size = UDim2.new(0.5, 0, 0.06, 0);
+                l_Frame_2.Position = UDim2.new(0.25, 0, 0.8, 0);
+                l_Frame_2.BackgroundColor3 = Color3.new(0, 0, 0);
+                l_Frame_2.BackgroundTransparency = 1;
+                l_Frame_2.BorderSizePixel = 0;
+                local l_TextLabel_2 = Instance.new("TextLabel");
+                l_TextLabel_2.Parent = l_Frame_2;
+                l_TextLabel_2.Size = UDim2.new(1, 0, 1, 0);
+                l_TextLabel_2.BackgroundTransparency = 1;
+                l_TextLabel_2.Text = "";
+                l_TextLabel_2.TextTransparency = 1;
+                l_TextLabel_2.TextStrokeTransparency = 1;
+                l_TextLabel_2.TextScaled = true;
+                l_TextLabel_2.Font = Enum.Font.Arcade;
+                l_TextLabel_2.TextStrokeColor3 = Color3.new(0, 0, 0);
+                l_TextLabel_2.TextColor3 = Color3.fromRGB(255, 255, 255);
+                l_TextLabel_2.TextXAlignment = Enum.TextXAlignment.Center;
+                l_TextLabel_2.TextYAlignment = Enum.TextYAlignment.Center;
+                l_TweenService_3:Create(l_Frame_2, TweenInfo.new(0.3), {
+                    BackgroundTransparency = 0.3
+                }):Play();
+                task.spawn(function() --[[ Line: 0 ]] --[[ Name:  ]]
+                    -- upvalues: v161 (ref), l_TextLabel_2 (ref), l_TweenService_3 (ref)
+                    for v165 = 1, #v161 do
+                        l_TextLabel_2.Text = string.sub(v161, 1, v165);
+                        l_TweenService_3:Create(l_TextLabel_2, TweenInfo.new(0.1), {
+                            TextTransparency = 0, 
+                            TextStrokeTransparency = 0
+                        }):Play();
+                        task.wait(0.07);
+                    end;
+                end);
+                task.delay(v162 or 3, function() --[[ Line: 0 ]] --[[ Name:  ]]
+                    -- upvalues: l_TweenService_3 (ref), l_Frame_2 (ref), l_TextLabel_2 (ref)
+                    l_TweenService_3:Create(l_Frame_2, TweenInfo.new(0.5), {
+                        BackgroundTransparency = 1
+                    }):Play();
+                    local v166 = l_TweenService_3:Create(l_TextLabel_2, TweenInfo.new(0.5), {
+                        TextTransparency = 1, 
+                        TextStrokeTransparency = 1
+                    });
+                    v166:Play();
+                    v166.Completed:Connect(function() --[[ Line: 0 ]] --[[ Name:  ]]
+                        -- upvalues: l_Frame_2 (ref)
+                        l_Frame_2:Destroy();
+                    end);
+                end);
+            end;
+            local v168 = l_LocalPlayer_11.Character or l_LocalPlayer_11.CharacterAdded:Wait();
+            local l_Humanoid_4 = v168:FindFirstChildOfClass("Humanoid");
+            local l_HumanoidRootPart_1 = v168:FindFirstChild("HumanoidRootPart");
+            if not l_Humanoid_4 or not l_HumanoidRootPart_1 then
+                return;
+            else
+                local v171 = RaycastParams.new();
+                v171.FilterDescendantsInstances = {
+                    v168
+                };
+                v171.FilterType = Enum.RaycastFilterType.Blacklist;
+                local v172 = {
+                    l_HumanoidRootPart_1.CFrame.LookVector * 100, 
+                    (l_HumanoidRootPart_1.CFrame.LookVector + l_HumanoidRootPart_1.CFrame.RightVector * 0.2) * 100, 
+                    (l_HumanoidRootPart_1.CFrame.LookVector - l_HumanoidRootPart_1.CFrame.RightVector * 0.2) * 100
+                };
+                local v173 = nil;
+                local v174 = nil;
+                for _, v176 in ipairs(v172) do
+                    local v177 = workspace:Raycast(l_HumanoidRootPart_1.Position, v176, v171);
+                    if v177 and v177.Instance then
+                        local l_FirstAncestorOfClass_0 = v177.Instance:FindFirstAncestorOfClass("Model");
+                        if l_Players_3:GetPlayerFromCharacter(l_FirstAncestorOfClass_0) and l_FirstAncestorOfClass_0 ~= v168 and not l_FirstAncestorOfClass_0:FindFirstChild("rock") then
+                            v173 = l_FirstAncestorOfClass_0;
+                            v174 = l_FirstAncestorOfClass_0:FindFirstChild("HumanoidRootPart");
+                            break;
+                        end;
+                    end;
+                end;
+                if not v174 then
+                    for _, v180 in ipairs(l_Players_3:GetPlayers()) do
+                        local v181 = false;
+                        local function v182() --[[ Line: 0 ]] --[[ Name:  ]]
+                            -- upvalues: v181 (ref)
+                            v181 = true;
+                        end;
+                        if v180 ~= l_LocalPlayer_11 and v180.Character and v180.Character:FindFirstChild("HumanoidRootPart") then
+                            local l_Character_0 = v180.Character;
+                            if not l_Character_0:FindFirstChild("rock") then
+                                local l_HumanoidRootPart_2 = l_Character_0.HumanoidRootPart;
+                                local l_Magnitude_0 = (l_HumanoidRootPart_2.Position - l_HumanoidRootPart_1.Position).Magnitude;
+                                local l_Unit_0 = (l_HumanoidRootPart_2.Position - l_HumanoidRootPart_1.Position).Unit;
+                                local v187 = l_HumanoidRootPart_1.CFrame.LookVector:Dot(l_Unit_0);
+                                if l_Magnitude_0 <= 60 and v187 > 0.7 then
+                                    v173 = l_Character_0;
+                                    v174 = l_HumanoidRootPart_2;
+                                    v182();
+                                end;
+                            end;
+                        end;
+                        if v181 then
+                            --[[ close >= 11 ]]
+                            break;
+                        else
+                            --[[ close >= 16 ]]
+                        end;
+                    end;
+                end;
+                if not v174 then
+                    return;
+                else
+                    local l_Unit_1 = (v174.Position - l_HumanoidRootPart_1.Position).Unit;
+                    l_HumanoidRootPart_1.CFrame = CFrame.new(l_HumanoidRootPart_1.Position, l_HumanoidRootPart_1.Position + l_Unit_1);
+                    local l_Highlight_1 = Instance.new("Highlight");
+                    l_Highlight_1.FillColor = Color3.fromRGB(0, 255, 255);
+                    l_Highlight_1.OutlineColor = Color3.fromRGB(0, 255, 255);
+                    l_Highlight_1.FillTransparency = 0;
+                    l_Highlight_1.OutlineTransparency = 0;
+                    l_Highlight_1.Adornee = v173;
+                    l_Highlight_1.Parent = v173;
+                    task.delay(1, function() --[[ Line: 0 ]] --[[ Name:  ]]
+                        -- upvalues: l_Highlight_1 (ref)
+                        for v190 = 0, 1, 0.1 do
+                            l_Highlight_1.FillTransparency = v190;
+                            l_Highlight_1.OutlineTransparency = v190;
+                            task.wait(0.05);
+                        end;
+                        l_Highlight_1:Destroy();
+                    end);
+                    local l_Sound_3 = Instance.new("Sound");
+                    l_Sound_3.SoundId = "rbxassetid://18553892205";
+                    l_Sound_3.Parent = l_HumanoidRootPart_1;
+                    l_Sound_3.Volume = 2.5;
+                    l_Sound_3:Play();
+                    v167("Judgement!", 3);
+                    local v192 = l_Humanoid_4:FindFirstChildOfClass("Animator") or Instance.new("Animator", l_Humanoid_4);
+                    local l_Animation_2 = Instance.new("Animation");
+                    l_Animation_2.AnimationId = "rbxassetid://13675136513";
+                    local v194 = v192:LoadAnimation(l_Animation_2);
+                    v194.Looped = true;
+                    v194:Play();
+                    v194.TimePosition = 2.9;
+                    v194:AdjustSpeed(0);
+                    l_Sound_3.Ended:Wait();
+                    game:GetService("ReplicatedStorage").slapstick:FireServer("fullcharged");
+                    task.wait(0.2);
+                    task.wait(0.5);
+                    local v195 = {
+                        [1] = "Ice_Simple_Spell_Impact", 
+                        [2] = game:GetService("Players").LocalPlayer.Character:WaitForChild("Head")
+                    };
+                    local function v196() --[[ Line: 0 ]] --[[ Name:  ]]
+                        -- upvalues: v195 (ref)
+                        game:GetService("ReplicatedStorage"):WaitForChild("PlaySoundRemote"):InvokeServer(unpack(v195));
+                    end;
+                    for _ = 1, 10 do
+                        coroutine.wrap(v196)();
+                    end;
+                    local l_Trail_0 = Instance.new("Trail");
+                    l_Trail_0.Attachment0 = Instance.new("Attachment", l_HumanoidRootPart_1);
+                    l_Trail_0.Attachment1 = Instance.new("Attachment", l_HumanoidRootPart_1);
+                    l_Trail_0.Lifetime = 0.5;
+                    l_Trail_0.MinLength = 0.1;
+                    l_Trail_0.WidthScale = NumberSequence.new(1);
+                    l_Trail_0.Color = ColorSequence.new(Color3.fromRGB(0, 255, 255));
+                    l_Trail_0.Transparency = NumberSequence.new({
+                        NumberSequenceKeypoint.new(0, 0), 
+                        NumberSequenceKeypoint.new(1, 1)
+                    });
+                    l_Trail_0.Enabled = true;
+                    l_Trail_0.Parent = l_HumanoidRootPart_1;
+                    local v199 = v174.CFrame.LookVector * 5;
+                    local v200 = v174.Position + v199;
+                    local v201 = math.rad(145);
+                    l_HumanoidRootPart_1.CFrame = CFrame.new(v200, v174.Position) * CFrame.Angles(v201, 0, 0);
+                    local l_BodyPosition_0 = Instance.new("BodyPosition");
+                    l_BodyPosition_0.Position = v200;
+                    l_BodyPosition_0.MaxForce = Vector3.new(math.huge, math.huge, math.huge);
+                    l_BodyPosition_0.D = 100;
+                    l_BodyPosition_0.Parent = l_HumanoidRootPart_1;
+                    task.wait(0.1);
+                    local v203 = {
+                        [1] = "Fire_8_Bit_Explosion_3", 
+                        [2] = game:GetService("Players").LocalPlayer.Character:WaitForChild("Head")
+                    };
+                    local function v204() --[[ Line: 0 ]] --[[ Name:  ]]
+                        -- upvalues: v203 (ref)
+                        game:GetService("ReplicatedStorage"):WaitForChild("PlaySoundRemote"):InvokeServer(unpack(v203));
+                    end;
+                    for _ = 1, 10 do
+                        coroutine.wrap(v204)();
+                    end;
+                    v194:Stop();
+                    task.wait(0.1);
+                    local l_slapstick_0 = game:GetService("ReplicatedStorage"):FindFirstChild("slapstick");
+                    if l_slapstick_0 then
+                        l_slapstick_0:FireServer("runeffect");
+                        l_slapstick_0:FireServer("cancelrun");
+                        l_slapstick_0:FireServer("dash");
+                    end;
+                    local v207 = v168:FindFirstChild("Torso") or v168:FindFirstChild("UpperTorso");
+                    local l_Part_1 = Instance.new("Part");
+                    l_Part_1.Shape = Enum.PartType.Ball;
+                    l_Part_1.Size = Vector3.new(0.1, 0.1, 0.1);
+                    l_Part_1.Color = Color3.fromRGB(0, 191, 255);
+                    l_Part_1.Anchored = true;
+                    l_Part_1.CanCollide = false;
+                    l_Part_1.Material = Enum.Material.Neon;
+                    l_Part_1.Transparency = 0.8;
+                    l_Part_1.Parent = workspace;
+                    l_Part_1.Position = v207.Position;
+                    local v209 = TweenInfo.new(0.2, Enum.EasingStyle.Sine, Enum.EasingDirection.Out);
+                    local v210 = {
+                        Size = Vector3.new(100, 100, 100)
+                    };
+                    local v211 = l_TweenService_3:Create(l_Part_1, v209, v210);
+                    v211:Play();
+                    local v212 = nil;
+                    v212 = l_RunService_2.RenderStepped:Connect(function() --[[ Line: 0 ]] --[[ Name:  ]]
+                        -- upvalues: l_Part_1 (ref), v207 (ref), v212 (ref)
+                        if l_Part_1 and v207 and v207.Parent then
+                            l_Part_1.Position = v207.Position;
+                        else
+                            v212:Disconnect();
+                        end;
+                    end);
+                    v211.Completed:Connect(function() --[[ Line: 0 ]] --[[ Name:  ]]
+                        -- upvalues: l_TweenService_3 (ref), l_Part_1 (ref), v212 (ref)
+                        local v213 = l_TweenService_3:Create(l_Part_1, TweenInfo.new(0.3), {
+                            Transparency = 1
+                        });
+                        v213:Play();
+                        v213.Completed:Connect(function() --[[ Line: 0 ]] --[[ Name:  ]]
+                            -- upvalues: v212 (ref), l_Part_1 (ref)
+                            v212:Disconnect();
+                            l_Part_1:Destroy();
+                        end);
+                    end);
+                    local l_Sound_4 = Instance.new("Sound");
+                    l_Sound_4.SoundId = "rbxassetid://107988129875973";
+                    l_Sound_4.Parent = l_HumanoidRootPart_1;
+                    l_Sound_4.Volume = 2.5;
+                    l_Sound_4:Play();
+                    task.wait(0.5);
+                    l_Humanoid_4.WalkSpeed = 16;
+                    l_BodyPosition_0:Destroy();
+                    l_Trail_0:Destroy();
+                    return;
+                end;
+            end;
+        end, 0, Enum.KeyCode.E);
+        v157("Die", 1, function() --[[ Line: 0 ]] --[[ Name:  ]]
+            local l_LocalPlayer_12 = game.Players.LocalPlayer;
+            local l_TweenService_4 = game:GetService("TweenService");
+            local l_ScreenGui_3 = Instance.new("ScreenGui");
+            l_ScreenGui_3.Name = "SubtitleGui";
+            l_ScreenGui_3.ResetOnSpawn = false;
+            l_ScreenGui_3.Parent = l_LocalPlayer_12:WaitForChild("PlayerGui");
+            local function v224(v218, v219) --[[ Line: 0 ]] --[[ Name:  ]]
+                -- upvalues: l_ScreenGui_3 (ref), l_TweenService_4 (ref)
+                local l_Frame_3 = Instance.new("Frame");
+                l_Frame_3.Parent = l_ScreenGui_3;
+                l_Frame_3.Size = UDim2.new(0.5, 0, 0.06, 0);
+                l_Frame_3.Position = UDim2.new(0.25, 0, 0.8, 0);
+                l_Frame_3.BackgroundColor3 = Color3.new(0, 0, 0);
+                l_Frame_3.BackgroundTransparency = 1;
+                l_Frame_3.BorderSizePixel = 0;
+                local l_TextLabel_3 = Instance.new("TextLabel");
+                l_TextLabel_3.Parent = l_Frame_3;
+                l_TextLabel_3.Size = UDim2.new(1, 0, 1, 0);
+                l_TextLabel_3.BackgroundTransparency = 1;
+                l_TextLabel_3.Text = "";
+                l_TextLabel_3.TextTransparency = 1;
+                l_TextLabel_3.TextStrokeTransparency = 1;
+                l_TextLabel_3.TextScaled = true;
+                l_TextLabel_3.Font = Enum.Font.Arcade;
+                l_TextLabel_3.TextStrokeColor3 = Color3.new(0, 0, 0);
+                l_TextLabel_3.TextColor3 = Color3.fromRGB(255, 255, 255);
+                l_TextLabel_3.TextXAlignment = Enum.TextXAlignment.Center;
+                l_TextLabel_3.TextYAlignment = Enum.TextYAlignment.Center;
+                l_TweenService_4:Create(l_Frame_3, TweenInfo.new(0.3), {
+                    BackgroundTransparency = 0.3
+                }):Play();
+                task.spawn(function() --[[ Line: 0 ]] --[[ Name:  ]]
+                    -- upvalues: v218 (ref), l_TextLabel_3 (ref), l_TweenService_4 (ref)
+                    for v222 = 1, #v218 do
+                        l_TextLabel_3.Text = string.sub(v218, 1, v222);
+                        l_TweenService_4:Create(l_TextLabel_3, TweenInfo.new(0.1), {
+                            TextTransparency = 0, 
+                            TextStrokeTransparency = 0
+                        }):Play();
+                        task.wait(0.07);
+                    end;
+                end);
+                task.delay(v219 or 3, function() --[[ Line: 0 ]] --[[ Name:  ]]
+                    -- upvalues: l_TweenService_4 (ref), l_Frame_3 (ref), l_TextLabel_3 (ref)
+                    l_TweenService_4:Create(l_Frame_3, TweenInfo.new(0.5), {
+                        BackgroundTransparency = 1
+                    }):Play();
+                    local v223 = l_TweenService_4:Create(l_TextLabel_3, TweenInfo.new(0.5), {
+                        TextTransparency = 1, 
+                        TextStrokeTransparency = 1
+                    });
+                    v223:Play();
+                    v223.Completed:Connect(function() --[[ Line: 0 ]] --[[ Name:  ]]
+                        -- upvalues: l_Frame_3 (ref)
+                        l_Frame_3:Destroy();
+                    end);
+                end);
+            end;
+            local v225 = {
+                [1] = "Sword_Slash_1", 
+                [2] = game:GetService("Players").LocalPlayer.Character:WaitForChild("Head")
+            };
+            local function v226() --[[ Line: 0 ]] --[[ Name:  ]]
+                -- upvalues: v225 (ref)
+                game:GetService("ReplicatedStorage"):WaitForChild("PlaySoundRemote"):InvokeServer(unpack(v225));
+            end;
+            for _ = 1, 10 do
+                coroutine.wrap(v226)();
+            end;
+            local l_Character_1 = game.Players.LocalPlayer.Character;
+            if not l_Character_1 then
+                return;
+            else
+                local l_HumanoidRootPart_3 = l_Character_1:FindFirstChild("HumanoidRootPart");
+                local l_Humanoid_5 = l_Character_1:FindFirstChildOfClass("Humanoid");
+                local v231 = l_Character_1:FindFirstChild("Torso") or l_Character_1:FindFirstChild("UpperTorso");
+                if not l_HumanoidRootPart_3 or not l_Humanoid_5 or not v231 then
+                    return;
+                else
+                    local l_Gravity_0 = game.Workspace.Gravity;
+                    local l_Animation_3 = Instance.new("Animation");
+                    l_Animation_3.AnimationId = "rbxassetid://17569164461";
+                    local v234 = (l_Humanoid_5:FindFirstChildOfClass("Animator") or l_Humanoid_5:WaitForChild("Animator")):LoadAnimation(l_Animation_3);
+                    v234:Play();
+                    v234:AdjustSpeed(1);
+                    wait(0.6);
+                    local l_LocalPlayer_13 = game:GetService("Players").LocalPlayer;
+                    local v236 = l_LocalPlayer_13.Character or l_LocalPlayer_13.CharacterAdded:Wait();
+                    local v237 = v236:FindFirstChild("RightHand") or v236:FindFirstChild("Right Arm");
+                    if not v237 then
+                        return;
+                    else
+                        local v238 = game:GetObjects("rbxassetid://5830593")[1];
+                        if not v238 then
+                            return;
+                        else
+                            if v238:IsA("Model") then
+                                for _, v240 in ipairs(v238:GetDescendants()) do
+                                    if v240:IsA("BasePart") then
+                                        v240.Size = v240.Size * 0.17;
+                                    end;
+                                end;
+                            elseif v238:IsA("BasePart") then
+                                v238.Size = v238.Size * 0.17;
+                            end;
+                            local v241 = v238:IsA("BasePart") and v238 or v238:FindFirstChildWhichIsA("BasePart");
+                            if not v241 then
+                                return;
+                            else
+                                v238.Name = "HandItem";
+                                v238.Parent = v236;
+                                v241.CFrame = v237.CFrame * CFrame.new(0, -2.5, -1);
+                                local l_WeldConstraint_1 = Instance.new("WeldConstraint");
+                                l_WeldConstraint_1.Part0 = v237;
+                                l_WeldConstraint_1.Part1 = v241;
+                                l_WeldConstraint_1.Parent = v241;
+                                v241.Anchored = false;
+                                v241.CanCollide = false;
+                                local l_PointLight_0 = Instance.new("PointLight");
+                                l_PointLight_0.Color = Color3.fromRGB(0, 255, 255);
+                                l_PointLight_0.Brightness = 2;
+                                l_PointLight_0.Range = 6;
+                                l_PointLight_0.Parent = v241;
+                                local v244 = Instance.new("Attachment", v241);
+                                local v245 = Instance.new("Attachment", v241);
+                                v244.Position = Vector3.new(0, 0.5, 0);
+                                v245.Position = Vector3.new(0, -0.5, 0);
+                                local l_Trail_1 = Instance.new("Trail");
+                                l_Trail_1.Attachment0 = v244;
+                                l_Trail_1.Attachment1 = v245;
+                                l_Trail_1.Color = ColorSequence.new(Color3.fromRGB(0, 200, 255));
+                                l_Trail_1.Lifetime = 0.4;
+                                l_Trail_1.MinLength = 0.1;
+                                l_Trail_1.LightInfluence = 1;
+                                l_Trail_1.Transparency = NumberSequence.new(0.2, 1);
+                                l_Trail_1.WidthScale = NumberSequence.new(1);
+                                l_Trail_1.Parent = v241;
+                                local l_BodyVelocity_0 = Instance.new("BodyVelocity");
+                                l_BodyVelocity_0.Velocity = Vector3.new(0, 130, 0);
+                                l_BodyVelocity_0.MaxForce = Vector3.new(0, math.huge, 0);
+                                l_BodyVelocity_0.Parent = l_HumanoidRootPart_3;
+                                task.wait(1);
+                                task.delay(0.1, function() --[[ Line: 0 ]] --[[ Name:  ]]
+                                    -- upvalues: v238 (ref)
+                                    v238:Destroy();
+                                end);
+                                l_BodyVelocity_0:Destroy();
+                                local l_BodyVelocity_1 = Instance.new("BodyVelocity");
+                                l_BodyVelocity_1.Velocity = Vector3.new(0, 0, 0);
+                                l_BodyVelocity_1.MaxForce = Vector3.new(math.huge, math.huge, math.huge);
+                                l_BodyVelocity_1.Parent = l_HumanoidRootPart_3;
+                                local l_Sound_5 = Instance.new("Sound");
+                                l_Sound_5.Volume = 3.5;
+                                l_Sound_5.SoundId = "rbxassetid://18553878118";
+                                l_Sound_5.Parent = v231;
+                                l_Sound_5:Play();
+                                v224("Die!", 2);
+                                v234:Stop();
+                                task.wait(0.2);
+                                l_BodyVelocity_1:Destroy();
+                                local l_Character_2 = game.Players.LocalPlayer.Character;
+                                if not l_Character_2 then
+                                    return;
+                                else
+                                    local l_HumanoidRootPart_4 = l_Character_2:FindFirstChild("HumanoidRootPart");
+                                    local l_Humanoid_6 = l_Character_2:FindFirstChildOfClass("Humanoid");
+                                    local v253 = l_Character_2:FindFirstChild("Torso") or l_Character_2:FindFirstChild("UpperTorso");
+                                    if not l_HumanoidRootPart_4 or not l_Humanoid_6 or not v253 then
+                                        return;
+                                    else
+                                        local l_Animation_4 = Instance.new("Animation");
+                                        l_Animation_4.AnimationId = "rbxassetid://17569574003";
+                                        local v255 = (l_Humanoid_6:FindFirstChildOfClass("Animator") or l_Humanoid_6:WaitForChild("Animator")):LoadAnimation(l_Animation_4);
+                                        v255:Play();
+                                        v255.TimePosition = 1.2;
+                                        v255:AdjustSpeed(0);
+                                        local l_LookVector_0 = l_HumanoidRootPart_4.CFrame.LookVector;
+                                        local l_Unit_2 = Vector3.new(l_LookVector_0.X, 0, l_LookVector_0.Z).Unit;
+                                        local l_BodyVelocity_2 = Instance.new("BodyVelocity");
+                                        l_BodyVelocity_2.Velocity = l_Unit_2 * 100 + Vector3.new(0, -200, 0);
+                                        l_BodyVelocity_2.MaxForce = Vector3.new(math.huge, math.huge, math.huge);
+                                        l_BodyVelocity_2.Parent = l_HumanoidRootPart_4;
+                                        local l_BodyGyro_0 = Instance.new("BodyGyro");
+                                        l_BodyGyro_0.CFrame = l_HumanoidRootPart_4.CFrame * CFrame.Angles(math.rad(50), 0, 0);
+                                        l_BodyGyro_0.MaxTorque = Vector3.new(400000, 400000, 400000);
+                                        l_BodyGyro_0.P = 20000;
+                                        l_BodyGyro_0.D = 500;
+                                        l_BodyGyro_0.Parent = l_HumanoidRootPart_4;
+                                        task.wait(0.5);
+                                        l_BodyGyro_0.CFrame = CFrame.new(l_HumanoidRootPart_4.Position, l_HumanoidRootPart_4.Position + l_Unit_2);
+                                        task.delay(0.3, function() --[[ Line: 0 ]] --[[ Name:  ]]
+                                            -- upvalues: l_BodyGyro_0 (ref)
+                                            l_BodyGyro_0:Destroy();
+                                        end);
+                                        local v260 = {
+                                            [1] = "Fire_8_Bit_Explosion_3", 
+                                            [2] = game:GetService("Players").LocalPlayer.Character:WaitForChild("Head")
+                                        };
+                                        local function v261() --[[ Line: 0 ]] --[[ Name:  ]]
+                                            -- upvalues: v260 (ref)
+                                            game:GetService("ReplicatedStorage"):WaitForChild("PlaySoundRemote"):InvokeServer(unpack(v260));
+                                        end;
+                                        for _ = 1, 10 do
+                                            coroutine.wrap(v261)();
+                                        end;
+                                        local l_Sound_6 = Instance.new("Sound");
+                                        l_Sound_6.Volume = 4;
+                                        l_Sound_6.SoundId = "rbxassetid://18694762392";
+                                        l_Sound_6.Parent = v253;
+                                        l_Sound_6:Play();
+                                        local l_slapstick_1 = game:GetService("ReplicatedStorage"):FindFirstChild("slapstick");
+                                        if l_slapstick_1 then
+                                            l_slapstick_1:FireServer("runeffect");
+                                            l_slapstick_1:FireServer("cancelrun");
+                                            l_slapstick_1:FireServer("dash");
+                                        end;
+                                        l_BodyVelocity_2:Destroy();
+                                        game.Workspace.Gravity = l_Gravity_0;
+                                        v255:Stop();
+                                        v234:Play();
+                                        wait(0.4);
+                                        v234:Stop();
+                                        l_Sound_5:Destroy();
+                                        return;
+                                    end;
+                                end;
+                            end;
+                        end;
+                    end;
+                end;
+            end;
+        end, 8, Enum.KeyCode.R);
+        v157("Thy end is now", 0, function() --[[ Line: 0 ]] --[[ Name:  ]]
+            -- upvalues: v22 (ref)
+            local l_LocalPlayer_14 = game.Players.LocalPlayer;
+            local l_TweenService_5 = game:GetService("TweenService");
+            local l_ScreenGui_4 = Instance.new("ScreenGui");
+            l_ScreenGui_4.Name = "SubtitleGui";
+            l_ScreenGui_4.ResetOnSpawn = false;
+            l_ScreenGui_4.Parent = l_LocalPlayer_14:WaitForChild("PlayerGui");
+            (function(v268, v269) --[[ Line: 0 ]] --[[ Name:  ]]
+                -- upvalues: l_ScreenGui_4 (ref), l_TweenService_5 (ref)
+                local l_Frame_4 = Instance.new("Frame");
+                l_Frame_4.Parent = l_ScreenGui_4;
+                l_Frame_4.Size = UDim2.new(0.5, 0, 0.06, 0);
+                l_Frame_4.Position = UDim2.new(0.25, 0, 0.8, 0);
+                l_Frame_4.BackgroundColor3 = Color3.new(0, 0, 0);
+                l_Frame_4.BackgroundTransparency = 1;
+                l_Frame_4.BorderSizePixel = 0;
+                local l_TextLabel_4 = Instance.new("TextLabel");
+                l_TextLabel_4.Parent = l_Frame_4;
+                l_TextLabel_4.Size = UDim2.new(1, 0, 1, 0);
+                l_TextLabel_4.BackgroundTransparency = 1;
+                l_TextLabel_4.Text = "";
+                l_TextLabel_4.TextTransparency = 1;
+                l_TextLabel_4.TextStrokeTransparency = 1;
+                l_TextLabel_4.TextScaled = true;
+                l_TextLabel_4.Font = Enum.Font.Arcade;
+                l_TextLabel_4.TextStrokeColor3 = Color3.new(0, 0, 0);
+                l_TextLabel_4.TextColor3 = Color3.fromRGB(255, 255, 255);
+                l_TextLabel_4.TextXAlignment = Enum.TextXAlignment.Center;
+                l_TextLabel_4.TextYAlignment = Enum.TextYAlignment.Center;
+                l_TweenService_5:Create(l_Frame_4, TweenInfo.new(0.3), {
+                    BackgroundTransparency = 0.3
+                }):Play();
+                task.spawn(function() --[[ Line: 0 ]] --[[ Name:  ]]
+                    -- upvalues: v268 (ref), l_TextLabel_4 (ref), l_TweenService_5 (ref)
+                    for v272 = 1, #v268 do
+                        l_TextLabel_4.Text = string.sub(v268, 1, v272);
+                        l_TweenService_5:Create(l_TextLabel_4, TweenInfo.new(0.1), {
+                            TextTransparency = 0, 
+                            TextStrokeTransparency = 0
+                        }):Play();
+                        task.wait(0.07);
+                    end;
+                end);
+                task.delay(v269 or 3, function() --[[ Line: 0 ]] --[[ Name:  ]]
+                    -- upvalues: l_TweenService_5 (ref), l_Frame_4 (ref), l_TextLabel_4 (ref)
+                    l_TweenService_5:Create(l_Frame_4, TweenInfo.new(0.5), {
+                        BackgroundTransparency = 1
+                    }):Play();
+                    local v273 = l_TweenService_5:Create(l_TextLabel_4, TweenInfo.new(0.5), {
+                        TextTransparency = 1, 
+                        TextStrokeTransparency = 1
+                    });
+                    v273:Play();
+                    v273.Completed:Connect(function() --[[ Line: 0 ]] --[[ Name:  ]]
+                        -- upvalues: l_Frame_4 (ref)
+                        l_Frame_4:Destroy();
+                    end);
+                end);
+            end)("Thy End Is Now!", 3);
+            CreateSlapAura = function() --[[ Line: 0 ]] --[[ Name:  ]]
+                -- upvalues: v22 (ref)
+                loadstring(v22)();
+                local l_Players_4 = game:GetService("Players");
+                local l_LocalPlayer_15 = l_Players_4.LocalPlayer;
+                local v276 = 0;
+                local v277 = 0;
+                local v278 = 25;
+                local function v285() --[[ Line: 0 ]] --[[ Name:  ]]
+                    -- upvalues: v277 (ref), v276 (ref), l_LocalPlayer_15 (ref), l_Players_4 (ref), v278 (ref)
+                    if tick() - v277 < v276 then
+                        return;
+                    else
+                        local l_Character_3 = l_LocalPlayer_15.Character;
+                        if not l_Character_3 then
+                            return;
+                        else
+                            local l_Humanoid_7 = l_Character_3:FindFirstChildOfClass("Humanoid");
+                            local l_HumanoidRootPart_5 = l_Character_3:FindFirstChild("HumanoidRootPart");
+                            if not l_Humanoid_7 or not l_HumanoidRootPart_5 then
+                                return;
+                            else
+                                local l_Sound_7 = Instance.new("Sound");
+                                l_Sound_7.SoundId = "rbxassetid://6594869919";
+                                l_Sound_7.Volume = 1;
+                                l_Sound_7.Parent = l_HumanoidRootPart_5;
+                                l_Sound_7:Play();
+                                l_Sound_7.Ended:Connect(function() --[[ Line: 0 ]] --[[ Name:  ]]
+                                    -- upvalues: l_Sound_7 (ref)
+                                    l_Sound_7:Destroy();
+                                end);
+                                for _, v284 in pairs(l_Players_4:GetPlayers()) do
+                                    if v284 ~= l_LocalPlayer_15 and v284.Character and v284.Character:FindFirstChild("HumanoidRootPart") and v284.Character:FindFirstChild("entered") and not v284.Character:FindFirstChild("rock") and (l_HumanoidRootPart_5.Position - v284.Character.HumanoidRootPart.Position).Magnitude <= v278 then
+                                        gloveHits[l_LocalPlayer_15.leaderstats.Glove.Value]:FireServer(v284.Character.HumanoidRootPart, true);
+                                    end;
+                                end;
+                                v277 = tick();
+                                return;
+                            end;
+                        end;
+                    end;
+                end;
+                local function v290(v286) --[[ Line: 0 ]] --[[ Name:  ]]
+                    -- upvalues: l_LocalPlayer_15 (ref)
+                    local l_Character_4 = l_LocalPlayer_15.Character;
+                    if l_Character_4 then
+                        local l_Humanoid_8 = l_Character_4:FindFirstChildOfClass("Humanoid");
+                        if l_Humanoid_8 then
+                            local l_Animation_5 = Instance.new("Animation");
+                            l_Animation_5.AnimationId = v286;
+                            l_Humanoid_8:LoadAnimation(l_Animation_5):Play();
+                        end;
+                    end;
+                end;
+                (function() --[[ Line: 0 ]] --[[ Name:  ]]
+                    -- upvalues: l_LocalPlayer_15 (ref)
+                    local l_Character_5 = l_LocalPlayer_15.Character;
+                    if l_Character_5 and l_Character_5:FindFirstChild("HumanoidRootPart") then
+                        local l_Sound_8 = Instance.new("Sound");
+                        if math.random() <= 0.5 then
+                            l_Sound_8.SoundId = "rbxassetid://79169332511727";
+                        else
+                            l_Sound_8.SoundId = "rbxassetid://110120873206075";
+                        end;
+                        l_Sound_8.Volume = 2.5;
+                        l_Sound_8.Parent = l_Character_5.HumanoidRootPart;
+                        l_Sound_8:Play();
+                        do
+                            local l_l_Sound_8_0 = l_Sound_8;
+                            l_l_Sound_8_0.Ended:Connect(function() --[[ Line: 0 ]] --[[ Name:  ]]
+                                -- upvalues: l_l_Sound_8_0 (ref)
+                                l_l_Sound_8_0:Destroy();
+                            end);
+                        end;
+                    end;
+                end)();
+                local function v297() --[[ Line: 0 ]] --[[ Name:  ]]
+                    -- upvalues: l_LocalPlayer_15 (ref)
+                    local l_Character_6 = l_LocalPlayer_15.Character;
+                    if l_Character_6 and l_Character_6:FindFirstChild("HumanoidRootPart") then
+                        local l_Sound_9 = Instance.new("Sound");
+                        l_Sound_9.SoundId = "rbxassetid://18694755502";
+                        l_Sound_9.Volume = 2.5;
+                        l_Sound_9.Parent = l_Character_6.HumanoidRootPart;
+                        l_Sound_9:Play();
+                        do
+                            local l_l_Sound_9_0 = l_Sound_9;
+                            l_l_Sound_9_0.Ended:Connect(function() --[[ Line: 0 ]] --[[ Name:  ]]
+                                -- upvalues: l_l_Sound_9_0 (ref)
+                                l_l_Sound_9_0:Destroy();
+                            end);
+                        end;
+                    end;
+                end;
+                local function v299() --[[ Line: 0 ]] --[[ Name:  ]]
+                    -- upvalues: l_LocalPlayer_15 (ref)
+                    local l_Character_7 = l_LocalPlayer_15.Character;
+                    if l_Character_7 and l_Character_7:FindFirstChild("HumanoidRootPart") then
+                        l_Character_7.HumanoidRootPart.Velocity = l_Character_7.HumanoidRootPart.CFrame.LookVector * 235;
+                    end;
+                end;
+                local function v304(v300) --[[ Line: 0 ]] --[[ Name:  ]]
+                    if not v300 then
+                        return;
+                    else
+                        local v301 = v300:FindFirstChild("TailAttachment1") or Instance.new("Attachment", v300);
+                        v301.Name = "TailAttachment1";
+                        v301.Position = Vector3.new(0, 1, 0);
+                        local v302 = v300:FindFirstChild("TailAttachment2") or Instance.new("Attachment", v300);
+                        v302.Name = "TailAttachment2";
+                        v302.Position = Vector3.new(0, -1, 0);
+                        local l_Trail_2 = Instance.new("Trail");
+                        l_Trail_2.Attachment0 = v301;
+                        l_Trail_2.Attachment1 = v302;
+                        l_Trail_2.Color = ColorSequence.new(Color3.fromRGB(0, 170, 255));
+                        l_Trail_2.Lifetime = 0.3;
+                        l_Trail_2.MinLength = 0.1;
+                        l_Trail_2.Transparency = NumberSequence.new(0, 1);
+                        l_Trail_2.Enabled = true;
+                        l_Trail_2.Parent = v300;
+                        task.delay(0.4, function() --[[ Line: 0 ]] --[[ Name:  ]]
+                            -- upvalues: l_Trail_2 (ref)
+                            if l_Trail_2 then
+                                l_Trail_2:Destroy();
+                            end;
+                        end);
+                        return;
+                    end;
+                end;
+                task.spawn(function() --[[ Line: 0 ]] --[[ Name:  ]]
+                    -- upvalues: l_LocalPlayer_15 (ref), v290 (ref), v285 (ref), v297 (ref), v304 (ref), v299 (ref)
+                    local l_Character_8 = l_LocalPlayer_15.Character;
+                    if not l_Character_8 then
+                        return;
+                    else
+                        v290("rbxassetid://109511274923523");
+                        v285();
+                        v297();
+                        local v306 = {
+                            [1] = "Mech_Attack_1_C1", 
+                            [2] = game:GetService("Players").LocalPlayer.Character:WaitForChild("Head")
+                        };
+                        local function v307() --[[ Line: 0 ]] --[[ Name:  ]]
+                            -- upvalues: v306 (ref)
+                            game:GetService("ReplicatedStorage"):WaitForChild("PlaySoundRemote"):InvokeServer(unpack(v306));
+                        end;
+                        for _ = 1, 10 do
+                            coroutine.wrap(v307)();
+                        end;
+                        v304(l_Character_8:FindFirstChild("LeftHand") or l_Character_8:FindFirstChild("Left Arm"));
+                        v299();
+                        task.wait(0.8);
+                        v290("rbxassetid://133068451086106");
+                        v285();
+                        v297();
+                        local v309 = {
+                            [1] = "Mech_Attack_1_C1", 
+                            [2] = game:GetService("Players").LocalPlayer.Character:WaitForChild("Head")
+                        };
+                        local function v310() --[[ Line: 0 ]] --[[ Name:  ]]
+                            -- upvalues: v309 (ref)
+                            game:GetService("ReplicatedStorage"):WaitForChild("PlaySoundRemote"):InvokeServer(unpack(v309));
+                        end;
+                        for _ = 1, 10 do
+                            coroutine.wrap(v310)();
+                        end;
+                        v304(l_Character_8:FindFirstChild("RightHand") or l_Character_8:FindFirstChild("Right Arm"));
+                        v299();
+                        task.wait(0.8);
+                        v290("rbxassetid://109511274923523");
+                        v285();
+                        v297();
+                        local v312 = {
+                            [1] = "Mech_Attack_1_C1", 
+                            [2] = game:GetService("Players").LocalPlayer.Character:WaitForChild("Head")
+                        };
+                        local function v313() --[[ Line: 0 ]] --[[ Name:  ]]
+                            -- upvalues: v312 (ref)
+                            game:GetService("ReplicatedStorage"):WaitForChild("PlaySoundRemote"):InvokeServer(unpack(v312));
+                        end;
+                        for _ = 1, 10 do
+                            coroutine.wrap(v313)();
+                        end;
+                        v304(l_Character_8:FindFirstChild("LeftHand") or l_Character_8:FindFirstChild("Left Arm"));
+                        v299();
+                        task.wait(0.8);
+                        v290("rbxassetid://116559255414365");
+                        v285();
+                        v297();
+                        local v315 = {
+                            [1] = "Mech_Attack_1_C1", 
+                            [2] = game:GetService("Players").LocalPlayer.Character:WaitForChild("Head")
+                        };
+                        local function v316() --[[ Line: 0 ]] --[[ Name:  ]]
+                            -- upvalues: v315 (ref)
+                            game:GetService("ReplicatedStorage"):WaitForChild("PlaySoundRemote"):InvokeServer(unpack(v315));
+                        end;
+                        for _ = 1, 10 do
+                            coroutine.wrap(v316)();
+                        end;
+                        v304(l_Character_8:FindFirstChild("LeftHand") or l_Character_8:FindFirstChild("Left Arm"));
+                        v299();
+                        return;
+                    end;
+                end);
+            end;
+            CreateSlapAura();
+        end, 5, Enum.KeyCode.T);
+    end;
+else
+    local l_Players_5 = game:GetService("Players");
+    local l_UserInputService_1 = game:GetService("UserInputService");
+    local _ = game:GetService("RunService");
+    local l_TweenService_6 = game:GetService("TweenService");
+    local l_LocalPlayer_16 = l_Players_5.LocalPlayer;
+    local v323 = l_LocalPlayer_16.Character or l_LocalPlayer_16.CharacterAdded:Wait();
+    local l_Humanoid_9 = v323:FindFirstChildOfClass("Humanoid");
+    local l_CurrentCamera_1 = game.Workspace.CurrentCamera;
+    if l_Humanoid_9 then
+        l_Humanoid_9.WalkSpeed = 0;
+        l_Humanoid_9.JumpPower = 0;
+    end;
+    local l_ScreenGui_5 = Instance.new("ScreenGui");
+    l_ScreenGui_5.Name = "UltrakillStyleGui";
+    l_ScreenGui_5.ResetOnSpawn = false;
+    l_ScreenGui_5.Parent = l_LocalPlayer_16:WaitForChild("PlayerGui");
+    local l_Frame_5 = Instance.new("Frame");
+    l_Frame_5.Size = UDim2.new(1, 0, 1, 0);
+    l_Frame_5.BackgroundTransparency = 1;
+    l_Frame_5.Parent = l_ScreenGui_5;
+    local l_Sound_10 = Instance.new("Sound");
+    l_Sound_10.SoundId = "rbxassetid://6042053626";
+    l_Sound_10.Volume = 1;
+    l_Sound_10.Parent = l_Frame_5;
+    do
+        local l_l_TweenService_6_0, l_l_Humanoid_9_0, l_l_Frame_5_0, l_l_Sound_10_0 = l_TweenService_6, l_Humanoid_9, l_Frame_5, l_Sound_10;
+        local function v336(v333, v334) --[[ Line: 0 ]] --[[ Name:  ]]
+            -- upvalues: l_l_Frame_5_0 (ref)
+            local l_TextLabel_5 = Instance.new("TextLabel");
+            l_TextLabel_5.Size = UDim2.new(1, 0, 0, v334);
+            l_TextLabel_5.Position = UDim2.new(0.5, 0, 0.22 + v333, 0);
+            l_TextLabel_5.AnchorPoint = Vector2.new(0.5, 0.5);
+            l_TextLabel_5.BackgroundTransparency = 1;
+            l_TextLabel_5.Text = "";
+            l_TextLabel_5.TextColor3 = Color3.new(1, 1, 1);
+            l_TextLabel_5.TextStrokeColor3 = Color3.new(0, 0, 0);
+            l_TextLabel_5.TextStrokeTransparency = 0.2;
+            l_TextLabel_5.TextTransparency = 0;
+            l_TextLabel_5.TextScaled = true;
+            l_TextLabel_5.Font = Enum.Font.Arcade;
+            l_TextLabel_5.Parent = l_l_Frame_5_0;
+            return l_TextLabel_5;
+        end;
+        local function v341(v337, v338, v339) --[[ Line: 0 ]] --[[ Name:  ]]
+            -- upvalues: l_l_Sound_10_0 (ref)
+            for v340 = 1, #v338 do
+                v337.Text = string.sub(v338, 1, v340);
+                l_l_Sound_10_0:Play();
+                wait(v339);
+            end;
+        end;
+        local function v349(v342, v343) --[[ Line: 0 ]] --[[ Name:  ]]
+            -- upvalues: l_l_TweenService_6_0 (ref)
+            wait(v343);
+            local v344 = TweenInfo.new(1, Enum.EasingStyle.Linear);
+            for _, v346 in pairs(v342) do
+                local v347 = l_l_TweenService_6_0:Create(v346, v344, {
+                    TextTransparency = 1, 
+                    TextStrokeTransparency = 1
+                });
+                v347:Play();
+                do
+                    local l_v346_0 = v346;
+                    v347.Completed:Connect(function() --[[ Line: 0 ]] --[[ Name:  ]]
+                        -- upvalues: l_v346_0 (ref)
+                        l_v346_0:Destroy();
+                    end);
+                end;
+            end;
+        end;
+        local l_Part_2 = Instance.new("Part");
+        l_Part_2.Size = Vector3.new(4, 4, 4);
+        l_Part_2.Position = Vector3.new(0, 50, 0);
+        l_Part_2.Anchored = true;
+        l_Part_2.Transparency = 1;
+        l_Part_2.CanCollide = false;
+        l_Part_2.Parent = workspace;
+        l_CurrentCamera_1.CameraType = Enum.CameraType.Scriptable;
+        l_CurrentCamera_1.CFrame = l_Part_2.CFrame;
+        local v351 = 0.5;
+        local v352 = CFrame.new();
+        l_UserInputService_1.InputChanged:Connect(function(v353, _) --[[ Line: 0 ]] --[[ Name:  ]]
+            -- upvalues: v352 (ref)
+            if v353.UserInputType == Enum.UserInputType.MouseMovement then
+                local l_Delta_0 = v353.Delta;
+                local v356 = 0.002;
+                v352 = v352 * CFrame.Angles(-l_Delta_0.Y * v356, -l_Delta_0.X * v356, 0);
+            end;
+        end);
+        local v357 = v336(-0.035, 45);
+        local v358 = v336(0.035, 35);
+        task.spawn(function() --[[ Line: 0 ]] --[[ Name:  ]]
+            -- upvalues: v341 (ref), v357 (ref), v358 (ref), v349 (ref)
+            v341(v357, "ARENA /// FIRST", 0.05);
+            wait(1.8);
+            v341(v358, "Soul Survivor", 0.05);
+            v349({
+                v357, 
+                v358
+            }, 2.5);
+        end);
+        while l_Part_2.Position.Y > 0 do
+            l_Part_2.Position = l_Part_2.Position - Vector3.new(0, v351, 0);
+            l_CurrentCamera_1.CFrame = v352 * l_Part_2.CFrame;
+            task.wait(0.05);
+        end;
+        if v323 and v323:FindFirstChild("HumanoidRootPart") then
+            v323.HumanoidRootPart.CFrame = CFrame.new(0, 3, 0);
+        end;
+        l_CurrentCamera_1.CameraType = Enum.CameraType.Custom;
+        l_Part_2:Destroy();
+        local l_ScreenGui_6 = Instance.new("ScreenGui");
+        l_ScreenGui_6.Parent = l_LocalPlayer_16:FindFirstChild("PlayerGui");
+        local function v370(v360, v361) --[[ Line: 0 ]] --[[ Name:  ]]
+            -- upvalues: l_ScreenGui_6 (ref)
+            local l_Frame_6 = Instance.new("Frame");
+            l_Frame_6.Parent = l_ScreenGui_6;
+            l_Frame_6.Size = UDim2.new(0.5, 0, 0.06, 0);
+            l_Frame_6.Position = UDim2.new(0.25, 0, 0.8, 0);
+            l_Frame_6.BackgroundColor3 = Color3.new(0, 0, 0);
+            l_Frame_6.BackgroundTransparency = 0.3;
+            l_Frame_6.BorderSizePixel = 0;
+            local l_TextLabel_6 = Instance.new("TextLabel");
+            l_TextLabel_6.Parent = l_Frame_6;
+            l_TextLabel_6.Size = UDim2.new(1, 0, 1, 0);
+            l_TextLabel_6.BackgroundTransparency = 1;
+            l_TextLabel_6.Text = v360;
+            l_TextLabel_6.TextScaled = true;
+            l_TextLabel_6.Font = Enum.Font.Arcade;
+            l_TextLabel_6.TextStrokeTransparency = 0;
+            l_TextLabel_6.TextStrokeColor3 = Color3.new(0, 0, 0);
+            l_TextLabel_6.TextColor3 = Color3.new(1, 1, 1);
+            l_TextLabel_6.TextXAlignment = Enum.TextXAlignment.Center;
+            l_TextLabel_6.TextYAlignment = Enum.TextYAlignment.Center;
+            if v360 == "is DEATH!" then
+                l_TextLabel_6.RichText = true;
+                l_TextLabel_6.Text = "is <b><font color='rgb(255,0,0)'>DEATH!</font></b>";
+            else
+                l_TextLabel_6.RichText = false;
+                l_TextLabel_6.Text = v360;
+            end;
+            local l_TextSize_0 = game:GetService("TextService"):GetTextSize(v360, l_TextLabel_6.AbsoluteSize.Y, l_TextLabel_6.Font, Vector2.new(math.huge, math.huge));
+            local v365 = math.clamp(l_TextSize_0.X / l_ScreenGui_6.AbsoluteSize.X, 0.3, 0.8);
+            l_Frame_6.Size = UDim2.new(v365, 0, 0.06, 0);
+            l_Frame_6.Position = UDim2.new((1 - v365) / 2, 0, 0.8, 0);
+            local l_TweenService_7 = game:GetService("TweenService");
+            local l_textLabel_0 = l_Frame_6:FindFirstChild("textLabel");
+            local v368 = l_TweenService_7:Create(l_Frame_6, TweenInfo.new(1, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {
+                Position = l_Frame_6.Position - UDim2.new(0, 0, 0.05, 0), 
+                BackgroundTransparency = 1
+            });
+            local v369 = nil;
+            if l_textLabel_0 then
+                v369 = l_TweenService_7:Create(l_textLabel_0, TweenInfo.new(1, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {
+                    textTransparency = 1, 
+                    textStrokeTransparency = 1
+                });
+            end;
+            task.wait(v361);
+            v368:Play();
+            if v369 then
+                v369.Play(v369);
+            end;
+            v368.Completed:Connect(function() --[[ Line: 0 ]] --[[ Name:  ]]
+                -- upvalues: l_Frame_6 (ref)
+                l_Frame_6:Destroy();
+            end);
+        end;
+        local function v377(v371, v372, v373) --[[ Line: 0 ]] --[[ Name:  ]]
+            -- upvalues: l_l_Humanoid_9_0 (ref)
+            if l_l_Humanoid_9_0 then
+                local v374 = l_l_Humanoid_9_0:FindFirstChildOfClass("Animator") or Instance.new("Animator", l_l_Humanoid_9_0);
+                local l_Animation_6 = Instance.new("Animation");
+                l_Animation_6.AnimationId = "rbxassetid://" .. v371;
+                local v376 = v374:LoadAnimation(l_Animation_6);
+                v376:Play(0);
+                v376.TimePosition = v372;
+                v376:AdjustSpeed(v373);
+                return v376;
+            else
+                return;
+            end;
+        end;
+        local v378 = v377("13675136513", 2.9, 0.2);
+        local v379 = nil;
+        if v378 then
+            v378.Stopped:Connect(function() --[[ Line: 0 ]] --[[ Name:  ]]
+                -- upvalues: v379 (ref), v377 (ref)
+                v379 = v377("16144816662", 1.6, 0);
+            end);
+        end;
+        local l_LocalPlayer_17 = game:GetService("Players").LocalPlayer;
+        local v381 = l_LocalPlayer_17.Character or l_LocalPlayer_17.CharacterAdded:Wait();
+        local l_Torso_1 = v381:WaitForChild("Torso");
+        local v383 = "https://raw.githubusercontent.com/KietVN02202/music/refs/heads/main/MinosPrime.mp3";
+        local v384 = "MinosPrime.mp3";
+        pcall(function() --[[ Line: 0 ]] --[[ Name:  ]]
+            -- upvalues: v384 (ref), v383 (ref)
+            if not isfile(v384) then
+                writefile(v384, game:HttpGet(v383));
+            end;
+        end);
+        local l_status_2, l_result_2 = pcall(function() --[[ Line: 0 ]] --[[ Name:  ]]
+            -- upvalues: v384 (ref), l_Torso_1 (ref)
+            local l_Sound_11 = Instance.new("Sound");
+            l_Sound_11.SoundId = (getcustomasset or getsynasset)(v384);
+            l_Sound_11.Volume = 2;
+            l_Sound_11.Looped = false;
+            l_Sound_11.Parent = l_Torso_1;
+            l_Sound_11:Play();
+            return l_Sound_11;
+        end);
+        if l_status_2 and l_result_2 then
+            task.spawn(function() --[[ Line: 0 ]] --[[ Name:  ]]
+                -- upvalues: l_result_2 (ref)
+                task.wait(2);
+                if not l_result_2.IsPlaying then
+                    pcall(function() --[[ Line: 0 ]] --[[ Name:  ]]
+                        -- upvalues: l_result_2 (ref)
+                        l_result_2:Play();
+                    end);
+                end;
+            end);
+            local l_Humanoid_10 = v381:FindFirstChildOfClass("Humanoid");
+            if l_Humanoid_10 then
+                l_Humanoid_10.Died:Connect(function() --[[ Line: 0 ]] --[[ Name:  ]]
+                    -- upvalues: l_result_2 (ref)
+                    pcall(function() --[[ Line: 0 ]] --[[ Name:  ]]
+                        -- upvalues: l_result_2 (ref)
+                        l_result_2:Stop();
+                    end);
+                end);
+            end;
+        end;
+        local v389 = {
+            {
+                text = "Ahh\226\128\166", 
+                time = 2.8
+            }, 
+            {
+                text = "Free.. at last.", 
+                time = 4.5
+            }, 
+            {
+                text = "O, Gabriel.", 
+                time = 3.9
+            }, 
+            {
+                text = "Now dawns thy reckoning,", 
+                time = 3.8
+            }, 
+            {
+                text = "and thy gore shall glisten before the temples of man.", 
+                time = 8.5
+            }, 
+            {
+                text = "Creature of steel,", 
+                time = 4
+            }, 
+            {
+                text = "My gratitude upon thee for my freedom,", 
+                time = 4.95
+            }, 
+            {
+                text = "but the crimes thy kind have committed against humanity", 
+                time = 6
+            }, 
+            {
+                text = "are NOT forgotten.", 
+                time = 3.7
+            }, 
+            {
+                text = "And thy punishment..", 
+                time = 3.2
+            }, 
+            {
+                text = "is DEATH!", 
+                time = 2, 
+                playAnimation3 = true
+            }
+        };
+        for _, v391 in ipairs(v389) do
+            v370(v391.text, v391.time);
+            if v391.playAnimation3 then
+                if v379 then
+                    v379:Stop();
+                end;
+                v377("16102696188", 3.5, 0.2);
+            end;
+        end;
+        local l_LocalPlayer_18 = game:GetService("Players").LocalPlayer;
+        local v393 = l_LocalPlayer_18.Character or l_LocalPlayer_18.CharacterAdded:Wait();
+        local l_Torso_2 = v393:WaitForChild("Torso");
+        local v395 = "https://raw.githubusercontent.com/KietVN02202/music/refs/heads/main/MinosPrimeTheme.mp3";
+        local v396 = "MinosPrimeTheme.mp3";
+        local l_Sound_12 = Instance.new("Sound");
+        l_Sound_12.Name = "MinosPrimeMusic";
+        l_Sound_12.Volume = 2;
+        l_Sound_12.Looped = true;
+        l_Sound_12.Parent = l_Torso_2;
+        pcall(function() --[[ Line: 0 ]] --[[ Name:  ]]
+            -- upvalues: v396 (ref), v395 (ref)
+            if not isfile(v396) then
+                writefile(v396, game:HttpGet(v395));
+            end;
+        end);
+        pcall(function() --[[ Line: 0 ]] --[[ Name:  ]]
+            -- upvalues: l_Sound_12 (ref), v396 (ref)
+            local v398 = getcustomasset or getsynasset;
+            if v398 then
+                l_Sound_12.SoundId = v398(v396);
+                l_Sound_12:Play();
+            end;
+        end);
+        task.spawn(function() --[[ Line: 0 ]] --[[ Name:  ]]
+            -- upvalues: l_Sound_12 (ref)
+            while true do
+                task.wait(2);
+                if l_Sound_12 and not l_Sound_12.IsPlaying then
+                    pcall(function() --[[ Line: 0 ]] --[[ Name:  ]]
+                        -- upvalues: l_Sound_12 (ref)
+                        l_Sound_12:Play();
+                    end);
+                end;
+            end;
+        end);
+        local l_Humanoid_11 = v393:FindFirstChildOfClass("Humanoid");
+        if l_Humanoid_11 then
+            l_Humanoid_11.WalkSpeed = 16;
+            l_Humanoid_11.JumpPower = 50;
+            l_Humanoid_11.Died:Connect(function() --[[ Line: 0 ]] --[[ Name:  ]]
+                -- upvalues: l_Sound_12 (ref)
+                pcall(function() --[[ Line: 0 ]] --[[ Name:  ]]
+                    -- upvalues: l_Sound_12 (ref)
+                    l_Sound_12:Stop();
+                end);
+            end);
+        end;
+        wait(0.1);
+        local l_LocalPlayer_19 = game:GetService("Players").LocalPlayer;
+        local l_Humanoid_12 = (l_LocalPlayer_19.Character or l_LocalPlayer_19.CharacterAdded:Wait()):WaitForChild("Humanoid");
+        local l_Animation_7 = Instance.new("Animation");
+        l_Animation_7.AnimationId = "rbxassetid://101931532422335";
+        local v403 = l_Humanoid_12:LoadAnimation(l_Animation_7);
+        v403.Priority = Enum.AnimationPriority.Movement;
+        local function v406(v404) --[[ Line: 0 ]] --[[ Name:  ]]
+            -- upvalues: l_Humanoid_12 (ref), v403 (ref)
+            local l_l_Humanoid_12_State_0 = l_Humanoid_12:GetState();
+            if v404 > 0 and l_l_Humanoid_12_State_0 ~= Enum.HumanoidStateType.Jumping and l_l_Humanoid_12_State_0 ~= Enum.HumanoidStateType.Freefall and l_l_Humanoid_12_State_0 ~= Enum.HumanoidStateType.Climbing and l_l_Humanoid_12_State_0 ~= Enum.HumanoidStateType.Seated then
+                if not v403.IsPlaying then
+                    v403:Play();
+                end;
+            elseif v403.IsPlaying then
+                v403:Stop();
+            end;
+        end;
+        l_Humanoid_12.Running:Connect(function(v407) --[[ Line: 0 ]] --[[ Name:  ]]
+            -- upvalues: v406 (ref)
+            v406(v407);
+        end);
+        l_Humanoid_12.StateChanged:Connect(function(_, _) --[[ Line: 0 ]] --[[ Name:  ]]
+            -- upvalues: v406 (ref), l_Humanoid_12 (ref)
+            v406(l_Humanoid_12.MoveDirection.Magnitude * l_Humanoid_12.WalkSpeed);
+        end);
+        local l_TweenService_8 = game:GetService("TweenService");
+        local l_Players_6 = game:GetService("Players");
+        local l_RunService_4 = game:GetService("RunService");
+        local l_UserInputService_2 = game:GetService("UserInputService");
+        local l_LocalPlayer_20 = l_Players_6.LocalPlayer;
+        local l_ScreenGui_7 = Instance.new("ScreenGui");
+        l_ScreenGui_7.Name = "MinosPrimeGUI";
+        l_ScreenGui_7.IgnoreGuiInset = true;
+        l_ScreenGui_7.Parent = l_LocalPlayer_20:WaitForChild("PlayerGui");
+        local l_Frame_7 = Instance.new("Frame");
+        l_Frame_7.Size = UDim2.new(0, 0, 0, 0);
+        l_Frame_7.Position = UDim2.new(0.5, 0, 0.55, 0);
+        l_Frame_7.AnchorPoint = Vector2.new(0.5, 0.5);
+        l_Frame_7.BackgroundColor3 = Color3.fromRGB(30, 30, 30);
+        l_Frame_7.BackgroundTransparency = 0.1;
+        l_Frame_7.ClipsDescendants = true;
+        l_Frame_7.Active = true;
+        l_Frame_7.Draggable = true;
+        l_Frame_7.Parent = l_ScreenGui_7;
+        local l_UICorner_2 = Instance.new("UICorner");
+        l_UICorner_2.CornerRadius = UDim.new(0, 10);
+        l_UICorner_2.Parent = l_Frame_7;
+        local l_UIStroke_1 = Instance.new("UIStroke");
+        l_UIStroke_1.Color = Color3.fromRGB(0, 0, 0);
+        l_UIStroke_1.Thickness = 2;
+        l_UIStroke_1.Transparency = 0.5;
+        l_UIStroke_1.ApplyStrokeMode = Enum.ApplyStrokeMode.Border;
+        l_UIStroke_1.Parent = l_Frame_7;
+        local l_TextLabel_7 = Instance.new("TextLabel");
+        l_TextLabel_7.Size = UDim2.new(1, 0, 0.18, 0);
+        l_TextLabel_7.Position = UDim2.new(0, 0, 0, 0);
+        l_TextLabel_7.BackgroundTransparency = 1;
+        l_TextLabel_7.Text = "MINOS PRIME";
+        l_TextLabel_7.Font = Enum.Font.Arcade;
+        l_TextLabel_7.TextSize = 24;
+        l_TextLabel_7.TextColor3 = Color3.fromRGB(255, 255, 255);
+        l_TextLabel_7.TextStrokeTransparency = 0.3;
+        l_TextLabel_7.TextStrokeColor3 = Color3.new(0, 0, 0);
+        l_TextLabel_7.Parent = l_Frame_7;
+        l_TweenService_8:Create(l_Frame_7, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+            Size = UDim2.new(0.3, 0, 0.33, 0)
+        }):Play();
+        local v420 = {};
+        local function v433(v421, v422, v423, v424, v425) --[[ Line: 0 ]] --[[ Name:  ]]
+            -- upvalues: l_Frame_7 (ref), v420 (ref), l_UserInputService_2 (ref)
+            local l_TextButton_1 = Instance.new("TextButton");
+            l_TextButton_1.Name = v421;
+            l_TextButton_1.Size = UDim2.new(0.85, 0, 0.19, 0);
+            l_TextButton_1.Position = UDim2.new(0.075, 0, 0.2 + v422 * 0.23, 0);
+            l_TextButton_1.BackgroundColor3 = Color3.fromRGB(0, 0, 0);
+            l_TextButton_1.BackgroundTransparency = 0.2;
+            l_TextButton_1.Text = v421 .. (v425 and " [" .. v425.Name .. "]" or "");
+            l_TextButton_1.TextColor3 = Color3.fromRGB(255, 255, 255);
+            l_TextButton_1.Font = Enum.Font.Arcade;
+            l_TextButton_1.TextSize = 24;
+            l_TextButton_1.TextStrokeTransparency = 0.3;
+            l_TextButton_1.TextStrokeColor3 = Color3.new(0, 0, 0);
+            l_TextButton_1.Parent = l_Frame_7;
+            local l_UICorner_3 = Instance.new("UICorner");
+            l_UICorner_3.CornerRadius = UDim.new(0, 6);
+            l_UICorner_3.Parent = l_TextButton_1;
+            v420[v421] = false;
+            local function v430() --[[ Line: 0 ]] --[[ Name:  ]]
+                -- upvalues: v420 (ref), v421 (ref), v423 (ref), v425 (ref), v424 (ref), l_TextButton_1 (ref)
+                if v420[v421] then
+                    return;
+                else
+                    v420[v421] = true;
+                    task.spawn(v423);
+                    local v428 = v421 .. (v425 and " [" .. v425.Name .. "]" or "");
+                    task.spawn(function() --[[ Line: 0 ]] --[[ Name:  ]]
+                        -- upvalues: v424 (ref), l_TextButton_1 (ref), v428 (ref), v420 (ref), v421 (ref)
+                        for v429 = math.floor(v424), 1, -1 do
+                            l_TextButton_1.Text = v428 .. " (" .. v429 .. "s)";
+                            task.wait(1);
+                        end;
+                        l_TextButton_1.Text = v428;
+                        v420[v421] = false;
+                    end);
+                    return;
+                end;
+            end;
+            l_TextButton_1.MouseButton1Click:Connect(v430);
+            if v425 then
+                l_UserInputService_2.InputBegan:Connect(function(v431, v432) --[[ Line: 0 ]] --[[ Name:  ]]
+                    -- upvalues: v425 (ref), v430 (ref)
+                    if not v432 and v431.KeyCode == v425 then
+                        v430();
+                    end;
+                end);
+            end;
+        end;
+        v433("Judgement", 2, function() --[[ Line: 0 ]] --[[ Name:  ]]
+            -- upvalues: l_Players_6 (ref), l_RunService_4 (ref)
+            local l_LocalPlayer_21 = game.Players.LocalPlayer;
+            local l_TweenService_9 = game:GetService("TweenService");
+            local l_ScreenGui_8 = Instance.new("ScreenGui");
+            l_ScreenGui_8.Name = "SubtitleGui";
+            l_ScreenGui_8.ResetOnSpawn = false;
+            l_ScreenGui_8.Parent = l_LocalPlayer_21:WaitForChild("PlayerGui");
+            local function v443(v437, v438) --[[ Line: 0 ]] --[[ Name:  ]]
+                -- upvalues: l_ScreenGui_8 (ref), l_TweenService_9 (ref)
+                local l_Frame_8 = Instance.new("Frame");
+                l_Frame_8.Parent = l_ScreenGui_8;
+                l_Frame_8.Size = UDim2.new(0.5, 0, 0.06, 0);
+                l_Frame_8.Position = UDim2.new(0.25, 0, 0.8, 0);
+                l_Frame_8.BackgroundColor3 = Color3.new(0, 0, 0);
+                l_Frame_8.BackgroundTransparency = 1;
+                l_Frame_8.BorderSizePixel = 0;
+                local l_TextLabel_8 = Instance.new("TextLabel");
+                l_TextLabel_8.Parent = l_Frame_8;
+                l_TextLabel_8.Size = UDim2.new(1, 0, 1, 0);
+                l_TextLabel_8.BackgroundTransparency = 1;
+                l_TextLabel_8.Text = "";
+                l_TextLabel_8.TextTransparency = 1;
+                l_TextLabel_8.TextStrokeTransparency = 1;
+                l_TextLabel_8.TextScaled = true;
+                l_TextLabel_8.Font = Enum.Font.Arcade;
+                l_TextLabel_8.TextStrokeColor3 = Color3.new(0, 0, 0);
+                l_TextLabel_8.TextColor3 = Color3.fromRGB(255, 255, 255);
+                l_TextLabel_8.TextXAlignment = Enum.TextXAlignment.Center;
+                l_TextLabel_8.TextYAlignment = Enum.TextYAlignment.Center;
+                l_TweenService_9:Create(l_Frame_8, TweenInfo.new(0.3), {
+                    BackgroundTransparency = 0.3
+                }):Play();
+                task.spawn(function() --[[ Line: 0 ]] --[[ Name:  ]]
+                    -- upvalues: v437 (ref), l_TextLabel_8 (ref), l_TweenService_9 (ref)
+                    for v441 = 1, #v437 do
+                        l_TextLabel_8.Text = string.sub(v437, 1, v441);
+                        l_TweenService_9:Create(l_TextLabel_8, TweenInfo.new(0.1), {
+                            TextTransparency = 0, 
+                            TextStrokeTransparency = 0
+                        }):Play();
+                        task.wait(0.07);
+                    end;
+                end);
+                task.delay(v438 or 3, function() --[[ Line: 0 ]] --[[ Name:  ]]
+                    -- upvalues: l_TweenService_9 (ref), l_Frame_8 (ref), l_TextLabel_8 (ref)
+                    l_TweenService_9:Create(l_Frame_8, TweenInfo.new(0.5), {
+                        BackgroundTransparency = 1
+                    }):Play();
+                    local v442 = l_TweenService_9:Create(l_TextLabel_8, TweenInfo.new(0.5), {
+                        TextTransparency = 1, 
+                        TextStrokeTransparency = 1
+                    });
+                    v442:Play();
+                    v442.Completed:Connect(function() --[[ Line: 0 ]] --[[ Name:  ]]
+                        -- upvalues: l_Frame_8 (ref)
+                        l_Frame_8:Destroy();
+                    end);
+                end);
+            end;
+            local v444 = l_LocalPlayer_21.Character or l_LocalPlayer_21.CharacterAdded:Wait();
+            local l_Humanoid_13 = v444:FindFirstChildOfClass("Humanoid");
+            local l_HumanoidRootPart_6 = v444:FindFirstChild("HumanoidRootPart");
+            if not l_Humanoid_13 or not l_HumanoidRootPart_6 then
+                return;
+            else
+                local v447 = RaycastParams.new();
+                v447.FilterDescendantsInstances = {
+                    v444
+                };
+                v447.FilterType = Enum.RaycastFilterType.Blacklist;
+                local v448 = {
+                    l_HumanoidRootPart_6.CFrame.LookVector * 100, 
+                    (l_HumanoidRootPart_6.CFrame.LookVector + l_HumanoidRootPart_6.CFrame.RightVector * 0.2) * 100, 
+                    (l_HumanoidRootPart_6.CFrame.LookVector - l_HumanoidRootPart_6.CFrame.RightVector * 0.2) * 100
+                };
+                local v449 = nil;
+                local v450 = nil;
+                for _, v452 in ipairs(v448) do
+                    local v453 = workspace:Raycast(l_HumanoidRootPart_6.Position, v452, v447);
+                    if v453 and v453.Instance then
+                        local l_FirstAncestorOfClass_1 = v453.Instance:FindFirstAncestorOfClass("Model");
+                        if l_Players_6:GetPlayerFromCharacter(l_FirstAncestorOfClass_1) and l_FirstAncestorOfClass_1 ~= v444 and not l_FirstAncestorOfClass_1:FindFirstChild("rock") then
+                            v449 = l_FirstAncestorOfClass_1;
+                            v450 = l_FirstAncestorOfClass_1:FindFirstChild("HumanoidRootPart");
+                            break;
+                        end;
+                    end;
+                end;
+                if not v450 then
+                    for _, v456 in ipairs(l_Players_6:GetPlayers()) do
+                        local v457 = false;
+                        local function v458() --[[ Line: 0 ]] --[[ Name:  ]]
+                            -- upvalues: v457 (ref)
+                            v457 = true;
+                        end;
+                        if v456 ~= l_LocalPlayer_21 and v456.Character and v456.Character:FindFirstChild("HumanoidRootPart") then
+                            local l_Character_9 = v456.Character;
+                            if not l_Character_9:FindFirstChild("rock") then
+                                local l_HumanoidRootPart_7 = l_Character_9.HumanoidRootPart;
+                                local l_Magnitude_1 = (l_HumanoidRootPart_7.Position - l_HumanoidRootPart_6.Position).Magnitude;
+                                local l_Unit_3 = (l_HumanoidRootPart_7.Position - l_HumanoidRootPart_6.Position).Unit;
+                                local v463 = l_HumanoidRootPart_6.CFrame.LookVector:Dot(l_Unit_3);
+                                if l_Magnitude_1 <= 60 and v463 > 0.7 then
+                                    v449 = l_Character_9;
+                                    v450 = l_HumanoidRootPart_7;
+                                    v458();
+                                end;
+                            end;
+                        end;
+                        if v457 then
+                            --[[ close >= 11 ]]
+                            break;
+                        else
+                            --[[ close >= 16 ]]
+                        end;
+                    end;
+                end;
+                if not v450 then
+                    return;
+                else
+                    local l_Unit_4 = (v450.Position - l_HumanoidRootPart_6.Position).Unit;
+                    l_HumanoidRootPart_6.CFrame = CFrame.new(l_HumanoidRootPart_6.Position, l_HumanoidRootPart_6.Position + l_Unit_4);
+                    local l_Highlight_2 = Instance.new("Highlight");
+                    l_Highlight_2.FillColor = Color3.fromRGB(0, 255, 255);
+                    l_Highlight_2.OutlineColor = Color3.fromRGB(0, 255, 255);
+                    l_Highlight_2.FillTransparency = 0;
+                    l_Highlight_2.OutlineTransparency = 0;
+                    l_Highlight_2.Adornee = v449;
+                    l_Highlight_2.Parent = v449;
+                    task.delay(1, function() --[[ Line: 0 ]] --[[ Name:  ]]
+                        -- upvalues: l_Highlight_2 (ref)
+                        for v466 = 0, 1, 0.1 do
+                            l_Highlight_2.FillTransparency = v466;
+                            l_Highlight_2.OutlineTransparency = v466;
+                            task.wait(0.05);
+                        end;
+                        l_Highlight_2:Destroy();
+                    end);
+                    local l_Sound_13 = Instance.new("Sound");
+                    l_Sound_13.SoundId = "rbxassetid://18553892205";
+                    l_Sound_13.Parent = l_HumanoidRootPart_6;
+                    l_Sound_13.Volume = 2.5;
+                    l_Sound_13:Play();
+                    v443("Judgement!", 3);
+                    local v468 = l_Humanoid_13:FindFirstChildOfClass("Animator") or Instance.new("Animator", l_Humanoid_13);
+                    local l_Animation_8 = Instance.new("Animation");
+                    l_Animation_8.AnimationId = "rbxassetid://13675136513";
+                    local v470 = v468:LoadAnimation(l_Animation_8);
+                    v470.Looped = true;
+                    v470:Play();
+                    v470.TimePosition = 2.9;
+                    v470:AdjustSpeed(0);
+                    l_Sound_13.Ended:Wait();
+                    game:GetService("ReplicatedStorage").slapstick:FireServer("fullcharged");
+                    task.wait(0.2);
+                    task.wait(0.5);
+                    local v471 = {
+                        [1] = "Ice_Simple_Spell_Impact", 
+                        [2] = game:GetService("Players").LocalPlayer.Character:WaitForChild("Head")
+                    };
+                    local function v472() --[[ Line: 0 ]] --[[ Name:  ]]
+                        -- upvalues: v471 (ref)
+                        game:GetService("ReplicatedStorage"):WaitForChild("PlaySoundRemote"):InvokeServer(unpack(v471));
+                    end;
+                    for _ = 1, 10 do
+                        coroutine.wrap(v472)();
+                    end;
+                    local l_Trail_3 = Instance.new("Trail");
+                    l_Trail_3.Attachment0 = Instance.new("Attachment", l_HumanoidRootPart_6);
+                    l_Trail_3.Attachment1 = Instance.new("Attachment", l_HumanoidRootPart_6);
+                    l_Trail_3.Lifetime = 0.5;
+                    l_Trail_3.MinLength = 0.1;
+                    l_Trail_3.WidthScale = NumberSequence.new(1);
+                    l_Trail_3.Color = ColorSequence.new(Color3.fromRGB(0, 255, 255));
+                    l_Trail_3.Transparency = NumberSequence.new({
+                        NumberSequenceKeypoint.new(0, 0), 
+                        NumberSequenceKeypoint.new(1, 1)
+                    });
+                    l_Trail_3.Enabled = true;
+                    l_Trail_3.Parent = l_HumanoidRootPart_6;
+                    local v475 = v450.CFrame.LookVector * 5;
+                    local v476 = v450.Position + v475;
+                    local v477 = math.rad(145);
+                    l_HumanoidRootPart_6.CFrame = CFrame.new(v476, v450.Position) * CFrame.Angles(v477, 0, 0);
+                    local l_BodyPosition_1 = Instance.new("BodyPosition");
+                    l_BodyPosition_1.Position = v476;
+                    l_BodyPosition_1.MaxForce = Vector3.new(math.huge, math.huge, math.huge);
+                    l_BodyPosition_1.D = 100;
+                    l_BodyPosition_1.Parent = l_HumanoidRootPart_6;
+                    task.wait(0.1);
+                    local v479 = {
+                        [1] = "Fire_8_Bit_Explosion_3", 
+                        [2] = game:GetService("Players").LocalPlayer.Character:WaitForChild("Head")
+                    };
+                    local function v480() --[[ Line: 0 ]] --[[ Name:  ]]
+                        -- upvalues: v479 (ref)
+                        game:GetService("ReplicatedStorage"):WaitForChild("PlaySoundRemote"):InvokeServer(unpack(v479));
+                    end;
+                    for _ = 1, 10 do
+                        coroutine.wrap(v480)();
+                    end;
+                    v470:Stop();
+                    task.wait(0.1);
+                    local l_slapstick_2 = game:GetService("ReplicatedStorage"):FindFirstChild("slapstick");
+                    if l_slapstick_2 then
+                        l_slapstick_2:FireServer("runeffect");
+                        l_slapstick_2:FireServer("cancelrun");
+                        l_slapstick_2:FireServer("dash");
+                    end;
+                    local v483 = v444:FindFirstChild("Torso") or v444:FindFirstChild("UpperTorso");
+                    local l_Part_3 = Instance.new("Part");
+                    l_Part_3.Shape = Enum.PartType.Ball;
+                    l_Part_3.Size = Vector3.new(0.1, 0.1, 0.1);
+                    l_Part_3.Color = Color3.fromRGB(0, 191, 255);
+                    l_Part_3.Anchored = true;
+                    l_Part_3.CanCollide = false;
+                    l_Part_3.Material = Enum.Material.Neon;
+                    l_Part_3.Transparency = 0.8;
+                    l_Part_3.Parent = workspace;
+                    l_Part_3.Position = v483.Position;
+                    local v485 = TweenInfo.new(0.2, Enum.EasingStyle.Sine, Enum.EasingDirection.Out);
+                    local v486 = {
+                        Size = Vector3.new(100, 100, 100)
+                    };
+                    local v487 = l_TweenService_9:Create(l_Part_3, v485, v486);
+                    v487:Play();
+                    local v488 = nil;
+                    v488 = l_RunService_4.RenderStepped:Connect(function() --[[ Line: 0 ]] --[[ Name:  ]]
+                        -- upvalues: l_Part_3 (ref), v483 (ref), v488 (ref)
+                        if l_Part_3 and v483 and v483.Parent then
+                            l_Part_3.Position = v483.Position;
+                        else
+                            v488:Disconnect();
+                        end;
+                    end);
+                    v487.Completed:Connect(function() --[[ Line: 0 ]] --[[ Name:  ]]
+                        -- upvalues: l_TweenService_9 (ref), l_Part_3 (ref), v488 (ref)
+                        local v489 = l_TweenService_9:Create(l_Part_3, TweenInfo.new(0.3), {
+                            Transparency = 1
+                        });
+                        v489:Play();
+                        v489.Completed:Connect(function() --[[ Line: 0 ]] --[[ Name:  ]]
+                            -- upvalues: v488 (ref), l_Part_3 (ref)
+                            v488:Disconnect();
+                            l_Part_3:Destroy();
+                        end);
+                    end);
+                    local l_Sound_14 = Instance.new("Sound");
+                    l_Sound_14.SoundId = "rbxassetid://107988129875973";
+                    l_Sound_14.Parent = l_HumanoidRootPart_6;
+                    l_Sound_14.Volume = 2.5;
+                    l_Sound_14:Play();
+                    task.wait(0.5);
+                    l_Humanoid_13.WalkSpeed = 16;
+                    l_BodyPosition_1:Destroy();
+                    l_Trail_3:Destroy();
+                    return;
+                end;
+            end;
+        end, 0, Enum.KeyCode.E);
+        v433("Die", 1, function() --[[ Line: 0 ]] --[[ Name:  ]]
+            local l_LocalPlayer_22 = game.Players.LocalPlayer;
+            local l_TweenService_10 = game:GetService("TweenService");
+            local l_ScreenGui_9 = Instance.new("ScreenGui");
+            l_ScreenGui_9.Name = "SubtitleGui";
+            l_ScreenGui_9.ResetOnSpawn = false;
+            l_ScreenGui_9.Parent = l_LocalPlayer_22:WaitForChild("PlayerGui");
+            local function v500(v494, v495) --[[ Line: 0 ]] --[[ Name:  ]]
+                -- upvalues: l_ScreenGui_9 (ref), l_TweenService_10 (ref)
+                local l_Frame_9 = Instance.new("Frame");
+                l_Frame_9.Parent = l_ScreenGui_9;
+                l_Frame_9.Size = UDim2.new(0.5, 0, 0.06, 0);
+                l_Frame_9.Position = UDim2.new(0.25, 0, 0.8, 0);
+                l_Frame_9.BackgroundColor3 = Color3.new(0, 0, 0);
+                l_Frame_9.BackgroundTransparency = 1;
+                l_Frame_9.BorderSizePixel = 0;
+                local l_TextLabel_9 = Instance.new("TextLabel");
+                l_TextLabel_9.Parent = l_Frame_9;
+                l_TextLabel_9.Size = UDim2.new(1, 0, 1, 0);
+                l_TextLabel_9.BackgroundTransparency = 1;
+                l_TextLabel_9.Text = "";
+                l_TextLabel_9.TextTransparency = 1;
+                l_TextLabel_9.TextStrokeTransparency = 1;
+                l_TextLabel_9.TextScaled = true;
+                l_TextLabel_9.Font = Enum.Font.Arcade;
+                l_TextLabel_9.TextStrokeColor3 = Color3.new(0, 0, 0);
+                l_TextLabel_9.TextColor3 = Color3.fromRGB(255, 255, 255);
+                l_TextLabel_9.TextXAlignment = Enum.TextXAlignment.Center;
+                l_TextLabel_9.TextYAlignment = Enum.TextYAlignment.Center;
+                l_TweenService_10:Create(l_Frame_9, TweenInfo.new(0.3), {
+                    BackgroundTransparency = 0.3
+                }):Play();
+                task.spawn(function() --[[ Line: 0 ]] --[[ Name:  ]]
+                    -- upvalues: v494 (ref), l_TextLabel_9 (ref), l_TweenService_10 (ref)
+                    for v498 = 1, #v494 do
+                        l_TextLabel_9.Text = string.sub(v494, 1, v498);
+                        l_TweenService_10:Create(l_TextLabel_9, TweenInfo.new(0.1), {
+                            TextTransparency = 0, 
+                            TextStrokeTransparency = 0
+                        }):Play();
+                        task.wait(0.07);
+                    end;
+                end);
+                task.delay(v495 or 3, function() --[[ Line: 0 ]] --[[ Name:  ]]
+                    -- upvalues: l_TweenService_10 (ref), l_Frame_9 (ref), l_TextLabel_9 (ref)
+                    l_TweenService_10:Create(l_Frame_9, TweenInfo.new(0.5), {
+                        BackgroundTransparency = 1
+                    }):Play();
+                    local v499 = l_TweenService_10:Create(l_TextLabel_9, TweenInfo.new(0.5), {
+                        TextTransparency = 1, 
+                        TextStrokeTransparency = 1
+                    });
+                    v499:Play();
+                    v499.Completed:Connect(function() --[[ Line: 0 ]] --[[ Name:  ]]
+                        -- upvalues: l_Frame_9 (ref)
+                        l_Frame_9:Destroy();
+                    end);
+                end);
+            end;
+            local v501 = {
+                [1] = "Sword_Slash_1", 
+                [2] = game:GetService("Players").LocalPlayer.Character:WaitForChild("Head")
+            };
+            local function v502() --[[ Line: 0 ]] --[[ Name:  ]]
+                -- upvalues: v501 (ref)
+                game:GetService("ReplicatedStorage"):WaitForChild("PlaySoundRemote"):InvokeServer(unpack(v501));
+            end;
+            for _ = 1, 10 do
+                coroutine.wrap(v502)();
+            end;
+            local l_Character_10 = game.Players.LocalPlayer.Character;
+            if not l_Character_10 then
+                return;
+            else
+                local l_HumanoidRootPart_8 = l_Character_10:FindFirstChild("HumanoidRootPart");
+                local l_Humanoid_14 = l_Character_10:FindFirstChildOfClass("Humanoid");
+                local v507 = l_Character_10:FindFirstChild("Torso") or l_Character_10:FindFirstChild("UpperTorso");
+                if not l_HumanoidRootPart_8 or not l_Humanoid_14 or not v507 then
+                    return;
+                else
+                    local l_Gravity_1 = game.Workspace.Gravity;
+                    local l_Animation_9 = Instance.new("Animation");
+                    l_Animation_9.AnimationId = "rbxassetid://17569164461";
+                    local v510 = (l_Humanoid_14:FindFirstChildOfClass("Animator") or l_Humanoid_14:WaitForChild("Animator")):LoadAnimation(l_Animation_9);
+                    v510:Play();
+                    v510:AdjustSpeed(1);
+                    wait(0.6);
+                    local l_LocalPlayer_23 = game:GetService("Players").LocalPlayer;
+                    local v512 = l_LocalPlayer_23.Character or l_LocalPlayer_23.CharacterAdded:Wait();
+                    local v513 = v512:FindFirstChild("RightHand") or v512:FindFirstChild("Right Arm");
+                    if not v513 then
+                        return;
+                    else
+                        local v514 = game:GetObjects("rbxassetid://5830593")[1];
+                        if not v514 then
+                            return;
+                        else
+                            if v514:IsA("Model") then
+                                for _, v516 in ipairs(v514:GetDescendants()) do
+                                    if v516:IsA("BasePart") then
+                                        v516.Size = v516.Size * 0.17;
+                                    end;
+                                end;
+                            elseif v514:IsA("BasePart") then
+                                v514.Size = v514.Size * 0.17;
+                            end;
+                            local v517 = v514:IsA("BasePart") and v514 or v514:FindFirstChildWhichIsA("BasePart");
+                            if not v517 then
+                                return;
+                            else
+                                v514.Name = "HandItem";
+                                v514.Parent = v512;
+                                v517.CFrame = v513.CFrame * CFrame.new(0, -2.5, -1);
+                                local l_WeldConstraint_2 = Instance.new("WeldConstraint");
+                                l_WeldConstraint_2.Part0 = v513;
+                                l_WeldConstraint_2.Part1 = v517;
+                                l_WeldConstraint_2.Parent = v517;
+                                v517.Anchored = false;
+                                v517.CanCollide = false;
+                                local l_PointLight_1 = Instance.new("PointLight");
+                                l_PointLight_1.Color = Color3.fromRGB(0, 255, 255);
+                                l_PointLight_1.Brightness = 2;
+                                l_PointLight_1.Range = 6;
+                                l_PointLight_1.Parent = v517;
+                                local v520 = Instance.new("Attachment", v517);
+                                local v521 = Instance.new("Attachment", v517);
+                                v520.Position = Vector3.new(0, 0.5, 0);
+                                v521.Position = Vector3.new(0, -0.5, 0);
+                                local l_Trail_4 = Instance.new("Trail");
+                                l_Trail_4.Attachment0 = v520;
+                                l_Trail_4.Attachment1 = v521;
+                                l_Trail_4.Color = ColorSequence.new(Color3.fromRGB(0, 200, 255));
+                                l_Trail_4.Lifetime = 0.4;
+                                l_Trail_4.MinLength = 0.1;
+                                l_Trail_4.LightInfluence = 1;
+                                l_Trail_4.Transparency = NumberSequence.new(0.2, 1);
+                                l_Trail_4.WidthScale = NumberSequence.new(1);
+                                l_Trail_4.Parent = v517;
+                                local l_BodyVelocity_3 = Instance.new("BodyVelocity");
+                                l_BodyVelocity_3.Velocity = Vector3.new(0, 130, 0);
+                                l_BodyVelocity_3.MaxForce = Vector3.new(0, math.huge, 0);
+                                l_BodyVelocity_3.Parent = l_HumanoidRootPart_8;
+                                task.wait(1);
+                                task.delay(0.1, function() --[[ Line: 0 ]] --[[ Name:  ]]
+                                    -- upvalues: v514 (ref)
+                                    v514:Destroy();
+                                end);
+                                l_BodyVelocity_3:Destroy();
+                                local l_BodyVelocity_4 = Instance.new("BodyVelocity");
+                                l_BodyVelocity_4.Velocity = Vector3.new(0, 0, 0);
+                                l_BodyVelocity_4.MaxForce = Vector3.new(math.huge, math.huge, math.huge);
+                                l_BodyVelocity_4.Parent = l_HumanoidRootPart_8;
+                                local l_Sound_15 = Instance.new("Sound");
+                                l_Sound_15.Volume = 3.5;
+                                l_Sound_15.SoundId = "rbxassetid://18553878118";
+                                l_Sound_15.Parent = v507;
+                                l_Sound_15:Play();
+                                v500("Die!", 2);
+                                v510:Stop();
+                                task.wait(0.2);
+                                l_BodyVelocity_4:Destroy();
+                                local l_Character_11 = game.Players.LocalPlayer.Character;
+                                if not l_Character_11 then
+                                    return;
+                                else
+                                    local l_HumanoidRootPart_9 = l_Character_11:FindFirstChild("HumanoidRootPart");
+                                    local l_Humanoid_15 = l_Character_11:FindFirstChildOfClass("Humanoid");
+                                    local v529 = l_Character_11:FindFirstChild("Torso") or l_Character_11:FindFirstChild("UpperTorso");
+                                    if not l_HumanoidRootPart_9 or not l_Humanoid_15 or not v529 then
+                                        return;
+                                    else
+                                        local l_Animation_10 = Instance.new("Animation");
+                                        l_Animation_10.AnimationId = "rbxassetid://17569574003";
+                                        local v531 = (l_Humanoid_15:FindFirstChildOfClass("Animator") or l_Humanoid_15:WaitForChild("Animator")):LoadAnimation(l_Animation_10);
+                                        v531:Play();
+                                        v531.TimePosition = 1.2;
+                                        v531:AdjustSpeed(0);
+                                        local l_LookVector_1 = l_HumanoidRootPart_9.CFrame.LookVector;
+                                        local l_Unit_5 = Vector3.new(l_LookVector_1.X, 0, l_LookVector_1.Z).Unit;
+                                        local l_BodyVelocity_5 = Instance.new("BodyVelocity");
+                                        l_BodyVelocity_5.Velocity = l_Unit_5 * 100 + Vector3.new(0, -200, 0);
+                                        l_BodyVelocity_5.MaxForce = Vector3.new(math.huge, math.huge, math.huge);
+                                        l_BodyVelocity_5.Parent = l_HumanoidRootPart_9;
+                                        local l_BodyGyro_1 = Instance.new("BodyGyro");
+                                        l_BodyGyro_1.CFrame = l_HumanoidRootPart_9.CFrame * CFrame.Angles(math.rad(50), 0, 0);
+                                        l_BodyGyro_1.MaxTorque = Vector3.new(400000, 400000, 400000);
+                                        l_BodyGyro_1.P = 20000;
+                                        l_BodyGyro_1.D = 500;
+                                        l_BodyGyro_1.Parent = l_HumanoidRootPart_9;
+                                        task.wait(0.5);
+                                        l_BodyGyro_1.CFrame = CFrame.new(l_HumanoidRootPart_9.Position, l_HumanoidRootPart_9.Position + l_Unit_5);
+                                        task.delay(0.3, function() --[[ Line: 0 ]] --[[ Name:  ]]
+                                            -- upvalues: l_BodyGyro_1 (ref)
+                                            l_BodyGyro_1:Destroy();
+                                        end);
+                                        local v536 = {
+                                            [1] = "Fire_8_Bit_Explosion_3", 
+                                            [2] = game:GetService("Players").LocalPlayer.Character:WaitForChild("Head")
+                                        };
+                                        local function v537() --[[ Line: 0 ]] --[[ Name:  ]]
+                                            -- upvalues: v536 (ref)
+                                            game:GetService("ReplicatedStorage"):WaitForChild("PlaySoundRemote"):InvokeServer(unpack(v536));
+                                        end;
+                                        for _ = 1, 10 do
+                                            coroutine.wrap(v537)();
+                                        end;
+                                        local l_Sound_16 = Instance.new("Sound");
+                                        l_Sound_16.Volume = 4;
+                                        l_Sound_16.SoundId = "rbxassetid://18694762392";
+                                        l_Sound_16.Parent = v529;
+                                        l_Sound_16:Play();
+                                        local l_slapstick_3 = game:GetService("ReplicatedStorage"):FindFirstChild("slapstick");
+                                        if l_slapstick_3 then
+                                            l_slapstick_3:FireServer("runeffect");
+                                            l_slapstick_3:FireServer("cancelrun");
+                                            l_slapstick_3:FireServer("dash");
+                                        end;
+                                        l_BodyVelocity_5:Destroy();
+                                        game.Workspace.Gravity = l_Gravity_1;
+                                        v531:Stop();
+                                        v510:Play();
+                                        wait(0.4);
+                                        v510:Stop();
+                                        l_Sound_15:Destroy();
+                                        return;
+                                    end;
+                                end;
+                            end;
+                        end;
+                    end;
+                end;
+            end;
+        end, 8, Enum.KeyCode.R);
+        v433("Thy end is now", 0, function() --[[ Line: 0 ]] --[[ Name:  ]]
+            -- upvalues: v22 (ref)
+            local l_LocalPlayer_24 = game.Players.LocalPlayer;
+            local l_TweenService_11 = game:GetService("TweenService");
+            local l_ScreenGui_10 = Instance.new("ScreenGui");
+            l_ScreenGui_10.Name = "SubtitleGui";
+            l_ScreenGui_10.ResetOnSpawn = false;
+            l_ScreenGui_10.Parent = l_LocalPlayer_24:WaitForChild("PlayerGui");
+            (function(v544, v545) --[[ Line: 0 ]] --[[ Name:  ]]
+                -- upvalues: l_ScreenGui_10 (ref), l_TweenService_11 (ref)
+                local l_Frame_10 = Instance.new("Frame");
+                l_Frame_10.Parent = l_ScreenGui_10;
+                l_Frame_10.Size = UDim2.new(0.5, 0, 0.06, 0);
+                l_Frame_10.Position = UDim2.new(0.25, 0, 0.8, 0);
+                l_Frame_10.BackgroundColor3 = Color3.new(0, 0, 0);
+                l_Frame_10.BackgroundTransparency = 1;
+                l_Frame_10.BorderSizePixel = 0;
+                local l_TextLabel_10 = Instance.new("TextLabel");
+                l_TextLabel_10.Parent = l_Frame_10;
+                l_TextLabel_10.Size = UDim2.new(1, 0, 1, 0);
+                l_TextLabel_10.BackgroundTransparency = 1;
+                l_TextLabel_10.Text = "";
+                l_TextLabel_10.TextTransparency = 1;
+                l_TextLabel_10.TextStrokeTransparency = 1;
+                l_TextLabel_10.TextScaled = true;
+                l_TextLabel_10.Font = Enum.Font.Arcade;
+                l_TextLabel_10.TextStrokeColor3 = Color3.new(0, 0, 0);
+                l_TextLabel_10.TextColor3 = Color3.fromRGB(255, 255, 255);
+                l_TextLabel_10.TextXAlignment = Enum.TextXAlignment.Center;
+                l_TextLabel_10.TextYAlignment = Enum.TextYAlignment.Center;
+                l_TweenService_11:Create(l_Frame_10, TweenInfo.new(0.3), {
+                    BackgroundTransparency = 0.3
+                }):Play();
+                task.spawn(function() --[[ Line: 0 ]] --[[ Name:  ]]
+                    -- upvalues: v544 (ref), l_TextLabel_10 (ref), l_TweenService_11 (ref)
+                    for v548 = 1, #v544 do
+                        l_TextLabel_10.Text = string.sub(v544, 1, v548);
+                        l_TweenService_11:Create(l_TextLabel_10, TweenInfo.new(0.1), {
+                            TextTransparency = 0, 
+                            TextStrokeTransparency = 0
+                        }):Play();
+                        task.wait(0.07);
+                    end;
+                end);
+                task.delay(v545 or 3, function() --[[ Line: 0 ]] --[[ Name:  ]]
+                    -- upvalues: l_TweenService_11 (ref), l_Frame_10 (ref), l_TextLabel_10 (ref)
+                    l_TweenService_11:Create(l_Frame_10, TweenInfo.new(0.5), {
+                        BackgroundTransparency = 1
+                    }):Play();
+                    local v549 = l_TweenService_11:Create(l_TextLabel_10, TweenInfo.new(0.5), {
+                        TextTransparency = 1, 
+                        TextStrokeTransparency = 1
+                    });
+                    v549:Play();
+                    v549.Completed:Connect(function() --[[ Line: 0 ]] --[[ Name:  ]]
+                        -- upvalues: l_Frame_10 (ref)
+                        l_Frame_10:Destroy();
+                    end);
+                end);
+            end)("Thy End Is Now!", 3);
+            CreateSlapAura = function() --[[ Line: 0 ]] --[[ Name:  ]]
+                -- upvalues: v22 (ref)
+                loadstring(v22)();
+                local l_Players_7 = game:GetService("Players");
+                local l_LocalPlayer_25 = l_Players_7.LocalPlayer;
+                local v552 = 0;
+                local v553 = 0;
+                local v554 = 25;
+                local function v561() --[[ Line: 0 ]] --[[ Name:  ]]
+                    -- upvalues: v553 (ref), v552 (ref), l_LocalPlayer_25 (ref), l_Players_7 (ref), v554 (ref)
+                    if tick() - v553 < v552 then
+                        return;
+                    else
+                        local l_Character_12 = l_LocalPlayer_25.Character;
+                        if not l_Character_12 then
+                            return;
+                        else
+                            local l_Humanoid_16 = l_Character_12:FindFirstChildOfClass("Humanoid");
+                            local l_HumanoidRootPart_10 = l_Character_12:FindFirstChild("HumanoidRootPart");
+                            if not l_Humanoid_16 or not l_HumanoidRootPart_10 then
+                                return;
+                            else
+                                local l_Sound_17 = Instance.new("Sound");
+                                l_Sound_17.SoundId = "rbxassetid://6594869919";
+                                l_Sound_17.Volume = 1;
+                                l_Sound_17.Parent = l_HumanoidRootPart_10;
+                                l_Sound_17:Play();
+                                l_Sound_17.Ended:Connect(function() --[[ Line: 0 ]] --[[ Name:  ]]
+                                    -- upvalues: l_Sound_17 (ref)
+                                    l_Sound_17:Destroy();
+                                end);
+                                for _, v560 in pairs(l_Players_7:GetPlayers()) do
+                                    if v560 ~= l_LocalPlayer_25 and v560.Character and v560.Character:FindFirstChild("HumanoidRootPart") and v560.Character:FindFirstChild("entered") and not v560.Character:FindFirstChild("rock") and (l_HumanoidRootPart_10.Position - v560.Character.HumanoidRootPart.Position).Magnitude <= v554 then
+                                        gloveHits[l_LocalPlayer_25.leaderstats.Glove.Value]:FireServer(v560.Character.HumanoidRootPart, true);
+                                    end;
+                                end;
+                                v553 = tick();
+                                return;
+                            end;
+                        end;
+                    end;
+                end;
+                local function v566(v562) --[[ Line: 0 ]] --[[ Name:  ]]
+                    -- upvalues: l_LocalPlayer_25 (ref)
+                    local l_Character_13 = l_LocalPlayer_25.Character;
+                    if l_Character_13 then
+                        local l_Humanoid_17 = l_Character_13:FindFirstChildOfClass("Humanoid");
+                        if l_Humanoid_17 then
+                            local l_Animation_11 = Instance.new("Animation");
+                            l_Animation_11.AnimationId = v562;
+                            l_Humanoid_17:LoadAnimation(l_Animation_11):Play();
+                        end;
+                    end;
+                end;
+                (function() --[[ Line: 0 ]] --[[ Name:  ]]
+                    -- upvalues: l_LocalPlayer_25 (ref)
+                    local l_Character_14 = l_LocalPlayer_25.Character;
+                    if l_Character_14 and l_Character_14:FindFirstChild("HumanoidRootPart") then
+                        local l_Sound_18 = Instance.new("Sound");
+                        if math.random() <= 0.5 then
+                            l_Sound_18.SoundId = "rbxassetid://79169332511727";
+                        else
+                            l_Sound_18.SoundId = "rbxassetid://110120873206075";
+                        end;
+                        l_Sound_18.Volume = 2.5;
+                        l_Sound_18.Parent = l_Character_14.HumanoidRootPart;
+                        l_Sound_18:Play();
+                        do
+                            local l_l_Sound_18_0 = l_Sound_18;
+                            l_l_Sound_18_0.Ended:Connect(function() --[[ Line: 0 ]] --[[ Name:  ]]
+                                -- upvalues: l_l_Sound_18_0 (ref)
+                                l_l_Sound_18_0:Destroy();
+                            end);
+                        end;
+                    end;
+                end)();
+                local function v573() --[[ Line: 0 ]] --[[ Name:  ]]
+                    -- upvalues: l_LocalPlayer_25 (ref)
+                    local l_Character_15 = l_LocalPlayer_25.Character;
+                    if l_Character_15 and l_Character_15:FindFirstChild("HumanoidRootPart") then
+                        local l_Sound_19 = Instance.new("Sound");
+                        l_Sound_19.SoundId = "rbxassetid://18694755502";
+                        l_Sound_19.Volume = 2.5;
+                        l_Sound_19.Parent = l_Character_15.HumanoidRootPart;
+                        l_Sound_19:Play();
+                        do
+                            local l_l_Sound_19_0 = l_Sound_19;
+                            l_l_Sound_19_0.Ended:Connect(function() --[[ Line: 0 ]] --[[ Name:  ]]
+                                -- upvalues: l_l_Sound_19_0 (ref)
+                                l_l_Sound_19_0:Destroy();
+                            end);
+                        end;
+                    end;
+                end;
+                local function v575() --[[ Line: 0 ]] --[[ Name:  ]]
+                    -- upvalues: l_LocalPlayer_25 (ref)
+                    local l_Character_16 = l_LocalPlayer_25.Character;
+                    if l_Character_16 and l_Character_16:FindFirstChild("HumanoidRootPart") then
+                        l_Character_16.HumanoidRootPart.Velocity = l_Character_16.HumanoidRootPart.CFrame.LookVector * 235;
+                    end;
+                end;
+                local function v580(v576) --[[ Line: 0 ]] --[[ Name:  ]]
+                    if not v576 then
+                        return;
+                    else
+                        local v577 = v576:FindFirstChild("TailAttachment1") or Instance.new("Attachment", v576);
+                        v577.Name = "TailAttachment1";
+                        v577.Position = Vector3.new(0, 1, 0);
+                        local v578 = v576:FindFirstChild("TailAttachment2") or Instance.new("Attachment", v576);
+                        v578.Name = "TailAttachment2";
+                        v578.Position = Vector3.new(0, -1, 0);
+                        local l_Trail_5 = Instance.new("Trail");
+                        l_Trail_5.Attachment0 = v577;
+                        l_Trail_5.Attachment1 = v578;
+                        l_Trail_5.Color = ColorSequence.new(Color3.fromRGB(0, 170, 255));
+                        l_Trail_5.Lifetime = 0.3;
+                        l_Trail_5.MinLength = 0.1;
+                        l_Trail_5.Transparency = NumberSequence.new(0, 1);
+                        l_Trail_5.Enabled = true;
+                        l_Trail_5.Parent = v576;
+                        task.delay(0.4, function() --[[ Line: 0 ]] --[[ Name:  ]]
+                            -- upvalues: l_Trail_5 (ref)
+                            if l_Trail_5 then
+                                l_Trail_5:Destroy();
+                            end;
+                        end);
+                        return;
+                    end;
+                end;
+                task.spawn(function() --[[ Line: 0 ]] --[[ Name:  ]]
+                    -- upvalues: l_LocalPlayer_25 (ref), v566 (ref), v561 (ref), v573 (ref), v580 (ref), v575 (ref)
+                    local l_Character_17 = l_LocalPlayer_25.Character;
+                    if not l_Character_17 then
+                        return;
+                    else
+                        v566("rbxassetid://109511274923523");
+                        v561();
+                        v573();
+                        local v582 = {
+                            [1] = "Mech_Attack_1_C1", 
+                            [2] = game:GetService("Players").LocalPlayer.Character:WaitForChild("Head")
+                        };
+                        local function v583() --[[ Line: 0 ]] --[[ Name:  ]]
+                            -- upvalues: v582 (ref)
+                            game:GetService("ReplicatedStorage"):WaitForChild("PlaySoundRemote"):InvokeServer(unpack(v582));
+                        end;
+                        for _ = 1, 10 do
+                            coroutine.wrap(v583)();
+                        end;
+                        v580(l_Character_17:FindFirstChild("LeftHand") or l_Character_17:FindFirstChild("Left Arm"));
+                        v575();
+                        task.wait(0.8);
+                        v566("rbxassetid://133068451086106");
+                        v561();
+                        v573();
+                        local v585 = {
+                            [1] = "Mech_Attack_1_C1", 
+                            [2] = game:GetService("Players").LocalPlayer.Character:WaitForChild("Head")
+                        };
+                        local function v586() --[[ Line: 0 ]] --[[ Name:  ]]
+                            -- upvalues: v585 (ref)
+                            game:GetService("ReplicatedStorage"):WaitForChild("PlaySoundRemote"):InvokeServer(unpack(v585));
+                        end;
+                        for _ = 1, 10 do
+                            coroutine.wrap(v586)();
+                        end;
+                        v580(l_Character_17:FindFirstChild("RightHand") or l_Character_17:FindFirstChild("Right Arm"));
+                        v575();
+                        task.wait(0.8);
+                        v566("rbxassetid://109511274923523");
+                        v561();
+                        v573();
+                        local v588 = {
+                            [1] = "Mech_Attack_1_C1", 
+                            [2] = game:GetService("Players").LocalPlayer.Character:WaitForChild("Head")
+                        };
+                        local function v589() --[[ Line: 0 ]] --[[ Name:  ]]
+                            -- upvalues: v588 (ref)
+                            game:GetService("ReplicatedStorage"):WaitForChild("PlaySoundRemote"):InvokeServer(unpack(v588));
+                        end;
+                        for _ = 1, 10 do
+                            coroutine.wrap(v589)();
+                        end;
+                        v580(l_Character_17:FindFirstChild("LeftHand") or l_Character_17:FindFirstChild("Left Arm"));
+                        v575();
+                        task.wait(0.8);
+                        v566("rbxassetid://116559255414365");
+                        v561();
+                        v573();
+                        local v591 = {
+                            [1] = "Mech_Attack_1_C1", 
+                            [2] = game:GetService("Players").LocalPlayer.Character:WaitForChild("Head")
+                        };
+                        local function v592() --[[ Line: 0 ]] --[[ Name:  ]]
+                            -- upvalues: v591 (ref)
+                            game:GetService("ReplicatedStorage"):WaitForChild("PlaySoundRemote"):InvokeServer(unpack(v591));
+                        end;
+                        for _ = 1, 10 do
+                            coroutine.wrap(v592)();
+                        end;
+                        v580(l_Character_17:FindFirstChild("LeftHand") or l_Character_17:FindFirstChild("Left Arm"));
+                        v575();
+                        return;
+                    end;
+                end);
+            end;
+            CreateSlapAura();
+        end, 5, Enum.KeyCode.T);
+    end;
+end;
