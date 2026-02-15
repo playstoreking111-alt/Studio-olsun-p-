@@ -19,8 +19,8 @@ local runService = game:GetService("RunService")
 -- Billboard oluştur
 local billboard = Instance.new("BillboardGui")
 billboard.Adornee = character:WaitForChild("HumanoidRootPart")
-billboard.Size = UDim2.new(0, 250, 0, 60)
-billboard.StudsOffset = Vector3.new(0, 3, 0)
+billboard.Size = UDim2.new(0, 125, 0, 30)
+billboard.StudsOffset = Vector3.new(0, 6, 0)
 billboard.AlwaysOnTop = true
 billboard.Parent = player.PlayerGui
 billboard.ExtentsOffset = Vector3.new(0, 0, 0) -- kamera ile sabit kalması için
@@ -240,7 +240,7 @@ hair.Size = Vector3.new(2,2,2)
 hair.CFrame = hair.CFrame:inverse() * Head.CFrame * CFrame.new(0,-.85,0)
 hair.Anchored = false
 hair.Name = "hair"
-hair.BrickColor = BrickColor.new("Lily white")
+hair.BrickColor = BrickColor.new("Really Black")
 hairmesh = Instance.new("SpecialMesh", hair)
 hairmesh.MeshType = "FileMesh"
 hairmesh.Scale = Vector3.new(5.839, 5.737, 5.947)
@@ -253,7 +253,7 @@ ears.Size = Vector3.new(2,2,2)
 ears.CFrame = ears.CFrame:inverse() * Head.CFrame * CFrame.new(0,-.85,0)
 ears.Anchored = false
 ears.Name = "ears"
-ears.BrickColor = BrickColor.new("Olivine")
+ears.BrickColor = BrickColor.new("Really Black")
 earsmesh = Instance.new("SpecialMesh", ears)
 earsmesh.MeshType = "FileMesh"
 earsmesh.Scale = Vector3.new(1,1,1.1)
@@ -293,8 +293,8 @@ shirt = Instance.new("Shirt", Character)
 shirt.Name = "Shirt"
 pants = Instance.new("Pants", Character)
 pants.Name = "Pants"
-Character.Shirt.ShirtTemplate = "http://www.roblox.com/asset/?id=715059748"
-Character.Pants.PantsTemplate = "http://www.roblox.com/asset/?id=745414427"
+Character.Shirt.ShirtTemplate = "http://www.roblox.com/asset/?id=9683332649"
+Character.Pants.PantsTemplate = "http://www.roblox.com/asset/?id=4979959426"
 
 function damagealll(Radius,Position)		
 	local Returning = {}		
@@ -862,7 +862,7 @@ coroutine.wrap(function()
 local sk = Instance.new("Part",Torso)
 sk.CanCollide = false
 sk.Anchored = true
-sk.BrickColor = BrickColor.new("White")
+sk.BrickColor = BrickColor.new("Really Black")
 sk.Name = "sk"
 sk.CFrame = halo.CFrame * CFrame.Angles(math.rad(math.random(-180,180)),0,math.rad(math.random(-180,180)))
 local skmesh = Instance.new("SpecialMesh",sk)
@@ -1189,7 +1189,7 @@ coroutine.wrap(function()
 local sk = Instance.new("Part",Torso)
 sk.CanCollide = false
 sk.Anchored = true
-sk.BrickColor = BrickColor.new("White")
+sk.BrickColor = BrickColor.new("Really Black")
 sk.Name = "sk"
 sk.CFrame = holywrath.CFrame * CFrame.Angles(math.rad(math.random(-180,180)),0,math.rad(math.random(-180,180)))
 local skmesh = Instance.new("SpecialMesh",sk)
@@ -1255,7 +1255,7 @@ coroutine.wrap(function()
 local deadlyring = Instance.new("Part", Torso)
 deadlyring.Size = Vector3.new(5, 5, 5)
 deadlyring.Transparency = .5
-deadlyring.BrickColor = BrickColor.new("White")
+deadlyring.BrickColor = BrickColor.new("Really Black")
 deadlyring.Anchored = true
 deadlyring.CanCollide = false
 deadlyring.CFrame = hitboxwrath.CFrame * CFrame.Angles(math.rad(math.random(-180,180)), math.rad(math.random(-180,180)), math.rad(math.random(-180,180)))
