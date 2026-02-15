@@ -12,10 +12,70 @@ Edited by MoonOfSkys
 THE BIG BLACK WITH CUSTOM THEME
 --]]
 
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+
+-- Billboard oluştur
+local billboard = Instance.new("BillboardGui")
+billboard.Adornee = character:WaitForChild("HumanoidRootPart")
+billboard.Size = UDim2.new(0, 250, 0, 60) -- biraz daha geniş
+billboard.StudsOffset = Vector3.new(0, 3, 0)
+billboard.AlwaysOnTop = true
+billboard.Parent = player.PlayerGui
+
+-- TextLabel oluştur
+local label = Instance.new("TextLabel")
+label.Size = UDim2.new(1, 0, 1, 0)
+label.BackgroundTransparency = 1
+label.Text = "THE BIG BLACK"
+label.TextColor3 = Color3.fromRGB(0, 0, 0) -- siyah
+label.TextScaled = true
+label.Font = Enum.Font.Bangers -- biraz havalı font
+label.Parent = billboard
+
+-- Hafif titreme efekti
+local amplitude = 2 -- kaç studs yukarı aşağı
+local speed = 5 -- hız
+spawn(function()
+	while true do
+		local offsetY = math.sin(tick() * speed) * amplitude
+		billboard.StudsOffset = Vector3.new(0, 3 + offsetY/10, 0)
+		wait(0.03)
+	end
+end)
+
+local function setBlack(obj)
+    -- BasePart veya MeshPart ise
+    if obj:IsA("BasePart") then
+        obj.Color = Color3.fromRGB(0,0,0)
+        if obj:IsA("UnionOperation") or obj:IsA("MeshPart") then
+            obj.Material = Enum.Material.SmoothPlastic -- renk görünürlüğü için
+        end
+    end
+
+    -- ParticleEmitter, Trail, Beam gibi renk ayarı olanlar
+    if obj:IsA("ParticleEmitter") or obj:IsA("Trail") or obj:IsA("Beam") then
+        obj.Color = ColorSequence.new(Color3.fromRGB(0,0,0))
+    end
+
+    -- SpotLight, PointLight, SurfaceLight gibi ışıklar
+    if obj:IsA("Light") then
+        obj.Color = Color3.fromRGB(0,0,0)
+    end
+
+    -- Recursive olarak çocuklarını da siyah yap
+    for _, child in pairs(obj:GetChildren()) do
+        setBlack(child)
+    end
+end
+
+-- Script’in parent’ını karart
+setBlack(script.Parent)
+
 writefile("BigBlack.mp3", game:HttpGet("https://github.com/playstoreking111-alt/Soundtracks/raw/main/BigBlack.mp3"))
 local sound = Instance.new("Sound")
 sound.SoundId = getcustomasset("BigBlack.mp3")
-sound.Volume = 1
+sound.Volume = 3
 sound.Looped = true
 sound.Parent = game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart")
 sound:Play()
