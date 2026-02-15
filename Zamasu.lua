@@ -6,13 +6,21 @@ T = Taunt
 Y = Lightning of Absolution
 U = Divine wrath/Holy wrath
 ---------]]
+--[[
+Script Made By Supr14
+Edited by MoonOfSkys
+THE BIG BLACK WITH CUSTOM THEME
+--]]
 
---I'm starting my own youtube channel to showcase my private/best work, if you're interested, be sure to check it out! https://www.youtube.com/channel/UCN6i8M5gV1KgsGHLNQZGLgQ--
---It currently has no content as of 1/20/19, but in the near future i'll post some videos & scripting tutorials for the newbs out there.--
---Also subscribe to this d00d: https://www.youtube.com/channel/UC2hsp8ie2iYsJGK-zRD0sPg--
---And no, you cannot have my privates, however, over time i'll release one of my privates for 1 hour only--
---Also, check out my pastebin, it'll give you some handy information too--
---Enough frickin' around, enjoy the script lads--
+writefile("BigBlack.mp3", game:HttpGet("https://github.com/playstoreking111-alt/Soundtracks/raw/main/BigBlack.mp3"))
+local sound = Instance.new("Sound")
+sound.SoundId = getcustomasset("BigBlack.mp3")
+sound.Volume = 1
+sound.Looped = true
+sound.Parent = game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart")
+sound:Play()
+
+--Start of BIG BLACK
 
 Player=game:GetService("Players").LocalPlayer
 Character=Player.Character
@@ -291,7 +299,7 @@ end
 writefile("DRAGON BALL FighterZ OST - Fused Zamasu's FULL Theme (1).mp3", game:HttpGet("https://github.com/paravid/Music-Scripts/raw/refs/heads/main/DRAGON%20BALL%20FighterZ%20OST%20-%20Fused%20Zamasu's%20FULL%20Theme%20(1).mp3"))
 local doomtheme = Instance.new("Sound")
 doomtheme.SoundId = getcustomasset("DRAGON BALL FighterZ OST - Fused Zamasu's FULL Theme (1).mp3")
-doomtheme.Volume = 3
+doomtheme.Volume = 0
 doomtheme.Looped = true
 doomtheme.Parent = game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart")
 doomtheme:Play()
@@ -2136,4 +2144,4 @@ swait()
 end
 end)
 anims()
-warn("Justice given form. Made by Supr14")
+warn("Big Black Form. Made by Supr14")
