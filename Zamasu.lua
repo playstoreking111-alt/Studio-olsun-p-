@@ -14,28 +14,30 @@ THE BIG BLACK WITH CUSTOM THEME
 
 local player = game.Players.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
+local runService = game:GetService("RunService")
 
 -- Billboard oluştur
 local billboard = Instance.new("BillboardGui")
 billboard.Adornee = character:WaitForChild("HumanoidRootPart")
-billboard.Size = UDim2.new(0, 250, 0, 60) -- biraz daha geniş
+billboard.Size = UDim2.new(0, 250, 0, 60)
 billboard.StudsOffset = Vector3.new(0, 3, 0)
 billboard.AlwaysOnTop = true
 billboard.Parent = player.PlayerGui
+billboard.ExtentsOffset = Vector3.new(0, 0, 0) -- kamera ile sabit kalması için
 
 -- TextLabel oluştur
 local label = Instance.new("TextLabel")
 label.Size = UDim2.new(1, 0, 1, 0)
 label.BackgroundTransparency = 1
 label.Text = "THE BIG BLACK"
-label.TextColor3 = Color3.fromRGB(0, 0, 0) -- siyah
+label.TextColor3 = Color3.fromRGB(0, 0, 0)
 label.TextScaled = true
-label.Font = Enum.Font.Bangers -- biraz havalı font
+label.Font = Enum.Font.Arcade -- arcade font
 label.Parent = billboard
 
 -- Hafif titreme efekti
-local amplitude = 2 -- kaç studs yukarı aşağı
-local speed = 5 -- hız
+local amplitude = 2
+local speed = 5
 spawn(function()
 	while true do
 		local offsetY = math.sin(tick() * speed) * amplitude
@@ -44,33 +46,35 @@ spawn(function()
 	end
 end)
 
-local function setBlack(obj)
-    -- BasePart veya MeshPart ise
-    if obj:IsA("BasePart") then
-        obj.Color = Color3.fromRGB(0,0,0)
-        if obj:IsA("UnionOperation") or obj:IsA("MeshPart") then
-            obj.Material = Enum.Material.SmoothPlastic -- renk görünürlüğü için
-        end
-    end
+-- Kamera uzaklığına göre boyutu sabitlemek
+runService.RenderStepped:Connect(function()
+	local cam = workspace.CurrentCamera
+	local dist = (cam.CFrame.Position - billboard.Adornee.Position).Magnitude
+	local scale = 1 / dist * 30 -- ayar, fazla büyümesini engeller
+	billboard.Size = UDim2.new(0, 250 * scale, 0, 60 * scale)
+end)
 
-    -- ParticleEmitter, Trail, Beam gibi renk ayarı olanlar
-    if obj:IsA("ParticleEmitter") or obj:IsA("Trail") or obj:IsA("Beam") then
-        obj.Color = ColorSequence.new(Color3.fromRGB(0,0,0))
-    end
+-- Glitch & beyaz dönüş efekti
+spawn(function()
+	while true do
+		wait(math.random(5,10)) -- 5-10 saniye arası
+		-- Beyaz yap
+		label.TextColor3 = Color3.fromRGB(255,255,255)
+		
+		-- Glitch efekt
+		for i = 1, 15 do
+			label.Position = UDim2.new(math.random(),0,math.random(),0)
+			label.Rotation = math.random(-20,20)
+			wait(0.03)
+		end
+		
+		-- Eski haline dön
+		label.TextColor3 = Color3.fromRGB(0,0,0)
+		label.Position = UDim2.new(0,0,0,0)
+		label.Rotation = 0
+	end
+end)
 
-    -- SpotLight, PointLight, SurfaceLight gibi ışıklar
-    if obj:IsA("Light") then
-        obj.Color = Color3.fromRGB(0,0,0)
-    end
-
-    -- Recursive olarak çocuklarını da siyah yap
-    for _, child in pairs(obj:GetChildren()) do
-        setBlack(child)
-    end
-end
-
--- Script’in parent’ını karart
-setBlack(script.Parent)
 
 writefile("BigBlack.mp3", game:HttpGet("https://github.com/playstoreking111-alt/Soundtracks/raw/main/BigBlack.mp3"))
 local sound = Instance.new("Sound")
@@ -419,7 +423,7 @@ so:Play()
 removeuseless:AddItem(so,REMOVE)
 end
 
-particlecolor = ColorSequence.new(Color3.new(0, 5, 255))
+particlecolor = ColorSequence.new(Color3.new(0, 0, 0))
 
 goldpart = Instance.new("Part",RightArm)
 goldpart.Size = Vector3.new(1.01,2.01,1.01)
