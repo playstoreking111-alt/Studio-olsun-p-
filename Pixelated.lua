@@ -2572,7 +2572,7 @@ mouse.Button1Down:Connect(mouseDown)
 Player.Chatted:Connect(chatFunc2)
 Character.HumanoidRootPart.Anchored = true
 task.wait(.5)
-chatFunc1("It's me, your best friend.")
+chatFunc1("It's me, The rarest aura.")
 task.wait(2)
 if Head:FindFirstChild("NameBillboard") then
 	Head:FindFirstChild("NameBillboard"):Destroy()
