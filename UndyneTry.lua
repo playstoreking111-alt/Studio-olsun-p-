@@ -37,7 +37,8 @@ warn([[I recommend use the volume in .5 or .7]])
 
 
 
-
+local plr = game.Players.LocalPlayer
+local chr = plr.Character or plr.CharacterAdded:Wait()
 
 local owner = game.Players.LocalPlayer
 local Player = game:GetService("Players").LocalPlayer
