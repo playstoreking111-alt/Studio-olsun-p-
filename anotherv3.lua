@@ -5,7 +5,7 @@ writefile("Censored.mp3", game:HttpGet("https://raw.githubusercontent.com/playst
 
 local sound = Instance.new("Sound")
 sound.SoundId = getcustomasset("Censored.mp3")
-sound.Volume = 1
+sound.Volume = 2
 sound.Looped = true
 sound.Parent = game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart")
 sound:Play()
@@ -3313,7 +3313,7 @@ local SONG = 99055227859661
 local Music = Instance.new("Sound")
 Music.Parent = tors
 Music.SoundId = "rbxassetid://"..SONG
-Music.Volume = 2.5
+Music.Volume = 0.1
 Music.Looped = true
 Music.PlaybackSpeed = 1/19 -- 19 kat yavaş
 
