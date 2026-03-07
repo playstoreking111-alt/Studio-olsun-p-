@@ -3308,16 +3308,6 @@ LH.C1 = CF(-0.5 * Player_Size, 1 * Player_Size, 0 * Player_Size) * angles(Rad(0)
 --hat.Parent = Character
 end
 ----------------------------------------------------------------------------------
-local SONG = 99055227859661
-
-local Music = Instance.new("Sound")
-Music.Parent = tors
-Music.SoundId = "rbxassetid://"..SONG
-Music.Volume = 0.1
-Music.Looped = true
-Music.PlaybackSpeed = 1/19 -- 19 kat yavaş
-
-Music:Play()
 ----------------------------------------------------------------------------------
 local equipped = false
 local idle = 0
