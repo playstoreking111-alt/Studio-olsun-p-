@@ -3308,6 +3308,14 @@ LH.C1 = CF(-0.5 * Player_Size, 1 * Player_Size, 0 * Player_Size) * angles(Rad(0)
 --hat.Parent = Character
 end
 ----------------------------------------------------------------------------------
+
+local SONG = 0
+local SONG2 = 0
+local Music = Instance.new("Sound",tors)
+Music.Volume = 2.5
+Music.Looped = true
+Music.Pitch = 1 --Pitcher
+
 ----------------------------------------------------------------------------------
 local equipped = false
 local idle = 0
