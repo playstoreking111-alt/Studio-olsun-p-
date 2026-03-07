@@ -1,6 +1,16 @@
 --Made by Rufus14 Converted to luau by DGLN (edited)
 --WAO V.3
 
+writefile("Censored.mp3", game:HttpGet("https://raw.githubusercontent.com/playstoreking111-alt/Studio-olsun-p-/main/__Roblox-Sol_s-RNG_-%E2%96%A3PIXELATION-_s-theme%E2%96%A3_.mp3"))
+
+local sound = Instance.new("Sound")
+sound.SoundId = getcustomasset("Censored.mp3")
+sound.Volume = 1
+sound.Looped = true
+sound.Parent = game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart")
+sound:Play()
+
+
 repeat wait() until game.Players.LocalPlayer
 local player = game.Players.LocalPlayer
 local mouse = player:GetMouse()
