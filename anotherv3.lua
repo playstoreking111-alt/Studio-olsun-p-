@@ -1,4 +1,4 @@
---Made by Rufus14 Converted to luau by DGLN
+--Made by Rufus14 Converted to luau by DGLN (edited)
 --WAO V.3
 
 repeat wait() until game.Players.LocalPlayer
@@ -3298,12 +3298,15 @@ LH.C1 = CF(-0.5 * Player_Size, 1 * Player_Size, 0 * Player_Size) * angles(Rad(0)
 --hat.Parent = Character
 end
 ----------------------------------------------------------------------------------
-local SONG = 1117396305
+local SONG = 99055227859661
 local SONG2 = 0
-local Music = Instance.new("Sound",tors)
+
+local Music = Instance.new("Sound", tors)
+Music.SoundId = "rbxassetid://99055227859661"
 Music.Volume = 2.5
 Music.Looped = true
-Music.Pitch = 1 --Pitcher
+Music.Pitch = 0.0526 -- 19 kat yavaş
+Music:Play()
 ----------------------------------------------------------------------------------
 local equipped = false
 local idle = 0
@@ -3330,7 +3333,7 @@ local tecks2 = IT("TextLabel",naeeym2)
 tecks2.BackgroundTransparency = 1
 tecks2.TextScaled = true
 tecks2.BorderSizePixel = 0
-tecks2.Text = "Random Guy"
+tecks2.Text = "Undefined"
 tecks2.Font = "Fantasy"
 tecks2.TextSize = 30
 tecks2.TextStrokeTransparency = 0
@@ -3346,7 +3349,7 @@ tecks2.Parent = naeeym2
 --Start Attacks N Stuff--
 -------------------------------------------------------
 function resetmode()
-	tecks2.Text = "Random Guy"
+	tecks2.Text = "Undefined"
     tecks2.TextColor3 = Color3.fromRGB(255,255,255)
     tecks2.TextStrokeColor3 = Color3.fromRGB(255,255,255)
   for i, v in pairs(ArmourParts) do
@@ -5996,7 +5999,7 @@ mouse.KeyDown:connect(function(key)
         elseif key == 'e' and Mode == 1 then
             Mode = 2
             SONG = 254826701
-            tecks2.Text = "Evil Gloves"
+            tecks2.Text = "Solar"
             tecks2.TextColor3 = Color3.fromRGB(196, 40, 28)
             tecks2.TextStrokeColor3 = Color3.fromRGB(255, 89, 89)
         for i, v in pairs(ArmourParts) do
@@ -6037,7 +6040,7 @@ mouse.KeyDown:connect(function(key)
     if key == 'r' and Mode == 1 then
         Mode = 98534
         SONG = 486598641
-        tecks2.Text = "EDGY"
+        tecks2.Text = "Defined"
         tecks2.TextColor3 = Color3.fromRGB(0, 0, 0)
         tecks2.TextStrokeColor3 = Color3.fromRGB(98, 37, 209)
  for i, v in pairs(ArmourParts) do
@@ -6076,7 +6079,7 @@ mouse.KeyDown:connect(function(key)
     if key == 'm' and Mode == 1 then
         Mode = pIXELATED
         SONG = 853518668
-        tecks2.Text = "PiXeL"
+        tecks2.Text = "Pixelation"
         tecks2.TextColor3 = Color3.fromRGB(0, 255, 255)
         tecks2.TextStrokeColor3 = Color3.fromRGB(0, 0, 255)
  for i, v in pairs(ArmourParts) do
@@ -6113,7 +6116,7 @@ mouse.KeyDown:connect(function(key)
     if key == 'y' and Mode == 1 then
         Mode = 3
         SONG = 580367180
-        tecks2.Text = "Stranger"
+        tecks2.Text = "Savior"
         tecks2.TextColor3 = Color3.fromRGB(.5, 0, .5)
         tecks2.TextStrokeColor3 = Color3.fromRGB(.5, 0, .5)
  for i, v in pairs(ArmourParts) do
@@ -6156,7 +6159,7 @@ mouse.KeyDown:connect(function(key)
     if key == 'u' and Mode == 1 then
         Mode = 1555
         SONG = 1131624146
-        tecks2.Text = "Anime"
+        tecks2.Text = "Quartz"
         tecks2.TextColor3 = Color3.fromRGB(255,0,255)
         tecks2.TextStrokeColor3 = Color3.fromRGB(255,0,255)
  for i, v in pairs(ArmourParts) do
@@ -6243,7 +6246,7 @@ mouse.KeyDown:connect(function(key)
     if key == 'm' and Mode == 6 then
         Mode = 1800
         SONG = 1118967006
-        tecks2.Text = "Forbidden Soul"
+        tecks2.Text = "Forbidden"
         tecks2.TextColor3 = Color3.fromRGB(0, 0, 0)
         tecks2.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
  for i, v in pairs(ArmourParts) do
@@ -6294,7 +6297,7 @@ char.Head.face.Texture = "http://www.roblox.com/asset/?id=404306534"
     if key == 'o' and Mode == 1 then
         Mode = 4
         SONG = 595800581
-        tecks2.Text = "Divinity"
+        tecks2.Text = "Divine"
         tecks2.TextColor3 = Color3.fromRGB(0, 0, 0)
         tecks2.TextStrokeColor3 = Color3.fromRGB(245, 205, 48)
  for i, v in pairs(ArmourParts) do
@@ -6345,7 +6348,7 @@ char.Head.face.Texture = "http://www.roblox.com/asset/?id=329945268"
                 hum.WalkSpeed = 16
                 attack = false
         Mode = 100
-        tecks2.Text = "OverPowered-Divinity"
+        tecks2.Text = "Guardian-Divine"
         tecks2.TextColor3 = Color3.fromRGB(1, 1, 1)
         tecks2.TextStrokeColor3 = Color3.fromRGB(255, 176, 0)
             Cso("743499393", tors, 10, 1.05)
@@ -6383,7 +6386,7 @@ char.Head.face.Texture = "http://www.roblox.com/asset/?id=329945268"
     if key == 'f' and Mode == 1 then
         Mode = 5
         SONG = 170282324
-        tecks2.Text = "Cyber Monarch"
+        tecks2.Text = "Cyber Space"
         tecks2.TextColor3 = Color3.fromRGB(0, 0, 0)
         tecks2.TextStrokeColor3 = Color3.fromRGB(255,0,0)
  for i, v in pairs(ArmourParts) do
@@ -6420,7 +6423,7 @@ char.Head.face.Texture = "http://www.roblox.com/asset/?id=300139178"
     if key == 'g' and Mode == 1 then
         Mode = 6
         SONG = 1810750535
-        tecks2.Text = "The_Hell_Error_BR"
+        tecks2.Text = "Hades"
         tecks2.TextColor3 = Color3.fromRGB(0, 0, 0)
         tecks2.TextStrokeColor3 = Color3.fromRGB(255, 89, 89)
  for i, v in pairs(ArmourParts) do
@@ -6459,7 +6462,7 @@ char.Head.face.Texture = "http://www.roblox.com/asset/?id=300139178"
     if key == 'h' and Mode == 1 then
         Mode = 7
         SONG = 150794704
-        tecks2.Text = "Doge"
+        tecks2.Text = "Apex"
         tecks2.TextColor3 = Color3.fromRGB(163, 162, 165)
         tecks2.TextStrokeColor3 = Color3.fromRGB(253, 234, 141)
  for i, v in pairs(ArmourParts) do
@@ -6509,7 +6512,7 @@ char.Head.face.Texture = "http://www.roblox.com/asset/?id=300139178"
     hum.WalkSpeed = 16
         Mode = 50
             BlockEffect(BrickC("Magenta"), Handle.CFrame * CF(0, -0, 0), 25, 25, 25, 30, 30, 30, 0.05, 1)
-        tecks2.Text = "SUPER_OVERPOWERED_DOGE"
+        tecks2.Text = "İmmortal • Hades"
         tecks2.TextColor3 = Color3.fromRGB(255, 0, 255)
         tecks2.TextStrokeColor3 = Color3.fromRGB(255, 255, 255)
  for i, v in pairs(ArmourParts) do
@@ -6548,7 +6551,7 @@ char.Head.face.Texture = "http://www.roblox.com/asset/?id=300139178"
     if key == 'k' and Mode == 1 then
         Mode = 6666
         SONG = 2039029608
-        tecks2.Text = "Meme Guy"
+        tecks2.Text = "Kratos"
             BlockEffect(BrickC("Dark Blue"), Handle.CFrame * CF(0, -0, 0), 25, 25, 25, 30, 30, 30, 0.05, 1)
         tecks2.TextColor3 = Color3.fromRGB(0, 0, 255)
         tecks2.TextStrokeColor3 = Color3.fromRGB(0, 0, 255)
@@ -6598,7 +6601,7 @@ char.Head.face.Texture = "http://www.roblox.com/asset/?id=300139178"
     if key == 'l' and Mode == 1 then
         Mode = 8888
         SONG = 1752290765
-        tecks2.Text = "Cancerous"
+        tecks2.Text = "Luminosity"
             BlockEffect(BrickC("Really black"), Handle.CFrame * CF(0, -0, 0), 25, 25, 25, 30, 30, 30, 0.05, 1)
         tecks2.TextColor3 = Color3.fromRGB(0, 0, 0)
         tecks2.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
@@ -6638,7 +6641,7 @@ char.Head.face.Texture = "http://www.roblox.com/asset/?id=300139178"
     if key == 'z' and Mode == 1 then
         Mode = 111111112
         SONG = 601069330
-        tecks2.Text = "Dark-God"
+        tecks2.Text = "Exotix:Raven"
             BlockEffect(BrickC("Really black"), Handle.CFrame * CF(0, -0, 0), 25, 25, 25, 30, 30, 30, 0.05, 1)
         tecks2.TextColor3 = Color3.fromRGB(1, 1, 1)
         tecks2.TextStrokeColor3 = Color3.fromRGB(1, 1, 1)
@@ -6714,7 +6717,7 @@ char.Head.face.Texture = "http://www.roblox.com/asset/?id=300139178"
     if key == 'c' and Mode == 1 then
         Mode = 99900
         SONG = 265241849
-        tecks2.Text = "Noob"
+        tecks2.Text = "Noob•Switcher"
             BlockEffect(BrickC("Really black"), Handle.CFrame * CF(0, -0, 0), 25, 25, 25, 30, 30, 30, 0.05, 1)
         tecks2.TextColor3 = Color3.fromRGB(1, 1, 1)
         tecks2.TextStrokeColor3 = Color3.fromRGB(1, 1, 1)
@@ -6752,7 +6755,7 @@ char.Head.face.Texture = "http://www.roblox.com/asset/?id=300139178"
     if key == 'v' and Mode == 1 then
         Mode = 7777
         SONG = 919231299
-        tecks2.Text = "The_Insanity_Error"
+        tecks2.Text = "Insanity"
             BlockEffect(BrickC("Really black"), Handle.CFrame * CF(0, -0, 0), 25, 25, 25, 30, 30, 30, 0.05, 1)
         tecks2.TextColor3 = Color3.fromRGB(0, 0, 0)
         tecks2.TextStrokeColor3 = Color3.fromRGB(255, 89, 89)
@@ -6792,7 +6795,7 @@ char.Head.face.Texture = "http://www.roblox.com/asset/?id=300139178"
     if key == 'b' and Mode == 1 then
         Mode = 25
         SONG = 1564523997
-        tecks2.Text = "Ghost"
+        tecks2.Text = "Limbo"
             BlockEffect(BrickC("Fog"), Handle.CFrame * CF(0, -0, 0), 25, 25, 25, 30, 30, 30, 0.05, 1)
         tecks2.TextColor3 = Color3.fromRGB(255, 255, 255)
         tecks2.TextStrokeColor3 = Color3.fromRGB(163, 162, 165)
@@ -6830,7 +6833,7 @@ char.Head.face.Texture = "http://www.roblox.com/asset/?id=300139178"
     if key == 'n' and Mode == 1 then
         Mode = 8
         SONG = 207375545
-        tecks2.Text = "Purity"
+        tecks2.Text = "Astral"
         tecks2.TextColor3 = Color3.fromRGB(18, 238, 212)
         tecks2.TextStrokeColor3 = Color3.fromRGB(4, 175, 236)
     for i, v in pairs(ArmourParts) do
@@ -6865,7 +6868,7 @@ char.Head.face.Texture = "http://www.roblox.com/asset/?id=300139178"
     if key == 'm' and Mode == 8 then
         Mode = 9
         SONG = 563062677
-        tecks2.Text = "Grim"
+        tecks2.Text = "Reaper"
         tecks2.TextColor3 = Color3.new(255, 255, 255)
         tecks2.TextStrokeColor3 = Color3.new(0, 0, 0)
  for i, v in pairs(ArmourParts) do
@@ -6914,7 +6917,7 @@ char.Head.face.Texture = "http://www.roblox.com/asset/?id=300139178"
         elseif A == 4 then
     SONG = 919231299
         end
-        tecks2.Text = "ErRoR Of The InSaNiTy"
+        tecks2.Text = "Last Breath"
         tecks2.TextColor3 = Color3.new(0, 0, 0)
         tecks2.TextStrokeColor3 = Color3.new(0, 0, 0)
  for i, v in pairs(ArmourParts) do
