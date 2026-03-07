@@ -283,7 +283,7 @@ function Damage(Part, hit, minim, maxim, knockback, Type, Property, Delay, HitSo
 	end
          if h ~= nil and hit.Parent.Name ~= char.Name and hit.Parent:FindFirstChild("UpperTorso") ~= nil then
 	
-         hit.Parent:FindFirstChild("Head"):BreakJoints()
+         --hit.Parent:FindFirstChild("Head"):BreakJoints()
          end
 
 	if h ~= nil and hit.Parent.Name ~= char.Name and hit.Parent:FindFirstChild("Torso") ~= nil then
@@ -293,7 +293,7 @@ function Damage(Part, hit, minim, maxim, knockback, Type, Property, Delay, HitSo
 			end
 		end
          if insta == true then
-         hit.Parent:FindFirstChild("Head"):BreakJoints()
+         --hit.Parent:FindFirstChild("Head"):BreakJoints()
          end
 		local c = Create("ObjectValue"){
 			Name = "creator",
@@ -881,27 +881,27 @@ function Eviscerate(dude)
 		local val = IT("BoolValue", dude)
 		val.Name = "IsHit"
 		local ds = coroutine.wrap(function()
-			dude:WaitForChild("Head"):BreakJoints()
+			--dude:WaitForChild("Head"):BreakJoints()
 			wait(0.5)
 			target = nil
 			coroutine.resume(coroutine.create(function()
 				for i, v in pairs(dude:GetChildren()) do
 					if v:IsA("Accessory") then
-						v:Destroy()
+						--v:Destroy()
 					end
 					if v:IsA("Humanoid") then
-						v:Destroy()
+						--v:Destroy()
 					end
 					if v:IsA("CharacterMesh") then
-						v:Destroy()
+						--v:Destroy()
 					end
 					if v:IsA("Model") then
-						v:Destroy()
+						--v:Destroy()
 					end
 					if v:IsA("Part") or v:IsA("MeshPart") then
 						for x, o in pairs(v:GetChildren()) do
 							if o:IsA("Decal") then
-								o:Destroy()
+								--o:Destroy()
 							end
 						end
 						coroutine.resume(coroutine.create(function()
@@ -939,8 +939,8 @@ function Eviscerate(dude)
 								wait(0.5)
 								PartEmmit1.Enabled = false
 								wait(3)
-								v:Destroy()
-								dude:Destroy()
+								--v:Destroy()
+								--dude:Destroy()
 							end))
 						end))
 					end
@@ -1245,11 +1245,11 @@ tecks2.TextStrokeColor3 = BrickColor.new('Really black').Color
 tecks2.Size = UDim2.new(1,0,0.5,0)
 tecks2.Parent = naeeym2
 textfag = tecks2
-tecks2.Text = "Edited by ozzak1003"
+tecks2.Text = "Edited by DGLN"
 wait(2)
 tecks2.Text = "Don't leak please :)"
 wait(1)
-tecks2.Text = "nahid Chara"
+tecks2.Text = "Nahid • Chara"
 BTAUNT:Play()
 coroutine.resume(coroutine.create(function()
     while textfag ~= nil do
@@ -1294,7 +1294,7 @@ M2.TextureId = "http://www.roblox.com/asset/?id=0"
 M2.Scale = Vector3.new(1, 1, 1)
 local l = game.Lighting
 local sky = Instance.new("Sky",l)
-l.TimeOfDay = "00:00:00"
+--l.TimeOfDay = "00:00:00"
 l.Brightness = 1
 l.Ambient = Color3.new(0.25, 0.5, 0.75)
 ----------------------------------------------------------------------------------
@@ -1353,7 +1353,7 @@ epicmode = false
 normal = true
 for i,v in pairs(char:GetChildren()) do
    if v.ClassName == "Shirt" or v.ClassName == "Pants" or v.ClassName == "ShirtGraphic" then
-      v:Destroy()
+      --v:Destroy()
      end
 end
 local shirt = Instance.new("Shirt",char)
@@ -1369,7 +1369,7 @@ bdycolors.RightLegColor3 = whitecolor
 bdycolors.TorsoColor3 = whitecolor
 for i,v in pairs(char:GetChildren()) do
     if v.ClassName == "Hat" or v.ClassName == "Accessory" then
-        v:Destroy()
+        --v:Destroy()
     end
 end
 ----------------------------------------------------------------------
@@ -1616,21 +1616,21 @@ function special_hell()
         wait(2)
 	CHOICE = 6
         Cso("464600985", hed, 3.5, 1)
-	local killsky = Instance.new('Sky', game:GetService'Lighting')
-killsky.SkyboxBk = "rbxassetid://818983932"
-killsky.SkyboxDn = "rbxassetid://818983932"
-killsky.SkyboxFt = "rbxassetid://818983932"
-killsky.SkyboxLf = "rbxassetid://818983932"
-killsky.SkyboxRt = "rbxassetid://818983932"
-killsky.SkyboxUp = "rbxassetid://818983932"
+	local killsky = Instance.new('Sky', game:GetService('Lighting'))
+killsky.SkyboxBk = ""   -- Artık asset yok
+killsky.SkyboxDn = ""   -- Artık asset yok
+killsky.SkyboxFt = ""   -- Artık asset yok
+killsky.SkyboxLf = ""   -- Artık asset yok
+killsky.SkyboxRt = ""   -- Artık asset yok
+killsky.SkyboxUp = ""   -- Artık asset yok
 ---
 killsky.StarCount = 0
 killsky.SunAngularSize = 0
 killsky.MoonAngularSize = 0
 killsky.MoonTextureId = ""
 killsky.CelestialBodiesShown = false
-game.Lighting.FogColor = Color3.new(255,0,0)
-game.Lighting.FogEnd = 1500
+--game.Lighting.FogColor = Color3.new(255,0,0)
+--game.Lighting.FogEnd = 1500
 	if HITFLOOR ~= nil then
 		ATTACK = false
 		Rooted = false
@@ -1753,7 +1753,7 @@ tecks2.Size = UDim2.new(1,0,0.5,0)
 tecks2.Parent = naeeym2
 textfag = tecks2
 wait(1)
-tecks2.Text = "Ultra nahid chara"
+tecks2.Text = "Ultra • Nahid • Chara"
 coroutine.resume(coroutine.create(function()
     while textfag ~= nil do
         swait()
