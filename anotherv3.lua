@@ -3309,7 +3309,7 @@ LH.C1 = CF(-0.5 * Player_Size, 1 * Player_Size, 0 * Player_Size) * angles(Rad(0)
 end
 ----------------------------------------------------------------------------------
 
-local SONG = 99055227859661
+local SONG = 0
 local SONG2 = 0
 
 local Music = Instance.new("Sound", tors)
