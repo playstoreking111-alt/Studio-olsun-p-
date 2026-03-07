@@ -1563,7 +1563,7 @@ function Damage(Part, hit, minim, maxim, knockback, Type, Property, Delay, HitSo
 	end
          if h ~= nil and hit.Parent.Name ~= char.Name and hit.Parent:FindFirstChild("UpperTorso") ~= nil then
 	
-         hit.Parent:FindFirstChild("Head"):BreakJoints()
+         --hit.Parent:FindFirstChild("Head"):BreakJoints()
          end
 
 	if h ~= nil and hit.Parent.Name ~= char.Name and hit.Parent:FindFirstChild("Torso") ~= nil then
@@ -1573,7 +1573,7 @@ function Damage(Part, hit, minim, maxim, knockback, Type, Property, Delay, HitSo
 			end
 		end
          if insta == true then
-         hit.Parent:FindFirstChild("Head"):BreakJoints()
+         --hit.Parent:FindFirstChild("Head"):BreakJoints()
          end
 		local c = Create("ObjectValue"){
 			Name = "creator",
@@ -1597,10 +1597,10 @@ function Damage(Part, hit, minim, maxim, knockback, Type, Property, Delay, HitSo
 			end
 		end
 		if blocked == false then
-			h.Health = h.Health - Damage
+			--h.Health = h.Health - Damage
 			ShowDamage((Part.CFrame * CFrame.new(0, 0, (Part.Size.Z / 2)).p + Vector3.new(0, 1.5, 0)), -Damage, 1.5, tors.BrickColor.Color)
 		else
-			h.Health = h.Health - (Damage / 2)
+			--h.Health = h.Health - (Damage / 2)
 			ShowDamage((Part.CFrame * CFrame.new(0, 0, (Part.Size.Z / 2)).p + Vector3.new(0, 1.5, 0)), -Damage, 1.5, tors.BrickColor.Color)
 		end
 		if Type == "Knockdown" then
@@ -3299,13 +3299,14 @@ LH.C1 = CF(-0.5 * Player_Size, 1 * Player_Size, 0 * Player_Size) * angles(Rad(0)
 end
 ----------------------------------------------------------------------------------
 local SONG = 99055227859661
-local SONG2 = 0
 
-local Music = Instance.new("Sound", tors)
-Music.SoundId = "rbxassetid://99055227859661"
+local Music = Instance.new("Sound")
+Music.Parent = tors
+Music.SoundId = "rbxassetid://"..SONG
 Music.Volume = 2.5
 Music.Looped = true
-Music.Pitch = 0.0526 -- 19 kat yavaş
+Music.PlaybackSpeed = 1/19 -- 19 kat yavaş
+
 Music:Play()
 ----------------------------------------------------------------------------------
 local equipped = false
