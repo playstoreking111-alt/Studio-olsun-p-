@@ -491,6 +491,7 @@ local function Create(class)
 	end
 end
 
+create = Create
 
 local NSn=NumberSequence.new
 local NSKp=NumberSequenceKeypoint.new
