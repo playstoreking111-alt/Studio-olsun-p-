@@ -845,7 +845,7 @@ function Eviscerate(dude)
         local val = IT("BoolValue", dude)
         val.Name = "IsHit"
         local ds = coroutine.wrap(function()
-            dude:WaitForChild("Head"):BreakJoints()
+            --dude:WaitForChild("Head"):BreakJoints()
             wait(0.5)
             target = nil
             coroutine.resume(coroutine.create(function()
@@ -922,7 +922,7 @@ function killnearest(position,range,maxstrength)
 			if((body[part].ClassName == "Part" or body[part].ClassName == "MeshPart") and v ~= Character) then
 				if(body[part].Position - position).Magnitude < range then
 					if v.ClassName == "Model" then
-						v:BreakJoints()
+						--v:BreakJoints()
 					end
 					table.insert(Effects2,{body[part],"Disappear",0.02,2,2,2,2})
 					body[part].Velocity = CFrame.new(position,body[part].Position).lookVector*5*maxstrength
@@ -2605,7 +2605,7 @@ function Eviscerate(dude)
 		local val = IT("BoolValue", dude)
 		val.Name = "IsHit"
 		local ds = coroutine.wrap(function()
-			dude:WaitForChild("Head"):BreakJoints()
+			--dude:WaitForChild("Head"):BreakJoints()
 			wait(0.5)
 			target = nil
 			coroutine.resume(coroutine.create(function()
@@ -4705,7 +4705,7 @@ function Decapitate()
 		targethead.face:Remove()
 		weldHead01.Part0 = ra
         weldHead01.C1 = CFrame.new(0, 0, 1.2) * angles(math.rad(90), math.rad(0), math.rad(0))
-		targettorso:BreakJoints()
+		--targettorso:BreakJoints()
 		CreateSound("314390675", targettorso, 5, .7)
 		for i = 0,3.2,0.1 do
 			swait()
@@ -5680,7 +5680,7 @@ partasdeff:Emit(30)
 coroutine.wrap(function()
 targetted = nil
 swait(30)
-dude:BreakJoints()
+--dude:BreakJoints()
 swait(5)
 dude:FindFirstChildOfClass("Humanoid"):Destroy()
 for i=0,1,.05 do
