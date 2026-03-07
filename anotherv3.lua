@@ -1,6 +1,10 @@
 --Made by Rufus14 Converted to luau by DGLN
 --WAO V.3
 
+repeat wait() until game.Players.LocalPlayer
+local player = game.Players.LocalPlayer
+local mouse = player:GetMouse()
+
 local owner = game.Players.LocalPlayer
 local Player = owner
 
@@ -1491,8 +1495,16 @@ end
 function rayCast(Position, Direction, Range, Ignore)
 	return game:service("Workspace"):FindPartOnRay(Ray.new(Position, Direction.unit * (Range or 999.999)), Ignore)
 end
-local RbxUtility = LoadLibrary("RbxUtility")
-local Create = RbxUtility.Create
+
+local function Create(class)
+	return function(props)
+		local obj = Instance.new(class)
+		for i,v in pairs(props) do
+			obj[i] = v
+		end
+		return obj
+	end
+end
 
 -------------------------------------------------------
 --Start Damage Function--
