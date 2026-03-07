@@ -36,7 +36,10 @@ local FavIDs = {
 --The past can be horrible, but the future will be better, so forget the past and move-onward. -XXUNORIBOASXX
 
 wait()
-local owner = game.Players.LocalPlayer
+repeat wait() until game.Players.LocalPlayer
+local player = game.Players.LocalPlayer
+local mouse = player:GetMouse()
+local owner = player
 local plr = owner
 local char = plr.Character
 local hum = char.Humanoid
@@ -2571,7 +2574,7 @@ end
 --End Attacks N Stuff--
 -------------------------------------------------------
 Sprinting = false
-mouse.KeyDown:connect(function(key)
+mouse.KeyDown:Connect(function(key)
     if string.byte(key) == 48 and attack == false and Mode ~= 10 then
         Swing = 2
         hum.WalkSpeed = 38.82
