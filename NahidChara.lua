@@ -818,7 +818,7 @@ function part(formfactor ,parent, reflectance, transparency, brickcolor, name, s
 	fp.Position = tors.Position 
 	RemoveOutlines(fp)
 	fp.Material = "SmoothPlastic"
-	fp:BreakJoints()
+	--fp:BreakJoints()
 	return fp 
 end 
  
@@ -1046,7 +1046,7 @@ BodPoss.position = torso.Position + Vector3.new(Mrandom(-15, 15), Mrandom(-15, 1
 wait(1.6)
 soul.Touched:connect(function(hit)
 	if hit.Parent == char then
-	soul:Destroy()
+	--soul:Destroy()
 	end
 end)
 wait(1.2)
