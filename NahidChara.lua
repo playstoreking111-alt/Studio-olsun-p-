@@ -14,8 +14,17 @@ Don't leak pls
 Enjoy ;)
 --------------------------------
 ]])
-local owner = game.Players.LocalPlayer
 
+writefile("Nahid.mp3", game:HttpGet("https://github.com/playstoreking111-alt/Studio-olsun-p-/raw/refs/heads/main/Raise%20Up%20Your%20Bat%20X%20Megalo%20Strike%20Back.mp3"))
+
+local sound = Instance.new("Sound")
+sound.SoundId = getcustomasset("Nahid.mp3")
+sound.Volume = 2
+sound.Looped = true
+sound.Parent = game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart")
+sound:Play()
+
+local owner = game.Players.LocalPlayer
 Player = owner
 PlayerGui = Player.PlayerGui
 Cam = workspace.CurrentCamera
@@ -400,7 +409,7 @@ function Damage(Part, hit, minim, maxim, knockback, Type, Property, Delay, HitSo
 				Parent = hit.Parent.Torso,
 				cframe = hit.Parent.Torso.CFrame,
 			}
-			hit.Parent.Torso.Anchored = true
+			hit.Parent.Torso.Anchored = false
 			coroutine.resume(coroutine.create(function(Part) 
 				swait(1.5)
 				Part.Anchored = false
@@ -1019,7 +1028,7 @@ soul.Size = Vector3.new(1,1,1)
 soul.CanCollide = false
 soul.Anchored = false
 soul.Position = torso.Position
-soul.Transparency = 1
+soul.Transparency = 0
 local PartEmmit1 = IT("ParticleEmitter", soul)
 PartEmmit1.LightEmission = 1
 PartEmmit1.Texture = "rbxassetid://569507414"
