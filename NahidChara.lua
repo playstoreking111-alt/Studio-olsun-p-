@@ -24,86 +24,6 @@ sound.Looped = true
 sound.Parent = game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart")
 sound:Play()
 
----------Some settings----------
-
-local Players = game:GetService("Players")
-local LocalPlayer = Players.LocalPlayer
-
--- Korunacak vücut parçaları listesi
-local validBodyParts = {
-    ["Head"] = true, ["Torso"] = true, ["Left Arm"] = true, ["Right Arm"] = true, 
-    ["Left Leg"] = true, ["Right Leg"] = true, ["UpperTorso"] = true, ["LowerTorso"] = true,
-    ["LeftHand"] = true, ["RightHand"] = true, ["LeftFoot"] = true, ["RightFoot"] = true,
-    ["LeftLowerArm"] = true, ["RightLowerArm"] = true, ["LeftUpperArm"] = true, ["RightUpperArm"] = true,
-    ["LeftLowerLeg"] = true, ["RightLowerLeg"] = true, ["LeftUpperLeg"] = true, ["RightUpperLeg"] = true
-}
-
--- Bir karakteri düzelten ana fonksiyon
-local function fixCharacter(char)
-    if not char then return end
-    
-    -- Karakterin içindeki her şeyi kontrol et
-    for _, obj in pairs(char:GetDescendants()) do
-        if obj:IsA("BasePart") then
-            -- 1. ROOT PART KORUMASI: Her zaman şeffaf kalmalı
-            if obj.Name == "HumanoidRootPart" then
-                obj.Transparency = 1
-                obj.CastShadow = false
-            
-            -- 2. UZUV KORUMASI: Her zaman görünür kalmalı
-            elseif validBodyParts[obj.Name] or (obj.Parent and obj.Parent:IsA("Accessory")) then
-                obj.Transparency = 0
-            end
-        end
-    end
-end
-
--- Yeni bir oyuncu katıldığında veya bir karakter doğduğunda çalışacak sistem
-local function monitorPlayer(player)
-    -- Karakteri her doğduğunda (Reset/Spawn) yakala
-    player.CharacterAdded:Connect(function(char)
-        -- Karakter tam yüklenene kadar bekle ve düzelt
-        task.wait(0.5)
-        fixCharacter(char)
-    end)
-    
-    -- Eğer karakter zaten varsa (oyuna girdiğinde yüklenmişse)
-    if player.Character then
-        fixCharacter(player.Character)
-    end
-end
-
--- 1. OYUNA SONRADAN GİRENLERİ TAKİP ET (Otomatik Koruma)
-Players.PlayerAdded:Connect(monitorPlayer)
-
--- 2. ŞU AN OYUNDA OLANLARI TAKİP ET
-for _, player in pairs(Players:GetPlayers()) do
-    monitorPlayer(player)
-end
-
--- 3. EKSTRA GÜVENLİK DÖNGÜSÜ (Değişiklikleri Anlık Geri Alır)
--- Bazı scriptler çalışma anında parçaları gizleyebilir, bu döngü onları zorla düzeltir.
-task.spawn(function()
-    while true do
-        -- Seni ve diğerlerini sürekli denetle
-        for _, player in pairs(Players:GetPlayers()) do
-            if player.Character then
-                fixCharacter(player.Character)
-            end
-        end
-        
-        -- Workspace'teki NPC'leri de unutma
-        for _, obj in pairs(workspace:GetChildren()) do
-            if obj:IsA("Model") and obj:FindFirstChildOfClass("Humanoid") and not Players:GetPlayerFromCharacter(obj) then
-                fixCharacter(obj)
-            end
-        end
-        
-        task.wait(0.5) -- Performans dostu hızlı kontrol
-    end
-end)
------------------------
-
 local owner = game.Players.LocalPlayer
 Player = owner
 PlayerGui = Player.PlayerGui
@@ -1927,7 +1847,7 @@ function hate()
 		LW.C0 = clerp(LW.C0, CF(-1.5, 0.5 + 0.05 * Sin(sine / 30), 0.025 * Cos(sine / 20)) * angles(Rad(0), Rad(0), Rad(-5)), 0.1)
 	end
 	coroutine.resume(coroutine.create(function()
-		orb.Anchored = false
+		orb.Anchored = true
 		CFuncs.Sound.Create("rbxassetid://907528019", root, 1.85, 1)
 		local a = Instance.new("Part", workspace)
 		a.Name = "Direction"
