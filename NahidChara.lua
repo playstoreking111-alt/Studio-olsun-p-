@@ -1854,7 +1854,7 @@ function hate()
 		a.Anchored = true
 		a.BrickColor = BrickC("Really black")
 		a.Material = "Neon"
-		a.Transparency = 1
+		a.Transparency = 0
 		a.CanCollide = false
 		local ray = Ray.new(orb.CFrame.p, (mouse.Hit.p - orb.CFrame.p).unit * 500)
 		local ignore = orb
