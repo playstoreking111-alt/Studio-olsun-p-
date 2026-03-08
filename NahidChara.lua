@@ -1889,7 +1889,7 @@ function hate()
 					Aura(2, 5, "Add", orb.CFrame * CFrame.Angles(math.rad(math.random(-360, 360)), math.rad(math.random(-360, 360)), math.rad(math.random(-360, 360))), 5, 5, 50, -0.05, BrickC("Really black"), 0, "Sphere")
 				end
 				orb.Anchored = true
-				orb.Transparency = 1
+				orb.Transparency = 0
 				wait(8)
 				orb:Destroy()
 			end
