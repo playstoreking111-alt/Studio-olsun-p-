@@ -1,8 +1,6 @@
 
 wait(0.2)
 
-repeat wait() until game.Players.LocalPlayer
-local mouse = Player:GetMouse()
 local owner = game.Players.LocalPlayer
 local Player = owner
 PlayerGui = Player.PlayerGui
