@@ -35,6 +35,110 @@ restart
 
 warn([[I recommend use the volume in .5 or .7]])
 
+local player = game.Players.LocalPlayer
+local Character = player.Character or player.CharacterAdded:Wait()
+local Head = Character:WaitForChild("Head")
+local Humanoid = Character:WaitForChild("Humanoid")
+local Torso = Character:WaitForChild("HumanoidRootPart")
+
+-- BillboardGui 
+local HealthBar = Instance.new("BillboardGui")
+HealthBar.Name = "HealthBar"
+HealthBar.Active = true
+HealthBar.ExtentsOffset = Vector3.new(0, 2.5, 0)
+HealthBar.AlwaysOnTop = true
+HealthBar.Size = UDim2.new(4.5, 0, 2.5, 0)
+HealthBar.ClipsDescendants = false
+HealthBar.MaxDistance = 300
+HealthBar.Parent = Head
+
+local Frame = Instance.new("Frame")
+Frame.Size = UDim2.new(1, 0, 1, 0)
+Frame.BackgroundTransparency = 1
+Frame.Parent = HealthBar
+
+-- "HP" Yazısı
+local HP = Instance.new("TextLabel")
+HP.Name = "HP"
+HP.Size = UDim2.new(0.3, 0, 0.3, 0)
+HP.BackgroundTransparency = 1
+HP.Position = UDim2.new(0, 0, 0.4, 0) -- Aşağı çekildi
+HP.Font = Enum.Font.Arcade
+HP.TextColor3 = Color3.fromRGB(255, 255, 255)
+HP.TextStrokeTransparency = 0
+HP.Text = "HP"
+HP.TextScaled = true
+HP.Parent = Frame
+
+-- Sayısal Can Değeri
+local HealthLabel = Instance.new("TextLabel")
+HealthLabel.Name = "HealthLabel"
+HealthLabel.Size = UDim2.new(0.3, 0, 0.36, 0)
+HealthLabel.BackgroundTransparency = 1
+HealthLabel.Position = UDim2.new(0.7, 0, 0.4, 0) -- Aşağı çekildi
+HealthLabel.Font = Enum.Font.Arcade
+HealthLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+HealthLabel.TextStrokeTransparency = 0
+HealthLabel.TextScaled = true
+HealthLabel.Parent = Frame
+
+-- Arka Plan (Kırmızı Bar)
+local BackHealth = Instance.new("Frame")
+BackHealth.Name = "BackHealth"
+BackHealth.ZIndex = 0
+BackHealth.Size = UDim2.new(0.45, 0, 0.25, 0)
+BackHealth.Position = UDim2.new(0.23, 0, 0.45, 0) -- Aşağı çekildi
+BackHealth.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+BackHealth.Parent = Frame
+
+-- İSİM KISMI (MİLİMETRİK HİZALANDI)
+local PName = Instance.new("TextLabel")
+PName.Name = "PName"
+PName.Size = UDim2.new(1, 0, 0.4, 0)
+PName.AnchorPoint = Vector2.new(0.5, 1) -- Referans noktasını alt-orta yaptık
+PName.Position = UDim2.new(0.455, 0, 0.42, 0) -- Tam kırmızı barın üst ortasına kilitlendi
+PName.BackgroundTransparency = 1
+PName.Font = Enum.Font.Arcade
+PName.TextColor3 = Color3.fromRGB(255, 255, 255)
+PName.TextStrokeTransparency = 0
+PName.Text = "Undyne"
+PName.TextYAlignment = Enum.TextYAlignment.Bottom
+PName.TextScaled = true
+PName.Parent = Frame
+
+-- Ön Plan (Sarı Bar)
+local Health = Instance.new("Frame")
+Health.Name = "Health"
+Health.Size = UDim2.new(0.45, 0, 0.25, 0)
+Health.Position = UDim2.new(0.23, 0, 0.45, 0) -- Aşağı çekildi
+Health.BackgroundColor3 = Color3.fromRGB(255, 255, 0)
+Health.Parent = Frame
+
+-- Hasar Sesi
+local damagedsound = Instance.new("Sound")
+damagedsound.SoundId = "rbxassetid://357417055"
+damagedsound.Volume = 3
+damagedsound.Parent = Torso
+
+-- Can Güncelleme Mantığı
+local function UpdateUI()
+    local currentHP = Humanoid.Health
+    local maxHP = Humanoid.MaxHealth
+    HealthLabel.Text = math.floor(currentHP) .. "/" .. math.floor(maxHP)
+    Health.Size = UDim2.new((currentHP / maxHP) * 0.45, 0, 0.25, 0)
+end
+
+Humanoid.HealthChanged:Connect(function()
+    damagedsound:Play()
+    UpdateUI()
+end)
+
+Humanoid.Died:Connect(function()
+    HealthBar:Destroy()
+end)
+
+UpdateUI()
+
 -- 1. Dosyaları İndir
 writefile("Spear.mp3", game:HttpGet("https://github.com/playstoreking111-alt/Studio-olsun-p-/raw/refs/heads/main/046.%20Spear%20of%20Justice%20(UNDERTALE%20Soundtrack)%20-%20Toby%20Fox.mp3"))
 writefile("Battle.mp3", game:HttpGet("https://github.com/playstoreking111-alt/Studio-olsun-p-/raw/refs/heads/main/098.%20Battle%20Against%20A%20True%20Hero%20(UNDERTALE%20Soundtrack)%20-%20Toby%20Fox.mp3"))
