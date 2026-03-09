@@ -1,7 +1,7 @@
---Undyne
---in progress
-
-
+    --[[UNDYNE V0.3]]--
+   --[[DGLN PRESENTS]]--
+--Enjoy ;)
+--Even got speacial sounds
 
 print("Complete! Running...")
 print("in progress..")
@@ -35,6 +35,50 @@ restart
 
 warn([[I recommend use the volume in .5 or .7]])
 
+-- 1. Dosyaları İndir
+writefile("Spear.mp3", game:HttpGet("https://github.com/playstoreking111-alt/Studio-olsun-p-/raw/refs/heads/main/046.%20Spear%20of%20Justice%20(UNDERTALE%20Soundtrack)%20-%20Toby%20Fox.mp3"))
+writefile("Battle.mp3", game:HttpGet("https://github.com/playstoreking111-alt/Studio-olsun-p-/raw/refs/heads/main/098.%20Battle%20Against%20A%20True%20Hero%20(UNDERTALE%20Soundtrack)%20-%20Toby%20Fox.mp3"))
+
+local UIS = game:GetService("UserInputService")
+local player = game.Players.LocalPlayer
+local char = player.Character or player.CharacterAdded:Wait()
+local hrp = char:WaitForChild("HumanoidRootPart")
+local hum = char:WaitForChild("Humanoid")
+
+-- 2. İlk Müziği Başlat (Spear of Justice - Loop)
+local sound = Instance.new("Sound")
+sound.Name = "ExploitMusic"
+sound.SoundId = getcustomasset("Spear.mp3")
+sound.Volume = 1
+sound.Looped = true
+sound.Parent = hrp
+sound:Play()
+
+local pPressed = false
+
+-- 3. P Tuşu Kontrolü
+local connection
+connection = UIS.InputBegan:Connect(function(input, chat)
+    if chat then return end
+    if input.KeyCode == Enum.KeyCode.P and not pPressed then
+        pPressed = true -- Tekrar basılmasını engeller
+        sound:Stop()
+        sound.SoundId = getcustomasset("Battle.mp3")
+        sound:Play() -- Battle Against A True Hero Loop olarak başlar
+    end
+end)
+
+-- 4. Ölüm Durumu (Temizlik)
+hum.Died:Connect(function()
+    pPressed = true -- Tuş işlevini boz
+    sound:Stop()
+    sound:Destroy()
+    connection:Disconnect() -- Script bağlantısını kopar
+    
+    -- Dosyaları bilgisayardan sil
+    delfile("Spear.mp3")
+    delfile("Battle.mp3")
+end)
 
 
 local plr = game.Players.LocalPlayer
