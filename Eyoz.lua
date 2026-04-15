@@ -300,17 +300,15 @@ function Damage(Part, hit, minim, maxim, knockback, Type, Property, Delay, HitSo
 	end
          if h ~= nil and hit.Parent.Name ~= char.Name and hit.Parent:FindFirstChild("UpperTorso") ~= nil then
 	
-         hit.Parent:FindFirstChild("Head"):BreakJoints()
+         --hit.Parent:FindFirstChild("Head"):BreakJoints()
          end
 
-	if h ~= nil and hit.Parent.Name ~= char.Name and hit.Parent:FindFirstChild("Torso") ~= nil then
-		if hit.Parent:findFirstChild("DebounceHit") ~= nil then
-			if hit.Parent.DebounceHit.Value == true then
+	if h ~= nil and hit.Parent.Name ~= char.Name and hit.Parent:FindFirstChild("Torso") then if hit.Parent:FindFirstChild("DebounceHit") then if hit.Parent.DebounceHit.Value == true then
 				return
 			end
 		end
          if insta == true then
-         hit.Parent:FindFirstChild("Head"):BreakJoints()
+         --hit.Parent:FindFirstChild("Head"):BreakJoints()
          end
 		local c = Create("ObjectValue"){
 			Name = "creator",
@@ -324,8 +322,7 @@ function Damage(Part, hit, minim, maxim, knockback, Type, Property, Delay, HitSo
 		local Damage = math.random(minim, maxim)
 		local blocked = false
 		local block = hit.Parent:findFirstChild("Block")
-		if block ~= nil then
-			if block.className == "IntValue" then
+		if block then if block.className == "IntValue" then
 				if block.Value > 0 then
 					blocked = true
 					block.Value = block.Value - 1
