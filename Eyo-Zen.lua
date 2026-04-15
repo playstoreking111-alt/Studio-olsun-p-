@@ -11,14 +11,32 @@
 --Enjoy 
 --(not for skids)--
 
+-- Dosyayı indir ve kaydet
 writefile("EyoZen.mp3", game:HttpGet("https://raw.githubusercontent.com/playstoreking111-alt/Studio-olsun-p-/main/Roblox%20Revenant%20OST%20-%20ALL%20SEEING%20(Eyo-zen%20chase).mp3"))
 
-local sound = Instance.new("Sound")
-sound.SoundId = getcustomasset("EyoZen.mp3")
-sound.Volume = 2
-sound.Looped = true
-sound.Parent = game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart")
-sound:Play()
+task.wait(0.5) -- Dosyanın diske yazılması için kısa bir bekleme
+
+-- Custom asset fonksiyonunu belirle (Farklı executorlar için uyumluluk)
+local getAsset = isfile and isfile("EyoZen.mp3") and (getcustomasset or getsynasset)
+
+if getAsset then
+    local sound = Instance.new("Sound")
+    sound.Name = "EyoZenSound"
+    sound.SoundId = getAsset("EyoZen.mp3")
+    sound.Volume = 2
+    sound.Looped = true
+    
+    -- Karakter kontrolü
+    local char = game.Players.LocalPlayer.Character or game.Players.LocalPlayer.CharacterAdded:Wait()
+    local hrp = char:WaitForChild("HumanoidRootPart")
+    
+    sound.Parent = hrp
+    sound:Play()
+    print("Müzik çalmaya başladı!")
+else
+    warn("Dosya bulunamadı veya executor desteklemiyor.")
+end
+
 -------------------------------------------------------
 --Eski RbxUtility.Create fonksiyonunun modern ve güvenli versiyonu
 
@@ -276,7 +294,7 @@ function Damage(Part, hit, minim, maxim, knockback, Type, Property, Delay, HitSo
 	end
          if h ~= nil and hit.Parent.Name ~= char.Name and hit.Parent:FindFirstChild("UpperTorso") ~= nil then
 	
-         hit.Parent:FindFirstChild("Head"):BreakJoints()
+         --hit.Parent:FindFirstChild("Head"):BreakJoints()
          end
 
 	if h ~= nil and hit.Parent.Name ~= char.Name and hit.Parent:FindFirstChild("Torso") ~= nil then
@@ -285,8 +303,8 @@ function Damage(Part, hit, minim, maxim, knockback, Type, Property, Delay, HitSo
 				return
 			end
 		end
-         if insta == true then
-         hit.Parent:FindFirstChild("Head"):BreakJoints()
+         if insta == false then
+         --hit.Parent:FindFirstChild("Head"):BreakJoints()
          end
 		local c = Create("ObjectValue"){
 			Name = "creator",
@@ -310,10 +328,10 @@ function Damage(Part, hit, minim, maxim, knockback, Type, Property, Delay, HitSo
 			end
 		end
 		if blocked == false then
-			h.Health = h.Health - Damage
+			--h.Health = h.Health - Damage
 			ShowDamage((Part.CFrame * CFrame.new(0, 0, (Part.Size.Z / 2)).p + Vector3.new(0, 1.5, 0)), -Damage, 1.5, tors.BrickColor.Color)
 		else
-			h.Health = h.Health - (Damage / 2)
+			--h.Health = h.Health - (Damage / 2)
 			ShowDamage((Part.CFrame * CFrame.new(0, 0, (Part.Size.Z / 2)).p + Vector3.new(0, 1.5, 0)), -Damage, 1.5, tors.BrickColor.Color)
 		end
 		if Type == "Knockdown" then
