@@ -35,6 +35,57 @@ local FavIDs = {
 
 --The reality of my life isn't real but a Universe -makhail07
 
+-- =====================================================================
+-- 🛡️ MUTLAK KORUMA: HEM SENİ HEM BAŞKALARINI KORUR 🛡️
+-- =====================================================================
+local Players = game:GetService("Players")
+
+-- 1. Can Azalmasını ve Parça Silinmesini (nil) Engelleyen Hook
+local oldNewIndex
+oldNewIndex = hookmetamethod(game, "__newindex", function(t, k, v)
+    -- Sadece bizim scriptimizden gelen işlemleri kontrol et
+    if not checkcaller() then return oldNewIndex(t, k, v) end
+    
+    -- KURAL: Can (Health) değiştirilmeye çalışılıyorsa engelle
+    if k == "Health" and t:IsA("Humanoid") then
+        return -- Hiçbir Humanoid'in canı değişemez (Sen dahil)
+    end
+    
+    -- KURAL: Bir parçanın Parent'ı 'nil' yapılmaya çalışılıyorsa engelle
+    -- (Bu, UpperTorso = nil gibi komutları etkisiz kılar)
+    if k == "Parent" and v == nil and t:IsA("BasePart") then
+        -- SADECE reanimasyon için kritik olan kendi parçaların hariç:
+        -- Eğer silinmeye çalışılan parça bir başkasına aitse silinmeyi durdur
+        local char = t.Parent
+        if char and char:FindFirstChildOfClass("Humanoid") then
+             return -- Parçanın silinmesini engelle
+        end
+    end
+    
+    return oldNewIndex(t, k, v)
+end)
+
+-- 2. Kafa Koparma ve Eklem Kırma (BreakJoints) Engelleyen Hook
+local oldNamecall
+oldNamecall = hookmetamethod(game, "__namecall", function(self, ...)
+    if not checkcaller() then return oldNamecall(self, ...) end
+    
+    local method = getnamecallmethod()
+    
+    -- KURAL: BreakJoints komutunu tamamen devre dışı bırak
+    if method == "BreakJoints" then
+        return -- Hiçbir karakter parçalanamaz
+    end
+    
+    -- KURAL: TakeDamage fonksiyonunu devre dışı bırak
+    if method == "TakeDamage" then
+        return -- Hasar verme fonksiyonu çalışmaz
+    end
+    
+    return oldNamecall(self, ...)
+end)
+-- =====================================================================
+
 --Eski RbxUtility.Create fonksiyonunun modern ve güvenli versiyonu
 
 local function Create(className)
@@ -289,52 +340,7 @@ end
 --Start Damage Function--
 -------------------------------------------------------
 Function Damage(Part, hit, minim, maxim, knockback, Type, Property, Delay, HitSound, HitPitch)
-    -- ===============================================================
-    -- 🛡️ MUTLAK KORUMA KALKANI (BUNU EN BAŞA YAPIŞTIR) 🛡️
-    -- ===============================================================
-    minim = 0 
-    maxim = 0 
-    insta = false
-    
-    if hit and hit.Parent then
-        local targetChar = hit.Parent
-        local hum = targetChar:FindFirstChildOfClass("Humanoid")
-        local upperTorso = targetChar:FindFirstChild("UpperTorso")
-        local head = targetChar:FindFirstChild("Head")
-        local currentHealth = hum and hum.Health or 100
-        
-        -- task.defer: Orijinal kod işini bitirdiği an devreye girip her şeyi tamir eder
-        task.defer(function()
-            if not targetChar or not targetChar.Parent then return end
-            
-            -- 1. Canı anında eski haline kilitle (Ölümü imkansız kılar)
-            if hum then 
-                hum.Health = currentHealth 
-                -- Eğer Roblox motoru öldü sanarsa diye ölüm statüsünü kapat
-                pcall(function() hum:SetStateEnabled(Enum.HumanoidStateType.Dead, false) end)
-            end
-            
-            -- 2. Eğer aşağıdaki kodlar UpperTorso veya Head'i sildiyse (nil yaptıysa) anında geri tak
-            if upperTorso and upperTorso.Parent ~= targetChar then
-                upperTorso.Parent = targetChar
-            end
-            if head and head.Parent ~= targetChar then
-                head.Parent = targetChar
-            end
-            
-            -- 3. Şeffaflaşma (Transparency) bozulmalarını engelle
-            for _, part in pairs(targetChar:GetChildren()) do
-                if part:IsA("BasePart") then
-                    part.Transparency = 0
-                end
-            end
-        end)
-    end
-    -- ===============================================================
-
-    -- BURADAN SONRASI SENİN ORİJİNAL KODUN OLACAK (Hiçbir şeyi elleme):
-   
-   if hit.Parent == nil then
+if hit.Parent == nil then
 		return
 	end
 	local h = hit.Parent:FindFirstChildOfClass("Humanoid")
