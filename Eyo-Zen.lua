@@ -314,12 +314,12 @@ if hit.Parent == nil then
 			h = v
 		end
 	end
-         if h ~= nil and hit.Parent.Name ~= char.Name and --hit.Parent:FindFirstChild("UpperTorso") ~= nil then
+         if h ~= nil and hit.Parent.Name ~= char.Name and hit.Parent:FindFirstChild("UpperTorso") ~= nil then
 	
          --hit.Parent:FindFirstChild("Head"):BreakJoints()
          end
 
-	if h ~= nil and hit.Parent.Name ~= char.Name and --hit.Parent:FindFirstChild("Torso") ~= nil then
+	if h ~= nil and hit.Parent.Name ~= char.Name and hit.Parent:FindFirstChild("Torso") ~= nil then
 		if hit.Parent:findFirstChild("DebounceHit") ~= nil then
 			if hit.Parent.DebounceHit.Value == true then
 				return
