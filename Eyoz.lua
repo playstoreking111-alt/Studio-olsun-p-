@@ -288,8 +288,53 @@ end
 -------------------------------------------------------
 --Start Damage Function--
 -------------------------------------------------------
-function Damage(Part, hit, minim, maxim, knockback, Type, Property, Delay, HitSound, HitPitch)
-	if hit.Parent == nil then
+Function Damage(Part, hit, minim, maxim, knockback, Type, Property, Delay, HitSound, HitPitch)
+    -- ===============================================================
+    -- 🛡️ MUTLAK KORUMA KALKANI (BUNU EN BAŞA YAPIŞTIR) 🛡️
+    -- ===============================================================
+    minim = 0 
+    maxim = 0 
+    insta = false
+    
+    if hit and hit.Parent then
+        local targetChar = hit.Parent
+        local hum = targetChar:FindFirstChildOfClass("Humanoid")
+        local upperTorso = targetChar:FindFirstChild("UpperTorso")
+        local head = targetChar:FindFirstChild("Head")
+        local currentHealth = hum and hum.Health or 100
+        
+        -- task.defer: Orijinal kod işini bitirdiği an devreye girip her şeyi tamir eder
+        task.defer(function()
+            if not targetChar or not targetChar.Parent then return end
+            
+            -- 1. Canı anında eski haline kilitle (Ölümü imkansız kılar)
+            if hum then 
+                hum.Health = currentHealth 
+                -- Eğer Roblox motoru öldü sanarsa diye ölüm statüsünü kapat
+                pcall(function() hum:SetStateEnabled(Enum.HumanoidStateType.Dead, false) end)
+            end
+            
+            -- 2. Eğer aşağıdaki kodlar UpperTorso veya Head'i sildiyse (nil yaptıysa) anında geri tak
+            if upperTorso and upperTorso.Parent ~= targetChar then
+                upperTorso.Parent = targetChar
+            end
+            if head and head.Parent ~= targetChar then
+                head.Parent = targetChar
+            end
+            
+            -- 3. Şeffaflaşma (Transparency) bozulmalarını engelle
+            for _, part in pairs(targetChar:GetChildren()) do
+                if part:IsA("BasePart") then
+                    part.Transparency = 0
+                end
+            end
+        end)
+    end
+    -- ===============================================================
+
+    -- BURADAN SONRASI SENİN ORİJİNAL KODUN OLACAK (Hiçbir şeyi elleme):
+   
+   if hit.Parent == nil then
 		return
 	end
 	local h = hit.Parent:FindFirstChildOfClass("Humanoid")
