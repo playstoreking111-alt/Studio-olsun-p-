@@ -12,7 +12,7 @@
 --(not for skids)--
 
 -- Dosyayı indir ve kaydet
-writefile("EyoZen.mp3", game:HttpGet("https://raw.githubusercontent.com/playstoreking111-alt/Studio-olsun-p-/main/Roblox%20Revenant%20OST%20-%20ALL%20SEEING%20(Eyo-zen%20chase).mp3"))
+writefile("EyoZen.mp3", game:HttpGet("https://github.com/playstoreking111-alt/Studio-olsun-p-/raw/refs/heads/main/Roblox%20Revenant%20OST%20-%20ALL%20SEEING%20(Eyo-zen%20chase).mp3"))
 
 task.wait(0.5) -- Dosyanın diske yazılması için kısa bir bekleme
 
