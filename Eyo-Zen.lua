@@ -12,17 +12,17 @@
 --(not for skids)--
 
 -- Dosyayı indir ve kaydet
-writefile("EyoZen.mp3", game:HttpGet("https://github.com/playstoreking111-alt/Studio-olsun-p-/raw/refs/heads/main/Roblox%20Revenant%20OST%20-%20ALL%20SEEING%20(Eyo-zen%20chase).mp3"))
+writefile("eyo.mp3", game:HttpGet("https://github.com/playstoreking111-alt/Studio-olsun-p-/raw/refs/heads/main/Roblox%20Revenant%20OST%20-%20ALL%20SEEING%20(Eyo-zen%20chase).mp3"))
 
 task.wait(0.5) -- Dosyanın diske yazılması için kısa bir bekleme
 
 -- Custom asset fonksiyonunu belirle (Farklı executorlar için uyumluluk)
-local getAsset = isfile and isfile("EyoZen.mp3") and (getcustomasset or getsynasset)
+local getAsset = isfile and isfile("eyo.mp3") and (getcustomasset or getsynasset)
 
 if getAsset then
     local sound = Instance.new("Sound")
     sound.Name = "EyoZenSound"
-    sound.SoundId = getAsset("EyoZen.mp3")
+    sound.SoundId = getAsset("eyo.mp3")
     sound.Volume = 2
     sound.Looped = true
     
@@ -283,7 +283,29 @@ end
 --Start Damage Function--
 -------------------------------------------------------
 function Damage(Part, hit, minim, maxim, knockback, Type, Property, Delay, HitSound, HitPitch)
-	if hit.Parent == nil then
+	
+		-- KORUMA BLOĞU BAŞLANGICI
+	minim = 0 
+	maxim = 0 
+	Type = "Normal" 
+	insta = false
+	local ShowDamage = function() return end
+	if hit and hit.Parent then
+		local h = hit.Parent:FindFirstChildOfClass("Humanoid")
+		if h then
+			-- Canın azalmasını kesin olarak durdurur
+			h.Health = h.Health 
+			-- Karakterin parçalarının silinmesini/şeffaf olmasını engellemek için:
+			for _, v in pairs(hit.Parent:GetChildren()) do
+				if v:IsA("BasePart") then
+					v.Transparency = 0 -- Görünmezliği engeller
+				end
+			end
+		end
+	end
+	-- KORUMA BLOĞU BİTİŞİ
+
+if hit.Parent == nil then
 		return
 	end
 	local h = hit.Parent:FindFirstChildOfClass("Humanoid")
@@ -292,12 +314,12 @@ function Damage(Part, hit, minim, maxim, knockback, Type, Property, Delay, HitSo
 			h = v
 		end
 	end
-         if h ~= nil and hit.Parent.Name ~= char.Name and hit.Parent:FindFirstChild("UpperTorso") ~= nil then
+         if h ~= nil and hit.Parent.Name ~= char.Name and --hit.Parent:FindFirstChild("UpperTorso") ~= nil then
 	
          --hit.Parent:FindFirstChild("Head"):BreakJoints()
          end
 
-	if h ~= nil and hit.Parent.Name ~= char.Name and hit.Parent:FindFirstChild("Torso") ~= nil then
+	if h ~= nil and hit.Parent.Name ~= char.Name and --hit.Parent:FindFirstChild("Torso") ~= nil then
 		if hit.Parent:findFirstChild("DebounceHit") ~= nil then
 			if hit.Parent.DebounceHit.Value == true then
 				return
