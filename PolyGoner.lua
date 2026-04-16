@@ -2,7 +2,7 @@
 --[[Use it with CurrentAngle]]--
 -- Enjoy ;)
 
-writefile("Goner.mp3", game:HttpGet("https://github.com/playstoreking111-alt/Studio-olsun-p-/raw/refs/heads/main/Roblox%20Revenant%20OST%20-%20ALL%20SEEING%20(Eyo-zen%20chase).mp3"))
+writefile("Goner.mp3", game:HttpGet("https://github.com/playstoreking111-alt/Studio-olsun-p-/raw/refs/heads/main/G.O.N.E.R.%20%5BCRIMSON%20CHRONICLES%20OST%20GONER%20CLEETUS%20SKIN%20CHASE%20THEME%5D%20!!NOT%20FORSAKEN%20NOR%20PC2!!%20-%20Nell%20(youtube).mp3"))
 
 local sound = Instance.new("Sound")
 sound.SoundId = getcustomasset("Goner.mp3")
@@ -798,11 +798,11 @@ function BEGINAI()
 			end
 		end)
 	end))
-	HUMANOID.Died:Connect(function()
+	--[[HUMANOID.Died:Connect(function()
 		CLONE.Parent = workspace
 		CLONE:SetPrimaryPartCFrame(ROOT.CFrame)
 		CLONE.PrimaryPart.Respawn:Play()
-		CHARACTER:Destroy()
+		CHARACTER:Destroy()]]--
 	end)
 	local TARGET = nil
 	local TARGETHUM = nil
