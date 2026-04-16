@@ -798,11 +798,11 @@ function BEGINAI()
 			end
 		end)
 	end))
-	--[[HUMANOID.Died:Connect(function()
+	HUMANOID.Died:Connect(function()
 		CLONE.Parent = workspace
 		CLONE:SetPrimaryPartCFrame(ROOT.CFrame)
 		CLONE.PrimaryPart.Respawn:Play()
-		CHARACTER:Destroy()]]--
+		--CHARACTER:Destroy()
 	end)
 	local TARGET = nil
 	local TARGETHUM = nil
