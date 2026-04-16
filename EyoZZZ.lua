@@ -304,8 +304,7 @@ function Damage(Part, hit, minim, maxim, knockback, Type, Property, Delay, HitSo
 			h.Health = h.Health - Damage
 			ShowDamage((Part.CFrame * CFrame.new(0, 0, (Part.Size.Z / 2)).p + Vector3.new(0, 1.5, 0)), -Damage, 1.5, tors.BrickColor.Color)
 		else
-			Damage = 0
-			h.Health = h.Health - Damage
+			h.Health = h.Health - (Damage / 2)
 			ShowDamage((Part.CFrame * CFrame.new(0, 0, (Part.Size.Z / 2)).p + Vector3.new(0, 1.5, 0)), -Damage, 1.5, tors.BrickColor.Color)
 		end
 		if Type == "Knockdown" then
@@ -861,46 +860,35 @@ end
 
 Function Eviscerate(dude)
 	if dude.Name ~= char then
-		-- Karakterin kafasını döndüren kısım (Görsel etki kalıyor)
 		local bgf = IT("BodyGyro", dude.Head)
 		bgf.CFrame = bgf.CFrame * CFrame.fromEulerAnglesXYZ(Rad(-90), 0, 0)
-		
 		local val = IT("BoolValue", dude)
 		val.Name = "IsHit"
-		
 		local ds = coroutine.wrap(function()
-			-- dude:WaitForChild("Head"):BreakJoints() -- BU SATIRI SİLDİK: Karakter artık ölmez.
+			-- dude:WaitForChild("Head"):BreakJoints() -- Bu satır devre dışı (Ölmeyi engeller)
 			wait(0.5)
 			target = nil
 			coroutine.resume(coroutine.create(function()
 				for i, v in pairs(dude:GetChildren()) do
-					-- Aşağıdaki v:Destroy() satırlarını kapattık: Parçalar silinmez.
 					if v:IsA("Accessory") then
-						-- v:Destroy() 
+						-- v:Destroy() -- Yok etme silindi
 					end
 					if v:IsA("Humanoid") then
-						-- v:Destroy() 
+						-- v:Destroy() -- Yok etme silindi
 					end
 					if v:IsA("CharacterMesh") then
-						-- v:Destroy() 
+						-- v:Destroy() -- Yok etme silindi
 					end
 					if v:IsA("Model") then
-						-- v:Destroy() 
+						-- v:Destroy() -- Yok etme silindi
 					end
 					if v:IsA("Part") or v:IsA("MeshPart") then
 						for x, o in pairs(v:GetChildren()) do
 							if o:IsA("Decal") then
-								-- o:Destroy() -- Yüz ve kıyafet stickerları silinmez.
+								-- o:Destroy() -- Yok etme silindi
 							end
 						end
-					end
-				end
-			end)) -- Parantezleri ve döngü sonlarını kapatmayı unutma
-		end)
-		ds() -- Coroutine'i başlatır
-	end
-end
-
+						
 						coroutine.resume(coroutine.create(function()
 							v.Material = "Neon"
 							v.CanCollide = false
