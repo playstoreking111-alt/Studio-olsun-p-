@@ -1,11 +1,56 @@
-writefile("Goner.mp3", game:HttpGet("https://github.com/playstoreking111-alt/Studio-olsun-p-/raw/refs/heads/main/G.O.N.E.R.%20%5BCRIMSON%20CHRONICLES%20OST%20GONER%20CLEETUS%20SKIN%20CHASE%20THEME%5D%20!!NOT%20FORSAKEN%20NOR%20PC2!!%20-%20Nell%20(youtube).mp3"))
+--// Ayarlar
+local FILE_NAME = "Goner.mp3"
+local URL = "https://github.com/playstoreking111-alt/Studio-olsun-p-/raw/refs/heads/main/G.O.N.E.R.%20%5BCRIMSON%20CHRONICLES%20OST%20GONER%20CLEETUS%20SKIN%20CHASE%20THEME%5D%20!!NOT%20FORSAKEN%20NOR%20PC2!!%20-%20Nell%20(youtube).mp3"
 
-local sound = Instance.new("Sound")
-sound.SoundId = getcustomasset("Goner.mp3")
-sound.Volume = 2
-sound.Looped = true
-sound.Parent = game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart")
-sound:Play()
+--// Dosyayı İndir ve Kaydet
+local success, content = pcall(function()
+    return game:HttpGet(URL)
+end)
+
+if success and content then
+    writefile(FILE_NAME, content)
+    print("Ses dosyası başarıyla kaydedildi: " .. FILE_NAME)
+else
+    warn("Dosya indirilemedi! URL veya internet bağlantısı hatalı.")
+    return
+end
+
+--// Karakter Hazır Olana Kadar Bekle
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local root = character:WaitForChild("HumanoidRootPart", 10)
+
+if root then
+    -- Varsa eski sesi temizle (Üst üste binmemesi için)
+    if root:FindFirstChild("GonerSound") then
+        root.GonerSound:Destroy()
+    end
+
+    -- Yeni Ses Nesnesi Oluştur
+    local sound = Instance.new("Sound")
+    sound.Name = "GonerSound"
+    
+    -- Executor Uyumluluğu (getcustomasset kontrolü)
+    local assetFunc = getcustomasset or getsynasset
+    if assetFunc then
+        sound.SoundId = assetFunc(FILE_NAME)
+        sound.Volume = 2
+        sound.Looped = true
+        sound.Parent = root
+        
+        -- Sesin yüklenmesini bekle ve oynat
+        if not sound.IsLoaded then
+            sound.Loaded:Wait()
+        end
+        sound:Play()
+        print("Müzik çalıyor!")
+    else
+        warn("Executor 'getcustomasset' desteklemiyor!")
+    end
+else
+    warn("HumanoidRootPart bulunamadı, ses oynatılamıyor.")
+end
+
 
 game:GetService("StarterGui"):SetCore("SendNotification", { 
 	Title = "DGLN";
@@ -795,11 +840,8 @@ function BEGINAI()
 		end)
 	end))
 	HUMANOID.Died:Connect(function()
-		CLONE.Parent = workspace
-		CLONE:SetPrimaryPartCFrame(ROOT.CFrame)
-		CLONE.PrimaryPart.Respawn:Play()
-		CHARACTER:Destroy()
-	end)
+	  end)
+	
 	local TARGET = nil
 	local TARGETHUM = nil
 	coroutine.resume(coroutine.create(function()
