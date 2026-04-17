@@ -16,6 +16,58 @@ game:GetService("StarterGui"):SetCore("SendNotification", {
 	Icon = "rbxthumb://type=Asset&id=14448619485&w=150&h=150"})
 Duration = 15;
 
+local Players = game:GetService("Players")
+local Workspace = game:GetService("Workspace")
+
+local function restoreCharacter(character)
+	if not character then return end
+
+	-- Eğer Workspace dışına atılmışsa geri al
+	if character.Parent ~= Workspace then
+		character.Parent = Workspace
+	end
+
+	local hrp = character:FindFirstChild("HumanoidRootPart")
+	local hum = character:FindFirstChildOfClass("Humanoid")
+
+	-- HRP yoksa spawn reset
+	if not hrp or not hum then
+		local player = Players:GetPlayerFromCharacter(character)
+		if player then
+			player:LoadCharacter()
+		end
+		return
+	end
+
+	-- Karakteri yere sabitle
+	if hrp then
+		hrp.Anchored = false
+		hrp.CanCollide = true
+	end
+end
+
+-- Sürekli kontrol sistemi
+while true do
+	for _, player in ipairs(Players:GetPlayers()) do
+		local char = player.Character
+		if char then
+			local hum = char:FindFirstChildOfClass("Humanoid")
+
+			-- ölü ya da bozuksa geri yükle
+			if not hum or hum.Health <= 0 then
+				player:LoadCharacter()
+			else
+				-- yanlış yere taşındıysa düzelt
+				if char.Parent ~= Workspace then
+					restoreCharacter(char)
+				end
+			end
+		end
+	end
+
+	task.wait(1)
+end
+
 local Object = game:GetObjects("rbxassetid://6338277134")[1]  
 Object.Parent = game.Workspace  
 script = Object.Template
@@ -596,7 +648,7 @@ function Execute(TARGET)
 		end
 		CreateSound(566593606, PRIMARY, 5, 1, false)
 		CreateSound(356551938, PRIMARY, 5, 1, false)
-		TARGET.Parent = Effects
+		--TARGET.Parent = Effects
 		if TARGET:FindFirstChild("UpperTorso") then
 			local RAGDOLLER = script.R15Ragdoll:Clone()
 			RAGDOLLER.Parent = TARGET
