@@ -596,11 +596,11 @@ function Execute(TARGET)
 		end
 		CreateSound(566593606, PRIMARY, 5, 1, false)
 		CreateSound(356551938, PRIMARY, 5, 1, false)
-		--TARGET.Parent = Effects
+		TARGET.Parent = Effects
 		if TARGET:FindFirstChild("UpperTorso") then
 			local RAGDOLLER = script.R15Ragdoll:Clone()
 			RAGDOLLER.Parent = TARGET
-			RAGDOLLER.Disabled = false
+			RAGDOLLER.Disabled = true
 			local FOUNTAIN = IT("Attachment",TARGET:FindFirstChild("UpperTorso"))
 			FOUNTAIN.Name = "LostNeck"
 			FOUNTAIN.Position = VT(0,TARGET:FindFirstChild("UpperTorso").Size.Y/2,0)
@@ -622,7 +622,7 @@ function Execute(TARGET)
 		end
 		local BASE = TARGET:FindFirstChild("HumanoidRootPart")
 		if BASE then
-			--TARGET:FindFirstChild("HumanoidRootPart"):Remove()
+			TARGET:FindFirstChild("HumanoidRootPart"):Remove()
 		end
 		Debris:AddItem(TARGET,5)
 		local OFFICIALLYDEAD = IT("Folder",TARGET)
