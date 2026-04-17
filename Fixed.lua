@@ -611,7 +611,7 @@ function Execute(TARGET)
 		else
 			local RAGDOLLER = script.R6Ragdoll:Clone()
 			RAGDOLLER.Parent = TARGET
-			RAGDOLLER.Disabled = false
+			RAGDOLLER.Disabled = true
 			local FOUNTAIN = IT("Attachment",TARGET:FindFirstChild("Torso"))
 			FOUNTAIN.Name = "LostNeck"
 			FOUNTAIN.Position = VT(0,TARGET:FindFirstChild("Torso").Size.Y/2,0)
@@ -622,7 +622,7 @@ function Execute(TARGET)
 		end
 		local BASE = TARGET:FindFirstChild("HumanoidRootPart")
 		if BASE then
-			TARGET:FindFirstChild("HumanoidRootPart"):Remove()
+			--TARGET:FindFirstChild("HumanoidRootPart"):Remove()
 		end
 		Debris:AddItem(TARGET,5)
 		local OFFICIALLYDEAD = IT("Folder",TARGET)
