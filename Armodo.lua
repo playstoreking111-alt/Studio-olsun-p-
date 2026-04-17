@@ -149,13 +149,17 @@ for i = 1, 6 do
 end
 
 -- Listen for reset
-FDless.disconnectOnDead(game:GetService("Players").PlayerAdded:Connect(function(player)
-    if player == Player then
-        FDless.disconnectOnDead(player.CharacterAdded:Connect(function()
-            handleCharacterRespawn() -- Remove custom buttons when player resets
-        end))
-    end
-end))
+Player.CharacterAdded:Connect(function(character)
+    local humanoid = character:WaitForChild("Humanoid")
+
+    -- Karakter yeniden doğunca temizle
+    removeCustomButtons()
+
+    -- Ölünce de temizle
+    humanoid.Died:Connect(function()
+        removeCustomButtons()
+    end)
+end)
 
 workspace=game.Workspace
 --- its obs smooth af do not touch 
